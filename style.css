@@ -1,0 +1,51 @@
+body {
+    background: rgb(208, 203, 199);
+    color: white;
+    font-family: Helvetica Neue, Helvetica, Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background: black;
+    padding: 20px;
+}
+.links {
+    text-align: right;
+}
+section {
+    background: white;
+    color: grey;
+    padding: 20px;
+}
+div {
+    background: rgb(88, 120, 88);
+    display: inline;
+}
+footer {
+    background: black;
+    padding: 10px 20px;
+}
+button {
+    background-color: rgb(255, 137, 77);
+    color: aliceblue;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom-width: 0px; /*no border*/
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;  
+    letter-spacing: 0.7px;
+    padding-bottom: 18.2px;
+    padding-left: 30.394px;
+    padding-right: 30.394px;
+    padding-top: 18.2px;
+    cursor: pointer;
+    transition: opacity .15s; /*what u will transition, how long*/
+}
+button:hover {
+    opacity: 0.85;
+    text-decoration: underline;
+}
+button:active {
+    opacity: 0.6;
+}
