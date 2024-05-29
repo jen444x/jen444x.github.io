@@ -17,6 +17,7 @@ Default: 1
 
 ---Colors
 primary colors: #228be6
+text color: #444
 
  */
 
@@ -38,25 +39,53 @@ body {
   color: #444;
 }
 
-.container {
-  /*Use this class for elemenets we want centered*/
-  /* Only center divs in main elements instead of the 
-  whole thing incase we want to add background color or image */
-  max-width: 130rem;
-  margin: 0 auto;
-  padding: 0 3.2rem;
-}
-
 /*******************/
 /* GENERAL REUSABLE COMPONENTS */
 /*******************/
 
+.container {
+  /*Use this class for elemenets we want centered*/
+  /* Only center divs in main elements instead of the 
+  whole thing incase we want to add background color or image */
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+}
+
+/* will be a reusable grid*/
+.grid {
+  display: grid;
+  gap: 9.6rem;
+}
+
+.grid--2-cols {
+  /* 2 columns each takes up a fraction of the space*/
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-cols {
+  /* if i want a grid with 3 columns. can use this for second idea of services */
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.heading-primary,
+.heading-secondary {
+  font-weight: 700;
+  /* letter-spacing: -0.5px; */
+}
+
 .heading-primary {
   font-size: 5.2rem;
-  font-weight: 700;
-  margin-bottom: 3.2rem;
   line-height: 1.05;
-  /* letter-spacing: -0.5px; */
+  margin-bottom: 3.2rem;
+}
+
+.heading-secondary {
+  color: #444;
+  /* color: #333; */
+  font-size: 4.4rem;
+  margin-bottom: 4.8rem;
+  line-height: 1.2;
 }
 
 .btn:link,
@@ -96,16 +125,17 @@ body {
   align-items: center;
   /* background-color: #333; */
   /* background-color: #000; */
-  background-color: #fdf2e9;
+  /* background-color: #fdf2e9; */
   background-color: #fff;
-
   /* Need height so header can be sticky */
-  height: 8rem;
+  /* height: 8rem; */
+  height: 6.5rem;
   padding: 0 4.8rem;
 }
 
 .logo {
-  height: 4.4rem;
+  /* height: 4.4rem; */
+  height: 6.2rem;
 }
 
 /*******************/
@@ -152,23 +182,26 @@ body {
 /*******************/
 .section-hero {
   /* height: 100vh; */
-  height: calc(100vh - 8rem); /* accounts for nav height */
+  height: calc(100vh - 6.5rem); /* accounts for nav height */
   position: relative;
   background-image: linear-gradient(
       rgba(34, 34, 34, 0.6),
       rgba(34, 34, 34, 0.6)
     ),
     url(../img/hero-img.jpg);
-  background-size: 100% 100%;
+  /* background-size: 100% 100%; */
+  background-size: cover;
+  background-position: 45% 45%;
   color: #fff;
 }
 
-.header-container {
+.hero {
   max-width: 80rem;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -56%); */
   text-align: center;
 }
 
@@ -178,21 +211,24 @@ body {
   margin-bottom: 4.8rem;
 }
 
-/* p {
-  font-size: 2rem;
-  line-height: 1.6;
-  margin-bottom: 48px;
-} */
-
-.number {
+/* .number {
   font-size: 2.6rem;
   margin-bottom: 3.2rem;
   font-weight: 600;
+} */
+
+/*************************/
+/* ABOUT US SECTION */
+/*************************/
+
+.about-us {
+  padding: 9.6rem 0;
 }
 
-h2 {
-  font-size: 4.4rem;
-  margin-bottom: 4.8rem;
+.about-us-paragraph {
+  font-size: 2rem;
+  line-height: 1.6;
+  margin-bottom: 48px;
 }
 
 /*section {
@@ -202,14 +238,16 @@ h2 {
   /* background-color: #fdf2e9; 
 }*/
 
-/*******************/
+/*************************/
 /* HOW IT WORKS SECTION? */
-/*******************/
+/*************************/
 
-/* .section-how {
+.services {
   padding: 9.6rem 0;
-  background-color: orangered;
+  /* background-color: #d6d6d6; */
+  /* background-color: #ebebeb; */
 }
-section:nth-child(1) {
-  background-color: aqua;
-} */
+
+.service-img {
+  width: 100%;
+}
