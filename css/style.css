@@ -106,12 +106,26 @@
 
 .about-us {
   padding: 9.6rem 0;
+  /* background-color: hsl(31.03deg 58% 80.39%); */
+}
+
+.about-us div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rem;
+}
+
+.about-us div .heading-secondary {
+  margin-bottom: 0;
 }
 
 .about-us-paragraph {
   font-size: 2rem;
   line-height: 1.6;
-  margin-bottom: 48px;
+  color: #222;
+  margin: 4.8rem 0;
+  /* margin-bottom: 0; */
 }
 
 /*section {
@@ -129,18 +143,52 @@
   padding: 9.6rem 0;
   /* background-color: #ebebeb; */
   /* background-color: #fdf2e9; */
+  /* background-color: hsl(31.03deg 58% 80.39%); */
+}
+
+.service-box {
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  border-radius: 11px;
+  /* removes whatever is ontop of the rounded corners */
+  overflow: hidden;
+
+  /* ADDING TO TRY TO FIX UNALIGNMENT ISSUE  */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure the content is spaced evenly */
+  transition: all 0.4s;
+}
+
+.service-box:hover {
+  transform: translate(0, -1.2rem);
+  box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.006);
 }
 
 .service-text-box {
-  padding: 0 3.2rem;
+  /* padding: 0 3.2rem; */
+  padding: 3.2rem 4.8rem 4.8rem 4.8rem;
+  flex-grow: 1;
+}
+
+.service-title {
+  font-size: 2.4rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 3.2rem;
 }
 
 .section-description {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 1.8;
   color: #666;
 }
 
+.service-img-box {
+  max-height: 20rem;
+}
+
 .service-img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

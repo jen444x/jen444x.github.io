@@ -34,6 +34,7 @@ html {
 
 body {
   font-family: "Rubik", sans-serif;
+  /* font-family: "Quicksand", sans-serif; */
   line-height: 1;
   font-weight: 400;
   color: #444;
@@ -67,6 +68,7 @@ body {
 .grid--3-cols {
   /* if i want a grid with 3 columns. can use this for second idea of services */
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
 }
 
 .grid--center-v {
@@ -76,7 +78,7 @@ body {
 .heading-primary,
 .heading-secondary,
 .heading-tertiary {
-  font-weight: 700;
+  font-weight: 600;
   /* letter-spacing: -0.5px; */
 }
 
@@ -89,6 +91,8 @@ body {
 .heading-secondary {
   /* color: #444; */
   color: #333;
+  color: #222;
+  color: hsl(31, 80%, 58%);
   font-size: 4.4rem;
   margin-bottom: 4.8rem;
   /* margin-bottom: 9.6rem; */
