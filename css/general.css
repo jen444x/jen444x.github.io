@@ -40,6 +40,11 @@ body {
   color: #444;
 }
 
+hr {
+  background-color: #999;
+  margin: 3.2rem 0;
+}
+
 /*******************/
 /* GENERAL REUSABLE COMPONENTS */
 /*******************/
@@ -60,6 +65,13 @@ body {
   row-gap: 9.6rem;
 }
 
+.grid--less-gap {
+  display: grid;
+  /* column-gap: 4.8rem;
+  row-gap: 6rem; */
+  gap: 4.8rem;
+}
+
 .grid--2-cols {
   /* 2 columns each takes up a fraction of the space*/
   grid-template-columns: repeat(2, 1fr);
@@ -69,10 +81,6 @@ body {
   /* if i want a grid with 3 columns. can use this for second idea of services */
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
-}
-
-.grid--center-v {
-  align-items: center;
 }
 
 .heading-primary,
@@ -97,7 +105,7 @@ body {
   margin-bottom: 4.8rem;
   /* margin-bottom: 9.6rem; */
   line-height: 1.2;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .heading-tertiary {
@@ -132,4 +140,8 @@ body {
   background-color: #cf711f;
   /* background-color: rgba(0, 0, 0, 0.3); */
   color: #fff;
+}
+
+.center-text {
+  text-align: center;
 }
