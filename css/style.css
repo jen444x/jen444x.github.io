@@ -167,11 +167,13 @@
 .services {
   padding: 9.6rem 0;
   /* background-color: #ebebeb; */
-  /* background-color: #fdf2e9; */
+  background-color: #818181;
   /* background-color: hsl(31.03deg 58% 80.39%); */
 }
 
 .service-box {
+  /* background-color: white; */
+  background-color: #dadada;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
   border-radius: 11px;
   /* removes whatever is ontop of the rounded corners */
@@ -203,6 +205,8 @@
   font-weight: 600;
   /* margin-bottom: 3.2rem; */
   margin-bottom: 1.8rem;
+  color: hsl(31, 80%, 58%);
+  color: #e67e22;
 }
 
 .section-description {
@@ -241,19 +245,17 @@
 
 .cta-title {
   color: hsl(31, 80%, 58%);
+  color: #454545;
   font-size: 4.4rem;
   line-height: 1.2;
 }
 
-.cta-left-box {
-}
-
 .cta-text-box {
-  padding: 1.6rem 3.2rem;
+  padding: 4.8rem;
 }
 
 .cta-text {
-  margin: 1.6rem 0 2rem 0;
+  padding: 1.2rem 0 2.4rem 0;
 }
 
 .contact-infos {
@@ -295,5 +297,38 @@
 }
 
 .cta-right-box {
-  background-image: linear-gradient(to right bottom, #eb984e, #e67e22);
+  /* background-image: linear-gradient(to right bottom, #eb984e, #e67e22); */
+  background-image: linear-gradient(to right bottom, #454545, #313131);
+}
+
+.cta-content-box {
+  padding: 6.4rem 5rem;
+}
+
+.cta-content-box h2 {
+  color: #fff;
+}
+
+.cta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-family: inherit;
+  color: #fff;
+}
+
+.cta-form label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+
+.cta-form input {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.4rem;
+}
+
+.cta-form button {
 }
