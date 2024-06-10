@@ -171,6 +171,10 @@
   /* background-color: hsl(31.03deg 58% 80.39%); */
 }
 
+.services h2 {
+  color: #fff;
+}
+
 .service-box {
   /* background-color: white; */
   background-color: #dadada;
@@ -240,7 +244,12 @@
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
   border-radius: 11px;
 
-  height: 65rem;
+  /* height: 65rem; */
+}
+
+.cta .cta-left-box,
+.cta .cta-right-box {
+  padding: 6.4rem 1.2rem;
 }
 
 .cta-title {
@@ -289,6 +298,8 @@
 
 .socials-icon {
   color: #e67e22;
+  /* color: #818181; */
+  /* color: #454545; */
   background-color: #fff;
   height: 3.4rem;
   width: 3.4rem;
@@ -303,6 +314,7 @@
 
 .cta-content-box {
   padding: 6.4rem 5rem;
+  /* padding: 4.8rem 5rem; */
 }
 
 .cta-content-box h2 {
@@ -328,7 +340,15 @@
   width: 100%;
   padding: 1.2rem;
   font-size: 1.4rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.cta-form button {
+.cta-form .btn {
+  margin-top: 1.2rem;
+  max-width: 45%;
+}
+
+.cta *:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.8rem rgba(253, 242, 233, 0.5);
 }

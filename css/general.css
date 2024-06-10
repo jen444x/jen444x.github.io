@@ -116,6 +116,7 @@ hr {
   margin-bottom: 3.2rem;
 }
 
+.btn,
 .btn:link,
 .btn:visited {
   font-size: 2rem;
@@ -133,6 +134,9 @@ hr {
   border-radius: 9px;
   margin-bottom: 1rem;
 
+  border: none;
+  cursor: pointer;
+
   transition: all 0.3s;
 }
 
@@ -141,6 +145,13 @@ hr {
   background-color: #cf711f;
   /* background-color: rgba(0, 0, 0, 0.3); */
   color: #fff;
+}
+
+*:focus {
+  outline: none;
+  /* outline: 4px box #e67e22;
+  outline-offset: 8px; */
+  box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
 }
 
 .center-text {
