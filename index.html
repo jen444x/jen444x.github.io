@@ -23,16 +23,18 @@
   </head>
   <body>
     <header class="header">
-      <img class="logo" alt="Rocky Concrete logo" src="img/logo.jpeg" />
+      <a href="#">
+        <img class="logo" alt="Rocky Concrete logo" src="img/logo.jpeg" />
+      </a>
       <nav class="main-nav">
         <ul class="main-nav-list">
           <li><a class="main-nav-link" href="#">HOME</a></li>
           <li><a class="main-nav-link" href="#">ABOUT US</a></li>
           <li><a class="main-nav-link" href="#">SERVICES</a></li>
           <li><a class="main-nav-link" href="#">SHOWCASE</a></li>
-          <li class="nav-divider"></li>
+          <!-- <li class="nav-divider"></li> -->
           <!-- <li><a class="main-nav-link" href="#">SOCIAL MEDIA</a></li> -->
-          <li><a class="main-nav-link" href="#">661-378-4017</a></li>
+          <!-- <li><a class="main-nav-link" href="#">661-378-4017</a></li> -->
           <li>
             <a class="main-nav-link nav-cta" href="#">CONTACT US</a>
           </li>
@@ -303,8 +305,17 @@
                     </div>
                     <div>
                       <label for="message">Message</label>
-                      <input id="message" type="text" required />
+                      <!-- <input id="message" type="text" required /> -->
+                      <textarea
+                        id="message"
+                        type="text"
+                        name="message"
+                        rows="10"
+                        cols="60"
+                        required
+                      ></textarea>
                     </div>
+
                     <button class="btn">Get free quote</button>
                   </form>
                 </div>
@@ -314,6 +325,65 @@
         </div>
       </section>
     </main>
+
+    <footer class="footer">
+      <div class="container grid-f grid--3-cols-f">
+        <nav class="nav-col">
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Home</a></li>
+            <li><a class="footer-link" href="#">About Us</a></li>
+            <li><a class="footer-link" href="#">Services</a></li>
+            <li><a class="footer-link" href="#">Showcase</a></li>
+          </ul>
+        </nav>
+        <div class="contact-col">
+          <p class="footer-heading">Contact</p>
+          <address class="contacts">
+            <p>
+              <a class="footer-link" href="tel:661-378-4017">661-378-4017</a
+              ><br />
+              <a class="footer-link" href="mailto:rockyconcreteinc22@gmail.com"
+                >rockyconcreteinc22@gmail.com
+              </a>
+            </p>
+            <p class="location">Bakersfield, CA</p>
+          </address>
+        </div>
+        <div class="logo-col">
+          <a href="#" class="footer-logo">
+            <img class="logo" alt="Rocky Concrete logo" src="img/logo.jpeg" />
+          </a>
+
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon
+                  class="footer-social-icon"
+                  name="logo-instagram"
+                ></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon
+                  class="footer-social-icon"
+                  name="logo-tiktok"
+                ></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon
+                  class="footer-social-icon"
+                  name="logo-facebook"
+                ></ion-icon
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
