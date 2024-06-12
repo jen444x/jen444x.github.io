@@ -1,0 +1,70 @@
+/* In media queries, 1rem = 1em = 16px 
+1px -> 1em == px size/16 */
+
+/*************************************/
+/* BELOW  1200px (Landscape Tablets) */
+/*************************************/
+
+@media (max-width: 74.74em) {
+  html {
+    /* 9px / 16px  */
+    font-size: 56.25%;
+  }
+
+  .grid {
+    column-gap: 4rem;
+    row-gap: 6.4rem;
+  }
+
+  .heading-primary {
+    font-size: 4.4rem;
+  }
+
+  .heading-secondary {
+    font-size: 3.6rem;
+  }
+
+  .heading-tertiary {
+    font-size: 2.4rem;
+  }
+
+  .grid--less-gap {
+    gap: 3.2rem;
+  }
+
+  .header {
+    padding: 0 3.2rem;
+  }
+
+  .main-nav-list {
+    gap: 3.2rem;
+  }
+}
+
+/*************************************/
+/* BELOW  1008px (Landscape Tablets) */
+/*************************************/
+
+@media (max-width: 63em) {
+  html {
+    /* 8px / 16px = 0.5 = 50% */
+    font-size: 50%;
+  }
+
+  .grid--2-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .about-us-img {
+    width: 60%;
+  }
+
+  .about-us-text-box {
+    /* padding: 0 3.2rem; */
+    text-align: center;
+  }
+
+  .service-text-box {
+    padding: 1.2rem 2.4rem;
+  }
+}
