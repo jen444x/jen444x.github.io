@@ -20,6 +20,22 @@
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/queries.css" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
+    <script defer src="js/script.js"></script>
+
     <title>Rocky Concrete</title>
   </head>
   <body>
@@ -30,15 +46,14 @@
 
       <nav class="main-nav">
         <ul class="main-nav-list">
-          <li><a class="main-nav-link" href="#">HOME</a></li>
-          <li><a class="main-nav-link" href="#">ABOUT US</a></li>
-          <li><a class="main-nav-link" href="#">SERVICES</a></li>
+          <li><a class="main-nav-link" href="#about-us">ABOUT US</a></li>
+          <li><a class="main-nav-link" href="#services">SERVICES</a></li>
           <li><a class="main-nav-link" href="#">SHOWCASE</a></li>
           <!-- <li class="nav-divider"></li> -->
           <!-- <li><a class="main-nav-link" href="#">SOCIAL MEDIA</a></li> -->
           <!-- <li><a class="main-nav-link" href="#">661-378-4017</a></li> -->
           <li>
-            <a class="main-nav-link nav-cta" href="#">CONTACT US</a>
+            <a class="main-nav-link nav-cta" href="#cta">CONTACT US</a>
           </li>
         </ul>
       </nav>
@@ -60,11 +75,11 @@
             expert team is dedicated to delivering exceptional results that
             exceed your expectations.
           </p>
-          <a href="#" class="btn">CONTACT US</a>
+          <a href="#cta" class="btn">CONTACT US</a>
         </div>
       </section>
 
-      <section class="about-us">
+      <section class="about-us" id="about-us">
         <div class="container">
           <div class="grid grid--2-cols">
             <div class="about-us-img-box">
@@ -91,7 +106,7 @@
         </div>
       </section>
 
-      <section class="services">
+      <section class="services" id="services">
         <div class="container">
           <h2 class="heading-secondary center-text">Services</h2>
         </div>
@@ -218,7 +233,7 @@
         </div>
       </section>
 
-      <section class="section-cta">
+      <section class="section-cta" id="cta">
         <div class="container">
           <div class="cta">
             <div class="cta-left-box">
@@ -298,9 +313,9 @@
       <div class="container grid-f grid--3-cols-f">
         <nav class="nav-col">
           <ul class="footer-nav">
-            <li><a class="footer-link" href="#">Home</a></li>
-            <li><a class="footer-link" href="#">About Us</a></li>
-            <li><a class="footer-link" href="#">Services</a></li>
+            <li><a class="footer-link" href="#hero">Home</a></li>
+            <li><a class="footer-link" href="#about-us">About Us</a></li>
+            <li><a class="footer-link" href="#services">Services</a></li>
             <li><a class="footer-link" href="#">Showcase</a></li>
           </ul>
         </nav>
@@ -351,16 +366,5 @@
         </div>
       </div>
     </footer>
-
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-
-    <script defer src="js/script.js"></script>
   </body>
 </html>
