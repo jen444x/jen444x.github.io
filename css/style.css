@@ -68,7 +68,7 @@
   margin-right: 15px;
 }
 
-/* MOBILE */
+/* mobile nav */
 .btn-mobile-nav {
   border: none;
   background: none;
@@ -86,11 +86,29 @@
   display: none;
 }
 
+/* sticky nav */
+.sticky {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 6.5rem;
+  z-index: 999;
+  background-color: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.04);
+
+  /* idk if i need this  */
+  padding-top: 0;
+  padding-bottom: 0;
+  /* ^ */
+}
+
 /*******************/
 /* HERO SECTION */
 /*******************/
 .section-hero {
-  height: calc(100vh - 6.5rem); /* accounts for nav height */
+  height: 100vh;
+  /* height: calc(100vh - 6.5rem);  */
   position: relative;
   background-image: linear-gradient(
       rgba(34, 34, 34, 0.6),
@@ -100,6 +118,7 @@
   background-size: cover;
   background-position: 45% 45%;
   color: #fff;
+  /* z-index: -1; */
 }
 
 .hero {
@@ -295,10 +314,12 @@
   border-radius: 50%;
 }
 
-.socials-links {
+.cta-social-links {
   display: flex;
   gap: 1.6rem;
   justify-content: center;
+
+  list-style: none;
 }
 
 .socials-icon {
