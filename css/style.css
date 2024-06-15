@@ -110,11 +110,16 @@
   height: 100vh;
   /* height: calc(100vh - 6.5rem);  */
   position: relative;
+  /* background-image: linear-gradient(
+      rgba(34, 34, 34, 0.6),
+      rgba(34, 34, 34, 0.6)
+    ),
+    url(../img/hero-img.avif); */
   background-image: linear-gradient(
       rgba(34, 34, 34, 0.6),
       rgba(34, 34, 34, 0.6)
     ),
-    url(../img/hero-img.jpg);
+    url(../img/hero-img.avif), url(../img/hero-img.jpg); /* if avif is not supported will use jpg*/
   background-size: cover;
   background-position: 45% 45%;
   color: #fff;

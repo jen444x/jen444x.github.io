@@ -319,11 +319,16 @@
                   <form class="cta-form" action="#">
                     <div>
                       <label for="full-name">Full Name</label>
-                      <input id="full-name" type="text" required />
+                      <input
+                        id="full-name"
+                        type="text"
+                        name="full-name"
+                        required
+                      />
                     </div>
                     <div>
                       <label for="email">Email</label>
-                      <input id="email" type="email" required />
+                      <input id="email" type="email" name="email" required />
                     </div>
                     <div>
                       <label for="message">Message</label>
@@ -334,6 +339,7 @@
                         name="message"
                         rows="10"
                         cols="60"
+                        name="message"
                         required
                       ></textarea>
                     </div>
