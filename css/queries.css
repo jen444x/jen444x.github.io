@@ -168,10 +168,6 @@
   .cta-text {
     padding: 1.2rem 0 2.4rem 0;
   }
-
-  .slider {
-    height: 40rem;
-  }
 }
 
 /*************************************/
@@ -250,10 +246,6 @@
     /* grid-column: 2; */
     grid-row: 2;
     grid-column: 1 / -1;
-  }
-
-  .slider {
-    height: 30rem;
   }
 }
 
