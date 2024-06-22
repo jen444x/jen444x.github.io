@@ -169,9 +169,8 @@
     padding: 1.2rem 0 2.4rem 0;
   }
 
-  .showcase-img {
-    width: 75%;
-    transform: scale(1.27);
+  .slider {
+    height: 40rem;
   }
 }
 
@@ -253,9 +252,8 @@
     grid-column: 1 / -1;
   }
 
-  .showcase-img {
-    width: 72%;
-    transform: scale(1.4);
+  .slider {
+    height: 30rem;
   }
 }
 
