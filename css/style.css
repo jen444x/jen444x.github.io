@@ -252,6 +252,88 @@
 }
 
 /*************************/
+/* SHOWCASE SECTION */
+/*************************/
+
+.section-showcase {
+  padding: 9.6rem 0;
+}
+
+.showcase {
+  /* width: 80rem; */
+  background-color: #313131;
+  border-radius: 8px;
+  padding: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.showcase-img {
+  /* height: 50rem; */
+  width: 76%;
+  border-radius: 8px;
+  text-align: center;
+  transform: scale(1.2);
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.3);
+}
+
+.showcase-btn {
+  background-color: white;
+  border: none;
+  height: 4.6rem;
+  width: 4.6rem;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.showcase-btn--left {
+  left: 0;
+  transform: translate(-50%, 0);
+}
+
+.showcase-btn--right {
+  right: 0;
+  transform: translate(50%, 0);
+}
+
+.btn-icon {
+  height: 3.6rem;
+  width: 3.6rem;
+  /* stroke: #313131; */
+  /* stroke: #e67e22; */
+  stroke: #454545;
+}
+
+.dots {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 5.3rem);
+
+  display: flex;
+  gap: 1.2rem;
+}
+
+.dot {
+  height: 1.2rem;
+  width: 1.2rem;
+  background-color: #fff;
+  border: 2px solid #454545;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot--fill {
+  background-color: #454545;
+}
+/*************************/
 /* CTA SECTION */
 /*************************/
 
