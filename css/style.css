@@ -108,7 +108,6 @@
 /*******************/
 .section-hero {
   height: 100vh;
-  /* height: calc(100vh - 6.5rem);  */
   position: relative;
   /* background-image: linear-gradient(
       rgba(34, 34, 34, 0.6),
@@ -122,6 +121,7 @@
     url(../img/hero-img.avif), url(../img/hero-img.jpg); /* if avif is not supported will use jpg*/
   background-size: cover;
   background-position: 45% 45%;
+  background-color: #222; /* Fallback color */
   color: #fff;
   /* z-index: -1; */
 }
@@ -340,7 +340,7 @@
 /* SLIDER */
 .slider {
   max-width: 100rem;
-  height: 50rem;
+  height: 65rem;
   margin: 0 auto;
   position: relative;
 
@@ -355,6 +355,7 @@
 .slide {
   position: absolute;
   width: 100%;
+  /* height: 100%; */
   /* max-height: 50rem; */
 
   /* display: flex;
@@ -365,33 +366,15 @@
   transition: transform 1s;
 }
 
-/* .slide > img {
-  /* Only for images that have different size than slide 
+.slide > img {
+  /* Only for images that have different size than slide */
   width: 100%;
   height: 100%;
-  object-fit: cover;
-} */
+  /* object-fit: cover; */
+  object-fit: contain;
+}
 
 .slider__btn {
-  /* position: absolute;
-  top: 50%;
-  z-index: 10; */
-  /* 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.3);
-
-  border: none;
-  background: rgba(255, 255, 255, 0.7);
-  font-family: inherit;
-  color: #333;
-  border-radius: 50%;
-  height: 5.5rem;
-  width: 5.5rem;
-  font-size: 3.25rem;
-  cursor: pointer; */
-
   /* background-color: white; */
   background: rgba(255, 255, 255, 0.7);
   border: none;
@@ -456,6 +439,22 @@
   opacity: 1;
 }
 
+.social-link {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 4.8rem;
+}
+
+.link:link,
+.link:visited {
+  display: inline-block;
+  color: #e67e22;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: all 0.3s;
+}
+
 /*************************/
 /* CTA SECTION */
 /*************************/
@@ -517,9 +516,22 @@
   border-radius: 50%;
 }
 
+.cta-link:link,
+.cta-link:visited {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #555;
+  transition: all 0.3s;
+}
+
+.cta-link:hover,
+.cta-link:active {
+  color: #444;
+}
+
 .cta-social-links {
   display: flex;
-  gap: 1.6rem;
+  gap: 4.5rem;
   justify-content: center;
 
   list-style: none;
@@ -532,6 +544,8 @@
   background-color: #fff;
   height: 3.4rem;
   width: 3.4rem;
+  height: 4.6rem;
+  width: 4.6rem;
   padding: 0.6rem;
   border-radius: 50%;
 }

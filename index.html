@@ -50,6 +50,20 @@
       Rocky Concrete &mdash; Expert Concrete and Landscaping Services in
       Bakersfield
     </title>
+
+    <!-- preloading background image -->
+    <link
+      rel="preload"
+      href="../img/hero-img.avif"
+      as="image"
+      type="image/avif"
+    />
+    <link
+      rel="preload"
+      href="../img/hero-img.jpg"
+      as="image"
+      type="image/jpeg"
+    />
   </head>
   <body>
     <header class="header sticky">
@@ -83,7 +97,7 @@
           <h1 class="heading-primary">TRANSFORMING YOUR OUTSIDE SPACES</h1>
           <p class="heading-description">
             At Rocky Concrete, we specialize in creating beautiful, durable, and
-            functional outdoor spaces. From stunning driveways and patios to
+            funct~ional outdoor spaces. From stunning driveways and patios to
             custom-built outdoor grills and complete landscaping solutions, our
             expert team is dedicated to delivering exceptional results that
             exceed your expectations.
@@ -96,11 +110,15 @@
         <div class="container">
           <div class="grid grid--2-cols">
             <div class="about-us-img-box">
-              <img
-                src="img/collage.png"
-                class="about-us-img"
-                alt="photos of beautifully designed homes"
-              />
+              <picture>
+                <source srcset="img/collage.webp" type="image/webp" />
+                <source srcset="img/collage.png" type="image/png" />
+                <img
+                  src="img/collage.png"
+                  class="about-us-img"
+                  alt="photos of beautifully designed homes"
+                />
+              </picture>
             </div>
             <div class="about-us-text-box">
               <h1 class="heading-secondary">
@@ -109,10 +127,11 @@
               <p class="about-us-description">
                 With over 15 years of experience, Rocky Concrete is your trusted
                 partner for high-quality concrete and landscaping services in
-                Bakersfield. We specialize in transforming outdoor spaces with
-                expert craftsmanship and personalized service. From driveways
-                and patios to custom outdoor kitchens and fire pits, we bring
-                your vision to life with precision and care.
+                Bakersfield, CA and surrounding areas. We specialize in
+                transforming outdoor spaces with expert craftsmanship and
+                personalized service. From driveways and patios to custom
+                outdoor kitchens and fire pits, we bring your vision to life
+                with precision and care.
               </p>
             </div>
           </div>
@@ -128,11 +147,21 @@
           <!-- Service 1-->
           <div class="service-box">
             <div class="service-img-box">
-              <img
-                src="img/men-concrete.jpg"
-                class="service-img"
-                alt="Worker smoothing freshly poured concrete"
-              />
+              <picture>
+                <source
+                  srcset="img/services/men-concrete.avif"
+                  type="image/avif"
+                />
+                <source
+                  srcset="img/services/men-concrete.jpg"
+                  type="image/jpeg"
+                />
+                <img
+                  src="img/services/men-concrete.jpg"
+                  class="service-img"
+                  alt="Worker smoothing freshly poured concrete"
+                />
+              </picture>
             </div>
             <div class="service-text-box">
               <!-- <h3 class="heading-tertiary">Concrete Work</h3> -->
@@ -148,11 +177,21 @@
           <!-- Section 2 -->
           <div class="service-box">
             <div class="service-img-box">
-              <img
-                src="img/landscape-home3 copy.jpeg"
-                class="service-img"
-                alt="House with landscape"
-              />
+              <picture>
+                <source
+                  srcset="img/services/landscape-home3.avif"
+                  type="image/avif"
+                />
+                <source
+                  srcset="img/services/landscape-home3.jpeg"
+                  type="image/jpeg"
+                />
+                <img
+                  src="img/services/landscape-home3.jpeg"
+                  class="service-img"
+                  alt="House with landscape"
+                />
+              </picture>
             </div>
             <div class="service-text-box">
               <!-- <h3 class="heading-tertiary">Landscaping</h3> -->
@@ -169,15 +208,25 @@
           <!-- Section 3 -->
           <div class="service-box">
             <div class="service-img-box">
-              <img
-                src="img/outdoor-kitchen.webp"
-                class="service-img"
-                alt="Outdoor kitchen"
-              />
+              <picture>
+                <source
+                  srcset="img/services/outdoor-kitchen.webp"
+                  type="image/webp"
+                />
+
+                <source
+                  srcset="img/services/outdoor-kitchen.JPEG"
+                  type="image/jpeg"
+                />
+                <img
+                  src="img/services/outdoor-kitchen.JPEG"
+                  class="service-img"
+                  alt="Outdoor kitchen"
+                />
+              </picture>
             </div>
             <div class="service-text-box">
-              <!-- <h3 class="heading-tertiary">Outdoor kitchens</h3> -->
-              <p class="box-title">Outdoor kitchens</p>
+              <p class="box-title">Outdoor Kitchens</p>
               <p class="section-description">
                 We design and build custom outdoor kitchens perfect for
                 entertaining. Our kitchens feature high-quality materials and
@@ -189,15 +238,18 @@
           <!-- Service 4 -->
           <div class="service-box">
             <div class="service-img-box">
-              <img
-                src="img/firepit.jpg"
-                class="service-img"
-                alt="Cement firepit and seating"
-              />
+              <picture>
+                <source srcset="img/services/firepit.webp" type="image/webp" />
+                <source srcset="img/services/firepit.jpg" type="image/jpeg" />
+                <img
+                  src="img/services/firepit.jpg"
+                  class="service-img"
+                  alt="Cement firepit and seating"
+                />
+              </picture>
             </div>
             <div class="service-text-box">
-              <!-- <h3 class="heading-tertiary">Firepits</h3> -->
-              <p class="box-title">Firepits</p>
+              <p class="box-title">Fire Pits</p>
               <p class="section-description">
                 Enhance your outdoor space with custom-designed fire pits,
                 perfect for gatherings and relaxation. Built with high-quality
@@ -210,10 +262,17 @@
           <!-- Service 5 -->
           <div class="service-box">
             <div class="service-img-box">
-              <img src="img/pool.jpg" class="service-img" alt="Backyard pool" />
+              <picture>
+                <source srcset="img/services/pool.avif" type="image/avif" />
+                <source srcset="img/services/pool.jpg" type="image/jpeg" />
+                <img
+                  src="img/services/pool.jpg"
+                  class="service-img"
+                  alt="Backyard pool"
+                />
+              </picture>
             </div>
             <div class="service-text-box">
-              <!-- <h3 class="heading-tertiary">Pool Remodel</h3> -->
               <p class="box-title">Pool Remodel</p>
               <p class="section-description">
                 Transform your pool area with our comprehensive remodeling
@@ -227,14 +286,23 @@
           <!-- Service 6 -->
           <div class="service-box">
             <div class="service-img-box">
-              <img
-                src="img/house-wet-concrete.jpg"
-                class="service-img"
-                alt="House with wet concrete"
-              />
+              <picture>
+                <source
+                  srcset="img/services/additional.webp"
+                  type="image/webp"
+                />
+                <source
+                  srcset="img/services/additional.jpeg"
+                  type="image/jpeg"
+                />
+                <img
+                  src="img/services/additional.jpeg"
+                  class="service-img"
+                  alt="House with wet concrete"
+                />
+              </picture>
             </div>
             <div class="service-text-box">
-              <!-- <h3 class="heading-tertiary">Aditional Services</h3> -->
               <p class="box-title">Additional Services</p>
               <p class="section-description">
                 We offer a variety of other outdoor services to meet all your
@@ -246,57 +314,6 @@
         </div>
       </section>
 
-      <!-- <section class="section-showcase" id="showcase">
-        <div class="container">
-          <h2 class="heading-secondary center-text">See What We’ve Built</h2>
-          <div class="showcase">
-            <img
-              class="showcase-img"
-              src="img/pool2.jpg"
-              alt="Outdoor pool with a hot tub"
-            />
-            <button class="showcase-btn showcase-btn--left">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="btn-icon"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 19.5 8.25 12l7.5-7.5"
-                />
-              </svg>
-            </button>
-            <button class="showcase-btn showcase-btn--right">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="btn-icon"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </button>
-            <div class="dots">
-              <button class="dot dot--fill">&nbsp</button>
-              <button class="dot">&nbsp</button>
-              <button class="dot">&nbsp</button>
-              <button class="dot">&nbsp</button>
-            </div>
-          </div>
-        </div>
-      </section> -->
-
       <section class="section-showcase" id="showcase">
         <div class="container">
           <h2 class="heading-secondary center-text">See What We’ve Built</h2>
@@ -304,25 +321,67 @@
           <div class="slider">
             <img
               class="slide"
-              src="img/pool2.jpg"
-              alt="Outdoor pool with a hot tub"
+              src="img/show-case/showcase1.JPEG"
+              alt="Outdoor grill and kitchen"
             />
 
             <img
               class="slide"
-              src="img/pool2.jpg"
-              alt="Outdoor pool with a hot tub"
+              src="img/show-case/showcase2.JPEG"
+              alt="concrete fire pit and seating"
             />
 
             <img
               class="slide"
-              src="img/pool2.jpg"
-              alt="Outdoor pool with a hot tub"
+              src="img/show-case/showcase3.JPEG"
+              alt="Outdoor concrete table"
+            />
+
+            <img
+              class="slide"
+              src="img/show-case/showcase4.JPEG"
+              alt="landscaping"
+            />
+
+            <img
+              class="slide"
+              src="img/show-case/showcase5.jpeg"
+              alt="concrete stairs"
+            />
+
+            <img
+              class="slide"
+              src="img/show-case/showcase6.jpeg"
+              alt="stamped concrete"
+            />
+
+            <img
+              class="slide"
+              src="img/show-case/showcase7.jpeg"
+              alt="pool being remodeled"
+            />
+
+            <img
+              class="slide"
+              src="img/show-case/showcase8.jpeg"
+              alt="concrete fire pit and seating"
+            />
+
+            <img
+              class="slide"
+              src="img/show-case/showcase9.jpeg"
+              alt="red stamped concrete"
             />
 
             <button class="slider__btn slider__btn--left">&larr;</button>
             <button class="slider__btn slider__btn--right">&rarr;</button>
             <div class="dots"></div>
+          </div>
+
+          <div class="container social-link">
+            <a href="#cta" class="link"
+              >Want to See More? Visit Our Social Media! &rarr;</a
+            >
           </div>
         </div>
       </section>
@@ -341,26 +400,33 @@
                   </p>
                   <ul class="contact-infos">
                     <li class="contact-info">
-                      <ion-icon class="cta-icon" name="call-outline"></ion-icon>
-                      <span>661-378-4017</span>
+                      <a class="cta-link contact-info" href="tel:661-378-4017">
+                        <ion-icon
+                          class="cta-icon"
+                          name="call-outline"
+                        ></ion-icon>
+                        <span>661-378-4017</span>
+                      </a>
                     </li>
                     <li class="contact-info">
-                      <ion-icon class="cta-icon" name="mail-outline"></ion-icon>
-                      <span>rockyconcreteinc22@gmail.com</span>
+                      <a
+                        class="cta-link contact-info"
+                        href="mailto:rockyconcreteinc22@gmail.com"
+                      >
+                        <ion-icon
+                          class="cta-icon"
+                          name="mail-outline"
+                        ></ion-icon>
+                        <span>rockyconcreteinc22@gmail.com</span>
+                      </a>
                     </li>
                   </ul>
                   <hr />
                   <ul class="cta-social-links">
                     <li>
-                      <a class="footer-link" href="#"
-                        ><ion-icon
-                          class="socials-icon"
-                          name="logo-instagram"
-                        ></ion-icon
-                      ></a>
-                    </li>
-                    <li>
-                      <a class="footer-link" href="#"
+                      <a
+                        class="footer-link"
+                        href="https://www.tiktok.com/@rockyconcreteinc"
                         ><ion-icon
                           class="socials-icon"
                           name="logo-tiktok"
@@ -368,7 +434,19 @@
                       ></a>
                     </li>
                     <li>
-                      <a class="footer-link" href="#"
+                      <a
+                        class="footer-link"
+                        href="https://www.instagram.com/rockyconcreteinc/"
+                        ><ion-icon
+                          class="socials-icon"
+                          name="logo-instagram"
+                        ></ion-icon
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        class="footer-link"
+                        href="https://m.facebook.com/RockyConcreteInc/"
                         ><ion-icon
                           class="socials-icon"
                           name="logo-facebook"
@@ -376,20 +454,6 @@
                       ></a>
                     </li>
                   </ul>
-                  <!-- <div class="socials-links">
-                    <ion-icon
-                      class="socials-icon"
-                      name="logo-instagram"
-                    ></ion-icon>
-                    <ion-icon
-                      class="socials-icon"
-                      name="logo-tiktok"
-                    ></ion-icon>
-                    <ion-icon
-                      class="socials-icon"
-                      name="logo-facebook"
-                    ></ion-icon>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -397,7 +461,11 @@
               <div class="cta-content-box">
                 <h2 class="heading-tertiary">Request a free quote</h2>
                 <div class="cta-form-box">
-                  <form class="cta-form" action="#">
+                  <form
+                    class="cta-form"
+                    action="https://formspree.io/f/xeojjaol"
+                    method="POST"
+                  >
                     <div>
                       <label for="full-name">Full Name</label>
                       <input
@@ -425,7 +493,7 @@
                       ></textarea>
                     </div>
 
-                    <button class="btn">Get Free Quote</button>
+                    <button type="submit" class="btn">Get Free Quote</button>
                   </form>
                 </div>
               </div>
@@ -439,7 +507,7 @@
       <div class="container grid-f grid--3-cols-f">
         <nav class="nav-col">
           <ul class="footer-nav">
-            <li><a class="footer-link" href="#hero">Home</a></li>
+            <li><a class="footer-link" href="#">Home</a></li>
             <li><a class="footer-link" href="#about-us">About Us</a></li>
             <li><a class="footer-link" href="#services">Services</a></li>
             <li><a class="footer-link" href="#showcase">Showcase</a></li>
@@ -465,15 +533,9 @@
 
           <ul class="social-links">
             <li>
-              <a class="footer-link" href="#"
-                ><ion-icon
-                  class="footer-social-icon"
-                  name="logo-instagram"
-                ></ion-icon
-              ></a>
-            </li>
-            <li>
-              <a class="footer-link" href="#"
+              <a
+                class="footer-link"
+                href="https://www.tiktok.com/@rockyconcreteinc"
                 ><ion-icon
                   class="footer-social-icon"
                   name="logo-tiktok"
@@ -481,7 +543,19 @@
               ></a>
             </li>
             <li>
-              <a class="footer-link" href="#"
+              <a
+                class="footer-link"
+                href="https://www.instagram.com/rockyconcreteinc/"
+                ><ion-icon
+                  class="footer-social-icon"
+                  name="logo-instagram"
+                ></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a
+                class="footer-link"
+                href="https://m.facebook.com/RockyConcreteInc/"
                 ><ion-icon
                   class="footer-social-icon"
                   name="logo-facebook"
