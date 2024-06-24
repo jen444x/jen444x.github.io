@@ -177,6 +177,16 @@
   .slider {
     height: 40rem;
   }
+
+  .slider__btn {
+    height: 4.2rem;
+    width: 4.2rem;
+  }
+
+  .dots__dot {
+    height: 0.8rem;
+    width: 0.8rem;
+  }
 }
 
 /*************************************/
@@ -259,6 +269,11 @@
 
   .slider {
     height: 27rem;
+  }
+
+  .slider__btn {
+    height: 3.2rem;
+    width: 3.2rem;
   }
 }
 
