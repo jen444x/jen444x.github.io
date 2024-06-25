@@ -1,6 +1,6 @@
-# Rocky Concrete
+# Rocky Concrete Inc.
 
-Welcome to the repository for Rocky Concrete's website. This project showcases the services and expertise of Rocky Concrete, specializing in high-quality concrete and landscaping services.
+Welcome to the repository for Rocky Concrete Inc.'s website. This project showcases the services and expertise of Rocky Concrete Inc., specializing in high-quality concrete and landscaping services.
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ Welcome to the repository for Rocky Concrete's website. This project showcases t
 
 ## Demo
 
-You can view the live website here: [Rocky Concrete](https://jen444x.github.io/)
+You can view the live website here: [Rocky Concrete Inc.](https://rockyconcreteinc.com)
 
 ## Features
 
@@ -35,7 +35,7 @@ To run this project locally, follow these steps:
     ```
 2. **Navigate to the project directory**:
     ```sh
-    cd jen44x.github.io
+    cd jen444x.github.io
     ```
 
 ## Usage
@@ -44,7 +44,7 @@ Open the `index.html` file in your preferred web browser to view the website loc
 
 ## Deployment
 
-This project is deployed using GitHub Pages. To re-deploy or update the site, push changes to the `main` branch.
+This project is deployed using GitHub Pages and is accessible via the custom domain [rockyconcreteinc.com](https://rockyconcreteinc.com).
 
 ### Steps to Deploy
 
@@ -54,10 +54,9 @@ This project is deployed using GitHub Pages. To re-deploy or update the site, pu
     git commit -m "Your commit message"
     git push origin main
     ```
-2. **Configure GitHub Pages** (if not already configured):
-    - Go to the repository settings on GitHub.
-    - Scroll down to the "GitHub Pages" section.
-    - Select the `main` branch as the source and save.
+2. **GitHub Pages Configuration**:
+    - Ensure the repository settings are configured to use the `main` branch for GitHub Pages.
+    - Verify that the custom domain (rockyconcreteinc.com) is set up correctly in the repository settings under the "Pages" section.
 
 ## Contributing
 
