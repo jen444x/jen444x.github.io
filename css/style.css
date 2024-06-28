@@ -118,7 +118,7 @@
       rgba(34, 34, 34, 0.6),
       rgba(34, 34, 34, 0.6)
     ),
-    url(../img/hero-img.avif), url(../img/hero-img.jpg); /* if avif is not supported will use jpg*/
+    url(../img/hero/hero-img.avif), url(../img/hero/hero-img.jpg); /* if avif is not supported will use jpg*/
   background-size: cover;
   background-position: 45% 45%;
   background-color: #222; /* Fallback color */
@@ -248,7 +248,6 @@
 } */
 
 .service-img-box img {
-  /* max-height: 17rem; */
   max-height: 20rem;
 }
 
