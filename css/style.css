@@ -243,11 +243,12 @@
   /* text-align: center; */
 }
 
-.service-img-box {
+/* .service-img-box {
   max-height: 20rem;
-}
+} */
 
-.service-img-box picture {
+.service-img-box img {
+  /* max-height: 17rem; */
   max-height: 20rem;
 }
 

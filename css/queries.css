@@ -139,6 +139,10 @@
   .cta-form .btn {
     max-width: 60%;
   }
+
+  .service-img-box img {
+    max-height: 17rem;
+  }
 }
 
 /*************************************/
@@ -186,6 +190,10 @@
   .dots__dot {
     height: 0.8rem;
     width: 0.8rem;
+  }
+
+  .service-img-box img {
+    max-height: 20rem;
   }
 }
 
