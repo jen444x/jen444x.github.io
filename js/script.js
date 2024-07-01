@@ -11,33 +11,6 @@ btnNavEl.addEventListener("click", function () {
 });
 
 ///////////////////////////////////////////////////////////
-// Sticky navigation
-
-// const sectionHeroEl = document.querySelector(".section-hero");
-
-// const obs = new IntersectionObserver(
-//   function (entries) {
-//     const ent = entries[0];
-//     console.log(ent);
-
-//     if (ent.isIntersecting === false) {
-//       document.body.classList.add("sticky");
-//     }
-
-//     if (ent.isIntersecting === true) {
-//       document.body.classList.remove("sticky");
-//     }
-//   },
-//   {
-//     // In the viewport
-//     root: null,
-//     threshold: 0,
-//     rootMargin: "-80px",
-//   }
-// );
-// obs.observe(sectionHeroEl);
-
-///////////////////////////////////////////////////////////
 // Fixing flexbox gap property missing in some Safari versions
 function checkFlexGap() {
   var flex = document.createElement("div");
@@ -59,12 +32,17 @@ checkFlexGap();
 
 ///////////////////////////////
 // Slider
-// Slider
 const slider = function () {
   const slides = document.querySelectorAll(".slide");
   const btnLeft = document.querySelector(".slider__btn--left");
   const btnRight = document.querySelector(".slider__btn--right");
   const dotContainer = document.querySelector(".dots");
+
+  // Check if slider elements exist
+  if (!slides.length || !btnLeft || !btnRight || !dotContainer) {
+    // Exit the function if slider elements are not found
+    return;
+  }
 
   let curSlide = 0;
   const maxSlide = slides.length;
@@ -142,7 +120,9 @@ const slider = function () {
     }
   });
 };
-slider();
+// slider();
+// Ensure the slider function runs once the DOM content is fully loaded
+document.addEventListener("DOMContentLoaded", slider);
 
 /////////////////
 //close mobile nav
