@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/queries.css" />
+    <link rel="stylesheet" href="css/about-us.css" />
 
     <script
       type="module"
@@ -49,38 +50,50 @@
     <script defer src="js/script.js"></script>
   </head>
   <body>
+    <header class="header sticky">
+      <a href="index.html">
+        <img class="logo" alt="Rocky Concrete logo" src="img/logo.jpeg" />
+      </a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li><a class="main-nav-link" href="#">ABOUT US</a></li>
+          <li>
+            <a class="main-nav-link" href="index.html#services">SERVICES</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="index.html#showcase">SHOWCASE</a>
+          </li>
+          <li>
+            <a class="main-nav-link nav-cta" href="index.html#cta"
+              >CONTACT US</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <button class="btn-mobile-nav" aria-label="Open navigation menu">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+      </button>
+    </header>
+
     <main>
-      <header class="header sticky">
-        <a href="index.html">
-          <img class="logo" alt="Rocky Concrete logo" src="img/logo.jpeg" />
-        </a>
+      <section class="about-us-section-hero">
+        <div class="about-us-hero">
+          <h1 class="heading-primary">About Us</h1>
+        </div>
+      </section>
 
-        <nav class="main-nav">
-          <ul class="main-nav-list">
-            <li><a class="main-nav-link" href="#">ABOUT US</a></li>
-            <li>
-              <a class="main-nav-link" href="index.html#services">SERVICES</a>
-            </li>
-            <li>
-              <a class="main-nav-link" href="index.html#showcase">SHOWCASE</a>
-            </li>
-            <li>
-              <a class="main-nav-link nav-cta" href="index.html#cta"
-                >CONTACT US</a
-              >
-            </li>
-          </ul>
-        </nav>
-
-        <button class="btn-mobile-nav" aria-label="Open navigation menu">
-          <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
-          <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
-        </button>
-      </header>
-      <section></section>
+      <section class="about-us">
+        <div class="container">
+          <div class="grid grid--2-cols">
+            <div about-us-text-box>girl</div>
+            <div about-us-img-box>hey</div>
+          </div>
+        </div>
+      </section>
     </main>
-
-    <section></section>
 
     <footer class="footer">
       <div class="container grid-f grid--3-cols-f">

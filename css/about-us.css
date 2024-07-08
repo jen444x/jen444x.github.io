@@ -1,0 +1,49 @@
+/*******************/
+/* NAVIGATION */
+/*******************/
+
+.main-nav-list li:first-child .main-nav-link {
+  color: #cf711f;
+}
+
+/*******************/
+/* HERO */
+/*******************/
+
+.about-us-section-hero {
+  height: 45vh;
+  position: relative;
+  background-image: linear-gradient(
+      rgba(34, 34, 34, 0.6),
+      rgba(34, 34, 34, 0.6)
+    ),
+    url(../img/about-us-page/pexels-rquiros-2219024.jpg);
+  background-size: cover;
+  background-position: 50% 45%;
+  background-color: #222; /* Fallback color */
+  color: #fff;
+}
+
+.about-us-hero {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -60%);
+  text-align: center;
+}
+
+.about-us-hero h1 {
+  position: relative;
+  padding-bottom: 2rem;
+  margin-bottom: 2.2rem;
+}
+
+.about-us-hero h1:after {
+  position: absolute;
+  content: "";
+  left: 0px;
+  bottom: 0px;
+  width: 50px;
+  height: 2px;
+  background-color: #cf711f;
+}
