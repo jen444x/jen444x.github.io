@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom colors */
+  --color-primary: #e67e22;
+  --color-primary-dark: #cf711f;
+  --color-primary-light: #eb984e;
+  --color-primary-tint: #fdf2e9;
+  --color-primary-tint-2: #fae5d3;
+  --color-primary-shade-dark: #45260a;
+
+  /* Custom fonts */
+  --font-rubik: 'Rubik', sans-serif;
+  --font-quicksand: 'Quicksand', sans-serif;
+}
+
+/* Base body styles */
+body {
+  color: #444;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
+}

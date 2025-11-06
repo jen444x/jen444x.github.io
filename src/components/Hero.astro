@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../../public/img/hero/hero-img.jpg';
+---
+
+<section class="section-hero relative h-screen overflow-hidden bg-[#222]">
+  <!-- Background Image with Astro optimization -->
+  <Image
+    src={heroImg}
+    alt="Rocky Concrete outdoor landscaping work"
+    class="absolute inset-0 w-full h-full object-cover object-[center_55%]"
+    loading="eager"
+    quality={85}
+  />
+
+  <!-- Gradient Overlay -->
+  <div class="absolute inset-0 bg-linear-to-br from-[rgba(34,34,34,0.6)] to-[rgba(34,34,34,0.6)]"></div>
+
+  <!-- Content -->
+  <div class="hero absolute z-10 max-w-4xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center px-6 md:px-8">
+    <h1 class="heading-primary text-white text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6 md:mb-8 tracking-tight">
+      TRANSFORMING YOUR<br />OUTSIDE SPACES
+    </h1>
+    <p class="heading-description text-white text-base md:text-lg lg:text-xl leading-relaxed mb-8 md:mb-10">
+      Expert concrete and landscaping services in Bakersfield and
+      surrounding areas. From stunning driveways and patios to custom
+      outdoor kitchens and full landscaping solutions, our team delivers
+      exceptional results. Contact us today for a free estimate!
+    </p>
+    <a
+      href="#cta"
+      class="btn inline-block text-base md:text-lg font-semibold bg-primary text-white no-underline py-3 px-8 md:py-4 md:px-10 rounded-lg transition-all duration-300 hover:bg-primary-dark focus-visible:bg-primary-dark focus-visible:outline-none"
+    >
+      CONTACT US
+    </a>
+  </div>
+</section>

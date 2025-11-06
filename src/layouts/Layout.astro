@@ -1,0 +1,190 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://rockyconcreteinc.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rockyconcreteinc.com/" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://rockyconcreteinc.com/img/hero/hero-img.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Rocky Concrete Inc" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://rockyconcreteinc.com/" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://rockyconcreteinc.com/img/hero/hero-img.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Ensure text remains visible during font load */
+      @font-face {
+        font-family: 'Rubik';
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Quicksand';
+        font-display: swap;
+      }
+    </style>
+
+    <link rel="icon" href="/img/favicon-64px.png" />
+    <link
+      rel="icon"
+      href="/img/favicon-192px.png"
+      sizes="192x192"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="/img/favicon-512px.png"
+      sizes="512x512"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <title>{title}</title>
+
+    <link rel="preload" href="/img/hero/hero-img.avif" as="image" type="image/avif" />
+    <link rel="preload" href="/img/hero/hero-img.jpg" as="image" type="image/jpeg" />
+
+    <!-- Schema.org Structured Data for Local Business -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Rocky Concrete Inc",
+        "image": "https://rockyconcreteinc.com/img/logo.jpeg",
+        "description": "Expert concrete and landscaping services in Bakersfield, CA. Specializing in driveways, patios, outdoor kitchens, fire pits, pool remodeling, and landscaping.",
+        "url": "https://rockyconcreteinc.com",
+        "telephone": "+1-661-378-4017",
+        "email": "rockyconcreteinc22@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bakersfield",
+          "addressRegion": "CA",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "35.3733",
+          "longitude": "-119.0187"
+        },
+        "areaServed": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": "35.3733",
+            "longitude": "-119.0187"
+          },
+          "geoRadius": "50000"
+        },
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "07:00",
+          "closes": "18:00"
+        },
+        "sameAs": [
+          "https://www.facebook.com/RockyConcreteInc/",
+          "https://www.instagram.com/rockyconcreteinc/",
+          "https://www.tiktok.com/@rockyconcreteinc"
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "reviewCount": "1"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Concrete and Landscaping Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Concrete Work",
+                "description": "Driveways, patios, walkways, and more"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Landscaping",
+                "description": "Custom design, grass installation, and yard transformations"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Outdoor Kitchens",
+                "description": "Custom outdoor kitchen design and installation"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Fire Pits",
+                "description": "Custom-designed fire pits for outdoor spaces"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Pool Remodel",
+                "description": "Comprehensive pool remodeling services"
+              }
+            }
+          ]
+        }
+      }
+    </script>
+  </head>
+  <body class="font-rubik leading-normal overflow-x-hidden">
+    <slot />
+  </body>
+</html>
