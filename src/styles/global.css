@@ -1,13 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* Custom colors - Refined Earthy Orange (Warm Clay) */
-  --color-primary: #CA7642;
-  --color-primary-dark: #B36635;
-  --color-primary-light: #D88F5E;
-  --color-primary-tint: #FBF3ED;
-  --color-primary-tint-2: #F4E5D8;
-  --color-primary-shade-dark: #3A2214;
+  /* Option A: Orange + Deep Teal/Blue */
+  --color-primary: #E8792E;
+  --color-primary-dark: #D06820;
+  --color-primary-light: #EE934D;
+  --color-primary-tint: #FDF5EF;
+  --color-primary-tint-2: #F9E8D9;
+  --color-primary-shade-dark: #472110;
+
+  /* Secondary color - Deep Teal/Blue (trust, professional) */
+  --color-secondary: #2C5F6F;
+  --color-secondary-dark: #1F4550;
+  --color-secondary-light: #3A7A8D;
 
   /* Custom fonts */
   --font-rubik: 'Rubik', sans-serif;
@@ -22,5 +27,5 @@ body {
 /* Focus styles for accessibility */
 *:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 0.8rem rgba(202, 118, 66, 0.5);
+  box-shadow: 0 0 0 0.8rem rgba(232, 121, 46, 0.5);
 }
