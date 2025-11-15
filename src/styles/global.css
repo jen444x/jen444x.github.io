@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* Option B: Orange + Deep Green */
+  /* Option C: Vibrant orange + warm neutrals (cream & charcoal) */
   --color-primary: #E8792E;
   --color-primary-dark: #D06820;
   --color-primary-light: #EE934D;
-  --color-primary-tint: #FDF5EF;
-  --color-primary-tint-2: #F9E8D9;
+  --color-primary-tint: #F5EFE6;
+  --color-primary-tint-2: #EDE4D6;
   --color-primary-shade-dark: #472110;
 
-  /* Secondary color - Deep Green (nature, landscaping, growth) */
-  --color-secondary: #2D5C3F;
-  --color-secondary-dark: #1E3D2A;
-  --color-secondary-light: #3D7753;
+  /* Warm neutrals for depth */
+  --color-cream: #F5EFE6;
+  --color-charcoal: #2D2D2D;
+  --color-charcoal-light: #3D3D3D;
 
   /* Custom fonts */
   --font-rubik: 'Rubik', sans-serif;
