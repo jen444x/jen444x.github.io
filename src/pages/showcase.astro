@@ -228,6 +228,60 @@ const galleryItems = [
       </div>
     </section>
 
+    <!-- Mobile Category Filter Bar (Hidden on Desktop) -->
+    <div class="lg:hidden sticky top-16 z-40 bg-white border-b-2 border-gray-200">
+      <!-- Grid Container - Clean, modern tab-style navigation -->
+      <div class="grid grid-cols-2 gap-0">
+        <!-- All Categories Button -->
+        <button
+          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-gray-900 bg-gray-50 text-gray-900"
+          data-target="all"
+        >
+          ALL PROJECTS
+        </button>
+
+        <!-- Concrete Work -->
+        <button
+          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          data-target="#section-concrete"
+        >
+          CONCRETE
+        </button>
+
+        <!-- Outdoor Living -->
+        <button
+          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          data-target="#section-outdoor-living"
+        >
+          OUTDOOR
+        </button>
+
+        <!-- Pools & Spas -->
+        <button
+          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          data-target="#section-pools-spas"
+        >
+          POOLS & SPAS
+        </button>
+
+        <!-- Landscaping -->
+        <button
+          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          data-target="#section-landscaping"
+        >
+          LANDSCAPING
+        </button>
+
+        <!-- Iron Work -->
+        <button
+          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          data-target="#section-iron-work"
+        >
+          IRON WORK
+        </button>
+      </div>
+    </div>
+
     <!-- Gallery Section with Sidebar -->
     <section class="py-16 md:py-24">
       <div class="max-w-[1400px] mx-auto px-8">
@@ -1034,6 +1088,30 @@ const galleryItems = [
     });
   });
 
+  // Mobile filter buttons
+  const mobileFilterBtns = document.querySelectorAll(".mobile-filter-btn");
+
+  mobileFilterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("data-target");
+
+      // Update active state - modern tab style
+      mobileFilterBtns.forEach((b) => {
+        b.classList.remove("border-gray-900", "bg-gray-50", "text-gray-900");
+        b.classList.add("border-transparent", "bg-white", "text-gray-600");
+      });
+      btn.classList.remove("border-transparent", "bg-white", "text-gray-600");
+      btn.classList.add("border-gray-900", "bg-gray-50", "text-gray-900");
+
+      // Scroll to section or top
+      if (targetId === "all") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (targetId) {
+        smoothScrollTo(targetId);
+      }
+    });
+  });
+
   // Back to top button
   if (backToTopBtn) {
     window.addEventListener("scroll", () => {
@@ -1154,11 +1232,20 @@ const galleryItems = [
     }
   });
 
-  // Initialize
-  filterGallery();
+  // Initialize - removed filterGallery as it's not needed
 </script>
 
 <style>
+  /* Hide scrollbar for mobile filter */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   @keyframes fade-in {
     from {
       opacity: 0;
