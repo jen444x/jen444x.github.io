@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  /* Custom colors - Bold Professional (Warm Terracotta) */
-  --color-primary: #D97D42;
-  --color-primary-dark: #C26B30;
-  --color-primary-light: #E59A65;
-  --color-primary-tint: #FBF4EF;
-  --color-primary-tint-2: #F5E6D9;
-  --color-primary-shade-dark: #3D2215;
+  /* Custom colors - Refined Earthy Orange (Warm Clay) */
+  --color-primary: #CA7642;
+  --color-primary-dark: #B36635;
+  --color-primary-light: #D88F5E;
+  --color-primary-tint: #FBF3ED;
+  --color-primary-tint-2: #F4E5D8;
+  --color-primary-shade-dark: #3A2214;
 
   /* Custom fonts */
   --font-rubik: 'Rubik', sans-serif;
@@ -22,5 +22,5 @@ body {
 /* Focus styles for accessibility */
 *:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 0.8rem rgba(217, 125, 66, 0.5);
+  box-shadow: 0 0 0 0.8rem rgba(202, 118, 66, 0.5);
 }
