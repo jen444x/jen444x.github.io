@@ -5,12 +5,12 @@ import Footer from "../components/Footer.astro";
 
 // Gallery items organized by category
 const galleryItems = [
-  // CONCRETE - Driveways, walkways, stairs, stamped concrete
+  // CONCRETE - Driveways, walkways, stairs, flatwork/patios
   {
     src: "/img/show-case/concrete/showcase1.JPEG",
     alt: "Modern patio installation with clean concrete work",
     category: "concrete",
-    type: "patios",
+    type: "flatwork",
     finish: "regular",
   },
   {
@@ -45,129 +45,147 @@ const galleryItems = [
     src: "/img/show-case/concrete/showcase9.jpeg",
     alt: "Red stamped concrete patio with professional finish",
     category: "concrete",
-    type: "patios",
+    type: "flatwork",
     finish: "stamped",
   },
 
-  // BACKYARD REMODELS - Complete transformations including outdoor kitchens, fire pits, pools
+  // OUTDOOR LIVING - Outdoor kitchens, fire pits, covered patios
   {
     src: "/img/show-case/backyard-remodels/IMG_1803.jpeg",
     alt: "Luxury outdoor kitchen with stone bar and professional countertops",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "outdoor-kitchens",
   },
   {
     src: "/img/show-case/backyard-remodels/IMG_1809.jpeg",
     alt: "Premium outdoor kitchen with fire pit table and entertainment setup",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "outdoor-kitchens",
   },
   {
     src: "/img/show-case/backyard-remodels/IMG_1805.jpeg",
     alt: "Spacious outdoor kitchen with bar seating and stone work",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "outdoor-kitchens",
   },
   {
     src: "/img/show-case/backyard-remodels/showcase11.jpeg",
     alt: "Covered outdoor kitchen with modern design",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "outdoor-kitchens",
   },
   {
     src: "/img/show-case/backyard-remodels/20241102093329.jpg",
     alt: "Modern patio with geometric pavers, turf strips, and fire feature",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "fire-features",
   },
   {
     src: "/img/show-case/backyard-remodels/showcase8.jpeg",
     alt: "Concrete fire pit with comfortable seating arrangement",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "fire-features",
   },
   {
     src: "/img/show-case/backyard-remodels/showcase2.jpeg",
     alt: "Custom fire pit with outdoor seating area",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "fire-features",
   },
   {
     src: "/img/show-case/backyard-remodels/showcase6.jpeg",
     alt: "Professional brick fire pit design",
-    category: "backyard-remodels",
-  },
-  {
-    src: "/img/show-case/backyard-remodels/20230419172346.jpg",
-    alt: "Spectacular modern pool with spa, turf, and oversized white pavers",
-    category: "backyard-remodels",
-  },
-  {
-    src: "/img/show-case/backyard-remodels/20230518093304.jpg",
-    alt: "Beautiful pool with large white pavers and artificial turf from aerial view",
-    category: "backyard-remodels",
-  },
-  {
-    src: "/img/show-case/backyard-remodels/showcase4.jpeg",
-    alt: "Complete pool remodeling project with modern finishes",
-    category: "backyard-remodels",
-  },
-  {
-    src: "/img/show-case/backyard-remodels/showcase7.jpeg",
-    alt: "Pool area transformation with quality concrete work",
-    category: "backyard-remodels",
-  },
-  {
-    src: "/img/show-case/backyard-remodels/IMG_4649.jpeg",
-    alt: "Evening pool reflection with covered patio and elegant lighting",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "fire-features",
   },
   {
     src: "/img/show-case/backyard-remodels/IMG_0068.jpeg",
     alt: "Modern outdoor fireplace with artificial turf and concrete accents",
-    category: "backyard-remodels",
+    category: "outdoor-living",
+    type: "fire-features",
   },
-
-  // LANDSCAPE - Artificial turf, gardens, water features
-  {
-    src: "/img/show-case/concrete/showcase10.JPEG",
-    alt: "bright green artificial turf and a raised garden bed made of stacked stone with plants and a small tree in the center.",
-    category: "landscape",
-  },
-  {
-    src: "/img/show-case/landscape/IMG_0805.jpeg",
-    alt: "Clean backyard with artificial turf and concrete patio borders",
-    category: "landscape",
-  },
-  {
-    src: "/img/show-case/landscape/IMG_1990.jpeg",
-    alt: "Custom rock waterfall feature with decorative landscaping",
-    category: "landscape",
-  },
-  {
-    src: "/img/show-case/landscape/IMG_9518.jpeg",
-    alt: "Pristine artificial turf backyard installation",
-    category: "landscape",
-  },
-  {
-    src: "/img/show-case/landscape/20231207162444 2.jpeg",
-    alt: "Custom putting green with artificial turf aerial view",
-    category: "landscape",
-  },
-
-  // PATIOS - Covered patios and outdoor living spaces
   {
     src: "/img/show-case/patio/IMG_0600.jpeg",
     alt: "Stunning evening patio with stone fire features and luxury seating",
-    category: "patio",
+    category: "outdoor-living",
+    type: "covered-patios",
   },
   {
     src: "/img/show-case/patio/IMG_0592.jpeg",
     alt: "Beautiful covered patio with pool, stone columns, and evening lighting",
-    category: "patio",
+    category: "outdoor-living",
+    type: "covered-patios",
   },
   {
     src: "/img/show-case/patio/IMG_0593.jpeg",
     alt: "Evening covered patio ceiling with elegant design",
-    category: "patio",
+    category: "outdoor-living",
+    type: "covered-patios",
   },
   {
     src: "/img/show-case/patio/20231005155415.jpg",
     alt: "Modern patio with large geometric pavers and turf strips",
-    category: "patio",
+    category: "outdoor-living",
+    type: "covered-patios",
+  },
+
+  // POOLS & SPAS - Pool remodels and spa installations
+  {
+    src: "/img/show-case/backyard-remodels/20230419172346.jpg",
+    alt: "Spectacular modern pool with spa, turf, and oversized white pavers",
+    category: "pools-spas",
+  },
+  {
+    src: "/img/show-case/backyard-remodels/20230518093304.jpg",
+    alt: "Beautiful pool with large white pavers and artificial turf from aerial view",
+    category: "pools-spas",
+  },
+  {
+    src: "/img/show-case/backyard-remodels/showcase4.jpeg",
+    alt: "Complete pool remodeling project with modern finishes",
+    category: "pools-spas",
+  },
+  {
+    src: "/img/show-case/backyard-remodels/showcase7.jpeg",
+    alt: "Pool area transformation with quality concrete work",
+    category: "pools-spas",
+  },
+  {
+    src: "/img/show-case/backyard-remodels/IMG_4649.jpeg",
+    alt: "Evening pool reflection with covered patio and elegant lighting",
+    category: "pools-spas",
+  },
+
+  // LANDSCAPING - Artificial turf, gardens, water features
+  {
+    src: "/img/show-case/concrete/showcase10.JPEG",
+    alt: "Bright green artificial turf and a raised garden bed made of stacked stone with plants and a small tree in the center",
+    category: "landscaping",
+    type: "gardens",
+  },
+  {
+    src: "/img/show-case/landscape/IMG_0805.jpeg",
+    alt: "Clean backyard with artificial turf and concrete patio borders",
+    category: "landscaping",
+    type: "turf",
+  },
+  {
+    src: "/img/show-case/landscape/IMG_1990.jpeg",
+    alt: "Custom rock waterfall feature with decorative landscaping",
+    category: "landscaping",
+    type: "water-features",
+  },
+  {
+    src: "/img/show-case/landscape/IMG_9518.jpeg",
+    alt: "Pristine artificial turf backyard installation",
+    category: "landscaping",
+    type: "turf",
+  },
+  {
+    src: "/img/show-case/landscape/20231207162444 2.jpeg",
+    alt: "Custom putting green with artificial turf aerial view",
+    category: "landscaping",
+    type: "turf",
   },
 
   // IRON WORK - Gates, railings, decorative metalwork
@@ -186,9 +204,6 @@ const galleryItems = [
     alt: "Decorative iron trellis with climbing plants",
     category: "iron-work",
   },
-
-  // CHIMNEYS - Outdoor fireplaces and chimney construction (coming soon)
-  // Add chimney images here when available
 ];
 ---
 
@@ -216,389 +231,657 @@ const galleryItems = [
     <!-- Gallery Section with Sidebar -->
     <section class="py-16 md:py-24">
       <div class="max-w-[1400px] mx-auto px-8">
-        <!-- Filter Controls -->
-        <div class="mb-12">
-          <!-- Main Category Buttons -->
-          <div class="flex flex-wrap justify-center gap-3 mb-4">
-            <button
-              class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-300 bg-primary text-white shadow-lg hover:bg-primary-dark active"
-              data-category="all"
-            >
-              All Projects
-            </button>
-            <!-- Concrete Dropdown -->
-            <div class="relative concrete-dropdown-wrapper">
-              <button
-                id="concrete-dropdown-btn"
-                class="category-btn concrete-main-btn px-6 py-3 rounded-full font-medium transition-all duration-300 bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary flex items-center gap-2"
-                data-category="concrete"
-                data-type="all"
-              >
-                Concrete
-                <svg id="concrete-dropdown-icon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </button>
-              <!-- Dropdown Menu -->
-              <div id="concrete-dropdown-menu" class="absolute top-full mt-2 hidden bg-white border-2 border-gray-200 rounded-lg shadow-lg min-w-[200px] z-10">
-                <button
-                  class="concrete-type-btn w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors first:rounded-t-lg"
-                  data-category="concrete"
-                  data-type="all"
-                >
-                  All Concrete
-                </button>
-                <button
-                  class="concrete-type-btn w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors"
-                  data-category="concrete"
-                  data-type="driveways"
-                >
-                  Driveways
-                </button>
-                <button
-                  class="concrete-type-btn w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors"
-                  data-category="concrete"
-                  data-type="stairs"
-                >
-                  Steps & Stairs
-                </button>
-                <button
-                  class="concrete-type-btn w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors"
-                  data-category="concrete"
-                  data-type="patios"
-                >
-                  Patios & Flatwork
-                </button>
-                <button
-                  class="concrete-type-btn w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors last:rounded-b-lg"
-                  data-category="concrete"
-                  data-type="walkways"
-                >
-                  Walkways
-                </button>
-              </div>
-            </div>
-            <button
-              class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-300 bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary"
-              data-category="backyard-remodels"
-            >
-              Backyard Remodels
-            </button>
-            <button
-              class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-300 bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary"
-              data-category="landscape"
-            >
-              Landscape
-            </button>
-            <button
-              class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-300 bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary"
-              data-category="patio"
-            >
-              Patio
-            </button>
-            <button
-              class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-300 bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary"
-              data-category="iron-work"
-            >
-              Iron Work
-            </button>
-            <button
-              class="category-btn px-6 py-3 rounded-full font-medium transition-all duration-300 bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary opacity-50 cursor-not-allowed"
-              data-category="chimneys"
-              disabled
-            >
-              Chimneys <span class="text-xs">(Coming Soon)</span>
-            </button>
-          </div>
-
-          <!-- Finish Filter (for Concrete) - Below categories, right aligned -->
-          <div
-            class="hidden justify-end items-center gap-2 mb-4"
-            id="concrete-finish-filter"
-          >
-            <span class="text-xs text-gray-500">Finish:</span>
-            <button
-              class="finish-btn px-3 py-1 rounded-md text-xs font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-primary hover:text-white"
-              data-finish="stamped"
-            >
-              Stamped
-            </button>
-            <button
-              class="finish-btn px-3 py-1 rounded-md text-xs font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-primary hover:text-white"
-              data-finish="stained"
-            >
-              Stained
-            </button>
-            <button
-              class="finish-btn px-3 py-1 rounded-md text-xs font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-primary hover:text-white"
-              data-finish="aggregate"
-            >
-              Aggregate
-            </button>
-            <button
-              class="finish-btn px-3 py-1 rounded-md text-xs font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-primary hover:text-white"
-              data-finish="regular"
-            >
-              Regular
-            </button>
-          </div>
-
-          <!-- Project Counter -->
-          <div class="text-center mt-6">
-            <p class="text-gray-600 font-medium" id="project-counter">
-              Showing <span id="visible-count">{galleryItems.length}</span> of <span
-                id="total-count">{galleryItems.length}</span
-              > projects
-            </p>
-          </div>
-        </div>
-
         <!-- Sidebar + Gallery Layout -->
         <div class="flex gap-8 items-start">
-          <!-- Sidebar -->
+          <!-- Sidebar Navigation -->
           <aside class="hidden lg:block sticky top-24 w-64 shrink-0 self-start">
             <div class="bg-white rounded-lg shadow-lg p-6">
               <h2 class="text-xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-primary">
-                Categories
+                Quick Navigation
               </h2>
               <nav>
                 <ul class="space-y-2">
                   <li>
                     <button
-                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 bg-primary text-white font-medium"
-                      data-category="all"
-                    >
-                      All Projects
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
                       data-category="concrete"
+                      data-target="#section-concrete"
                     >
-                      Concrete
+                      Concrete Work
+                    </button>
+                    <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="concrete">
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#concrete-walkways"
+                        >
+                          Walkways
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#concrete-stairs"
+                        >
+                          Steps & Stairs
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#concrete-flatwork"
+                        >
+                          Flatwork & Patios
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      data-category="outdoor-living"
+                      data-target="#section-outdoor-living"
+                    >
+                      Outdoor Living
+                    </button>
+                    <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="outdoor-living">
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#outdoor-living-outdoor-kitchens"
+                        >
+                          Outdoor Kitchens
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#outdoor-living-fire-features"
+                        >
+                          Fire Features
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#outdoor-living-covered-patios"
+                        >
+                          Covered Patios
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      data-category="pools-spas"
+                      data-target="#section-pools-spas"
+                    >
+                      Pools & Spas
                     </button>
                   </li>
                   <li>
                     <button
-                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
-                      data-category="backyard-remodels"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      data-category="landscaping"
+                      data-target="#section-landscaping"
                     >
-                      Backyard Remodels
+                      Landscaping
                     </button>
+                    <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="landscaping">
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#landscaping-turf"
+                        >
+                          Artificial Turf
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#landscaping-gardens"
+                        >
+                          Gardens
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          data-target="#landscaping-water-features"
+                        >
+                          Water Features
+                        </button>
+                      </li>
+                    </ul>
                   </li>
                   <li>
                     <button
-                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
-                      data-category="landscape"
-                    >
-                      Landscape
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
-                      data-category="patio"
-                    >
-                      Covered Patios
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
                       data-category="iron-work"
+                      data-target="#section-iron-work"
                     >
                       Iron Work
                     </button>
                   </li>
-                  <li>
-                    <button
-                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-400 cursor-not-allowed opacity-50"
-                      data-category="chimneys"
-                      disabled
-                    >
-                      Chimneys <span class="text-xs">(Soon)</span>
-                    </button>
-                  </li>
                 </ul>
               </nav>
-
-              <!-- Concrete Sub-filters (shown when Concrete is selected) -->
-              <div id="sidebar-concrete-filters" class="hidden mt-6 pt-6 border-t border-gray-200">
-                <h3 class="text-sm font-semibold text-gray-700 mb-3">Concrete Type</h3>
-                <ul class="space-y-1.5 mb-4">
-                  <li>
-                    <button
-                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-category="concrete"
-                      data-type="all"
-                    >
-                      All Concrete
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-category="concrete"
-                      data-type="driveways"
-                    >
-                      Driveways
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-category="concrete"
-                      data-type="stairs"
-                    >
-                      Steps & Stairs
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-category="concrete"
-                      data-type="patios"
-                    >
-                      Patios & Flatwork
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-category="concrete"
-                      data-type="walkways"
-                    >
-                      Walkways
-                    </button>
-                  </li>
-                </ul>
-
-                <h3 class="text-sm font-semibold text-gray-700 mb-3">Finish Type</h3>
-                <ul class="space-y-1.5">
-                  <li>
-                    <button
-                      class="sidebar-finish-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-finish="stamped"
-                    >
-                      Stamped
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-finish-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-finish="stained"
-                    >
-                      Stained
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-finish-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-finish="aggregate"
-                    >
-                      Aggregate
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-finish-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
-                      data-finish="regular"
-                    >
-                      Regular
-                    </button>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Project Counter in Sidebar -->
-              <div class="mt-6 pt-6 border-t border-gray-200">
-                <p class="text-sm text-gray-600 text-center">
-                  <span class="font-semibold text-gray-800" id="sidebar-visible-count">{galleryItems.length}</span>
-                  <span class="text-gray-500"> of </span>
-                  <span class="font-semibold text-gray-800" id="sidebar-total-count">{galleryItems.length}</span>
-                  <br />
-                  <span class="text-xs text-gray-500">projects</span>
-                </p>
-              </div>
             </div>
           </aside>
 
           <!-- Gallery Grid -->
-          <div class="flex-1 min-w-0">
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-          id="gallery-grid"
-        >
-          {
-            galleryItems.map((item, index) => (
-              <article
-                class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                data-category={item.category}
-                data-type={item.type || ""}
-                data-finish={item.finish || ""}
-                data-index={index}
-              >
-                <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    loading={index < 6 ? "eager" : "lazy"}
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div class="absolute bottom-4 left-4 right-4">
-                      <p class="text-white font-medium text-sm md:text-base">
-                        {item.alt}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                      <svg
-                        class="w-6 h-6 text-primary"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+          <div class="flex-1 min-w-0" id="gallery-container">
+            <!-- Concrete Work Section -->
+            <section id="section-concrete" class="mb-16 scroll-mt-24">
+              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-primary">
+                Concrete Work
+              </h2>
+
+              <!-- Walkways Subsection -->
+              {galleryItems.filter(item => item.category === "concrete" && item.type === "walkways").length > 0 && (
+                <div id="concrete-walkways" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Walkways
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "concrete" && item.type === "walkways").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
-                        />
-                      </svg>
-                    </div>
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading={index < 3 ? "eager" : "lazy"}
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
                   </div>
                 </div>
-              </article>
-            ))
-          }
-        </div>
+              )}
 
-        <!-- Empty State -->
-        <div class="hidden text-center py-20" id="empty-state">
-          <div class="text-gray-400 mb-4">
-            <svg
-              class="w-20 h-20 mx-auto"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-semibold text-gray-700 mb-2">
-            No projects found
-          </h3>
-          <p class="text-gray-500">Try selecting a different category</p>
-        </div>
-        </div>
+              <!-- Stairs Subsection -->
+              {galleryItems.filter(item => item.category === "concrete" && item.type === "stairs").length > 0 && (
+                <div id="concrete-stairs" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Steps & Stairs
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "concrete" && item.type === "stairs").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Flatwork Subsection -->
+              {galleryItems.filter(item => item.category === "concrete" && item.type === "flatwork").length > 0 && (
+                <div id="concrete-flatwork" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Flatwork & Patios
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "concrete" && item.type === "flatwork").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
+
+            <!-- Outdoor Living Section -->
+            <section id="section-outdoor-living" class="mb-16 scroll-mt-24">
+              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-primary">
+                Outdoor Living
+              </h2>
+
+              <!-- Outdoor Kitchens Subsection -->
+              {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "outdoor-kitchens").length > 0 && (
+                <div id="outdoor-living-outdoor-kitchens" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Outdoor Kitchens
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "outdoor-kitchens").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Fire Features Subsection -->
+              {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "fire-features").length > 0 && (
+                <div id="outdoor-living-fire-features" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Fire Features
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "fire-features").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Covered Patios Subsection -->
+              {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "covered-patios").length > 0 && (
+                <div id="outdoor-living-covered-patios" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Covered Patios
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "covered-patios").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
+
+            <!-- Pools & Spas Section -->
+            <section id="section-pools-spas" class="mb-16 scroll-mt-24">
+              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-primary">
+                Pools & Spas
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {galleryItems.filter(item => item.category === "pools-spas").map((item, index) => (
+                  <article
+                    class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                    data-category={item.category}
+                    data-type={item.type || ""}
+                    data-finish={item.finish || ""}
+                    data-index={galleryItems.indexOf(item)}
+                  >
+                    <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 right-4">
+                          <p class="text-white font-medium text-sm md:text-base">
+                            {item.alt}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <!-- Landscaping Section -->
+            <section id="section-landscaping" class="mb-16 scroll-mt-24">
+              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-primary">
+                Landscaping
+              </h2>
+
+              <!-- Artificial Turf Subsection -->
+              {galleryItems.filter(item => item.category === "landscaping" && item.type === "turf").length > 0 && (
+                <div id="landscaping-turf" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Artificial Turf
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "landscaping" && item.type === "turf").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Gardens Subsection -->
+              {galleryItems.filter(item => item.category === "landscaping" && item.type === "gardens").length > 0 && (
+                <div id="landscaping-gardens" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Gardens
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "landscaping" && item.type === "gardens").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Water Features Subsection -->
+              {galleryItems.filter(item => item.category === "landscaping" && item.type === "water-features").length > 0 && (
+                <div id="landscaping-water-features" class="mb-12 scroll-mt-24">
+                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                    Water Features
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {galleryItems.filter(item => item.category === "landscaping" && item.type === "water-features").map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        data-category={item.category}
+                        data-type={item.type || ""}
+                        data-finish={item.finish || ""}
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-4 left-4 right-4">
+                              <p class="text-white font-medium text-sm md:text-base">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
+
+            <!-- Iron Work Section -->
+            <section id="section-iron-work" class="mb-16 scroll-mt-24">
+              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-primary">
+                Iron Work
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {galleryItems.filter(item => item.category === "iron-work").map((item, index) => (
+                  <article
+                    class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                    data-category={item.category}
+                    data-type={item.type || ""}
+                    data-finish={item.finish || ""}
+                    data-index={galleryItems.indexOf(item)}
+                  >
+                    <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 right-4">
+                          <p class="text-white font-medium text-sm md:text-base">
+                            {item.alt}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <!-- Empty State -->
+            <div class="hidden text-center py-20" id="empty-state">
+              <div class="text-gray-400 mb-4">
+                <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-700 mb-2">
+                No projects found
+              </h3>
+              <p class="text-gray-500">Try selecting a different category</p>
+            </div>
           </div>
         </div>
       </div>
@@ -705,254 +988,69 @@ const galleryItems = [
     </div>
   </div>
 
+  <!-- Back to Top Button -->
+  <button
+    id="back-to-top"
+    class="fixed bottom-8 right-8 bg-primary text-white p-4 rounded-full shadow-2xl hover:bg-primary-dark transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110"
+    aria-label="Back to top"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+
   <Footer />
 </Layout>
 
 <script>
-  // Gallery filtering
-  const categoryBtns = document.querySelectorAll(".category-btn");
-  const finishBtns = document.querySelectorAll(".finish-btn");
+  // Navigation elements
+  const sidebarCategoryLinks = document.querySelectorAll(".sidebar-category-link");
+  const sidebarSubcatLinks = document.querySelectorAll(".sidebar-subcat-link");
+  const backToTopBtn = document.getElementById("back-to-top");
   const galleryItems = document.querySelectorAll(".gallery-item");
-  const emptyState = document.getElementById("empty-state");
-  const visibleCount = document.getElementById("visible-count");
-  const totalCount = document.getElementById("total-count");
-  const concreteFinishFilter = document.getElementById(
-    "concrete-finish-filter"
-  );
-  const concreteTypeBtns = document.querySelectorAll(".concrete-type-btn");
-  const concreteDropdownBtn = document.getElementById("concrete-dropdown-btn");
-  const concreteDropdownMenu = document.getElementById("concrete-dropdown-menu");
-  const concreteDropdownIcon = document.getElementById("concrete-dropdown-icon");
 
-  // Sidebar elements
-  const sidebarCategoryBtns = document.querySelectorAll(".sidebar-category-btn");
-  const sidebarTypeBtns = document.querySelectorAll(".sidebar-type-btn");
-  const sidebarFinishBtns = document.querySelectorAll(".sidebar-finish-btn");
-  const sidebarConcreteFilters = document.getElementById("sidebar-concrete-filters");
-  const sidebarVisibleCount = document.getElementById("sidebar-visible-count");
-  const sidebarTotalCount = document.getElementById("sidebar-total-count");
-
-  let currentCategory = "all";
-  let currentType = "all";
-  let selectedFinishes: string[] = [];
-
-  // Dropdown toggle functionality (click-based, not hover)
-  concreteDropdownBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isOpen = !concreteDropdownMenu?.classList.contains("hidden");
-
-    if (isOpen) {
-      concreteDropdownMenu?.classList.add("hidden");
-      concreteDropdownIcon?.classList.remove("rotate-180");
-    } else {
-      concreteDropdownMenu?.classList.remove("hidden");
-      concreteDropdownIcon?.classList.add("rotate-180");
-    }
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-    if (!target.closest(".concrete-dropdown-wrapper")) {
-      concreteDropdownMenu?.classList.add("hidden");
-      concreteDropdownIcon?.classList.remove("rotate-180");
-    }
-  });
-
-  function filterGallery() {
-    let visibleItems = 0;
-
-    galleryItems.forEach((item) => {
-      const itemCategory = item.getAttribute("data-category");
-      const itemType = item.getAttribute("data-type");
-      const itemFinish = item.getAttribute("data-finish");
-
-      let shouldShow = false;
-
-      if (currentCategory === "all") {
-        shouldShow = true;
-      } else if (currentCategory === itemCategory) {
-        // For concrete category, check type and finish
-        if (currentCategory === "concrete") {
-          const typeMatch = currentType === "all" || currentType === itemType;
-          // Show item if no finishes selected, or if item's finish is in selected finishes
-          const finishMatch = selectedFinishes.length === 0 || selectedFinishes.includes(itemFinish);
-          shouldShow = typeMatch && finishMatch;
-        } else {
-          // For other categories, just show if category matches
-          shouldShow = true;
-        }
-      }
-
-      if (shouldShow) {
-        item.classList.remove("hidden");
-        item.classList.add("animate-fade-in");
-        visibleItems++;
-      } else {
-        item.classList.add("hidden");
-        item.classList.remove("animate-fade-in");
-      }
-    });
-
-    // Update counter
-    if (visibleCount && totalCount) {
-      visibleCount.textContent = visibleItems.toString();
-    }
-    if (sidebarVisibleCount) {
-      sidebarVisibleCount.textContent = visibleItems.toString();
-    }
-
-    // Show/hide empty state
-    if (emptyState) {
-      if (visibleItems === 0) {
-        emptyState.classList.remove("hidden");
-      } else {
-        emptyState.classList.add("hidden");
-      }
+  // Smooth scroll function with offset for sticky header
+  function smoothScrollTo(targetId) {
+    const target = document.querySelector(targetId);
+    if (target) {
+      const headerOffset = 100;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: targetPosition, behavior: "smooth" });
     }
   }
 
-  // Category button clicks
-  categoryBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      // Skip if disabled
-      if (btn.hasAttribute("disabled")) return;
-
-      // Remove active class from all category buttons
-      categoryBtns.forEach((b) => {
-        b.classList.remove("active", "bg-primary", "text-white", "shadow-lg");
-        b.classList.add(
-          "bg-white",
-          "text-gray-700",
-          "border-2",
-          "border-gray-200"
-        );
-      });
-
-      // Add active class to clicked button
-      btn.classList.add("active", "bg-primary", "text-white", "shadow-lg");
-      btn.classList.remove(
-        "bg-white",
-        "text-gray-700",
-        "border-2",
-        "border-gray-200"
-      );
-
-      currentCategory = btn.getAttribute("data-category") || "all";
-      currentType = btn.getAttribute("data-type") || "all";
-      selectedFinishes = [];
-
-      // Show/hide concrete finish filter
-      if (concreteFinishFilter) {
-        if (currentCategory === "concrete") {
-          concreteFinishFilter.classList.remove("hidden");
-          concreteFinishFilter.classList.add("flex");
-
-          // Reset finish buttons
-          finishBtns.forEach((finishBtn) => {
-            finishBtn.classList.remove(
-              "active",
-              "bg-primary",
-              "text-white",
-              "border-primary"
-            );
-            finishBtn.classList.add("bg-gray-100", "text-gray-600", "border-gray-300");
-          });
-        } else {
-          concreteFinishFilter.classList.add("hidden");
-          concreteFinishFilter.classList.remove("flex");
-        }
-      }
-
-      filterGallery();
+  // Sidebar navigation - smooth scroll
+  sidebarCategoryLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const targetId = link.getAttribute("data-target");
+      if (targetId) smoothScrollTo(targetId);
     });
   });
 
-  // Concrete type dropdown button clicks
-  concreteTypeBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      currentCategory = "concrete";
-      currentType = btn.getAttribute("data-type") || "all";
-      selectedFinishes = [];
-
-      // Close the dropdown
-      concreteDropdownMenu?.classList.add("hidden");
-      concreteDropdownIcon?.classList.remove("rotate-180");
-
-      // Update main category buttons
-      categoryBtns.forEach((b) => {
-        b.classList.remove("active", "bg-primary", "text-white", "shadow-lg");
-        b.classList.add(
-          "bg-white",
-          "text-gray-700",
-          "border-2",
-          "border-gray-200"
-        );
-      });
-
-      // Activate concrete button
-      const concreteBtn = document.querySelector('[data-category="concrete"][data-type="all"]');
-      if (concreteBtn) {
-        concreteBtn.classList.add("active", "bg-primary", "text-white", "shadow-lg");
-        concreteBtn.classList.remove(
-          "bg-white",
-          "text-gray-700",
-          "border-2",
-          "border-gray-200"
-        );
-      }
-
-      // Show finish filter
-      if (concreteFinishFilter) {
-        concreteFinishFilter.classList.remove("hidden");
-        concreteFinishFilter.classList.add("flex");
-
-        // Reset finish buttons
-        finishBtns.forEach((finishBtn) => {
-          finishBtn.classList.remove(
-            "active",
-            "bg-primary",
-            "text-white"
-          );
-          finishBtn.classList.add("bg-gray-100", "text-gray-600");
-        });
-      }
-
-      filterGallery();
+  sidebarSubcatLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const targetId = link.getAttribute("data-target");
+      if (targetId) smoothScrollTo(targetId);
     });
   });
 
-  // Finish button clicks (multi-select)
-  finishBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const finish = btn.getAttribute("data-finish");
-      if (!finish) return;
-
-      // Toggle finish selection
-      const finishIndex = selectedFinishes.indexOf(finish);
-      if (finishIndex > -1) {
-        // Remove finish from selection
-        selectedFinishes.splice(finishIndex, 1);
-        btn.classList.remove(
-          "active",
-          "bg-primary",
-          "text-white"
-        );
-        btn.classList.add("bg-gray-100", "text-gray-600");
+  // Back to top button
+  if (backToTopBtn) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+        backToTopBtn.classList.add("opacity-100");
       } else {
-        // Add finish to selection
-        selectedFinishes.push(finish);
-        btn.classList.add(
-          "active",
-          "bg-primary",
-          "text-white"
-        );
-        btn.classList.remove("bg-gray-100", "text-gray-600");
+        backToTopBtn.classList.add("opacity-0", "pointer-events-none");
+        backToTopBtn.classList.remove("opacity-100");
       }
-
-      filterGallery();
     });
-  });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
 
   // Lightbox functionality
   const lightbox = document.getElementById("lightbox");
@@ -1054,108 +1152,6 @@ const galleryItems = [
       if (e.key === "ArrowRight") nextImage();
       if (e.key === "ArrowLeft") prevImage();
     }
-  });
-
-  // Sidebar category button clicks
-  sidebarCategoryBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      // Skip if disabled
-      if (btn.hasAttribute("disabled")) return;
-
-      // Remove active class from all sidebar category buttons
-      sidebarCategoryBtns.forEach((b) => {
-        b.classList.remove("bg-primary", "text-white", "font-medium");
-        b.classList.add("text-gray-700", "hover:bg-gray-100", "hover:text-primary");
-      });
-
-      // Add active class to clicked button
-      btn.classList.add("bg-primary", "text-white", "font-medium");
-      btn.classList.remove("text-gray-700", "hover:bg-gray-100", "hover:text-primary");
-
-      currentCategory = btn.getAttribute("data-category") || "all";
-      currentType = "all";
-      selectedFinishes = [];
-
-      // Show/hide concrete filters in sidebar
-      if (sidebarConcreteFilters) {
-        if (currentCategory === "concrete") {
-          sidebarConcreteFilters.classList.remove("hidden");
-          // Reset type and finish buttons
-          sidebarTypeBtns.forEach((typeBtn) => {
-            typeBtn.classList.remove("bg-primary", "text-white");
-            typeBtn.classList.add("text-gray-600");
-          });
-          sidebarFinishBtns.forEach((finishBtn) => {
-            finishBtn.classList.remove("bg-primary", "text-white");
-            finishBtn.classList.add("text-gray-600");
-          });
-        } else {
-          sidebarConcreteFilters.classList.add("hidden");
-        }
-      }
-
-      // Also sync with top category buttons if they exist
-      categoryBtns.forEach((b) => {
-        b.classList.remove("active", "bg-primary", "text-white", "shadow-lg");
-        b.classList.add("bg-white", "text-gray-700", "border-2", "border-gray-200");
-      });
-      const matchingBtn = Array.from(categoryBtns).find(b => b.getAttribute("data-category") === currentCategory);
-      if (matchingBtn) {
-        matchingBtn.classList.add("active", "bg-primary", "text-white", "shadow-lg");
-        matchingBtn.classList.remove("bg-white", "text-gray-700", "border-2", "border-gray-200");
-      }
-
-      filterGallery();
-    });
-  });
-
-  // Sidebar type button clicks
-  sidebarTypeBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      currentCategory = "concrete";
-      currentType = btn.getAttribute("data-type") || "all";
-      selectedFinishes = [];
-
-      // Update sidebar type buttons
-      sidebarTypeBtns.forEach((b) => {
-        b.classList.remove("bg-primary", "text-white");
-        b.classList.add("text-gray-600");
-      });
-      btn.classList.add("bg-primary", "text-white");
-      btn.classList.remove("text-gray-600");
-
-      // Reset finish buttons
-      sidebarFinishBtns.forEach((finishBtn) => {
-        finishBtn.classList.remove("bg-primary", "text-white");
-        finishBtn.classList.add("text-gray-600");
-      });
-
-      filterGallery();
-    });
-  });
-
-  // Sidebar finish button clicks
-  sidebarFinishBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const finish = btn.getAttribute("data-finish");
-      if (!finish) return;
-
-      // Toggle finish selection
-      const finishIndex = selectedFinishes.indexOf(finish);
-      if (finishIndex > -1) {
-        // Remove finish from selection
-        selectedFinishes.splice(finishIndex, 1);
-        btn.classList.remove("bg-primary", "text-white");
-        btn.classList.add("text-gray-600");
-      } else {
-        // Add finish to selection
-        selectedFinishes.push(finish);
-        btn.classList.add("bg-primary", "text-white");
-        btn.classList.remove("text-gray-600");
-      }
-
-      filterGallery();
-    });
   });
 
   // Initialize
