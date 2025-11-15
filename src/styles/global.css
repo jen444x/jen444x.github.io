@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Option C: Vibrant orange + warm neutrals (cream & charcoal) */
+  /* Vibrant Orange + Deep Teal - Professional & Energetic */
   --color-primary: #E8792E;
   --color-primary-dark: #D06820;
   --color-primary-light: #EE934D;
-  --color-primary-tint: #F5EFE6;
-  --color-primary-tint-2: #EDE4D6;
+  --color-primary-tint: #FDF5EF;
+  --color-primary-tint-2: #F9E8D9;
   --color-primary-shade-dark: #472110;
 
-  /* Warm neutrals for depth */
-  --color-cream: #F5EFE6;
-  --color-charcoal: #2D2D2D;
-  --color-charcoal-light: #3D3D3D;
+  /* Secondary - Deep Teal (trust, professional, water/pools) */
+  --color-secondary: #2C5F6F;
+  --color-secondary-dark: #1F4550;
+  --color-secondary-light: #3A7A8D;
+  --color-secondary-tint: #E8F1F3;
 
   /* Custom fonts */
   --font-rubik: 'Rubik', sans-serif;
