@@ -213,9 +213,9 @@ const galleryItems = [
       </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Gallery Section with Sidebar -->
     <section class="py-16 md:py-24">
-      <div class="container max-w-7xl mx-auto px-6 md:px-8">
+      <div class="max-w-[1400px] mx-auto px-8">
         <!-- Filter Controls -->
         <div class="mb-12">
           <!-- Main Category Buttons -->
@@ -353,7 +353,179 @@ const galleryItems = [
           </div>
         </div>
 
-        <!-- Gallery Grid -->
+        <!-- Sidebar + Gallery Layout -->
+        <div class="flex gap-8 items-start">
+          <!-- Sidebar -->
+          <aside class="hidden lg:block sticky top-24 w-64 shrink-0 self-start">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h2 class="text-xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-primary">
+                Categories
+              </h2>
+              <nav>
+                <ul class="space-y-2">
+                  <li>
+                    <button
+                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 bg-primary text-white font-medium"
+                      data-category="all"
+                    >
+                      All Projects
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
+                      data-category="concrete"
+                    >
+                      Concrete
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
+                      data-category="backyard-remodels"
+                    >
+                      Backyard Remodels
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
+                      data-category="landscape"
+                    >
+                      Landscape
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
+                      data-category="patio"
+                    >
+                      Covered Patios
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary"
+                      data-category="iron-work"
+                    >
+                      Iron Work
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-category-btn w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-400 cursor-not-allowed opacity-50"
+                      data-category="chimneys"
+                      disabled
+                    >
+                      Chimneys <span class="text-xs">(Soon)</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+
+              <!-- Concrete Sub-filters (shown when Concrete is selected) -->
+              <div id="sidebar-concrete-filters" class="hidden mt-6 pt-6 border-t border-gray-200">
+                <h3 class="text-sm font-semibold text-gray-700 mb-3">Concrete Type</h3>
+                <ul class="space-y-1.5 mb-4">
+                  <li>
+                    <button
+                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-category="concrete"
+                      data-type="all"
+                    >
+                      All Concrete
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-category="concrete"
+                      data-type="driveways"
+                    >
+                      Driveways
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-category="concrete"
+                      data-type="stairs"
+                    >
+                      Steps & Stairs
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-category="concrete"
+                      data-type="patios"
+                    >
+                      Patios & Flatwork
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-type-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-category="concrete"
+                      data-type="walkways"
+                    >
+                      Walkways
+                    </button>
+                  </li>
+                </ul>
+
+                <h3 class="text-sm font-semibold text-gray-700 mb-3">Finish Type</h3>
+                <ul class="space-y-1.5">
+                  <li>
+                    <button
+                      class="sidebar-finish-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-finish="stamped"
+                    >
+                      Stamped
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-finish-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-finish="stained"
+                    >
+                      Stained
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-finish-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-finish="aggregate"
+                    >
+                      Aggregate
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="sidebar-finish-btn w-full text-left px-3 py-1.5 rounded text-sm transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-primary"
+                      data-finish="regular"
+                    >
+                      Regular
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Project Counter in Sidebar -->
+              <div class="mt-6 pt-6 border-t border-gray-200">
+                <p class="text-sm text-gray-600 text-center">
+                  <span class="font-semibold text-gray-800" id="sidebar-visible-count">{galleryItems.length}</span>
+                  <span class="text-gray-500"> of </span>
+                  <span class="font-semibold text-gray-800" id="sidebar-total-count">{galleryItems.length}</span>
+                  <br />
+                  <span class="text-xs text-gray-500">projects</span>
+                </p>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Gallery Grid -->
+          <div class="flex-1 min-w-0">
         <div
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
           id="gallery-grid"
@@ -425,6 +597,9 @@ const galleryItems = [
             No projects found
           </h3>
           <p class="text-gray-500">Try selecting a different category</p>
+        </div>
+        </div>
+          </div>
         </div>
       </div>
     </section>
@@ -549,6 +724,14 @@ const galleryItems = [
   const concreteDropdownMenu = document.getElementById("concrete-dropdown-menu");
   const concreteDropdownIcon = document.getElementById("concrete-dropdown-icon");
 
+  // Sidebar elements
+  const sidebarCategoryBtns = document.querySelectorAll(".sidebar-category-btn");
+  const sidebarTypeBtns = document.querySelectorAll(".sidebar-type-btn");
+  const sidebarFinishBtns = document.querySelectorAll(".sidebar-finish-btn");
+  const sidebarConcreteFilters = document.getElementById("sidebar-concrete-filters");
+  const sidebarVisibleCount = document.getElementById("sidebar-visible-count");
+  const sidebarTotalCount = document.getElementById("sidebar-total-count");
+
   let currentCategory = "all";
   let currentType = "all";
   let selectedFinishes: string[] = [];
@@ -613,7 +796,10 @@ const galleryItems = [
 
     // Update counter
     if (visibleCount && totalCount) {
-      visibleCount.textContent = visibleItems;
+      visibleCount.textContent = visibleItems.toString();
+    }
+    if (sidebarVisibleCount) {
+      sidebarVisibleCount.textContent = visibleItems.toString();
     }
 
     // Show/hide empty state
@@ -868,6 +1054,108 @@ const galleryItems = [
       if (e.key === "ArrowRight") nextImage();
       if (e.key === "ArrowLeft") prevImage();
     }
+  });
+
+  // Sidebar category button clicks
+  sidebarCategoryBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Skip if disabled
+      if (btn.hasAttribute("disabled")) return;
+
+      // Remove active class from all sidebar category buttons
+      sidebarCategoryBtns.forEach((b) => {
+        b.classList.remove("bg-primary", "text-white", "font-medium");
+        b.classList.add("text-gray-700", "hover:bg-gray-100", "hover:text-primary");
+      });
+
+      // Add active class to clicked button
+      btn.classList.add("bg-primary", "text-white", "font-medium");
+      btn.classList.remove("text-gray-700", "hover:bg-gray-100", "hover:text-primary");
+
+      currentCategory = btn.getAttribute("data-category") || "all";
+      currentType = "all";
+      selectedFinishes = [];
+
+      // Show/hide concrete filters in sidebar
+      if (sidebarConcreteFilters) {
+        if (currentCategory === "concrete") {
+          sidebarConcreteFilters.classList.remove("hidden");
+          // Reset type and finish buttons
+          sidebarTypeBtns.forEach((typeBtn) => {
+            typeBtn.classList.remove("bg-primary", "text-white");
+            typeBtn.classList.add("text-gray-600");
+          });
+          sidebarFinishBtns.forEach((finishBtn) => {
+            finishBtn.classList.remove("bg-primary", "text-white");
+            finishBtn.classList.add("text-gray-600");
+          });
+        } else {
+          sidebarConcreteFilters.classList.add("hidden");
+        }
+      }
+
+      // Also sync with top category buttons if they exist
+      categoryBtns.forEach((b) => {
+        b.classList.remove("active", "bg-primary", "text-white", "shadow-lg");
+        b.classList.add("bg-white", "text-gray-700", "border-2", "border-gray-200");
+      });
+      const matchingBtn = Array.from(categoryBtns).find(b => b.getAttribute("data-category") === currentCategory);
+      if (matchingBtn) {
+        matchingBtn.classList.add("active", "bg-primary", "text-white", "shadow-lg");
+        matchingBtn.classList.remove("bg-white", "text-gray-700", "border-2", "border-gray-200");
+      }
+
+      filterGallery();
+    });
+  });
+
+  // Sidebar type button clicks
+  sidebarTypeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentCategory = "concrete";
+      currentType = btn.getAttribute("data-type") || "all";
+      selectedFinishes = [];
+
+      // Update sidebar type buttons
+      sidebarTypeBtns.forEach((b) => {
+        b.classList.remove("bg-primary", "text-white");
+        b.classList.add("text-gray-600");
+      });
+      btn.classList.add("bg-primary", "text-white");
+      btn.classList.remove("text-gray-600");
+
+      // Reset finish buttons
+      sidebarFinishBtns.forEach((finishBtn) => {
+        finishBtn.classList.remove("bg-primary", "text-white");
+        finishBtn.classList.add("text-gray-600");
+      });
+
+      filterGallery();
+    });
+  });
+
+  // Sidebar finish button clicks
+  sidebarFinishBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const finish = btn.getAttribute("data-finish");
+      if (!finish) return;
+
+      // Toggle finish selection
+      const finishIndex = selectedFinishes.indexOf(finish);
+      if (finishIndex > -1) {
+        // Remove finish from selection
+        selectedFinishes.splice(finishIndex, 1);
+        btn.classList.remove("bg-primary", "text-white");
+        btn.classList.add("text-gray-600");
+      } else {
+        // Add finish to selection
+        selectedFinishes.push(finish);
+        btn.classList.add("bg-primary", "text-white");
+        btn.classList.remove("text-gray-600");
+      }
+
+      filterGallery();
+    });
   });
 
   // Initialize
