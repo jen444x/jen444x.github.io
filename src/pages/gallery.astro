@@ -1144,6 +1144,60 @@ const galleryItems = [
     });
   }
 
+  // SCROLL SPY - Highlight active section in sidebar
+  const sections = document.querySelectorAll("section[id^='section-']");
+
+  function updateActiveSection() {
+    const scrollPosition = window.scrollY + 200; // Offset for better UX
+
+    let currentSection = "";
+
+    sections.forEach((section) => {
+      const sectionTop = (section as HTMLElement).offsetTop;
+      const sectionHeight = (section as HTMLElement).offsetHeight;
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        currentSection = section.id;
+      }
+    });
+
+    // Update sidebar links
+    sidebarCategoryLinks.forEach((link) => {
+      const target = link.getAttribute("data-target");
+
+      if (target === `#${currentSection}`) {
+        // Add active state
+        link.classList.add("bg-primary", "text-white", "border-l-4", "border-bronze");
+        link.classList.remove("text-gray-700", "hover:bg-gray-100");
+      } else {
+        // Remove active state
+        link.classList.remove("bg-primary", "text-white", "border-l-4", "border-bronze");
+        link.classList.add("text-gray-700");
+      }
+    });
+  }
+
+  // Run on scroll
+  window.addEventListener("scroll", updateActiveSection);
+
+  // Run on page load (handles hash navigation from services section)
+  window.addEventListener("load", () => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Scroll to the hash section
+      smoothScrollTo(hash);
+      // Update active state after a short delay to ensure scroll completes
+      setTimeout(updateActiveSection, 100);
+    } else {
+      updateActiveSection();
+    }
+  });
+
+  // Also update when hash changes (browser back/forward)
+  window.addEventListener("hashchange", () => {
+    updateActiveSection();
+  });
+
 
   // Lightbox functionality
   const lightbox = document.getElementById("lightbox");
