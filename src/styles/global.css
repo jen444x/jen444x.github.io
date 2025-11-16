@@ -1,27 +1,93 @@
 @import "tailwindcss";
 
 @theme {
-  /* Custom colors */
+  /* LUXURY INDUSTRIAL COLOR PALETTE */
+  /* Deep Blacks & Charcoals (Primary backgrounds) */
+  --color-black-pure: #0A0A0A;
+  --color-charcoal: #1A1A1A;
+  --color-charcoal-light: #2D2D2D;
+
+  /* Grays & Slates (Text, accents) */
+  --color-slate: #4A5568;
+  --color-slate-light: #64748B;
+  --color-steel: #8B9AAB;
+
+  /* White (High contrast text) */
+  --color-white-pure: #FFFFFF;
+  --color-white-soft: #F8F9FA;
+
+  /* Bronze/Gold Accent (USE SPARINGLY - <10% of design) */
+  --color-bronze: #B8860B;
+  --color-bronze-dark: #9B7509;
+  --color-bronze-light: #D4A574;
+
+  /* Legacy orange (keeping for backwards compatibility - will phase out) */
   --color-primary: #e67e22;
   --color-primary-dark: #cf711f;
-  --color-primary-light: #eb984e;
-  --color-primary-tint: #fdf2e9;
-  --color-primary-tint-2: #fae5d3;
-  --color-primary-shade-dark: #45260a;
 
-  /* Professional Fonts */
+  /* TYPOGRAPHY SYSTEM */
   --font-heading: 'Bebas Neue', sans-serif;
   --font-body: 'Inter', sans-serif;
+
+  /* Font Sizes - Luxury Scale (larger = more premium) */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px - body text should be generous */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 3.75rem;   /* 60px */
+  --text-7xl: 4.5rem;    /* 72px */
+  --text-8xl: 6rem;      /* 96px - HERO text */
+
+  /* Letter Spacing (increased for industrial feel) */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* Spacing System - 8px Grid */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-6: 3rem;     /* 48px */
+  --space-8: 4rem;     /* 64px */
+  --space-12: 6rem;    /* 96px */
+  --space-16: 8rem;    /* 128px */
 }
 
-/* Base body styles */
+/* Base body styles - Keep original, just better defaults */
 body {
   font-family: var(--font-body);
-  color: #444;
+  color: #444;  /* Keeping original - we'll use dark backgrounds selectively */
+  line-height: 1.7;
 }
 
-/* Focus styles for accessibility */
+/* Heading styles - Only apply font family, let components control size/weight */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+/* Smooth text rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles for accessibility - Bronze accent */
 *:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(184, 134, 11, 0.5);
+}
+
+/* Selection color - Bronze */
+::selection {
+  background-color: var(--color-bronze);
+  color: var(--color-black-pure);
 }
