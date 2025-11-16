@@ -9,7 +9,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
 ---
 
 <!-- DARK Section - Luxury Showcase with BENTO GRID + SCROLL ANIMATIONS -->
-<section class="services py-24 md:py-32 lg:py-40 bg-[#0A0A0A] overflow-hidden" id="services">
+<section class="services py-24 md:py-32 lg:py-40 bg-black-pure overflow-hidden" id="services">
   <div class="container max-w-7xl mx-auto px-8 md:px-12">
     <!-- Section Heading - Scroll fade in -->
     <div class="text-center mb-16 md:mb-20 scroll-reveal opacity-0">
@@ -17,14 +17,14 @@ import additionalImg from '../../public/img/services/additional.jpeg';
                  text-4xl md:text-5xl lg:text-6xl">
         OUR SERVICES
       </h2>
-      <div class="w-24 h-[2px] bg-[#B8860B] mx-auto"></div>
+      <div class="w-24 h-0.5 bg-bronze mx-auto"></div>
     </div>
 
     <!-- BENTO GRID - Asymmetric Layout (2024 Trend!) -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 auto-rows-[280px]">
 
       <!-- Service 1: Concrete Work - FEATURED (2 cols wide) -->
-      <article class="scroll-reveal opacity-0 lg:col-span-2 group relative overflow-hidden bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-2 border-[#2D2D2D] hover:border-[#B8860B] transition-all duration-500" style="animation-delay: 0.1s">
+      <article class="scroll-reveal opacity-0 lg:col-span-2 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500" style="animation-delay: 0.1s">
         <div class="absolute inset-0">
           <Image
             src={menConcreteImg}
@@ -32,7 +32,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-3xl md:text-4xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
@@ -45,7 +45,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
       </article>
 
       <!-- Service 2: Landscaping - Standard -->
-      <article class="scroll-reveal opacity-0 group relative overflow-hidden bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-2 border-[#2D2D2D] hover:border-[#B8860B] transition-all duration-500" style="animation-delay: 0.2s">
+      <article class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500" style="animation-delay: 0.2s">
         <div class="absolute inset-0">
           <Image
             src={landscapeImg}
@@ -53,7 +53,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
@@ -66,7 +66,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
       </article>
 
       <!-- Service 3: Outdoor Kitchens - Standard -->
-      <article class="scroll-reveal opacity-0 group relative overflow-hidden bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-2 border-[#2D2D2D] hover:border-[#B8860B] transition-all duration-500" style="animation-delay: 0.3s">
+      <article class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500" style="animation-delay: 0.3s">
         <div class="absolute inset-0">
           <Image
             src={outdoorKitchenImg}
@@ -74,7 +74,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
@@ -87,7 +87,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
       </article>
 
       <!-- Service 4: Pools - FEATURED (2 rows tall) -->
-      <article class="scroll-reveal opacity-0 lg:row-span-2 group relative overflow-hidden bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-2 border-[#2D2D2D] hover:border-[#B8860B] transition-all duration-500" style="animation-delay: 0.4s">
+      <article class="scroll-reveal opacity-0 lg:row-span-2 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500" style="animation-delay: 0.4s">
         <div class="absolute inset-0">
           <Image
             src={poolImg}
@@ -95,7 +95,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-black/20 group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500"></div>
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-3xl md:text-4xl font-bold mb-4 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
@@ -108,7 +108,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
       </article>
 
       <!-- Service 5: Fire Pits - Standard -->
-      <article class="scroll-reveal opacity-0 group relative overflow-hidden bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-2 border-[#2D2D2D] hover:border-[#B8860B] transition-all duration-500" style="animation-delay: 0.5s">
+      <article class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500" style="animation-delay: 0.5s">
         <div class="absolute inset-0">
           <Image
             src={firepitImg}
@@ -116,7 +116,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
@@ -129,7 +129,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
       </article>
 
       <!-- Service 6: Additional - Standard -->
-      <article class="scroll-reveal opacity-0 group relative overflow-hidden bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border-2 border-[#2D2D2D] hover:border-[#B8860B] transition-all duration-500" style="animation-delay: 0.6s">
+      <article class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500" style="animation-delay: 0.6s">
         <div class="absolute inset-0">
           <Image
             src={additionalImg}
@@ -137,7 +137,7 @@ import additionalImg from '../../public/img/services/additional.jpeg';
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
