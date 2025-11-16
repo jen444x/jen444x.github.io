@@ -210,40 +210,37 @@ const galleryItems = [
 >
   <Header />
 
-  <main class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-    <!-- Hero Section - Minimal Industrial -->
-    <section class="relative min-h-[60vh] flex items-center justify-center bg-[#0A0A0A] overflow-hidden">
+  <main class="min-h-screen">
+    <!-- Hero Section - Luxury Industrial -->
+    <section class="relative min-h-[60vh] flex items-center justify-center bg-black-pure overflow-hidden section-padding border-t border-bronze/10">
       <!-- Subtle texture overlay -->
-      <div class="absolute inset-0 opacity-5 mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"></div>
+      <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"></div>
 
-      <div class="container relative z-10 max-w-5xl mx-auto px-6 md:px-12 py-20 md:py-24">
-        <div class="text-center">
-          <!-- Main Heading with Mercedes Font -->
-          <h1 class="text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wide font-light">
+      <div class="container relative z-10 max-w-5xl mx-auto px-6 md:px-12">
+        <div class="text-center hero-content">
+          <!-- Main Heading - Bebas Neue Luxury -->
+          <h1 class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light hero-animate opacity-0" style="animation-delay: 0.2s; text-shadow: 0 4px 24px rgb(0 0 0 / 70%);">
             PROJECT SHOWCASE
           </h1>
 
-          <!-- Subtle accent line -->
-          <div class="w-24 h-1 bg-primary mx-auto mb-8"></div>
+          <!-- Bronze accent line -->
+          <div class="bronze-divider mx-auto mb-8 hero-animate opacity-0" style="animation-delay: 0.4s"></div>
 
           <!-- Subheading -->
-          <p class="text-base md:text-lg text-[#8B9AAB] max-w-2xl mx-auto">
+          <p class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed hero-animate opacity-0" style="animation-delay: 0.6s">
             Concrete and landscaping projects across Bakersfield and surrounding areas
           </p>
         </div>
       </div>
-
-      <!-- Bottom fade -->
-      <div class="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-white to-transparent"></div>
     </section>
 
     <!-- Mobile Category Filter Bar (Hidden on Desktop) -->
-    <div class="lg:hidden sticky top-16 z-40 bg-white border-b-2 border-gray-200">
-      <!-- Grid Container - Clean, modern tab-style navigation -->
+    <div class="lg:hidden sticky top-16 z-40 bg-charcoal border-b border-bronze/20">
+      <!-- Grid Container - Luxury tab-style navigation -->
       <div class="grid grid-cols-2 gap-0">
         <!-- All Categories Button -->
         <button
-          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-gray-900 bg-gray-50 text-gray-900"
+          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-bronze bg-charcoal-light text-white"
           data-target="all"
         >
           ALL PROJECTS
@@ -251,7 +248,7 @@ const galleryItems = [
 
         <!-- Concrete Work -->
         <button
-          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
           data-target="#section-concrete"
         >
           CONCRETE
@@ -259,7 +256,7 @@ const galleryItems = [
 
         <!-- Outdoor Living -->
         <button
-          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
           data-target="#section-outdoor-living"
         >
           OUTDOOR
@@ -267,7 +264,7 @@ const galleryItems = [
 
         <!-- Pools & Spas -->
         <button
-          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
           data-target="#section-pools-spas"
         >
           POOLS & SPAS
@@ -275,7 +272,7 @@ const galleryItems = [
 
         <!-- Fire Features -->
         <button
-          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
           data-target="#section-fire-features"
         >
           FIRE FEATURES
@@ -283,7 +280,7 @@ const galleryItems = [
 
         <!-- Landscaping -->
         <button
-          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
           data-target="#section-landscaping"
         >
           LANDSCAPING
@@ -291,7 +288,7 @@ const galleryItems = [
 
         <!-- Iron Work -->
         <button
-          class="mobile-filter-btn px-3 py-3.5 font-semibold text-sm transition-all duration-200 border-b-3 border-transparent bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
           data-target="#section-iron-work"
         >
           IRON WORK
@@ -299,22 +296,22 @@ const galleryItems = [
       </div>
     </div>
 
-    <!-- Gallery Section with Sidebar -->
-    <section class="py-16 md:py-24">
+    <!-- Gallery Section with Sidebar - Light background for rhythm -->
+    <section class="section-padding bg-white border-t border-bronze/10">
       <div class="max-w-[1400px] mx-auto px-8">
         <!-- Sidebar + Gallery Layout -->
         <div class="flex gap-8 items-start">
-          <!-- Sidebar Navigation -->
+          <!-- Sidebar Navigation - Luxury Dark -->
           <aside class="hidden lg:block sticky top-24 w-64 shrink-0 self-start">
-            <div class="bg-white rounded-lg shadow-lg p-6">
-              <h2 class="text-xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-primary">
+            <div class="bg-charcoal border border-bronze/20 shadow-2xl p-6">
+              <h2 class="font-['Bebas_Neue'] text-2xl tracking-wider text-white mb-6 pb-3 border-b-2 border-bronze">
                 Quick Navigation
               </h2>
               <nav>
                 <ul class="space-y-2">
                   <li>
                     <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
                       data-category="concrete"
                       data-target="#section-concrete"
                     >
@@ -323,7 +320,7 @@ const galleryItems = [
                     <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="concrete">
                       <li>
                         <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
                           data-target="#concrete-walkways"
                         >
                           Walkways
@@ -331,7 +328,7 @@ const galleryItems = [
                       </li>
                       <li>
                         <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
                           data-target="#concrete-stairs"
                         >
                           Steps & Stairs
@@ -339,7 +336,7 @@ const galleryItems = [
                       </li>
                       <li>
                         <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
                           data-target="#concrete-flatwork"
                         >
                           Flatwork & Patios
@@ -349,7 +346,7 @@ const galleryItems = [
                   </li>
                   <li>
                     <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
                       data-category="outdoor-living"
                       data-target="#section-outdoor-living"
                     >
@@ -358,7 +355,7 @@ const galleryItems = [
                     <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="outdoor-living">
                       <li>
                         <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
                           data-target="#outdoor-living-outdoor-kitchens"
                         >
                           Outdoor Kitchens
@@ -366,7 +363,7 @@ const galleryItems = [
                       </li>
                       <li>
                         <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
                           data-target="#outdoor-living-covered-patios"
                         >
                           Covered Patios
@@ -376,7 +373,7 @@ const galleryItems = [
                   </li>
                   <li>
                     <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
                       data-category="pools-spas"
                       data-target="#section-pools-spas"
                     >
@@ -385,7 +382,7 @@ const galleryItems = [
                   </li>
                   <li>
                     <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
                       data-category="fire-features"
                       data-target="#section-fire-features"
                     >
@@ -394,7 +391,7 @@ const galleryItems = [
                   </li>
                   <li>
                     <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
                       data-category="landscaping"
                       data-target="#section-landscaping"
                     >
@@ -403,7 +400,7 @@ const galleryItems = [
                     <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="landscaping">
                       <li>
                         <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
                           data-target="#landscaping-turf"
                         >
                           Artificial Turf
@@ -411,7 +408,7 @@ const galleryItems = [
                       </li>
                       <li>
                         <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
                           data-target="#landscaping-gardens"
                         >
                           Gardens
@@ -419,7 +416,7 @@ const galleryItems = [
                       </li>
                       <li>
                         <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm rounded-md transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-primary"
+                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
                           data-target="#landscaping-water-features"
                         >
                           Water Features
@@ -429,7 +426,7 @@ const galleryItems = [
                   </li>
                   <li>
                     <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-primary font-medium"
+                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
                       data-category="iron-work"
                       data-target="#section-iron-work"
                     >
@@ -445,15 +442,15 @@ const galleryItems = [
           <div class="flex-1 min-w-0" id="gallery-container">
             <!-- Concrete Work Section -->
             <section id="section-concrete" class="mb-16 scroll-mt-24">
-              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-primary">
+              <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-wider text-charcoal mb-8 pb-3 border-b-2 border-bronze">
                 Concrete Work
               </h2>
 
               <!-- Walkways Subsection -->
               {galleryItems.filter(item => item.category === "concrete" && item.type === "walkways").length > 0 && (
                 <div id="concrete-walkways" class="mb-12 scroll-mt-24">
-                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3"></span>
                     Walkways
                   </h3>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -481,7 +478,7 @@ const galleryItems = [
                           </div>
                           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                               </svg>
                             </div>
@@ -496,8 +493,8 @@ const galleryItems = [
               <!-- Stairs Subsection -->
               {galleryItems.filter(item => item.category === "concrete" && item.type === "stairs").length > 0 && (
                 <div id="concrete-stairs" class="mb-12 scroll-mt-24">
-                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3"></span>
                     Steps & Stairs
                   </h3>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -525,7 +522,7 @@ const galleryItems = [
                           </div>
                           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                               </svg>
                             </div>
@@ -540,8 +537,8 @@ const galleryItems = [
               <!-- Flatwork Subsection -->
               {galleryItems.filter(item => item.category === "concrete" && item.type === "flatwork").length > 0 && (
                 <div id="concrete-flatwork" class="mb-12 scroll-mt-24">
-                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3"></span>
                     Flatwork & Patios
                   </h3>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -569,7 +566,7 @@ const galleryItems = [
                           </div>
                           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                               </svg>
                             </div>
@@ -584,15 +581,15 @@ const galleryItems = [
 
             <!-- Outdoor Living Section -->
             <section id="section-outdoor-living" class="mb-16 scroll-mt-24">
-              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-primary">
+              <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-wider text-charcoal mb-8 pb-3 border-b-2 border-bronze">
                 Outdoor Living
               </h2>
 
               <!-- Outdoor Kitchens Subsection -->
               {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "outdoor-kitchens").length > 0 && (
                 <div id="outdoor-living-outdoor-kitchens" class="mb-12 scroll-mt-24">
-                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3"></span>
                     Outdoor Kitchens
                   </h3>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -620,7 +617,7 @@ const galleryItems = [
                           </div>
                           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                               </svg>
                             </div>
@@ -635,8 +632,8 @@ const galleryItems = [
               <!-- Covered Patios Subsection -->
               {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "covered-patios").length > 0 && (
                 <div id="outdoor-living-covered-patios" class="mb-12 scroll-mt-24">
-                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3"></span>
                     Covered Patios
                   </h3>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -664,7 +661,7 @@ const galleryItems = [
                           </div>
                           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                               </svg>
                             </div>
@@ -679,7 +676,7 @@ const galleryItems = [
 
             <!-- Pools & Spas Section -->
             <section id="section-pools-spas" class="mb-16 scroll-mt-24">
-              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-primary">
+              <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-wider text-charcoal mb-6 pb-3 border-b-2 border-bronze">
                 Pools & Spas
               </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -707,7 +704,7 @@ const galleryItems = [
                       </div>
                       <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                           </svg>
                         </div>
@@ -720,7 +717,7 @@ const galleryItems = [
 
             <!-- Fire Features Section -->
             <section id="section-fire-features" class="mb-16 scroll-mt-24">
-              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-primary">
+              <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-wider text-charcoal mb-6 pb-3 border-b-2 border-bronze">
                 Fire Features
               </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -748,7 +745,7 @@ const galleryItems = [
                       </div>
                       <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                           </svg>
                         </div>
@@ -761,15 +758,15 @@ const galleryItems = [
 
             <!-- Landscaping Section -->
             <section id="section-landscaping" class="mb-16 scroll-mt-24">
-              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 pb-3 border-b-2 border-primary">
+              <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-wider text-charcoal mb-8 pb-3 border-b-2 border-bronze">
                 Landscaping
               </h2>
 
               <!-- Artificial Turf Subsection -->
               {galleryItems.filter(item => item.category === "landscaping" && item.type === "turf").length > 0 && (
                 <div id="landscaping-turf" class="mb-12 scroll-mt-24">
-                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3"></span>
                     Artificial Turf
                   </h3>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -797,7 +794,7 @@ const galleryItems = [
                           </div>
                           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                               </svg>
                             </div>
@@ -812,8 +809,8 @@ const galleryItems = [
               <!-- Gardens Subsection -->
               {galleryItems.filter(item => item.category === "landscaping" && item.type === "gardens").length > 0 && (
                 <div id="landscaping-gardens" class="mb-12 scroll-mt-24">
-                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3"></span>
                     Gardens
                   </h3>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -841,7 +838,7 @@ const galleryItems = [
                           </div>
                           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                               </svg>
                             </div>
@@ -856,8 +853,8 @@ const galleryItems = [
               <!-- Water Features Subsection -->
               {galleryItems.filter(item => item.category === "landscaping" && item.type === "water-features").length > 0 && (
                 <div id="landscaping-water-features" class="mb-12 scroll-mt-24">
-                  <h3 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-primary mr-3"></span>
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3"></span>
                     Water Features
                   </h3>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -885,7 +882,7 @@ const galleryItems = [
                           </div>
                           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                               </svg>
                             </div>
@@ -900,7 +897,7 @@ const galleryItems = [
 
             <!-- Iron Work Section -->
             <section id="section-iron-work" class="mb-16 scroll-mt-24">
-              <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 pb-3 border-b-2 border-primary">
+              <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-wider text-charcoal mb-6 pb-3 border-b-2 border-bronze">
                 Iron Work
               </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -928,7 +925,7 @@ const galleryItems = [
                       </div>
                       <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                           </svg>
                         </div>
@@ -956,19 +953,20 @@ const galleryItems = [
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-16 bg-gradient-to-br from-[#818181] to-[#454545]">
+    <!-- CTA Section - Luxury Industrial -->
+    <section class="bg-black-pure section-padding border-t border-bronze/10">
       <div class="container max-w-4xl mx-auto px-6 md:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        <h2 class="font-['Bebas_Neue'] text-4xl md:text-5xl tracking-wider text-white mb-6">
           Ready to Start Your Project?
         </h2>
-        <p class="text-lg text-gray-200 mb-8">
+        <div class="bronze-divider mx-auto mb-8"></div>
+        <p class="text-lg md:text-xl text-slate-light font-light leading-relaxed mb-10 max-w-2xl mx-auto">
           Let us transform your outdoor space with quality craftsmanship and
           exceptional service.
         </p>
         <a
           href="/#cta"
-          class="inline-block bg-white text-primary px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+          class="inline-block font-['Bebas_Neue'] text-lg tracking-wider bg-transparent border-2 border-white text-white py-4 px-10 transition-all duration-300 hover:bg-bronze hover:border-bronze hover:text-white shadow-[0_4px_15px_rgb(0_0_0/30%)] hover:shadow-[0_4px_20px_rgb(184_134_11/40%)]"
         >
           Get Your Free Estimate
         </a>
@@ -1060,7 +1058,7 @@ const galleryItems = [
   <!-- Back to Top Button -->
   <button
     id="back-to-top"
-    class="fixed bottom-8 right-8 bg-primary text-white p-4 rounded-full shadow-2xl hover:bg-primary-dark transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110"
+    class="fixed bottom-8 right-8 bg-bronze text-white p-4 rounded-full shadow-2xl hover:bg-bronze-dark transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110"
     aria-label="Back to top"
   >
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1110,13 +1108,13 @@ const galleryItems = [
     btn.addEventListener("click", () => {
       const targetId = btn.getAttribute("data-target");
 
-      // Update active state - modern tab style
+      // Update active state - luxury tab style
       mobileFilterBtns.forEach((b) => {
-        b.classList.remove("border-gray-900", "bg-gray-50", "text-gray-900");
-        b.classList.add("border-transparent", "bg-white", "text-gray-600");
+        b.classList.remove("border-bronze", "bg-charcoal-light", "text-white");
+        b.classList.add("border-transparent", "bg-charcoal", "text-slate-light");
       });
-      btn.classList.remove("border-transparent", "bg-white", "text-gray-600");
-      btn.classList.add("border-gray-900", "bg-gray-50", "text-gray-900");
+      btn.classList.remove("border-transparent", "bg-charcoal", "text-slate-light");
+      btn.classList.add("border-bronze", "bg-charcoal-light", "text-white");
 
       // Scroll to section or top
       if (targetId === "all") {
@@ -1166,13 +1164,13 @@ const galleryItems = [
       const target = link.getAttribute("data-target");
 
       if (target === `#${currentSection}`) {
-        // Add active state
-        link.classList.add("bg-primary", "text-white", "border-l-4", "border-bronze");
-        link.classList.remove("text-gray-700", "hover:bg-gray-100");
+        // Add active state - Bronze highlight
+        link.classList.add("text-bronze", "border-bronze");
+        link.classList.remove("text-slate-light", "border-transparent");
       } else {
         // Remove active state
-        link.classList.remove("bg-primary", "text-white", "border-l-4", "border-bronze");
-        link.classList.add("text-gray-700");
+        link.classList.remove("text-bronze", "border-bronze");
+        link.classList.add("text-slate-light", "border-transparent");
       }
     });
   }
@@ -1302,7 +1300,37 @@ const galleryItems = [
   });
 
   // Initialize - removed filterGallery as it's not needed
+
+  // Hero page-load animations
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroElements = document.querySelectorAll('.hero-animate');
+    heroElements.forEach(el => {
+      el.classList.add('animate-fade-in-up');
+    });
+  });
 </script>
+
+<style>
+  /* Hero animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-animate {
+    will-change: transform, opacity;
+  }
+</style>
 
 <style>
   /* Hide scrollbar for mobile filter */
