@@ -3,35 +3,44 @@ import { Image } from 'astro:assets';
 import collageImg from '../../public/img/collage.png';
 ---
 
-<section class="about-us py-24 md:py-32" id="about-us">
-  <div class="container max-w-7xl mx-auto px-6 md:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+<!-- LIGHT Section - Breathing Room After Dark Hero -->
+<section class="about-us py-24 md:py-32 lg:py-40 bg-white" id="about-us">
+  <div class="container max-w-7xl mx-auto px-8 md:px-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 lg:gap-24 items-center">
       <!-- Image -->
       <div class="about-us-img-box flex justify-center md:justify-start">
         <Image
           src={collageImg}
           alt="Photos showing concrete and landscape work"
-          class="about-us-img w-3/5 md:w-full"
+          class="about-us-img w-3/5 md:w-full drop-shadow-2xl"
           quality={85}
         />
       </div>
 
-      <!-- Text Content -->
+      <!-- Text Content - Clean & Professional -->
       <div class="about-us-text-box text-center md:text-left">
-        <h2 class="heading-secondary text-[#313131] text-3xl md:text-4xl font-semibold leading-tight mb-8 md:mb-12">
-          Trusted Experts in Concrete and Landscaping
+        <!-- Heading - Bebas Neue for consistency -->
+        <h2 class="heading-secondary text-[#1A1A1A] font-semibold leading-tight mb-6 tracking-wide
+                   text-4xl md:text-5xl lg:text-6xl">
+          TRUSTED EXPERTS IN CONCRETE & LANDSCAPING
         </h2>
-        <p class="about-us-description text-[#222] text-base md:text-lg leading-relaxed">
+
+        <!-- Thin divider line -->
+        <div class="w-16 h-[2px] bg-[#B8860B] mb-8 mx-auto md:mx-0"></div>
+
+        <!-- Body Copy - Generous line height for readability -->
+        <p class="about-us-description text-[#4A5568] text-base md:text-lg leading-relaxed mb-6">
           With over 15 years of experience, Rocky Concrete is your trusted
           partner for high-quality concrete and landscaping services in
-          Bakersfield and surrounding areas. As a family-operated
-          business, we prioritize customer satisfaction, delivering
-          exceptional results in every project. From driveways and patios
-          to custom outdoor kitchens, fire pits, and comprehensive
+          Bakersfield and surrounding areas.
+        </p>
+
+        <p class="about-us-description text-[#4A5568] text-base md:text-lg leading-relaxed">
+          As a family-operated business, we prioritize customer satisfaction,
+          delivering exceptional results in every project. From driveways and
+          patios to custom outdoor kitchens, fire pits, and comprehensive
           landscaping solutions, our expert team transforms outdoor spaces
-          with precision and care. We offer free estimates and 3D virtual
-          models to help bring your vision to life. Trust Rocky Concrete
-          for beautiful, durable, and functional outdoor spaces.
+          with precision and care.
         </p>
       </div>
     </div>
