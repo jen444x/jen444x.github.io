@@ -1,137 +1,233 @@
 ---
 ---
 
-<footer class="footer bg-gray-100 py-12 md:py-16 border-t border-gray-200">
-  <div class="container max-w-7xl mx-auto px-6 md:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-      <!-- Navigation Column -->
-      <nav class="nav-col">
-        <p class="footer-heading text-gray-800 font-semibold text-lg mb-4">
-          Navigation
-        </p>
-        <ul class="footer-nav space-y-3">
-          <li>
-            <a
-              class="footer-link text-gray-600 hover:text-primary transition-colors text-base"
-              href="/"
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              class="footer-link text-gray-600 hover:text-primary transition-colors text-base"
-              href="#about-us"
-            >
-              About Us
-            </a>
-          </li>
-          <li>
-            <a
-              class="footer-link text-gray-600 hover:text-primary transition-colors text-base"
-              href="#services"
-            >
-              Services
-            </a>
-          </li>
-          <li>
-            <a
-              class="footer-link text-gray-600 hover:text-primary transition-colors text-base"
-              href="/gallery"
-            >
-              Gallery
-            </a>
-          </li>
-          <li>
-            <a
-              class="footer-link text-gray-600 hover:text-primary transition-colors text-base"
-              href="#cta"
-            >
-              Contact
-            </a>
-          </li>
-        </ul>
-      </nav>
+<!-- TWO-TONE LUXURY FOOTER WITH SCROLL ANIMATIONS -->
+<footer class="footer">
+  <!-- Main Footer Section - DARK CHARCOAL -->
+  <div class="bg-charcoal py-16 md:py-20 border-t border-bronze/20">
+    <div class="container max-w-7xl mx-auto px-6 md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
 
-      <!-- Contact Column -->
-      <div class="contact-col">
-        <p class="footer-heading text-gray-800 font-semibold text-lg mb-4">
-          Contact Us
-        </p>
-        <address class="contacts not-italic text-gray-600 space-y-3">
-          <p>
-            <a
-              class="footer-link hover:text-primary transition-colors text-base"
-              href="tel:661-378-4017"
-            >
-              661-378-4017
-            </a>
+        <!-- Logo & Tagline Column -->
+        <div class="logo-col footer-reveal opacity-0" style="animation-delay: 0.1s">
+          <a href="/" class="inline-block mb-6 group bg-white p-3 rounded-sm shadow-lg hover:shadow-xl transition-all duration-300">
+            <img
+              class="w-24 md:w-28 transition-transform duration-500 group-hover:scale-105"
+              alt="Rocky Concrete logo"
+              src="/img/logo.jpeg"
+            />
+          </a>
+          <p class="text-slate-light text-base leading-relaxed">
+            Expert concrete and landscape construction serving Bakersfield since 2008.
           </p>
-          <p>
-            <a
-              class="footer-link hover:text-primary transition-colors text-base break-all"
-              href="mailto:rockyconcreteinc22@gmail.com"
-            >
-              rockyconcreteinc22@gmail.com
-            </a>
+        </div>
+
+        <!-- Navigation Column -->
+        <nav class="nav-col footer-reveal opacity-0" style="animation-delay: 0.2s">
+          <h3 class="font-['Bebas_Neue'] text-xl tracking-wider text-white mb-6 relative inline-block">
+            Quick Links
+            <span class="absolute bottom-0 left-0 w-8 h-[2px] bg-bronze"></span>
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                class="footer-link text-slate-light hover:text-bronze transition-all duration-300 text-base inline-block relative group"
+                href="/"
+              >
+                <span class="relative">
+                  Home
+                  <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-bronze transition-all duration-300 group-hover:w-full"></span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="footer-link text-slate-light hover:text-bronze transition-all duration-300 text-base inline-block relative group"
+                href="#about-us"
+              >
+                <span class="relative">
+                  About Us
+                  <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-bronze transition-all duration-300 group-hover:w-full"></span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="footer-link text-slate-light hover:text-bronze transition-all duration-300 text-base inline-block relative group"
+                href="#services"
+              >
+                <span class="relative">
+                  Services
+                  <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-bronze transition-all duration-300 group-hover:w-full"></span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="footer-link text-slate-light hover:text-bronze transition-all duration-300 text-base inline-block relative group"
+                href="/showcase"
+              >
+                <span class="relative">
+                  Showcase
+                  <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-bronze transition-all duration-300 group-hover:w-full"></span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="footer-link text-slate-light hover:text-bronze transition-all duration-300 text-base inline-block relative group"
+                href="#contact"
+              >
+                <span class="relative">
+                  Contact
+                  <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-bronze transition-all duration-300 group-hover:w-full"></span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Contact Column -->
+        <div class="contact-col footer-reveal opacity-0" style="animation-delay: 0.3s">
+          <h3 class="font-['Bebas_Neue'] text-xl tracking-wider text-white mb-6 relative inline-block">
+            Get In Touch
+            <span class="absolute bottom-0 left-0 w-8 h-[2px] bg-bronze"></span>
+          </h3>
+          <address class="not-italic space-y-4">
+            <p>
+              <a
+                class="text-slate-light hover:text-bronze transition-all duration-300 text-base inline-flex items-center gap-2 group"
+                href="tel:661-378-4017"
+              >
+                <ion-icon class="text-xl transition-transform duration-300 group-hover:scale-110" name="call-outline"></ion-icon>
+                661-378-4017
+              </a>
+            </p>
+            <p>
+              <a
+                class="text-slate-light hover:text-bronze transition-all duration-300 text-base inline-flex items-center gap-2 break-all group"
+                href="mailto:rockyconcreteinc22@gmail.com"
+              >
+                <ion-icon class="text-xl transition-transform duration-300 group-hover:scale-110 shrink-0" name="mail-outline"></ion-icon>
+                rockyconcreteinc22@gmail.com
+              </a>
+            </p>
+            <p class="inline-flex items-center gap-2 text-slate-light text-base">
+              <ion-icon class="text-xl" name="location-outline"></ion-icon>
+              Bakersfield, CA
+            </p>
+          </address>
+        </div>
+
+        <!-- Social Column -->
+        <div class="social-col footer-reveal opacity-0" style="animation-delay: 0.4s">
+          <h3 class="font-['Bebas_Neue'] text-xl tracking-wider text-white mb-6 relative inline-block">
+            Follow Us
+            <span class="absolute bottom-0 left-0 w-8 h-[2px] bg-bronze"></span>
+          </h3>
+          <ul class="flex gap-4">
+            <li>
+              <a
+                class="social-icon w-12 h-12 flex items-center justify-center bg-charcoal-light border-2 border-slate/30 text-white hover:text-bronze hover:border-bronze transition-all duration-300 hover:scale-110 hover:rotate-6"
+                href="https://www.tiktok.com/@rockyconcreteinc"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit our TikTok page"
+              >
+                <ion-icon class="text-2xl" name="logo-tiktok"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a
+                class="social-icon w-12 h-12 flex items-center justify-center bg-charcoal-light border-2 border-slate/30 text-white hover:text-bronze hover:border-bronze transition-all duration-300 hover:scale-110 hover:rotate-6"
+                href="https://www.instagram.com/rockyconcreteinc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit our Instagram page"
+              >
+                <ion-icon class="text-2xl" name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+            <li>
+              <a
+                class="social-icon w-12 h-12 flex items-center justify-center bg-charcoal-light border-2 border-slate/30 text-white hover:text-bronze hover:border-bronze transition-all duration-300 hover:scale-110 hover:rotate-6"
+                href="https://m.facebook.com/RockyConcreteInc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit our Facebook page"
+              >
+                <ion-icon class="text-2xl" name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+          </ul>
+          <p class="text-slate-light text-sm mt-8">
+            Licensed & Insured<br />
+            CA License #000000
           </p>
-          <p class="location text-gray-500 text-base">Bakersfield, CA</p>
-        </address>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Logo & Social Column -->
-      <div class="logo-col flex flex-col items-start md:items-end">
-        <a href="/" class="footer-logo mb-6 bg-white p-2 rounded-lg shadow-md hover:shadow-lg transition-shadow inline-block">
-          <img
-            class="logo w-20 md:w-24 rounded-lg"
-            alt="Rocky Concrete logo"
-            src="/img/logo.jpeg"
-          />
-        </a>
-
-        <ul class="social-links flex gap-6">
-          <li>
-            <a
-              class="footer-link text-gray-600 hover:text-primary transition-colors"
-              href="https://www.tiktok.com/@rockyconcreteinc"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit our TikTok page"
-            >
-              <ion-icon class="text-3xl" name="logo-tiktok"></ion-icon>
-            </a>
-          </li>
-          <li>
-            <a
-              class="footer-link text-gray-600 hover:text-primary transition-colors"
-              href="https://www.instagram.com/rockyconcreteinc/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit our Instagram page"
-            >
-              <ion-icon class="text-3xl" name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-          <li>
-            <a
-              class="footer-link text-gray-600 hover:text-primary transition-colors"
-              href="https://m.facebook.com/RockyConcreteInc/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit our Facebook page"
-            >
-              <ion-icon class="text-3xl" name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-        </ul>
-
-        <p class="copyright text-gray-500 text-sm mt-8 md:text-right whitespace-nowrap">
-          Copyright &copy; <span class="year">{new Date().getFullYear()}</span> Rocky Concrete Inc.
+  <!-- Bottom Copyright Bar - LIGHT -->
+  <div class="bg-white py-6 border-t border-charcoal-light/20">
+    <div class="container max-w-7xl mx-auto px-6 md:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-slate text-sm">
+          Copyright &copy; {new Date().getFullYear()} Rocky Concrete Inc. All rights reserved.
         </p>
-        <p class="text-gray-500 text-sm md:text-right">
-          All rights reserved.
-        </p>
+        <div class="flex gap-6 text-sm">
+          <a href="#" class="text-slate hover:text-bronze transition-colors duration-300">Privacy Policy</a>
+          <span class="text-slate">|</span>
+          <a href="#" class="text-slate hover:text-bronze transition-colors duration-300">Terms of Service</a>
+        </div>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- SCROLL ANIMATION STYLES -->
+<style>
+  /* Scroll reveal animation */
+  @keyframes footerFadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .footer-reveal.animate-in {
+    animation: footerFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .footer-reveal {
+    will-change: transform, opacity;
+  }
+</style>
+
+<!-- SCROLL ANIMATION SCRIPT -->
+<script>
+  // Intersection Observer for scroll-triggered animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all footer reveal elements
+  document.querySelectorAll('.footer .footer-reveal').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

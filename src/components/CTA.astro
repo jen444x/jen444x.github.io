@@ -1,147 +1,216 @@
 ---
 ---
 
-<section class="section-cta bg-gray-50 py-24 md:py-32" id="cta">
+<section class="section-cta bg-black-pure section-padding" id="contact">
   <div class="container max-w-7xl mx-auto px-6 md:px-8">
-    <div class="cta bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
-      <!-- Left Side: Contact Info -->
-      <div class="cta-left-box bg-gradient-to-br from-primary to-[#d35400] text-white p-8 md:p-12 lg:p-16">
-        <div class="cta-text-box">
-          <h2 class="cta-title text-3xl md:text-4xl font-semibold mb-6">
-            Get In Touch
-          </h2>
-          <div class="section-description">
-            <p class="cta-text text-lg leading-relaxed mb-8">
-              We would love to talk to you about what we can do for you.
-              Fill out the form for your free quote or call us immediately.
-            </p>
+    <!-- Heading Section -->
+    <div class="text-center mb-8 md:mb-12 cta-reveal opacity-0" style="animation-delay: 0.1s">
+      <h2 class="section-heading text-white mb-4">
+        Get Your Free Estimate
+      </h2>
+      <div class="bronze-divider mx-auto mb-6"></div>
+      <p class="section-subheading text-slate-light max-w-2xl mx-auto">
+        Tell us about your project and we'll get back to you within 24 hours.
+      </p>
+    </div>
 
-            <ul class="contact-infos space-y-4 mb-8">
-              <li class="contact-info">
-                <a
-                  class="cta-link flex items-center gap-3 text-white hover:text-gray-100 transition-colors"
-                  href="tel:661-378-4017"
-                >
-                  <ion-icon class="text-2xl" name="call-outline"></ion-icon>
-                  <span class="text-lg">661-378-4017</span>
-                </a>
-              </li>
-              <li class="contact-info">
-                <a
-                  class="cta-link flex items-center gap-3 text-white hover:text-gray-100 transition-colors break-all"
-                  href="mailto:rockyconcreteinc22@gmail.com"
-                >
-                  <ion-icon class="text-2xl" name="mail-outline"></ion-icon>
-                  <span class="text-lg">rockyconcreteinc22@gmail.com</span>
-                </a>
-              </li>
-            </ul>
+    <!-- Split Layout: Contact Info + Form -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
 
-            <hr class="border-white/30 mb-8" />
-
-            <ul class="cta-social-links flex gap-6">
-              <li>
-                <a
-                  class="footer-link text-white hover:text-gray-100 transition-colors"
-                  href="https://www.tiktok.com/@rockyconcreteinc"
-                  aria-label="TikTok"
-                >
-                  <ion-icon class="text-3xl" name="logo-tiktok"></ion-icon>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="footer-link text-white hover:text-gray-100 transition-colors"
-                  href="https://www.instagram.com/rockyconcreteinc/"
-                  aria-label="Instagram"
-                >
-                  <ion-icon class="text-3xl" name="logo-instagram"></ion-icon>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="footer-link text-white hover:text-gray-100 transition-colors"
-                  href="https://m.facebook.com/RockyConcreteInc/"
-                  aria-label="Facebook"
-                >
-                  <ion-icon class="text-3xl" name="logo-facebook"></ion-icon>
-                </a>
-              </li>
-            </ul>
-          </div>
+      <!-- Left: Contact Information (2 cols) -->
+      <div class="lg:col-span-2 space-y-6 cta-reveal opacity-0" style="animation-delay: 0.2s">
+        <!-- Phone -->
+        <div class="group">
+          <h3 class="font-['Bebas_Neue'] text-xl md:text-2xl tracking-wide text-white mb-4">
+            Call Us
+          </h3>
+          <a
+            href="tel:661-378-4017"
+            class="inline-flex items-center gap-3 text-white-soft hover:text-bronze transition-all duration-300 text-lg md:text-xl"
+          >
+            <ion-icon class="text-2xl" name="call-outline"></ion-icon>
+            <span class="font-['Inter'] font-light tracking-wide">661-378-4017</span>
+          </a>
         </div>
-      </div>
 
-      <!-- Right Side: Contact Form -->
-      <div class="cta-right-box bg-white p-8 md:p-12 lg:p-16">
-        <div class="cta-content-box">
-          <h2 class="heading-tertiary text-gray-800 text-2xl md:text-3xl font-semibold mb-8">
-            Request A Free Quote
-          </h2>
-          <div class="cta-form-box">
-            <form
-              class="cta-form space-y-6"
-              action="https://formspree.io/f/xeojjaol"
-              method="POST"
+        <!-- Email -->
+        <div class="group">
+          <h3 class="font-['Bebas_Neue'] text-xl md:text-2xl tracking-wide text-white mb-4">
+            Email Us
+          </h3>
+          <a
+            href="mailto:rockyconcreteinc22@gmail.com"
+            class="inline-flex items-start gap-3 text-white-soft hover:text-bronze transition-all duration-300 text-base md:text-lg break-all"
+          >
+            <ion-icon class="text-2xl flex-shrink-0 mt-1" name="mail-outline"></ion-icon>
+            <span class="font-['Inter'] font-light tracking-wide">rockyconcreteinc22@gmail.com</span>
+          </a>
+        </div>
+
+        <!-- Social Links -->
+        <div class="group pt-6">
+          <h3 class="font-['Bebas_Neue'] text-xl md:text-2xl tracking-wide text-white mb-6">
+            Follow Us
+          </h3>
+          <div class="flex gap-6">
+            <a
+              href="https://www.tiktok.com/@rockyconcreteinc"
+              aria-label="TikTok"
+              class="text-white-soft hover:text-bronze transition-all duration-300 transform hover:scale-110"
             >
-              <div>
-                <label
-                  for="full-name"
-                  class="block text-gray-700 font-medium mb-2"
-                >
-                  Full Name
-                </label>
-                <input
-                  id="full-name"
-                  type="text"
-                  name="full-name"
-                  required
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-
-              <div>
-                <label
-                  for="email"
-                  class="block text-gray-700 font-medium mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  required
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-
-              <div>
-                <label
-                  for="message"
-                  class="block text-gray-700 font-medium mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="6"
-                  required
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="w-full bg-primary text-white font-semibold py-4 px-8 rounded-lg hover:bg-primary-dark transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-primary/50"
-              >
-                Get Free Quote
-              </button>
-            </form>
+              <ion-icon class="text-3xl" name="logo-tiktok"></ion-icon>
+            </a>
+            <a
+              href="https://www.instagram.com/rockyconcreteinc/"
+              aria-label="Instagram"
+              class="text-white-soft hover:text-bronze transition-all duration-300 transform hover:scale-110"
+            >
+              <ion-icon class="text-3xl" name="logo-instagram"></ion-icon>
+            </a>
+            <a
+              href="https://m.facebook.com/RockyConcreteInc/"
+              aria-label="Facebook"
+              class="text-white-soft hover:text-bronze transition-all duration-300 transform hover:scale-110"
+            >
+              <ion-icon class="text-3xl" name="logo-facebook"></ion-icon>
+            </a>
           </div>
         </div>
       </div>
+
+      <!-- Right: Form (3 cols) -->
+      <div class="lg:col-span-3 cta-reveal opacity-0" style="animation-delay: 0.3s">
+        <div class="bg-charcoal border border-charcoal-light p-6 md:p-8 shadow-2xl">
+          <form
+            action="https://formspree.io/f/xeojjaol"
+            method="POST"
+            class="space-y-5"
+          >
+            <!-- Full Name -->
+            <div>
+              <label
+                for="full-name"
+                class="block font-['Inter'] text-sm font-medium text-white-soft mb-2 tracking-wide"
+              >
+                Full Name
+              </label>
+              <input
+                id="full-name"
+                type="text"
+                name="full-name"
+                required
+                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-all duration-300 font-['Inter'] text-base"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label
+                for="email"
+                class="block font-['Inter'] text-sm font-medium text-white-soft mb-2 tracking-wide"
+              >
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-all duration-300 font-['Inter'] text-base"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div>
+              <label
+                for="phone"
+                class="block font-['Inter'] text-sm font-medium text-white-soft mb-2 tracking-wide"
+              >
+                Phone Number
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                name="phone"
+                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-all duration-300 font-['Inter'] text-base"
+                placeholder="(661) 378-4017"
+              />
+            </div>
+
+            <!-- Message -->
+            <div>
+              <label
+                for="message"
+                class="block font-['Inter'] text-sm font-medium text-white-soft mb-2 tracking-wide"
+              >
+                Project Details
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate resize-none focus:outline-none focus:border-bronze transition-all duration-300 font-['Inter'] text-base"
+                placeholder="Tell us about your project..."
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="w-full bg-transparent border-2 border-white text-white font-['Inter'] font-medium text-base md:text-lg py-4 px-8 tracking-wide transition-all duration-300 hover:bg-white hover:text-black-pure hover:border-bronze focus:outline-none focus:ring-2 focus:ring-bronze focus:ring-offset-2 focus:ring-offset-charcoal"
+            >
+              Get Free Estimate
+            </button>
+          </form>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<!-- SCROLL ANIMATION STYLES -->
+<style>
+  @keyframes ctaFadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .cta-reveal.animate-in {
+    animation: ctaFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .cta-reveal {
+    will-change: transform, opacity;
+  }
+</style>
+
+<!-- SCROLL ANIMATION SCRIPT -->
+<script>
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.section-cta .cta-reveal').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

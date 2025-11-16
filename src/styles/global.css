@@ -91,3 +91,28 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-bronze);
   color: var(--color-black-pure);
 }
+
+/* ========================================
+   REUSABLE COMPONENT STYLES
+   Use these classes for consistency across all sections
+   ======================================== */
+
+/* Section Headings (H2) - All section titles use this */
+.section-heading {
+  @apply font-['Bebas_Neue'] text-4xl md:text-5xl lg:text-6xl font-semibold tracking-wide leading-tight;
+}
+
+/* Section Padding - Standard spacing for all sections */
+.section-padding {
+  @apply py-24 md:py-32;
+}
+
+/* Bronze Accent Divider - Consistent across sections */
+.bronze-divider {
+  @apply w-20 h-0.5 bg-bronze;
+}
+
+/* Section Subheading/Description Text */
+.section-subheading {
+  @apply text-base md:text-lg font-light leading-relaxed;
+}
