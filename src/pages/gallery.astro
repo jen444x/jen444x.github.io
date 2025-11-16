@@ -248,7 +248,7 @@ const galleryItems = [
           </a>
 
           <!-- Filter Buttons Container -->
-          <div class="flex items-center justify-center gap-2 flex-1">
+          <div class="flex items-center justify-start gap-2 flex-1 ml-4">
           <!-- CONCRETE WORK - Has Subcategories -->
           <div class="relative group">
             <button
@@ -969,53 +969,20 @@ const galleryItems = [
 
   let currentFilter = "all";
 
-  // TRUE FILTERING - Show/Hide Sections
-  function filterGallery(category: string, subcategory: string | null = null) {
-    currentFilter = category;
+  // SMOOTH SCROLL TO SECTIONS (No filtering - show all work)
+  function scrollToSection(category: string, subcategory: string | null = null) {
+    let targetId = `#section-${category}`;
 
-    sections.forEach((section) => {
-      const sectionId = section.id;
-      const sectionCategory = sectionId.replace("section-", "");
+    // If subcategory specified, scroll to that instead
+    if (subcategory) {
+      targetId = `#${category}-${subcategory}`;
+    }
 
-      if (sectionCategory === category) {
-        // Show matching section
-        (section as HTMLElement).style.display = "block";
-        setTimeout(() => {
-          section.classList.remove("opacity-0");
-          section.classList.add("opacity-100");
-        }, 10);
-
-        // If subcategory specified, scroll to it
-        if (subcategory) {
-          setTimeout(() => {
-            const subcatElement = document.getElementById(
-              `${category}-${subcategory}`
-            );
-            if (subcatElement) {
-              const headerOffset = 200;
-              const targetPosition =
-                subcatElement.getBoundingClientRect().top +
-                window.pageYOffset -
-                headerOffset;
-              window.scrollTo({ top: targetPosition, behavior: "smooth" });
-            }
-          }, 300);
-        }
-      } else {
-        // Hide non-matching sections with fade-out
-        section.classList.remove("opacity-100");
-        section.classList.add("opacity-0");
-        setTimeout(() => {
-          (section as HTMLElement).style.display = "none";
-        }, 300);
-      }
-    });
-
-    // Scroll to top when filtering (unless subcategory click)
-    if (!subcategory) {
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 100);
+    const target = document.querySelector(targetId);
+    if (target) {
+      const headerOffset = 120; // Account for sticky filter bar
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: targetPosition, behavior: "smooth" });
     }
   }
 
@@ -1059,25 +1026,25 @@ const galleryItems = [
     });
   }
 
-  // Main category button clicks
+  // Main category button clicks - SCROLL TO SECTION
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const category = btn.getAttribute("data-category");
       if (category) {
-        filterGallery(category);
+        scrollToSection(category);
         updateActiveButton(category);
       }
     });
   });
 
-  // Subcategory button clicks
+  // Subcategory button clicks - SCROLL TO SUBCATEGORY
   subcatBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const category = btn.getAttribute("data-category");
       const subcategory = btn.getAttribute("data-subcategory");
 
       if (category && subcategory) {
-        filterGallery(category, subcategory);
+        scrollToSection(category, subcategory);
         updateActiveButton(category);
       }
     });
@@ -1100,10 +1067,7 @@ const galleryItems = [
     });
   }
 
-  // Initialize - add transition classes
-  sections.forEach((section) => {
-    section.classList.add("transition-opacity", "duration-300", "opacity-100");
-  });
+  // All sections visible by default (no filtering)
 
   // HIDE HEADER + SHOW LOGO IN FILTER BAR ON SCROLL
   const header = document.querySelector("header");
@@ -1174,7 +1138,7 @@ const galleryItems = [
       // Extract category from hash (e.g., #section-concrete -> concrete)
       const category = hash.replace("#section-", "");
       if (category) {
-        filterGallery(category);
+        scrollToSection(category);
         updateActiveButton(category);
       }
     }
