@@ -234,212 +234,188 @@ const galleryItems = [
       </div>
     </section>
 
-    <!-- Mobile Category Filter Bar (Hidden on Desktop) -->
-    <div class="lg:hidden sticky top-16 z-40 bg-charcoal border-b border-bronze/20">
-      <!-- Grid Container - Luxury tab-style navigation -->
-      <div class="grid grid-cols-2 gap-0">
-        <!-- All Categories Button -->
-        <button
-          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-bronze bg-charcoal-light text-white"
-          data-target="all"
-        >
-          ALL PROJECTS
-        </button>
+    <!-- Sticky Horizontal Filter Bar - Luxury Industrial BOLD -->
+    <div id="filter-bar" class="sticky top-20 md:top-24 z-40 bg-charcoal shadow-2xl transition-all duration-300">
+      <!-- Bronze top accent line -->
+      <div class="h-1 bg-gradient-to-r from-transparent via-bronze to-transparent"></div>
 
-        <!-- Concrete Work -->
-        <button
-          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
-          data-target="#section-concrete"
-        >
-          CONCRETE
-        </button>
+      <div class="max-w-[1400px] mx-auto px-6 md:px-8 py-2 md:py-3">
+        <!-- Desktop: Horizontal Flex Layout - BIGGER & BOLDER -->
+        <div class="hidden md:flex items-center justify-center gap-2">
+          <!-- ALL PROJECTS -->
+          <button
+            class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-white relative group bg-bronze/10 border-2 border-bronze"
+            data-category="all"
+          >
+            ALL PROJECTS
+            <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300"></span>
+          </button>
 
-        <!-- Outdoor Living -->
-        <button
-          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
-          data-target="#section-outdoor-living"
-        >
-          OUTDOOR
-        </button>
+          <!-- CONCRETE WORK - Has Subcategories -->
+          <div class="relative group">
+            <button
+              class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-slate-light hover:text-white relative border-2 border-transparent hover:border-bronze/30"
+              data-category="concrete"
+            >
+              CONCRETE WORK
+              <svg class="inline-block w-4 h-4 ml-2 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            </button>
 
-        <!-- Pools & Spas -->
-        <button
-          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
-          data-target="#section-pools-spas"
-        >
-          POOLS & SPAS
-        </button>
+            <!-- Dropdown -->
+            <div class="absolute top-full left-0 mt-2 bg-charcoal-light border-2 border-bronze/20 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[240px] z-50">
+              <button class="subcat-btn w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze" data-category="concrete" data-subcategory="walkways">
+                Walkways
+              </button>
+              <button class="subcat-btn w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze" data-category="concrete" data-subcategory="stairs">
+                Steps & Stairs
+              </button>
+              <button class="subcat-btn w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze" data-category="concrete" data-subcategory="flatwork">
+                Flatwork & Patios
+              </button>
+            </div>
+          </div>
 
-        <!-- Fire Features -->
-        <button
-          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
-          data-target="#section-fire-features"
-        >
-          FIRE FEATURES
-        </button>
+          <!-- OUTDOOR LIVING - Has Subcategories -->
+          <div class="relative group">
+            <button
+              class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-slate-light hover:text-white relative border-2 border-transparent hover:border-bronze/30"
+              data-category="outdoor-living"
+            >
+              OUTDOOR LIVING
+              <svg class="inline-block w-4 h-4 ml-2 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            </button>
 
-        <!-- Landscaping -->
-        <button
-          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
-          data-target="#section-landscaping"
-        >
-          LANDSCAPING
-        </button>
+            <!-- Dropdown -->
+            <div class="absolute top-full left-0 mt-2 bg-charcoal-light border-2 border-bronze/20 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[240px] z-50">
+              <button class="subcat-btn w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze" data-category="outdoor-living" data-subcategory="outdoor-kitchens">
+                Outdoor Kitchens
+              </button>
+              <button class="subcat-btn w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze" data-category="outdoor-living" data-subcategory="covered-patios">
+                Covered Patios
+              </button>
+            </div>
+          </div>
 
-        <!-- Iron Work -->
-        <button
-          class="mobile-filter-btn px-3 py-3.5 font-['Bebas_Neue'] tracking-wider text-sm transition-all duration-200 border-b-2 border-transparent bg-charcoal text-slate-light hover:bg-charcoal-light hover:text-white"
-          data-target="#section-iron-work"
-        >
-          IRON WORK
-        </button>
+          <!-- POOLS & SPAS - No Subcategories -->
+          <button
+            class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-slate-light hover:text-white relative border-2 border-transparent hover:border-bronze/30"
+            data-category="pools-spas"
+          >
+            POOLS & SPAS
+            <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+          </button>
+
+          <!-- FIRE FEATURES - No Subcategories -->
+          <button
+            class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-slate-light hover:text-white relative border-2 border-transparent hover:border-bronze/30"
+            data-category="fire-features"
+          >
+            FIRE FEATURES
+            <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+          </button>
+
+          <!-- LANDSCAPING - Has Subcategories -->
+          <div class="relative group">
+            <button
+              class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-slate-light hover:text-white relative border-2 border-transparent hover:border-bronze/30"
+              data-category="landscaping"
+            >
+              LANDSCAPING
+              <svg class="inline-block w-4 h-4 ml-2 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            </button>
+
+            <!-- Dropdown -->
+            <div class="absolute top-full left-0 mt-2 bg-charcoal-light border-2 border-bronze/20 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[240px] z-50">
+              <button class="subcat-btn w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze" data-category="landscaping" data-subcategory="turf">
+                Artificial Turf
+              </button>
+              <button class="subcat-btn w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze" data-category="landscaping" data-subcategory="gardens">
+                Gardens
+              </button>
+              <button class="subcat-btn w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze" data-category="landscaping" data-subcategory="water-features">
+                Water Features
+              </button>
+            </div>
+          </div>
+
+          <!-- IRON WORK - No Subcategories -->
+          <button
+            class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-slate-light hover:text-white relative border-2 border-transparent hover:border-bronze/30"
+            data-category="iron-work"
+          >
+            IRON WORK
+            <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+          </button>
+        </div>
+
+        <!-- Mobile: Grid Layout - Bigger -->
+        <div class="grid grid-cols-2 gap-1 md:hidden">
+          <button
+            class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-bronze bg-bronze/10 text-white"
+            data-category="all"
+          >
+            ALL
+          </button>
+
+          <button
+            class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-transparent bg-charcoal-light text-slate-light"
+            data-category="concrete"
+          >
+            CONCRETE
+          </button>
+
+          <button
+            class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-transparent bg-charcoal-light text-slate-light"
+            data-category="outdoor-living"
+          >
+            OUTDOOR
+          </button>
+
+          <button
+            class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-transparent bg-charcoal-light text-slate-light"
+            data-category="pools-spas"
+          >
+            POOLS
+          </button>
+
+          <button
+            class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-transparent bg-charcoal-light text-slate-light"
+            data-category="fire-features"
+          >
+            FIRE
+          </button>
+
+          <button
+            class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-transparent bg-charcoal-light text-slate-light"
+            data-category="landscaping"
+          >
+            LANDSCAPE
+          </button>
+
+          <button
+            class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-transparent bg-charcoal-light text-slate-light"
+            data-category="iron-work"
+          >
+            IRON WORK
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Gallery Section with Sidebar - Light background for rhythm -->
+    <!-- Gallery Section - Full Width -->
     <section class="section-padding bg-white border-t border-bronze/10">
-      <div class="max-w-[1400px] mx-auto px-8">
-        <!-- Sidebar + Gallery Layout -->
-        <div class="flex gap-8 items-start">
-          <!-- Sidebar Navigation - Luxury Dark -->
-          <aside class="hidden lg:block sticky top-24 w-64 shrink-0 self-start">
-            <div class="bg-charcoal border border-bronze/20 shadow-2xl p-6">
-              <h2 class="font-['Bebas_Neue'] text-2xl tracking-wider text-white mb-6 pb-3 border-b-2 border-bronze">
-                Quick Navigation
-              </h2>
-              <nav>
-                <ul class="space-y-2">
-                  <li>
-                    <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
-                      data-category="concrete"
-                      data-target="#section-concrete"
-                    >
-                      Concrete Work
-                    </button>
-                    <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="concrete">
-                      <li>
-                        <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
-                          data-target="#concrete-walkways"
-                        >
-                          Walkways
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
-                          data-target="#concrete-stairs"
-                        >
-                          Steps & Stairs
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
-                          data-target="#concrete-flatwork"
-                        >
-                          Flatwork & Patios
-                        </button>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
-                      data-category="outdoor-living"
-                      data-target="#section-outdoor-living"
-                    >
-                      Outdoor Living
-                    </button>
-                    <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="outdoor-living">
-                      <li>
-                        <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
-                          data-target="#outdoor-living-outdoor-kitchens"
-                        >
-                          Outdoor Kitchens
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
-                          data-target="#outdoor-living-covered-patios"
-                        >
-                          Covered Patios
-                        </button>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
-                      data-category="pools-spas"
-                      data-target="#section-pools-spas"
-                    >
-                      Pools & Spas
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
-                      data-category="fire-features"
-                      data-target="#section-fire-features"
-                    >
-                      Fire Features
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
-                      data-category="landscaping"
-                      data-target="#section-landscaping"
-                    >
-                      Landscaping
-                    </button>
-                    <ul class="sidebar-subcategories ml-4 mt-2 space-y-1" data-parent="landscaping">
-                      <li>
-                        <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
-                          data-target="#landscaping-turf"
-                        >
-                          Artificial Turf
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
-                          data-target="#landscaping-gardens"
-                        >
-                          Gardens
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="sidebar-subcat-link w-full text-left px-3 py-1.5 text-sm transition-all duration-300 text-slate hover:text-bronze font-light"
-                          data-target="#landscaping-water-features"
-                        >
-                          Water Features
-                        </button>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <button
-                      class="sidebar-category-link w-full text-left px-4 py-2.5 transition-all duration-300 text-slate-light hover:text-bronze font-['Bebas_Neue'] tracking-wider text-lg border-l-2 border-transparent hover:border-bronze"
-                      data-category="iron-work"
-                      data-target="#section-iron-work"
-                    >
-                      Iron Work
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </aside>
-
-          <!-- Gallery Grid -->
-          <div class="flex-1 min-w-0" id="gallery-container">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-8">
+        <!-- Gallery Grid - Full Width -->
+        <div id="gallery-container">
             <!-- Concrete Work Section -->
             <section id="section-concrete" class="mb-16 scroll-mt-24">
               <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-wider text-charcoal mb-8 pb-3 border-b-2 border-bronze">
@@ -456,31 +432,24 @@ const galleryItems = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {galleryItems.filter(item => item.category === "concrete" && item.type === "walkways").map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-category={item.category}
                         data-type={item.type || ""}
                         data-finish={item.finish || ""}
                         data-index={galleryItems.indexOf(item)}
                       >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
                             src={item.src}
                             alt={item.alt}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                             loading={index < 3 ? "eager" : "lazy"}
                           />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-4 left-4 right-4">
-                              <p class="text-white font-medium text-sm md:text-base">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
                                 {item.alt}
                               </p>
-                            </div>
-                          </div>
-                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                              </svg>
                             </div>
                           </div>
                         </div>
@@ -500,31 +469,24 @@ const galleryItems = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {galleryItems.filter(item => item.category === "concrete" && item.type === "stairs").map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-category={item.category}
                         data-type={item.type || ""}
                         data-finish={item.finish || ""}
                         data-index={galleryItems.indexOf(item)}
                       >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
                             src={item.src}
                             alt={item.alt}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                             loading="lazy"
                           />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-4 left-4 right-4">
-                              <p class="text-white font-medium text-sm md:text-base">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
                                 {item.alt}
                               </p>
-                            </div>
-                          </div>
-                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                              </svg>
                             </div>
                           </div>
                         </div>
@@ -544,31 +506,24 @@ const galleryItems = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {galleryItems.filter(item => item.category === "concrete" && item.type === "flatwork").map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-category={item.category}
                         data-type={item.type || ""}
                         data-finish={item.finish || ""}
                         data-index={galleryItems.indexOf(item)}
                       >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
                             src={item.src}
                             alt={item.alt}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                             loading="lazy"
                           />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-4 left-4 right-4">
-                              <p class="text-white font-medium text-sm md:text-base">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
                                 {item.alt}
                               </p>
-                            </div>
-                          </div>
-                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                              </svg>
                             </div>
                           </div>
                         </div>
@@ -595,31 +550,24 @@ const galleryItems = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "outdoor-kitchens").map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-category={item.category}
                         data-type={item.type || ""}
                         data-finish={item.finish || ""}
                         data-index={galleryItems.indexOf(item)}
                       >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
                             src={item.src}
                             alt={item.alt}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                             loading="lazy"
                           />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-4 left-4 right-4">
-                              <p class="text-white font-medium text-sm md:text-base">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
                                 {item.alt}
                               </p>
-                            </div>
-                          </div>
-                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                              </svg>
                             </div>
                           </div>
                         </div>
@@ -639,31 +587,24 @@ const galleryItems = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {galleryItems.filter(item => item.category === "outdoor-living" && item.type === "covered-patios").map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-category={item.category}
                         data-type={item.type || ""}
                         data-finish={item.finish || ""}
                         data-index={galleryItems.indexOf(item)}
                       >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
                             src={item.src}
                             alt={item.alt}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                             loading="lazy"
                           />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-4 left-4 right-4">
-                              <p class="text-white font-medium text-sm md:text-base">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
                                 {item.alt}
                               </p>
-                            </div>
-                          </div>
-                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                              </svg>
                             </div>
                           </div>
                         </div>
@@ -682,31 +623,24 @@ const galleryItems = [
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {galleryItems.filter(item => item.category === "pools-spas").map((item, index) => (
                   <article
-                    class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                    class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                     data-category={item.category}
                     data-type={item.type || ""}
                     data-finish={item.finish || ""}
                     data-index={galleryItems.indexOf(item)}
                   >
-                    <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                       <img
                         src={item.src}
                         alt={item.alt}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                         loading="lazy"
                       />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-4 left-4 right-4">
-                          <p class="text-white font-medium text-sm md:text-base">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 right-6">
+                          <p class="text-white font-light text-sm md:text-base tracking-wide">
                             {item.alt}
                           </p>
-                        </div>
-                      </div>
-                      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                          <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                          </svg>
                         </div>
                       </div>
                     </div>
@@ -723,31 +657,24 @@ const galleryItems = [
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {galleryItems.filter(item => item.category === "fire-features").map((item, index) => (
                   <article
-                    class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                    class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                     data-category={item.category}
                     data-type={item.type || ""}
                     data-finish={item.finish || ""}
                     data-index={galleryItems.indexOf(item)}
                   >
-                    <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                       <img
                         src={item.src}
                         alt={item.alt}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                         loading="lazy"
                       />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-4 left-4 right-4">
-                          <p class="text-white font-medium text-sm md:text-base">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 right-6">
+                          <p class="text-white font-light text-sm md:text-base tracking-wide">
                             {item.alt}
                           </p>
-                        </div>
-                      </div>
-                      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                          <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                          </svg>
                         </div>
                       </div>
                     </div>
@@ -772,31 +699,24 @@ const galleryItems = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {galleryItems.filter(item => item.category === "landscaping" && item.type === "turf").map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-category={item.category}
                         data-type={item.type || ""}
                         data-finish={item.finish || ""}
                         data-index={galleryItems.indexOf(item)}
                       >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
                             src={item.src}
                             alt={item.alt}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                             loading="lazy"
                           />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-4 left-4 right-4">
-                              <p class="text-white font-medium text-sm md:text-base">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
                                 {item.alt}
                               </p>
-                            </div>
-                          </div>
-                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                              </svg>
                             </div>
                           </div>
                         </div>
@@ -816,31 +736,24 @@ const galleryItems = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {galleryItems.filter(item => item.category === "landscaping" && item.type === "gardens").map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-category={item.category}
                         data-type={item.type || ""}
                         data-finish={item.finish || ""}
                         data-index={galleryItems.indexOf(item)}
                       >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
                             src={item.src}
                             alt={item.alt}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                             loading="lazy"
                           />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-4 left-4 right-4">
-                              <p class="text-white font-medium text-sm md:text-base">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
                                 {item.alt}
                               </p>
-                            </div>
-                          </div>
-                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                              </svg>
                             </div>
                           </div>
                         </div>
@@ -860,31 +773,24 @@ const galleryItems = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {galleryItems.filter(item => item.category === "landscaping" && item.type === "water-features").map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-category={item.category}
                         data-type={item.type || ""}
                         data-finish={item.finish || ""}
                         data-index={galleryItems.indexOf(item)}
                       >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
                             src={item.src}
                             alt={item.alt}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                             loading="lazy"
                           />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-4 left-4 right-4">
-                              <p class="text-white font-medium text-sm md:text-base">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
                                 {item.alt}
                               </p>
-                            </div>
-                          </div>
-                          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                              <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                              </svg>
                             </div>
                           </div>
                         </div>
@@ -903,31 +809,24 @@ const galleryItems = [
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {galleryItems.filter(item => item.category === "iron-work").map((item, index) => (
                   <article
-                    class="gallery-item group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                    class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                     data-category={item.category}
                     data-type={item.type || ""}
                     data-finish={item.finish || ""}
                     data-index={galleryItems.indexOf(item)}
                   >
-                    <div class="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                       <img
                         src={item.src}
                         alt={item.alt}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
                         loading="lazy"
                       />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-4 left-4 right-4">
-                          <p class="text-white font-medium text-sm md:text-base">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 right-6">
+                          <p class="text-white font-light text-sm md:text-base tracking-wide">
                             {item.alt}
                           </p>
-                        </div>
-                      </div>
-                      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="bg-white/90 rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                          <svg class="w-6 h-6 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                          </svg>
                         </div>
                       </div>
                     </div>
@@ -1071,56 +970,133 @@ const galleryItems = [
 
 <script>
   // Navigation elements
-  const sidebarCategoryLinks = document.querySelectorAll(".sidebar-category-link");
-  const sidebarSubcatLinks = document.querySelectorAll(".sidebar-subcat-link");
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const subcatBtns = document.querySelectorAll(".subcat-btn");
   const backToTopBtn = document.getElementById("back-to-top");
-  const galleryItems = document.querySelectorAll(".gallery-item");
+  const sections = document.querySelectorAll("section[id^='section-']");
 
-  // Smooth scroll function with offset for sticky header
-  function smoothScrollTo(targetId) {
-    const target = document.querySelector(targetId);
-    if (target) {
-      const headerOffset = 100;
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-      window.scrollTo({ top: targetPosition, behavior: "smooth" });
+  let currentFilter = "all";
+
+  // TRUE FILTERING - Show/Hide Sections
+  function filterGallery(category: string, subcategory: string | null = null) {
+    currentFilter = category;
+
+    sections.forEach((section) => {
+      const sectionId = section.id;
+      const sectionCategory = sectionId.replace("section-", "");
+
+      if (category === "all") {
+        // Show all sections with fade-in
+        (section as HTMLElement).style.display = "block";
+        setTimeout(() => {
+          section.classList.remove("opacity-0");
+          section.classList.add("opacity-100");
+        }, 10);
+      } else if (sectionCategory === category) {
+        // Show matching section
+        (section as HTMLElement).style.display = "block";
+        setTimeout(() => {
+          section.classList.remove("opacity-0");
+          section.classList.add("opacity-100");
+        }, 10);
+
+        // If subcategory specified, scroll to it
+        if (subcategory) {
+          setTimeout(() => {
+            const subcatElement = document.getElementById(
+              `${category}-${subcategory}`
+            );
+            if (subcatElement) {
+              const headerOffset = 200;
+              const targetPosition =
+                subcatElement.getBoundingClientRect().top +
+                window.pageYOffset -
+                headerOffset;
+              window.scrollTo({ top: targetPosition, behavior: "smooth" });
+            }
+          }, 300);
+        }
+      } else {
+        // Hide non-matching sections with fade-out
+        section.classList.remove("opacity-100");
+        section.classList.add("opacity-0");
+        setTimeout(() => {
+          (section as HTMLElement).style.display = "none";
+        }, 300);
+      }
+    });
+
+    // Scroll to top when filtering (unless subcategory click)
+    if (!subcategory) {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
     }
   }
 
-  // Sidebar navigation - smooth scroll
-  sidebarCategoryLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      const targetId = link.getAttribute("data-target");
-      if (targetId) smoothScrollTo(targetId);
+  // Update active button states
+  function updateActiveButton(category: string) {
+    filterBtns.forEach((btn) => {
+      const btnCategory = btn.getAttribute("data-category");
+      const bronzeLine = btn.querySelector("span");
+
+      // Reset all buttons
+      btn.classList.remove(
+        "border-bronze",
+        "bg-bronze/10",
+        "text-white",
+        "border-bronze/30"
+      );
+      btn.classList.add("border-transparent", "text-slate-light");
+
+      if (bronzeLine) {
+        bronzeLine.classList.remove("scale-x-100");
+        bronzeLine.classList.add("scale-x-0");
+      }
+
+      // Activate matching button
+      if (btnCategory === category) {
+        btn.classList.remove("border-transparent", "text-slate-light");
+        btn.classList.add("text-white");
+
+        // Desktop - border and underline
+        if (window.innerWidth >= 768) {
+          btn.classList.add("border-bronze/30");
+          if (category === "all") {
+            btn.classList.add("border-bronze", "bg-bronze/10");
+          }
+          if (bronzeLine) {
+            bronzeLine.classList.remove("scale-x-0");
+            bronzeLine.classList.add("scale-x-100");
+          }
+        } else {
+          // Mobile - bronze border
+          btn.classList.add("border-bronze", "bg-bronze/10");
+        }
+      }
     });
-  });
+  }
 
-  sidebarSubcatLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      const targetId = link.getAttribute("data-target");
-      if (targetId) smoothScrollTo(targetId);
-    });
-  });
-
-  // Mobile filter buttons
-  const mobileFilterBtns = document.querySelectorAll(".mobile-filter-btn");
-
-  mobileFilterBtns.forEach((btn) => {
+  // Main category button clicks
+  filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const targetId = btn.getAttribute("data-target");
+      const category = btn.getAttribute("data-category");
+      if (category) {
+        filterGallery(category);
+        updateActiveButton(category);
+      }
+    });
+  });
 
-      // Update active state - luxury tab style
-      mobileFilterBtns.forEach((b) => {
-        b.classList.remove("border-bronze", "bg-charcoal-light", "text-white");
-        b.classList.add("border-transparent", "bg-charcoal", "text-slate-light");
-      });
-      btn.classList.remove("border-transparent", "bg-charcoal", "text-slate-light");
-      btn.classList.add("border-bronze", "bg-charcoal-light", "text-white");
+  // Subcategory button clicks
+  subcatBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.getAttribute("data-category");
+      const subcategory = btn.getAttribute("data-subcategory");
 
-      // Scroll to section or top
-      if (targetId === "all") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (targetId) {
-        smoothScrollTo(targetId);
+      if (category && subcategory) {
+        filterGallery(category, subcategory);
+        updateActiveButton(category);
       }
     });
   });
@@ -1133,7 +1109,7 @@ const galleryItems = [
         backToTopBtn.classList.add("opacity-100");
       } else {
         backToTopBtn.classList.add("opacity-0", "pointer-events-none");
-        backToTopBtn.classList.remove("opacity-100");
+        backToTopBtn.classList.remove("opacity-0");
       }
     });
 
@@ -1142,58 +1118,22 @@ const galleryItems = [
     });
   }
 
-  // SCROLL SPY - Highlight active section in sidebar
-  const sections = document.querySelectorAll("section[id^='section-']");
-
-  function updateActiveSection() {
-    const scrollPosition = window.scrollY + 200; // Offset for better UX
-
-    let currentSection = "";
-
-    sections.forEach((section) => {
-      const sectionTop = (section as HTMLElement).offsetTop;
-      const sectionHeight = (section as HTMLElement).offsetHeight;
-
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        currentSection = section.id;
-      }
-    });
-
-    // Update sidebar links
-    sidebarCategoryLinks.forEach((link) => {
-      const target = link.getAttribute("data-target");
-
-      if (target === `#${currentSection}`) {
-        // Add active state - Bronze highlight
-        link.classList.add("text-bronze", "border-bronze");
-        link.classList.remove("text-slate-light", "border-transparent");
-      } else {
-        // Remove active state
-        link.classList.remove("text-bronze", "border-bronze");
-        link.classList.add("text-slate-light", "border-transparent");
-      }
-    });
-  }
-
-  // Run on scroll
-  window.addEventListener("scroll", updateActiveSection);
+  // Initialize - add transition classes
+  sections.forEach((section) => {
+    section.classList.add("transition-opacity", "duration-300", "opacity-100");
+  });
 
   // Run on page load (handles hash navigation from services section)
   window.addEventListener("load", () => {
     const hash = window.location.hash;
     if (hash) {
-      // Scroll to the hash section
-      smoothScrollTo(hash);
-      // Update active state after a short delay to ensure scroll completes
-      setTimeout(updateActiveSection, 100);
-    } else {
-      updateActiveSection();
+      // Extract category from hash (e.g., #section-concrete -> concrete)
+      const category = hash.replace("#section-", "");
+      if (category) {
+        filterGallery(category);
+        updateActiveButton(category);
+      }
     }
-  });
-
-  // Also update when hash changes (browser back/forward)
-  window.addEventListener("hashchange", () => {
-    updateActiveSection();
   });
 
 
