@@ -8,7 +8,7 @@ import collageImg from '../../public/img/collage.png';
   <div class="container max-w-7xl mx-auto px-8 md:px-12">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 lg:gap-24 items-center">
       <!-- Image -->
-      <div class="about-us-img-box flex justify-center md:justify-start">
+      <div class="about-us-img-box flex justify-center md:justify-start scroll-reveal opacity-0" style="animation-delay: 0.1s">
         <Image
           src={collageImg}
           alt="Photos showing concrete and landscape work"
@@ -20,22 +20,23 @@ import collageImg from '../../public/img/collage.png';
       <!-- Text Content - Clean & Professional -->
       <div class="about-us-text-box text-center md:text-left">
         <!-- Heading - Bebas Neue for consistency -->
-        <h2 class="heading-secondary text-[#1A1A1A] font-semibold leading-tight mb-6 tracking-wide
-                   text-4xl md:text-5xl lg:text-6xl">
+        <h2 class="heading-secondary text-charcoal font-semibold leading-tight mb-6 tracking-wide
+                   text-4xl md:text-5xl lg:text-6xl
+                   scroll-reveal opacity-0" style="animation-delay: 0.2s">
           TRUSTED EXPERTS IN CONCRETE & LANDSCAPING
         </h2>
 
         <!-- Thin divider line -->
-        <div class="w-16 h-[2px] bg-[#B8860B] mb-8 mx-auto md:mx-0"></div>
+        <div class="w-16 h-0.5 bg-bronze mb-8 mx-auto md:mx-0 scroll-reveal opacity-0" style="animation-delay: 0.35s"></div>
 
         <!-- Body Copy - Generous line height for readability -->
-        <p class="about-us-description text-[#4A5568] text-base md:text-lg leading-relaxed mb-6">
+        <p class="about-us-description text-slate text-base md:text-lg leading-relaxed mb-6 scroll-reveal opacity-0" style="animation-delay: 0.5s">
           With over 15 years of experience, Rocky Concrete is your trusted
           partner for high-quality concrete and landscaping services in
           Bakersfield and surrounding areas.
         </p>
 
-        <p class="about-us-description text-[#4A5568] text-base md:text-lg leading-relaxed">
+        <p class="about-us-description text-slate text-base md:text-lg leading-relaxed scroll-reveal opacity-0" style="animation-delay: 0.65s">
           As a family-operated business, we prioritize customer satisfaction,
           delivering exceptional results in every project. From driveways and
           patios to custom outdoor kitchens, fire pits, and comprehensive
@@ -46,3 +47,48 @@ import collageImg from '../../public/img/collage.png';
     </div>
   </div>
 </section>
+
+<!-- SCROLL ANIMATION SCRIPT -->
+<script>
+  // Intersection Observer for scroll-triggered animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-in-up');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all scroll-reveal elements
+  document.querySelectorAll('.about-us .scroll-reveal').forEach((el) => {
+    observer.observe(el);
+  });
+</script>
+
+<style>
+  /* Scroll-triggered fade-in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .scroll-reveal {
+    will-change: transform, opacity;
+  }
+</style>

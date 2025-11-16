@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import heroImg from '../../public/img/hero/hero-img.jpg';
 ---
 
-<section class="section-hero relative h-screen overflow-hidden bg-[#0A0A0A]">
+<section class="section-hero relative h-screen overflow-hidden bg-black-pure">
   <!-- Background Image with Astro optimization -->
   <Image
     src={heroImg}
@@ -14,7 +14,7 @@ import heroImg from '../../public/img/hero/hero-img.jpg';
   />
 
   <!-- DRAMATIC Dark Overlay - Luxury Industrial -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
+  <div class="absolute inset-0 bg-linear-to-b from-black/70 via-black/60 to-black/80"></div>
 
   <!-- Subtle Concrete Texture Overlay -->
   <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"></div>
@@ -24,15 +24,16 @@ import heroImg from '../../public/img/hero/hero-img.jpg';
     <!-- Main Heading - THIN + LARGE = Luxury (optimized spacing) -->
     <h1 class="heading-primary text-white font-light leading-[1.1] mb-4 md:mb-6 tracking-[0.04em]
                 text-5xl sm:text-6xl md:text-7xl lg:text-8xl
-                [text-shadow:_0_4px_24px_rgb(0_0_0_/_70%)]">
+                [text-shadow:0_4px_24px_rgb(0_0_0/70%)]
+                hero-animate opacity-0" style="animation-delay: 0.2s">
       TRANSFORMING<br />OUTDOOR SPACES
     </h1>
 
     <!-- Bronze accent line - Tight with heading (they're one unit) -->
-    <div class="w-24 h-[2px] bg-[#B8860B] mx-auto mb-10 md:mb-12"></div>
+    <div class="w-24 h-0.5 bg-bronze mx-auto mb-10 md:mb-12 hero-animate opacity-0" style="animation-delay: 0.4s"></div>
 
     <!-- Subheading - Expanded with location context -->
-    <p class="heading-description text-[#E5E5E5] text-lg md:text-xl lg:text-2xl font-light leading-relaxed mb-10 md:mb-12 max-w-3xl mx-auto tracking-wide">
+    <p class="heading-description text-white-soft text-lg md:text-xl lg:text-2xl font-light leading-relaxed mb-10 md:mb-12 max-w-3xl mx-auto tracking-wide hero-animate opacity-0" style="animation-delay: 0.6s">
       Expert concrete and landscape construction serving Bakersfield and surrounding areas
     </p>
 
@@ -40,16 +41,50 @@ import heroImg from '../../public/img/hero/hero-img.jpg';
     <a
       href="#cta"
       class="btn inline-block text-sm md:text-base font-bold uppercase tracking-widest
-             bg-white text-[#0A0A0A] no-underline
+             bg-white text-black-pure no-underline
              py-4 px-10 md:py-5 md:px-12
              border-2 border-white
              transition-all duration-300
-             hover:bg-transparent hover:text-white hover:border-[#B8860B]
+             hover:bg-transparent hover:text-white hover:border-bronze
              focus-visible:bg-transparent focus-visible:text-white focus-visible:outline-none
-             shadow-[0_8px_30px_rgb(0_0_0_/_30%)]
-             hover:shadow-[0_8px_40px_rgb(184_134_11_/_20%)]"
+             shadow-[0_8px_30px_rgb(0_0_0/30%)]
+             hover:shadow-[0_8px_40px_rgb(184_134_11/20%)]
+             hero-animate opacity-0" style="animation-delay: 0.8s"
     >
       Get Free Estimate
     </a>
   </div>
 </section>
+
+<!-- HERO PAGE-LOAD ANIMATION SCRIPT -->
+<script>
+  // Trigger animations on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroElements = document.querySelectorAll('.hero-animate');
+    heroElements.forEach(el => {
+      el.classList.add('animate-fade-in-up');
+    });
+  });
+</script>
+
+<style>
+  /* Page-load fade-in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-animate {
+    will-change: transform, opacity;
+  }
+</style>
