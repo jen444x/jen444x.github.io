@@ -9,13 +9,14 @@
   --color-primary-tint-2: #fae5d3;
   --color-primary-shade-dark: #45260a;
 
-  /* Custom fonts */
-  --font-rubik: 'Rubik', sans-serif;
-  --font-quicksand: 'Quicksand', sans-serif;
+  /* Professional Fonts */
+  --font-heading: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 /* Base body styles */
 body {
+  font-family: var(--font-body);
   color: #444;
 }
 
