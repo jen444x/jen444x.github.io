@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import concreteImg from '../../public/img/show-case/concrete/showcase9.jpeg';
 import outdoorLivingImg from '../../public/img/show-case/backyard-remodels/showcase11.jpeg';
 import poolsImg from '../../public/img/show-case/backyard-remodels/showcase4.jpeg';
+import fireFeaturesImg from '../../public/img/show-case/backyard-remodels/showcase8.jpeg';
 import landscapingImg from '../../public/img/show-case/concrete/showcase10.JPEG';
 import ironWorkImg from '../../public/img/show-case/iron-work/IMG_8394.jpeg';
 ---
@@ -60,7 +61,7 @@ import ironWorkImg from '../../public/img/show-case/iron-work/IMG_8394.jpeg';
             OUTDOOR LIVING
           </h3>
           <p class="text-[#D1D1D1] text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-            Kitchens, fire features & covered patios
+            Outdoor kitchens & covered patios
           </p>
         </div>
       </a>
@@ -86,8 +87,29 @@ import ironWorkImg from '../../public/img/show-case/iron-work/IMG_8394.jpeg';
         </div>
       </a>
 
-      <!-- Service 4: Landscaping -->
-      <a href="/gallery#section-landscaping" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block h-[320px]" style="animation-delay: 0.4s">
+      <!-- Service 4: Fire Features -->
+      <a href="/gallery#section-fire-features" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block h-[320px]" style="animation-delay: 0.4s">
+        <div class="absolute inset-0">
+          <Image
+            src={fireFeaturesImg}
+            alt="Concrete fire pit with seating"
+            class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+            quality={85}
+          />
+          <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
+        </div>
+        <div class="relative z-10 p-8 h-full flex flex-col justify-end">
+          <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
+            FIRE FEATURES
+          </h3>
+          <p class="text-[#D1D1D1] text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+            Fire pits, fireplaces & chimneys
+          </p>
+        </div>
+      </a>
+
+      <!-- Service 5: Landscaping -->
+      <a href="/gallery#section-landscaping" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block h-[320px]" style="animation-delay: 0.5s">
         <div class="absolute inset-0">
           <Image
             src={landscapingImg}
@@ -107,8 +129,8 @@ import ironWorkImg from '../../public/img/show-case/iron-work/IMG_8394.jpeg';
         </div>
       </a>
 
-      <!-- Service 5: Iron Work -->
-      <a href="/gallery#section-iron-work" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block h-[320px]" style="animation-delay: 0.5s">
+      <!-- Service 6: Iron Work -->
+      <a href="/gallery#section-iron-work" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block h-[320px]" style="animation-delay: 0.6s">
         <div class="absolute inset-0">
           <Image
             src={ironWorkImg}
