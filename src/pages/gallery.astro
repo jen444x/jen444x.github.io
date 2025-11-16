@@ -216,18 +216,18 @@ const galleryItems = [
       <!-- Subtle texture overlay -->
       <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"></div>
 
-      <div class="container relative z-10 max-w-5xl mx-auto px-6 md:px-12">
+      <div class="container relative z-20 max-w-5xl mx-auto px-6 md:px-12">
         <div class="text-center hero-content">
           <!-- Main Heading - Bebas Neue Luxury -->
-          <h1 class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light hero-animate opacity-0" style="animation-delay: 0.2s; text-shadow: 0 4px 24px rgb(0 0 0 / 70%);">
+          <h1 class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light" style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%);">
             PROJECT SHOWCASE
           </h1>
 
           <!-- Bronze accent line -->
-          <div class="bronze-divider mx-auto mb-8 hero-animate opacity-0" style="animation-delay: 0.4s"></div>
+          <div class="w-20 h-0.5 bg-bronze mx-auto mb-8"></div>
 
           <!-- Subheading -->
-          <p class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed hero-animate opacity-0" style="animation-delay: 0.6s">
+          <p class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed">
             Concrete and landscaping projects across Bakersfield and surrounding areas
           </p>
         </div>
@@ -249,15 +249,6 @@ const galleryItems = [
 
           <!-- Filter Buttons Container -->
           <div class="flex items-center justify-center gap-2 flex-1">
-          <!-- ALL PROJECTS -->
-          <button
-            class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-white relative group bg-bronze/10 border-2 border-bronze"
-            data-category="all"
-          >
-            ALL PROJECTS
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300"></span>
-          </button>
-
           <!-- CONCRETE WORK - Has Subcategories -->
           <div class="relative group">
             <button
@@ -367,13 +358,6 @@ const galleryItems = [
 
         <!-- Mobile: Grid Layout - Bigger -->
         <div class="grid grid-cols-2 gap-1 md:hidden">
-          <button
-            class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-bronze bg-bronze/10 text-white"
-            data-category="all"
-          >
-            ALL
-          </button>
-
           <button
             class="filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 border-transparent bg-charcoal-light text-slate-light"
             data-category="concrete"
@@ -993,14 +977,7 @@ const galleryItems = [
       const sectionId = section.id;
       const sectionCategory = sectionId.replace("section-", "");
 
-      if (category === "all") {
-        // Show all sections with fade-in
-        (section as HTMLElement).style.display = "block";
-        setTimeout(() => {
-          section.classList.remove("opacity-0");
-          section.classList.add("opacity-100");
-        }, 10);
-      } else if (sectionCategory === category) {
+      if (sectionCategory === category) {
         // Show matching section
         (section as HTMLElement).style.display = "block";
         setTimeout(() => {
@@ -1070,9 +1047,6 @@ const galleryItems = [
         // Desktop - border and underline
         if (window.innerWidth >= 768) {
           btn.classList.add("border-bronze/30");
-          if (category === "all") {
-            btn.classList.add("border-bronze", "bg-bronze/10");
-          }
           if (bronzeLine) {
             bronzeLine.classList.remove("scale-x-0");
             bronzeLine.classList.add("scale-x-100");
@@ -1311,25 +1285,7 @@ const galleryItems = [
 
   // Initialize - removed filterGallery as it's not needed
 
-  // Hero page-load animations - Run immediately and on load
-  function triggerHeroAnimations() {
-    const heroElements = document.querySelectorAll('.hero-animate');
-    console.log('Hero elements found:', heroElements.length);
-    heroElements.forEach((el, index) => {
-      setTimeout(() => {
-        el.classList.remove('opacity-0');
-        el.classList.add('animate-fade-in-up');
-      }, index * 200); // Stagger the animations
-    });
-  }
-
-  // Run on DOMContentLoaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', triggerHeroAnimations);
-  } else {
-    // DOM already loaded, run immediately
-    triggerHeroAnimations();
-  }
+  // Hero no longer needs animations - text shows immediately
 </script>
 
 <style>
