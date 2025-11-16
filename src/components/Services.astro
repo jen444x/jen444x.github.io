@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-import menConcreteImg from '../../public/img/services/men-concrete.jpg';
-import landscapeImg from '../../public/img/services/landscape-home3.jpeg';
-import outdoorKitchenImg from '../../public/img/services/outdoor-kitchen.JPEG';
-import firepitImg from '../../public/img/services/firepit.jpg';
-import poolImg from '../../public/img/services/pool.jpg';
-import additionalImg from '../../public/img/services/additional.jpeg';
+// Import images from gallery sections for visual continuity
+import concreteImg from '../../public/img/show-case/concrete/showcase9.jpeg';
+import outdoorLivingImg from '../../public/img/show-case/backyard-remodels/showcase11.jpeg';
+import poolsImg from '../../public/img/show-case/backyard-remodels/showcase4.jpeg';
+import landscapingImg from '../../public/img/show-case/concrete/showcase10.JPEG';
+import ironWorkImg from '../../public/img/show-case/iron-work/IMG_8394.jpeg';
 ---
 
 <!-- DARK Section - Luxury Showcase with BENTO GRID + SCROLL ANIMATIONS -->
@@ -27,8 +27,8 @@ import additionalImg from '../../public/img/services/additional.jpeg';
       <a href="/gallery#section-concrete" class="scroll-reveal opacity-0 lg:col-span-2 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.1s">
         <div class="absolute inset-0">
           <Image
-            src={menConcreteImg}
-            alt="Worker smoothing freshly poured concrete"
+            src={concreteImg}
+            alt="Red stamped concrete patio"
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
@@ -44,12 +44,12 @@ import additionalImg from '../../public/img/services/additional.jpeg';
         </div>
       </a>
 
-      <!-- Service 2: Landscaping - Standard -->
-      <a href="/gallery#section-landscaping" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.2s">
+      <!-- Service 2: Outdoor Living - Standard -->
+      <a href="/gallery#section-outdoor-living" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.2s">
         <div class="absolute inset-0">
           <Image
-            src={landscapeImg}
-            alt="Professional landscaping"
+            src={outdoorLivingImg}
+            alt="Covered outdoor kitchen"
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
@@ -57,41 +57,20 @@ import additionalImg from '../../public/img/services/additional.jpeg';
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
-            LANDSCAPING
+            OUTDOOR LIVING
           </h3>
           <p class="text-[#D1D1D1] text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-            Custom design and transformations
+            Kitchens, fire features & covered patios
           </p>
         </div>
       </a>
 
-      <!-- Service 3: Outdoor Kitchens - Standard -->
-      <a href="/gallery#section-outdoor-living" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.3s">
+      <!-- Service 3: Pools & Spas - FEATURED (2 rows tall) -->
+      <a href="/gallery#section-pools-spas" class="scroll-reveal opacity-0 lg:row-span-2 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.3s">
         <div class="absolute inset-0">
           <Image
-            src={outdoorKitchenImg}
-            alt="Outdoor kitchen"
-            class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-            quality={85}
-          />
-          <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
-        </div>
-        <div class="relative z-10 p-8 h-full flex flex-col justify-end">
-          <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
-            OUTDOOR KITCHENS
-          </h3>
-          <p class="text-[#D1D1D1] text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-            Premium entertainment spaces
-          </p>
-        </div>
-      </a>
-
-      <!-- Service 4: Pools - FEATURED (2 rows tall) -->
-      <a href="/gallery#section-pools-spas" class="scroll-reveal opacity-0 lg:row-span-2 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.4s">
-        <div class="absolute inset-0">
-          <Image
-            src={poolImg}
-            alt="Pool remodel"
+            src={poolsImg}
+            alt="Complete pool remodeling"
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
@@ -107,12 +86,12 @@ import additionalImg from '../../public/img/services/additional.jpeg';
         </div>
       </a>
 
-      <!-- Service 5: Fire Pits - Standard -->
-      <a href="/gallery#section-outdoor-living" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.5s">
+      <!-- Service 4: Landscaping - Standard -->
+      <a href="/gallery#section-landscaping" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.4s">
         <div class="absolute inset-0">
           <Image
-            src={firepitImg}
-            alt="Fire pit"
+            src={landscapingImg}
+            alt="Artificial turf and garden installation"
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
@@ -120,20 +99,20 @@ import additionalImg from '../../public/img/services/additional.jpeg';
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
-            FIRE FEATURES
+            LANDSCAPING
           </h3>
           <p class="text-[#D1D1D1] text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-            Custom pits and fireplaces
+            Turf, gardens & water features
           </p>
         </div>
       </a>
 
-      <!-- Service 6: Additional - Standard -->
-      <a href="/gallery" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.6s">
+      <!-- Service 5: Iron Work - Standard -->
+      <a href="/gallery#section-iron-work" class="scroll-reveal opacity-0 group relative overflow-hidden bg-linear-to-br from-charcoal to-black-pure border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block" style="animation-delay: 0.5s">
         <div class="absolute inset-0">
           <Image
-            src={additionalImg}
-            alt="Additional services"
+            src={ironWorkImg}
+            alt="Decorative iron archway"
             class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
             quality={85}
           />
@@ -141,10 +120,10 @@ import additionalImg from '../../public/img/services/additional.jpeg';
         </div>
         <div class="relative z-10 p-8 h-full flex flex-col justify-end">
           <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">
-            SPECIALTY WORK
+            IRON WORK
           </h3>
           <p class="text-[#D1D1D1] text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-            Retaining walls & features
+            Gates, railings & decorative metalwork
           </p>
         </div>
       </a>
