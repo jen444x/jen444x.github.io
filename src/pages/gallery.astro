@@ -235,13 +235,20 @@ const galleryItems = [
     </section>
 
     <!-- Sticky Horizontal Filter Bar - Luxury Industrial BOLD -->
-    <div id="filter-bar" class="sticky top-20 md:top-24 z-40 bg-charcoal shadow-2xl transition-all duration-300">
+    <div id="filter-bar" class="sticky top-20 md:top-24 z-40 bg-charcoal shadow-2xl transition-all duration-500">
       <!-- Bronze top accent line -->
       <div class="h-1 bg-gradient-to-r from-transparent via-bronze to-transparent"></div>
 
       <div class="max-w-[1400px] mx-auto px-6 md:px-8 py-2 md:py-3">
-        <!-- Desktop: Horizontal Flex Layout - BIGGER & BOLDER -->
-        <div class="hidden md:flex items-center justify-center gap-2">
+        <!-- Desktop: Horizontal Flex Layout with Logo -->
+        <div class="hidden md:flex items-center justify-between gap-4">
+          <!-- Logo - Hidden initially, shows on scroll -->
+          <a href="/" id="filter-bar-logo" class="opacity-0 pointer-events-none transition-all duration-500 shrink-0">
+            <img src="/img/Background.png" alt="Rocky Concrete Logo" class="h-12 w-auto" />
+          </a>
+
+          <!-- Filter Buttons Container -->
+          <div class="flex items-center justify-center gap-2 flex-1">
           <!-- ALL PROJECTS -->
           <button
             class="filter-btn px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 text-white relative group bg-bronze/10 border-2 border-bronze"
@@ -355,6 +362,7 @@ const galleryItems = [
             IRON WORK
             <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
           </button>
+          </div>
         </div>
 
         <!-- Mobile: Grid Layout - Bigger -->
@@ -1123,6 +1131,68 @@ const galleryItems = [
     section.classList.add("transition-opacity", "duration-300", "opacity-100");
   });
 
+  // HIDE HEADER + SHOW LOGO IN FILTER BAR ON SCROLL
+  const header = document.querySelector("header");
+  const filterBar = document.getElementById("filter-bar");
+  const filterBarLogo = document.getElementById("filter-bar-logo");
+  let lastScrollY = 0;
+  let headerHidden = false;
+
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+
+    // When scrolled down past 150px
+    if (scrollY > 150 && !headerHidden) {
+      // Hide header
+      if (header) {
+        header.style.transform = "translateY(-100%)";
+        header.style.opacity = "0";
+      }
+
+      // Show logo in filter bar
+      if (filterBarLogo) {
+        filterBarLogo.classList.remove("opacity-0", "pointer-events-none");
+        filterBarLogo.classList.add("opacity-100");
+      }
+
+      // Move filter bar to top
+      if (filterBar) {
+        filterBar.style.top = "0";
+      }
+
+      headerHidden = true;
+    }
+    // When scrolled back to top
+    else if (scrollY <= 150 && headerHidden) {
+      // Show header
+      if (header) {
+        header.style.transform = "translateY(0)";
+        header.style.opacity = "1";
+      }
+
+      // Hide logo in filter bar
+      if (filterBarLogo) {
+        filterBarLogo.classList.remove("opacity-100");
+        filterBarLogo.classList.add("opacity-0", "pointer-events-none");
+      }
+
+      // Move filter bar back down
+      if (filterBar) {
+        const isMobile = window.innerWidth < 768;
+        filterBar.style.top = isMobile ? "5rem" : "6rem"; // top-20 md:top-24
+      }
+
+      headerHidden = false;
+    }
+
+    lastScrollY = scrollY;
+  });
+
+  // Make sure header has transition
+  if (header) {
+    header.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+  }
+
   // Run on page load (handles hash navigation from services section)
   window.addEventListener("load", () => {
     const hash = window.location.hash;
@@ -1241,13 +1311,25 @@ const galleryItems = [
 
   // Initialize - removed filterGallery as it's not needed
 
-  // Hero page-load animations
-  document.addEventListener('DOMContentLoaded', () => {
+  // Hero page-load animations - Run immediately and on load
+  function triggerHeroAnimations() {
     const heroElements = document.querySelectorAll('.hero-animate');
-    heroElements.forEach(el => {
-      el.classList.add('animate-fade-in-up');
+    console.log('Hero elements found:', heroElements.length);
+    heroElements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.remove('opacity-0');
+        el.classList.add('animate-fade-in-up');
+      }, index * 200); // Stagger the animations
     });
-  });
+  }
+
+  // Run on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', triggerHeroAnimations);
+  } else {
+    // DOM already loaded, run immediately
+    triggerHeroAnimations();
+  }
 </script>
 
 <style>
