@@ -125,21 +125,43 @@ const subcategories = categorySubcategories[category as string] || [];
 
           <!-- Category Navigation Buttons -->
           <div class="flex items-center justify-start gap-2 flex-1 ml-4">
-            <a
-              href="/gallery/concrete"
-              class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
-                category === 'concrete'
-                  ? 'text-white border-bronze/30'
-                  : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
-              }`}
-            >
-              CONCRETE WORK
-              <span
-                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-                  category === 'concrete' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+            <!-- CONCRETE WORK - Has subcategories, always show dropdown -->
+            <div class="relative group">
+              <button
+                class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
+                  category === 'concrete'
+                    ? 'text-white border-bronze/30'
+                    : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
                 }`}
-              ></span>
-            </a>
+              >
+                CONCRETE WORK
+                <span
+                  class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+                    category === 'concrete' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
+                ></span>
+              </button>
+              <div class="absolute top-full left-0 mt-2 bg-charcoal-light border-2 border-bronze/20 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[240px] z-50">
+                <a
+                  href="/gallery/concrete#concrete-walkways"
+                  class="block w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                >
+                  Walkways
+                </a>
+                <a
+                  href="/gallery/concrete#concrete-stairs"
+                  class="block w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                >
+                  Steps & Stairs
+                </a>
+                <a
+                  href="/gallery/concrete#concrete-flatwork"
+                  class="block w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                >
+                  Flatwork & Patios
+                </a>
+              </div>
+            </div>
 
             <a
               href="/gallery/outdoor-kitchens"
@@ -205,49 +227,9 @@ const subcategories = categorySubcategories[category as string] || [];
               ></span>
             </a>
 
-            <!-- LANDSCAPING - Has subcategories, show dropdown if current page -->
-            {category === 'landscaping' && subcategories.length > 0 ? (
-              <div class="relative group">
-                <button
-                  class="filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 text-white border-bronze/30"
-                >
-                  LANDSCAPING
-                  <svg
-                    class="inline-block w-4 h-4 ml-2 transition-transform group-hover:rotate-180"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-100 transition-transform duration-300"></span>
-                </button>
-                <div class="absolute top-full left-0 mt-2 bg-charcoal-light border-2 border-bronze/20 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[240px] z-50">
-                  <button
-                    class="subcat-scroll-btn cursor-pointer w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
-                    data-target="landscaping-turf"
-                  >
-                    Artificial Turf
-                  </button>
-                  <button
-                    class="subcat-scroll-btn cursor-pointer w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
-                    data-target="landscaping-gardens"
-                  >
-                    Gardens
-                  </button>
-                  <button
-                    class="subcat-scroll-btn cursor-pointer w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
-                    data-target="landscaping-water-features"
-                  >
-                    Water Features
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <a
-                href="/gallery/landscaping"
+            <!-- LANDSCAPING - Has subcategories, always show dropdown -->
+            <div class="relative group">
+              <button
                 class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
                   category === 'landscaping'
                     ? 'text-white border-bronze/30'
@@ -260,8 +242,28 @@ const subcategories = categorySubcategories[category as string] || [];
                     category === 'landscaping' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                   }`}
                 ></span>
-              </a>
-            )}
+              </button>
+              <div class="absolute top-full left-0 mt-2 bg-charcoal-light border-2 border-bronze/20 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[240px] z-50">
+                <a
+                  href="/gallery/landscaping#landscaping-turf"
+                  class="block w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                >
+                  Artificial Turf
+                </a>
+                <a
+                  href="/gallery/landscaping#landscaping-gardens"
+                  class="block w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                >
+                  Gardens
+                </a>
+                <a
+                  href="/gallery/landscaping#landscaping-water-features"
+                  class="block w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                >
+                  Water Features
+                </a>
+              </div>
+            </div>
 
             <a
               href="/gallery/ironwork"
