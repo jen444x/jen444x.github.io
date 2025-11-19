@@ -868,6 +868,9 @@ const galleryItems = [
   <!-- Lightbox Modal -->
   <div
     id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Image gallery lightbox"
     class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300"
   >
     <button
@@ -941,8 +944,8 @@ const galleryItems = [
     <div
       class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-center"
     >
-      <p id="lightbox-caption" class="text-lg font-medium mb-2"></p>
-      <p id="lightbox-counter" class="text-sm text-gray-300"></p>
+      <p id="lightbox-caption" class="text-lg font-light mb-2"></p>
+      <p id="lightbox-counter" class="text-sm text-slate-light"></p>
     </div>
   </div>
 
@@ -961,13 +964,18 @@ const galleryItems = [
 </Layout>
 
 <script>
+  // Constants
+  const SCROLL_THRESHOLD_HEADER = 150;
+  const SCROLL_THRESHOLD_BACK_TO_TOP = 300;
+  const HEADER_OFFSET = 120;
+  const MOBILE_BREAKPOINT = 768;
+  const LIGHTBOX_TRANSITION_DELAY = 10;
+  const LIGHTBOX_CLOSE_DELAY = 300;
+
   // Navigation elements
   const filterBtns = document.querySelectorAll(".filter-btn");
   const subcatBtns = document.querySelectorAll(".subcat-btn");
   const backToTopBtn = document.getElementById("back-to-top");
-  const sections = document.querySelectorAll("section[id^='section-']");
-
-  let currentFilter = "all";
 
   // SMOOTH SCROLL TO SECTIONS (No filtering - show all work)
   function scrollToSection(category: string, subcategory: string | null = null) {
@@ -980,8 +988,7 @@ const galleryItems = [
 
     const target = document.querySelector(targetId);
     if (target) {
-      const headerOffset = 120; // Account for sticky filter bar
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
       window.scrollTo({ top: targetPosition, behavior: "smooth" });
     }
   }
@@ -1012,7 +1019,7 @@ const galleryItems = [
         btn.classList.add("text-white");
 
         // Desktop - border and underline
-        if (window.innerWidth >= 768) {
+        if (window.innerWidth >= MOBILE_BREAKPOINT) {
           btn.classList.add("border-bronze/30");
           if (bronzeLine) {
             bronzeLine.classList.remove("scale-x-0");
@@ -1050,37 +1057,29 @@ const galleryItems = [
     });
   });
 
-  // Back to top button
-  if (backToTopBtn) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
+  // Header and filter bar elements
+  const header = document.querySelector("header");
+  const filterBar = document.getElementById("filter-bar");
+  const filterBarLogo = document.getElementById("filter-bar-logo");
+  let headerHidden = false;
+
+  // Combined scroll handler for better performance
+  function handleScroll() {
+    const scrollY = window.scrollY;
+
+    // Back to top button visibility
+    if (backToTopBtn) {
+      if (scrollY > SCROLL_THRESHOLD_BACK_TO_TOP) {
         backToTopBtn.classList.remove("opacity-0", "pointer-events-none");
         backToTopBtn.classList.add("opacity-100");
       } else {
         backToTopBtn.classList.add("opacity-0", "pointer-events-none");
         backToTopBtn.classList.remove("opacity-100");
       }
-    });
+    }
 
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  // All sections visible by default (no filtering)
-
-  // HIDE HEADER + SHOW LOGO IN FILTER BAR ON SCROLL
-  const header = document.querySelector("header");
-  const filterBar = document.getElementById("filter-bar");
-  const filterBarLogo = document.getElementById("filter-bar-logo");
-  let lastScrollY = 0;
-  let headerHidden = false;
-
-  window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
-
-    // When scrolled down past 150px
-    if (scrollY > 150 && !headerHidden) {
+    // Header hide/show with filter bar logo
+    if (scrollY > SCROLL_THRESHOLD_HEADER && !headerHidden) {
       // Hide header
       if (header) {
         header.style.transform = "translateY(-100%)";
@@ -1099,9 +1098,7 @@ const galleryItems = [
       }
 
       headerHidden = true;
-    }
-    // When scrolled back to top
-    else if (scrollY <= 150 && headerHidden) {
+    } else if (scrollY <= SCROLL_THRESHOLD_HEADER && headerHidden) {
       // Show header
       if (header) {
         header.style.transform = "translateY(0)";
@@ -1116,15 +1113,23 @@ const galleryItems = [
 
       // Move filter bar back down
       if (filterBar) {
-        const isMobile = window.innerWidth < 768;
-        filterBar.style.top = isMobile ? "5rem" : "6rem"; // top-20 md:top-24
+        const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+        filterBar.style.top = isMobile ? "5rem" : "6rem";
       }
 
       headerHidden = false;
     }
+  }
 
-    lastScrollY = scrollY;
-  });
+  // Single scroll event listener
+  window.addEventListener("scroll", handleScroll);
+
+  // Back to top button click
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 
   // Run on page load (handles hash navigation from services section)
   window.addEventListener("load", () => {
@@ -1187,13 +1192,15 @@ const galleryItems = [
     lightbox.classList.add("flex");
     document.body.style.overflow = "hidden";
 
-    // Trigger fade-in animation
+    // Trigger fade-in animation and focus close button for keyboard accessibility
     setTimeout(() => {
       lightbox.classList.remove("opacity-0");
       lightbox.classList.add("opacity-100");
       lightboxImage.classList.remove("opacity-0", "scale-95");
       lightboxImage.classList.add("opacity-100", "scale-100");
-    }, 10);
+      // Focus the close button for keyboard users
+      lightboxClose?.focus();
+    }, LIGHTBOX_TRANSITION_DELAY);
   }
 
   function closeLightbox() {
@@ -1210,7 +1217,7 @@ const galleryItems = [
       lightbox.classList.add("hidden");
       lightbox.classList.remove("flex");
       document.body.style.overflow = "";
-    }, 300);
+    }, LIGHTBOX_CLOSE_DELAY);
   }
 
   function nextImage() {
@@ -1229,13 +1236,31 @@ const galleryItems = [
     openLightbox(currentLightboxIndex);
   }
 
-  // Gallery item clicks
-  galleryItems.forEach((item, index) => {
+  // Gallery item clicks and keyboard accessibility
+  galleryItems.forEach((item) => {
+    // Make gallery items keyboard accessible
+    item.setAttribute("tabindex", "0");
+    item.setAttribute("role", "button");
+
+    // Click handler
     item.addEventListener("click", () => {
       updateVisibleItems();
       const visibleIndex = visibleGalleryItems.indexOf(item);
       if (visibleIndex !== -1) {
         openLightbox(visibleIndex);
+      }
+    });
+
+    // Keyboard handler (Enter or Space)
+    item.addEventListener("keydown", (e: Event) => {
+      const keyboardEvent = e as KeyboardEvent;
+      if (keyboardEvent.key === "Enter" || keyboardEvent.key === " ") {
+        keyboardEvent.preventDefault();
+        updateVisibleItems();
+        const visibleIndex = visibleGalleryItems.indexOf(item);
+        if (visibleIndex !== -1) {
+          openLightbox(visibleIndex);
+        }
       }
     });
   });
