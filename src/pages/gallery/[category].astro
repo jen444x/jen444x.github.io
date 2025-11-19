@@ -1,0 +1,809 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  const categories = [
+    { slug: 'concrete', name: 'Concrete Work', description: 'Driveways, walkways, patios, stairs, and professional flatwork' },
+    { slug: 'outdoor-kitchens', name: 'Outdoor Kitchens', description: 'Luxury outdoor kitchen designs with professional countertops and entertainment setups' },
+    { slug: 'covered-patios', name: 'Covered Patios', description: 'Elegant covered patio designs with stone columns and premium finishes' },
+    { slug: 'pools-spas', name: 'Pools & Spas', description: 'Pool remodels, spa installations, and backyard transformations' },
+    { slug: 'fire-features', name: 'Fire Features', description: 'Custom fire pits, outdoor fireplaces, and fire feature installations' },
+    { slug: 'landscaping', name: 'Landscaping', description: 'Artificial turf, gardens, water features, and complete landscape design' },
+    { slug: 'ironwork', name: 'Iron Work', description: 'Decorative gates, railings, archways, and custom metalwork' },
+  ];
+
+  return categories.map(category => ({
+    params: { category: category.slug },
+    props: { categoryInfo: category },
+  }));
+}
+
+const { category } = Astro.params;
+const { categoryInfo } = Astro.props;
+
+// Get all gallery items and filter by category
+const allGalleryItems = await getCollection('gallery');
+const galleryItems = allGalleryItems
+  .filter(item => category in item.data.categories)
+  .map((item, index) => ({
+    src: item.data.image,
+    alt: item.data.alt,
+    title: item.data.title,
+    categories: item.data.categories,
+    subcategory: item.data.categories[category as keyof typeof item.data.categories],
+    featured: item.data.featured,
+    originalIndex: index,
+  }));
+
+// Define subcategories for each category (matches original gallery.astro structure)
+const categorySubcategories: Record<string, { slug: string; name: string }[]> = {
+  'concrete': [
+    { slug: 'walkways', name: 'Walkways' },
+    { slug: 'stairs', name: 'Steps & Stairs' },
+    { slug: 'flatwork', name: 'Flatwork & Patios' }
+  ],
+  'landscaping': [
+    { slug: 'turf', name: 'Artificial Turf' },
+    { slug: 'gardens', name: 'Gardens' },
+    { slug: 'water-features', name: 'Water Features' }
+  ]
+};
+
+// Get subcategories for current category (if any)
+const subcategories = categorySubcategories[category as string] || [];
+---
+
+<Layout
+  title={`${categoryInfo.name} — Rocky Concrete Portfolio`}
+  description={`${categoryInfo.description} by Rocky Concrete in Bakersfield, CA.`}
+>
+  <Header />
+
+  <main class="min-h-screen">
+    <!-- Hero Section - Luxury Industrial (EXACT MATCH) -->
+    <section
+      class="relative min-h-[60vh] flex items-center justify-center bg-black-pure overflow-hidden section-padding border-t border-bronze/10"
+    >
+      <!-- Subtle texture overlay -->
+      <div
+        class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"
+      >
+      </div>
+
+      <div class="container relative z-20 max-w-5xl mx-auto px-6 md:px-12">
+        <div class="text-center hero-content opacity-0">
+          <!-- Main Heading - Bebas Neue Luxury -->
+          <h1
+            class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light"
+            style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%);"
+          >
+            {categoryInfo.name}
+          </h1>
+
+          <!-- Bronze accent line -->
+          <div class="w-20 h-0.5 bg-bronze mx-auto mb-8"></div>
+
+          <!-- Subheading -->
+          <p
+            class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed"
+          >
+            {categoryInfo.description}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Category Navigation Bar - EXACT MATCH of Filter Bar Design -->
+    <div
+      id="filter-bar"
+      class="sticky top-20 md:top-24 z-40 bg-charcoal shadow-2xl transition-all duration-500"
+    >
+      <!-- Bronze top accent line -->
+      <div
+        class="h-1 bg-gradient-to-r from-transparent via-bronze to-transparent"
+      >
+      </div>
+
+      <div class="max-w-[1400px] mx-auto px-6 md:px-8 py-2 md:py-3">
+        <!-- Desktop: Horizontal Flex Layout with Logo -->
+        <div class="hidden md:flex items-center justify-between gap-4">
+          <!-- Logo - Hidden initially, shows on scroll -->
+          <a
+            href="/"
+            id="filter-bar-logo"
+            class="opacity-0 pointer-events-none transition-all duration-500 shrink-0"
+          >
+            <img
+              src="/img/Background.png"
+              alt="Rocky Concrete Logo"
+              class="h-12 w-auto"
+            />
+          </a>
+
+          <!-- Category Navigation Buttons -->
+          <div class="flex items-center justify-start gap-2 flex-1 ml-4">
+            <a
+              href="/gallery/concrete"
+              class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
+                category === 'concrete'
+                  ? 'text-white border-bronze/30'
+                  : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
+              }`}
+            >
+              CONCRETE WORK
+              <span
+                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+                  category === 'concrete' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}
+              ></span>
+            </a>
+
+            <a
+              href="/gallery/outdoor-kitchens"
+              class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
+                category === 'outdoor-kitchens'
+                  ? 'text-white border-bronze/30'
+                  : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
+              }`}
+            >
+              OUTDOOR KITCHENS
+              <span
+                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+                  category === 'outdoor-kitchens' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}
+              ></span>
+            </a>
+
+            <a
+              href="/gallery/covered-patios"
+              class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
+                category === 'covered-patios'
+                  ? 'text-white border-bronze/30'
+                  : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
+              }`}
+            >
+              COVERED PATIOS
+              <span
+                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+                  category === 'covered-patios' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}
+              ></span>
+            </a>
+
+            <a
+              href="/gallery/pools-spas"
+              class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
+                category === 'pools-spas'
+                  ? 'text-white border-bronze/30'
+                  : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
+              }`}
+            >
+              POOLS & SPAS
+              <span
+                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+                  category === 'pools-spas' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}
+              ></span>
+            </a>
+
+            <a
+              href="/gallery/fire-features"
+              class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
+                category === 'fire-features'
+                  ? 'text-white border-bronze/30'
+                  : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
+              }`}
+            >
+              FIRE FEATURES
+              <span
+                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+                  category === 'fire-features' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}
+              ></span>
+            </a>
+
+            <!-- LANDSCAPING - Has subcategories, show dropdown if current page -->
+            {category === 'landscaping' && subcategories.length > 0 ? (
+              <div class="relative group">
+                <button
+                  class="filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 text-white border-bronze/30"
+                >
+                  LANDSCAPING
+                  <svg
+                    class="inline-block w-4 h-4 ml-2 transition-transform group-hover:rotate-180"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="absolute bottom-0 left-0 w-full h-1 bg-bronze scale-x-100 transition-transform duration-300"></span>
+                </button>
+                <div class="absolute top-full left-0 mt-2 bg-charcoal-light border-2 border-bronze/20 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[240px] z-50">
+                  <button
+                    class="subcat-scroll-btn cursor-pointer w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                    data-target="landscaping-turf"
+                  >
+                    Artificial Turf
+                  </button>
+                  <button
+                    class="subcat-scroll-btn cursor-pointer w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                    data-target="landscaping-gardens"
+                  >
+                    Gardens
+                  </button>
+                  <button
+                    class="subcat-scroll-btn cursor-pointer w-full text-left px-6 py-3 font-['Bebas_Neue'] text-base tracking-wider text-slate-light hover:text-white hover:bg-bronze/10 transition-all duration-200 border-l-2 border-transparent hover:border-bronze"
+                    data-target="landscaping-water-features"
+                  >
+                    Water Features
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <a
+                href="/gallery/landscaping"
+                class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
+                  category === 'landscaping'
+                    ? 'text-white border-bronze/30'
+                    : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
+                }`}
+              >
+                LANDSCAPING
+                <span
+                  class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+                    category === 'landscaping' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
+                ></span>
+              </a>
+            )}
+
+            <a
+              href="/gallery/ironwork"
+              class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 ${
+                category === 'ironwork'
+                  ? 'text-white border-bronze/30'
+                  : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
+              }`}
+            >
+              IRON WORK
+              <span
+                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+                  category === 'ironwork' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}
+              ></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mobile: Grid Layout - Bigger (EXACT MATCH) -->
+        <div class="grid grid-cols-2 gap-1 md:hidden">
+          <a
+            href="/gallery/concrete"
+            class={`filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 bg-charcoal-light ${
+              category === 'concrete'
+                ? 'text-white border-bronze bg-bronze/10'
+                : 'text-slate-light border-transparent'
+            }`}
+          >
+            CONCRETE
+          </a>
+
+          <a
+            href="/gallery/outdoor-kitchens"
+            class={`filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 bg-charcoal-light ${
+              category === 'outdoor-kitchens'
+                ? 'text-white border-bronze bg-bronze/10'
+                : 'text-slate-light border-transparent'
+            }`}
+          >
+            OUTDOOR
+          </a>
+
+          <a
+            href="/gallery/covered-patios"
+            class={`filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 bg-charcoal-light ${
+              category === 'covered-patios'
+                ? 'text-white border-bronze bg-bronze/10'
+                : 'text-slate-light border-transparent'
+            }`}
+          >
+            PATIOS
+          </a>
+
+          <a
+            href="/gallery/pools-spas"
+            class={`filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 bg-charcoal-light ${
+              category === 'pools-spas'
+                ? 'text-white border-bronze bg-bronze/10'
+                : 'text-slate-light border-transparent'
+            }`}
+          >
+            POOLS
+          </a>
+
+          <a
+            href="/gallery/fire-features"
+            class={`filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 bg-charcoal-light ${
+              category === 'fire-features'
+                ? 'text-white border-bronze bg-bronze/10'
+                : 'text-slate-light border-transparent'
+            }`}
+          >
+            FIRE
+          </a>
+
+          <a
+            href="/gallery/landscaping"
+            class={`filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 bg-charcoal-light ${
+              category === 'landscaping'
+                ? 'text-white border-bronze bg-bronze/10'
+                : 'text-slate-light border-transparent'
+            }`}
+          >
+            LANDSCAPE
+          </a>
+
+          <a
+            href="/gallery/ironwork"
+            class={`filter-btn px-4 py-4 font-['Bebas_Neue'] tracking-wider text-base transition-all duration-200 border-2 bg-charcoal-light ${
+              category === 'ironwork'
+                ? 'text-white border-bronze bg-bronze/10'
+                : 'text-slate-light border-transparent'
+            }`}
+          >
+            IRON WORK
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Section - Full Width (EXACT MATCH of original gallery.astro) -->
+    <section class="section-padding bg-white border-t border-bronze/10">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-8">
+        <!-- Categories WITH subcategories - show subsections with bronze headers -->
+        {subcategories.length > 0 ? (
+          <div>
+            {subcategories.map((subcat) => {
+              const subcatItems = galleryItems.filter(item => item.subcategory === subcat.slug);
+              if (subcatItems.length === 0) return null;
+
+              return (
+                <div id={`${category}-${subcat.slug}`} class="mb-12 scroll-mt-24">
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3" />
+                    {subcat.name}
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {subcatItems.map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                        data-index={galleryItems.indexOf(item)}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                            loading={index < 3 ? "eager" : "lazy"}
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
+                                {item.alt}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          // Categories WITHOUT subcategories - simple grid like original
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {galleryItems.map((item, index) => (
+              <article
+                class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                data-index={index}
+              >
+                <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                    loading={index < 6 ? "eager" : "lazy"}
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="absolute bottom-6 left-6 right-6">
+                      <p class="text-white font-light text-sm md:text-base tracking-wide">
+                        {item.alt}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- CTA Section - Luxury Industrial -->
+    <section class="bg-black-pure section-padding border-t border-bronze/10">
+      <div class="container max-w-4xl mx-auto px-6 md:px-8 text-center">
+        <h2
+          class="font-['Bebas_Neue'] text-4xl md:text-5xl tracking-wider text-white mb-6"
+        >
+          Ready to Start Your Project?
+        </h2>
+        <div class="bronze-divider mx-auto mb-8"></div>
+        <p
+          class="text-lg md:text-xl text-slate-light font-light leading-relaxed mb-10 max-w-2xl mx-auto"
+        >
+          Let us transform your outdoor space with quality craftsmanship and
+          exceptional service.
+        </p>
+        <a
+          href="/#cta"
+          class="inline-block font-['Bebas_Neue'] text-lg tracking-wider bg-transparent border-2 border-white text-white py-4 px-10 transition-all duration-300 hover:bg-bronze hover:border-bronze hover:text-white shadow-[0_4px_15px_rgb(0_0_0/30%)] hover:shadow-[0_4px_20px_rgb(184_134_11/40%)]"
+        >
+          Get Your Free Estimate
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<!-- Lightbox Modal -->
+<div
+  id="lightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Image gallery lightbox"
+  class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300"
+>
+  <button
+    id="lightbox-close"
+    class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+    aria-label="Close lightbox"
+  >
+    <svg
+      class="w-10 h-10"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <button
+    id="lightbox-prev"
+    class="absolute left-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
+    aria-label="Previous image"
+  >
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+
+  <button
+    id="lightbox-next"
+    class="absolute right-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
+    aria-label="Next image"
+  >
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+
+  <div
+    class="max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+  >
+    <img
+      id="lightbox-image"
+      src=""
+      alt=""
+      class="max-w-full max-h-full object-contain opacity-0 scale-95 transition-all duration-300"
+    />
+  </div>
+
+  <div
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-center"
+  >
+    <p id="lightbox-caption" class="text-lg font-light mb-2 text-slate-light"></p>
+    <p id="lightbox-counter" class="text-sm text-slate-light"></p>
+  </div>
+</div>
+
+<!-- Back to Top Button (EXACT MATCH) -->
+<button
+  id="back-to-top"
+  class="fixed bottom-8 right-8 bg-bronze text-white p-4 rounded-full shadow-2xl hover:bg-bronze-dark transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110 cursor-pointer"
+  aria-label="Back to top"
+>
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<Footer />
+
+<script>
+  // Constants (EXACT MATCH)
+  const SCROLL_THRESHOLD_HEADER = 150;
+  const SCROLL_THRESHOLD_BACK_TO_TOP = 300;
+  const MOBILE_BREAKPOINT = 768;
+  const LIGHTBOX_TRANSITION_DELAY = 10;
+  const LIGHTBOX_CLOSE_DELAY = 300;
+
+  // Header and filter bar elements
+  const header = document.querySelector("header");
+  const filterBar = document.getElementById("filter-bar");
+  const filterBarLogo = document.getElementById("filter-bar-logo");
+  const backToTopBtn = document.getElementById("back-to-top");
+  let headerHidden = false;
+
+  // Combined scroll handler for better performance (EXACT MATCH)
+  function handleScroll() {
+    const scrollY = window.scrollY;
+
+    // Back to top button visibility
+    if (backToTopBtn) {
+      if (scrollY > SCROLL_THRESHOLD_BACK_TO_TOP) {
+        backToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+        backToTopBtn.classList.add("opacity-100");
+      } else {
+        backToTopBtn.classList.add("opacity-0", "pointer-events-none");
+        backToTopBtn.classList.remove("opacity-100");
+      }
+    }
+
+    // Header hide/show with filter bar logo
+    if (scrollY > SCROLL_THRESHOLD_HEADER && !headerHidden) {
+      // Hide header
+      if (header) {
+        header.style.transform = "translateY(-100%)";
+        header.style.opacity = "0";
+      }
+
+      // Show logo in filter bar
+      if (filterBarLogo) {
+        filterBarLogo.classList.remove("opacity-0", "pointer-events-none");
+        filterBarLogo.classList.add("opacity-100");
+      }
+
+      // Move filter bar to top
+      if (filterBar) {
+        filterBar.style.top = "0";
+      }
+
+      headerHidden = true;
+    } else if (scrollY <= SCROLL_THRESHOLD_HEADER && headerHidden) {
+      // Show header
+      if (header) {
+        header.style.transform = "translateY(0)";
+        header.style.opacity = "1";
+      }
+
+      // Hide logo in filter bar
+      if (filterBarLogo) {
+        filterBarLogo.classList.remove("opacity-100");
+        filterBarLogo.classList.add("opacity-0", "pointer-events-none");
+      }
+
+      // Move filter bar back down
+      if (filterBar) {
+        const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+        filterBar.style.top = isMobile ? "5rem" : "6rem";
+      }
+
+      headerHidden = false;
+    }
+  }
+
+  // Single scroll event listener
+  window.addEventListener("scroll", handleScroll);
+
+  // Back to top button click
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Lightbox functionality
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById(
+    "lightbox-image"
+  ) as HTMLImageElement;
+  const lightboxCaption = document.getElementById("lightbox-caption");
+  const lightboxCounter = document.getElementById("lightbox-counter");
+  const lightboxClose = document.getElementById("lightbox-close");
+  const lightboxPrev = document.getElementById("lightbox-prev");
+  const lightboxNext = document.getElementById("lightbox-next");
+  const galleryItems = document.querySelectorAll(".gallery-item");
+
+  let currentLightboxIndex = 0;
+
+  function openLightbox(index: number) {
+    currentLightboxIndex = index;
+
+    const item = galleryItems[currentLightboxIndex];
+    if (!item) return;
+
+    const img = item.querySelector("img");
+    if (
+      !img ||
+      !lightbox ||
+      !lightboxImage ||
+      !lightboxCaption ||
+      !lightboxCounter
+    )
+      return;
+
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt;
+    lightboxCaption.textContent = img.alt;
+    lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${galleryItems.length}`;
+
+    lightbox.classList.remove("hidden");
+    lightbox.classList.add("flex");
+    document.body.style.overflow = "hidden";
+
+    // Trigger fade-in animation and focus close button for keyboard accessibility
+    setTimeout(() => {
+      lightbox.classList.remove("opacity-0");
+      lightbox.classList.add("opacity-100");
+      lightboxImage.classList.remove("opacity-0", "scale-95");
+      lightboxImage.classList.add("opacity-100", "scale-100");
+      lightboxClose?.focus();
+    }, LIGHTBOX_TRANSITION_DELAY);
+  }
+
+  function closeLightbox() {
+    if (!lightbox || !lightboxImage) return;
+
+    lightbox.classList.remove("opacity-100");
+    lightbox.classList.add("opacity-0");
+    lightboxImage.classList.remove("opacity-100", "scale-100");
+    lightboxImage.classList.add("opacity-0", "scale-95");
+
+    setTimeout(() => {
+      lightbox.classList.add("hidden");
+      lightbox.classList.remove("flex");
+      document.body.style.overflow = "";
+    }, LIGHTBOX_CLOSE_DELAY);
+  }
+
+  function nextImage() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
+    openLightbox(currentLightboxIndex);
+  }
+
+  function prevImage() {
+    currentLightboxIndex =
+      currentLightboxIndex === 0
+        ? galleryItems.length - 1
+        : currentLightboxIndex - 1;
+    openLightbox(currentLightboxIndex);
+  }
+
+  // Gallery item clicks and keyboard accessibility
+  galleryItems.forEach((item, index) => {
+    item.setAttribute("tabindex", "0");
+    item.setAttribute("role", "button");
+
+    item.addEventListener("click", () => {
+      openLightbox(index);
+    });
+
+    item.addEventListener("keydown", (e: Event) => {
+      const keyboardEvent = e as KeyboardEvent;
+      if (keyboardEvent.key === "Enter" || keyboardEvent.key === " ") {
+        keyboardEvent.preventDefault();
+        openLightbox(index);
+      }
+    });
+  });
+
+  // Lightbox controls
+  lightboxClose?.addEventListener("click", closeLightbox);
+  lightboxNext?.addEventListener("click", nextImage);
+  lightboxPrev?.addEventListener("click", prevImage);
+
+  // Close on background click
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox?.classList.contains("hidden")) {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    }
+  });
+
+  // Hero page-load animation
+  const heroContent = document.querySelector(".hero-content");
+  if (heroContent) {
+    setTimeout(() => {
+      heroContent.classList.remove("opacity-0");
+      heroContent.classList.add("animate-fade-in-up");
+    }, 100);
+  }
+
+  // Subcategory dropdown scroll functionality
+  const HEADER_OFFSET = 120;
+  const subcatScrollBtns = document.querySelectorAll(".subcat-scroll-btn");
+
+  subcatScrollBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("data-target");
+      if (targetId) {
+        const target = document.getElementById(targetId);
+        if (target) {
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+          window.scrollTo({ top: targetPosition, behavior: "smooth" });
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Hero animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Hide scrollbar for category nav */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
