@@ -217,7 +217,7 @@ const galleryItems = [
       <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"></div>
 
       <div class="container relative z-20 max-w-5xl mx-auto px-6 md:px-12">
-        <div class="text-center hero-content">
+        <div class="text-center hero-content opacity-0">
           <!-- Main Heading - Bebas Neue Luxury -->
           <h1 class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light" style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%);">
             PROJECT SHOWCASE
@@ -829,15 +829,15 @@ const galleryItems = [
 
             <!-- Empty State -->
             <div class="hidden text-center py-20" id="empty-state">
-              <div class="text-gray-400 mb-4">
+              <div class="text-slate-light mb-4">
                 <svg class="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
               </div>
-              <h3 class="text-2xl font-semibold text-gray-700 mb-2">
+              <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-2">
                 No projects found
               </h3>
-              <p class="text-gray-500">Try selecting a different category</p>
+              <p class="text-slate font-light">Try selecting a different category</p>
             </div>
           </div>
         </div>
@@ -868,7 +868,7 @@ const galleryItems = [
   <!-- Lightbox Modal -->
   <div
     id="lightbox"
-    class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center p-4"
+    class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300"
   >
     <button
       id="lightbox-close"
@@ -934,7 +934,7 @@ const galleryItems = [
         id="lightbox-image"
         src=""
         alt=""
-        class="max-w-full max-h-full object-contain"
+        class="max-w-full max-h-full object-contain opacity-0 scale-95 transition-all duration-300"
       />
     </div>
 
@@ -949,7 +949,7 @@ const galleryItems = [
   <!-- Back to Top Button -->
   <button
     id="back-to-top"
-    class="fixed bottom-8 right-8 bg-bronze text-white p-4 rounded-full shadow-2xl hover:bg-bronze-dark transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110"
+    class="fixed bottom-8 right-8 bg-bronze text-white p-4 rounded-full shadow-2xl hover:bg-bronze-dark transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110 cursor-pointer"
     aria-label="Back to top"
   >
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1058,7 +1058,7 @@ const galleryItems = [
         backToTopBtn.classList.add("opacity-100");
       } else {
         backToTopBtn.classList.add("opacity-0", "pointer-events-none");
-        backToTopBtn.classList.remove("opacity-0");
+        backToTopBtn.classList.remove("opacity-100");
       }
     });
 
@@ -1126,11 +1126,6 @@ const galleryItems = [
     lastScrollY = scrollY;
   });
 
-  // Make sure header has transition
-  if (header) {
-    header.style.transition = "transform 0.5s ease, opacity 0.5s ease";
-  }
-
   // Run on page load (handles hash navigation from services section)
   window.addEventListener("load", () => {
     const hash = window.location.hash;
@@ -1155,6 +1150,7 @@ const galleryItems = [
   const lightboxClose = document.getElementById("lightbox-close");
   const lightboxPrev = document.getElementById("lightbox-prev");
   const lightboxNext = document.getElementById("lightbox-next");
+  const galleryItems = document.querySelectorAll(".gallery-item");
 
   let currentLightboxIndex = 0;
   let visibleGalleryItems: Element[] = [];
@@ -1190,13 +1186,31 @@ const galleryItems = [
     lightbox.classList.remove("hidden");
     lightbox.classList.add("flex");
     document.body.style.overflow = "hidden";
+
+    // Trigger fade-in animation
+    setTimeout(() => {
+      lightbox.classList.remove("opacity-0");
+      lightbox.classList.add("opacity-100");
+      lightboxImage.classList.remove("opacity-0", "scale-95");
+      lightboxImage.classList.add("opacity-100", "scale-100");
+    }, 10);
   }
 
   function closeLightbox() {
-    if (!lightbox) return;
-    lightbox.classList.add("hidden");
-    lightbox.classList.remove("flex");
-    document.body.style.overflow = "";
+    if (!lightbox || !lightboxImage) return;
+
+    // Fade out animation
+    lightbox.classList.remove("opacity-100");
+    lightbox.classList.add("opacity-0");
+    lightboxImage.classList.remove("opacity-100", "scale-100");
+    lightboxImage.classList.add("opacity-0", "scale-95");
+
+    // Hide after animation completes
+    setTimeout(() => {
+      lightbox.classList.add("hidden");
+      lightbox.classList.remove("flex");
+      document.body.style.overflow = "";
+    }, 300);
   }
 
   function nextImage() {
@@ -1249,7 +1263,14 @@ const galleryItems = [
 
   // Initialize - removed filterGallery as it's not needed
 
-  // Hero no longer needs animations - text shows immediately
+  // Hero page-load animation - trigger immediately
+  const heroContent = document.querySelector(".hero-content");
+  if (heroContent) {
+    setTimeout(() => {
+      heroContent.classList.remove("opacity-0");
+      heroContent.classList.add("animate-fade-in-up");
+    }, 100);
+  }
 </script>
 
 <style>
