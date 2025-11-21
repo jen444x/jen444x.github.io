@@ -82,10 +82,17 @@
       <div class="lg:col-span-3 cta-reveal opacity-0" style="animation-delay: 0.3s">
         <div class="bg-charcoal border border-charcoal-light p-6 md:p-8 shadow-2xl">
           <form
-            action="https://formspree.io/f/xeojjaol"
+            name="contact"
             method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
             class="space-y-5"
           >
+            <!-- Netlify Forms bot field (hidden) -->
+            <input type="hidden" name="form-name" value="contact" />
+            <div style="display: none;">
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </div>
             <!-- Full Name -->
             <div>
               <label
