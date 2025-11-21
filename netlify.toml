@@ -1,0 +1,16 @@
+# Netlify Configuration File
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Directory where Astro builds the site
+  publish = "dist"
+
+  # Build command to run
+  command = "npm run build"
+
+# Form notifications (optional - add your email to get notifications)
+# [build.environment]
+#   NODE_VERSION = "20"
+
+# Enable Netlify Forms
+# Forms are automatically detected when they have data-netlify="true"
