@@ -1,0 +1,264 @@
+---
+/**
+ * CATEGORY NAVIGATION BAR
+ *
+ * Horizontal navigation bar for gallery category pages
+ * Shows all 7 categories with active state highlighting
+ * Includes dropdowns for categories with subcategories (Concrete, Landscaping)
+ *
+ * Props:
+ * - currentCategory: string - The active category slug (e.g., "concrete", "outdoor-kitchens")
+ */
+
+interface Props {
+  currentCategory: string;
+}
+
+const { currentCategory } = Astro.props;
+---
+
+<div class="bg-charcoal shadow-2xl">
+  <div class="category-nav-container">
+    <!-- Desktop: Horizontal Category Buttons -->
+    <div class="hidden md:flex items-center justify-center gap-2">
+      <!-- CONCRETE WORK - Has subcategories, always show dropdown -->
+      <div class="relative group">
+        <a
+          href="/gallery/concrete"
+          class={`nav-category-btn flex items-center gap-2 ${
+            currentCategory === 'concrete'
+              ? 'nav-category-btn-active'
+              : 'nav-category-btn-inactive'
+          }`}
+        >
+          CONCRETE WORK
+          <!-- Dropdown indicator -->
+          <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <span
+            class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+              currentCategory === 'concrete' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+            }`}
+          ></span>
+        </a>
+        <!-- Dropdown Menu - Professional spacing & sizing -->
+        <div class="absolute top-full left-0 mt-1 bg-charcoal border border-bronze/20 shadow-[0_8px_30px_rgb(0,0,0,0.6)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-full z-50">
+          <a href="/gallery/concrete#concrete-walkways" class="dropdown-item">
+            Walkways
+          </a>
+          <a href="/gallery/concrete#concrete-stairs" class="dropdown-item">
+            Steps & Stairs
+          </a>
+          <a href="/gallery/concrete#concrete-flatwork" class="dropdown-item">
+            Flatwork & Patios
+          </a>
+        </div>
+      </div>
+
+      <a
+        href="/gallery/outdoor-kitchens"
+        class={`nav-category-btn ${
+          currentCategory === 'outdoor-kitchens'
+            ? 'nav-category-btn-active'
+            : 'nav-category-btn-inactive'
+        }`}
+      >
+        OUTDOOR KITCHENS
+        <span
+          class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+            currentCategory === 'outdoor-kitchens' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+          }`}
+        ></span>
+      </a>
+
+      <a
+        href="/gallery/covered-patios"
+        class={`nav-category-btn ${
+          currentCategory === 'covered-patios'
+            ? 'nav-category-btn-active'
+            : 'nav-category-btn-inactive'
+        }`}
+      >
+        COVERED PATIOS
+        <span
+          class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+            currentCategory === 'covered-patios' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+          }`}
+        ></span>
+      </a>
+
+      <a
+        href="/gallery/pools-spas"
+        class={`nav-category-btn ${
+          currentCategory === 'pools-spas'
+            ? 'nav-category-btn-active'
+            : 'nav-category-btn-inactive'
+        }`}
+      >
+        POOLS & SPAS
+        <span
+          class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+            currentCategory === 'pools-spas' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+          }`}
+        ></span>
+      </a>
+
+      <a
+        href="/gallery/fire-features"
+        class={`nav-category-btn ${
+          currentCategory === 'fire-features'
+            ? 'nav-category-btn-active'
+            : 'nav-category-btn-inactive'
+        }`}
+      >
+        FIRE FEATURES
+        <span
+          class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+            currentCategory === 'fire-features' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+          }`}
+        ></span>
+      </a>
+
+      <!-- LANDSCAPING - Has subcategories, always show dropdown -->
+      <div class="relative group">
+        <a
+          href="/gallery/landscaping"
+          class={`nav-category-btn flex items-center gap-2 ${
+            currentCategory === 'landscaping'
+              ? 'nav-category-btn-active'
+              : 'nav-category-btn-inactive'
+          }`}
+        >
+          LANDSCAPING
+          <!-- Dropdown indicator -->
+          <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <span
+            class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+              currentCategory === 'landscaping' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+            }`}
+          ></span>
+        </a>
+        <!-- Dropdown Menu - Professional spacing & sizing -->
+        <div class="absolute top-full left-0 mt-1 bg-charcoal border border-bronze/20 shadow-[0_8px_30px_rgb(0,0,0,0.6)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-full z-50">
+          <a
+            href="/gallery/landscaping#landscaping-turf"
+            class="dropdown-item"
+          >
+            Artificial Turf
+          </a>
+          <a
+            href="/gallery/landscaping#landscaping-gardens"
+            class="dropdown-item"
+          >
+            Gardens
+          </a>
+          <a
+            href="/gallery/landscaping#landscaping-water-features"
+            class="dropdown-item"
+          >
+            Water Features
+          </a>
+        </div>
+      </div>
+
+      <a
+        href="/gallery/ironwork"
+        class={`nav-category-btn ${
+          currentCategory === 'ironwork'
+            ? 'nav-category-btn-active'
+            : 'nav-category-btn-inactive'
+        }`}
+      >
+        IRON WORK
+        <span
+          class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+            currentCategory === 'ironwork' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+          }`}
+        ></span>
+      </a>
+    </div>
+
+    <!-- Mobile: Grid Layout -->
+    <div class="grid grid-cols-2 gap-1 md:hidden">
+      <a
+        href="/gallery/concrete"
+        class={`nav-mobile-btn ${
+          currentCategory === 'concrete'
+            ? 'text-white border-bronze bg-bronze/10'
+            : 'text-slate-light border-transparent'
+        }`}
+      >
+        CONCRETE
+      </a>
+
+      <a
+        href="/gallery/outdoor-kitchens"
+        class={`nav-mobile-btn ${
+          currentCategory === 'outdoor-kitchens'
+            ? 'text-white border-bronze bg-bronze/10'
+            : 'text-slate-light border-transparent'
+        }`}
+      >
+        OUTDOOR
+      </a>
+
+      <a
+        href="/gallery/covered-patios"
+        class={`nav-mobile-btn ${
+          currentCategory === 'covered-patios'
+            ? 'text-white border-bronze bg-bronze/10'
+            : 'text-slate-light border-transparent'
+        }`}
+      >
+        PATIOS
+      </a>
+
+      <a
+        href="/gallery/pools-spas"
+        class={`nav-mobile-btn ${
+          currentCategory === 'pools-spas'
+            ? 'text-white border-bronze bg-bronze/10'
+            : 'text-slate-light border-transparent'
+        }`}
+      >
+        POOLS
+      </a>
+
+      <a
+        href="/gallery/fire-features"
+        class={`nav-mobile-btn ${
+          currentCategory === 'fire-features'
+            ? 'text-white border-bronze bg-bronze/10'
+            : 'text-slate-light border-transparent'
+        }`}
+      >
+        FIRE
+      </a>
+
+      <a
+        href="/gallery/landscaping"
+        class={`nav-mobile-btn ${
+          currentCategory === 'landscaping'
+            ? 'text-white border-bronze bg-bronze/10'
+            : 'text-slate-light border-transparent'
+        }`}
+      >
+        LANDSCAPE
+      </a>
+
+      <a
+        href="/gallery/ironwork"
+        class={`nav-mobile-btn ${
+          currentCategory === 'ironwork'
+            ? 'text-white border-bronze bg-bronze/10'
+            : 'text-slate-light border-transparent'
+        }`}
+      >
+        IRON WORK
+      </a>
+    </div>
+  </div>
+</div>

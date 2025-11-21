@@ -1,0 +1,145 @@
+---
+/**
+ * GALLERY LAYOUT
+ *
+ * Wraps all gallery pages (landing + category pages) with consistent structure:
+ * - Header
+ * - Hero section with title/description
+ * - Bronze dividers
+ * - Main content (slot)
+ * - CTA section
+ * - Footer
+ *
+ * Usage:
+ * <GalleryLayout title="..." description="..." heroTitle="..." heroDescription="...">
+ *   Your page content here
+ * </GalleryLayout>
+ */
+
+import Layout from "./Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  heroTitle: string;
+  heroDescription: string;
+  breadcrumbs?: { label: string; href: string }[];
+}
+
+const { title, description, heroTitle, heroDescription, breadcrumbs } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Header />
+
+  <main class="min-h-screen">
+    <!-- Hero Section - Luxury Industrial (consistent across all gallery pages) -->
+    <section
+      class="relative min-h-[60vh] flex items-center justify-center bg-black-pure overflow-hidden section-padding border-t border-bronze/10"
+    >
+      <!-- Subtle texture overlay -->
+      <div
+        class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"
+      >
+      </div>
+
+      <div class="container relative z-20 max-w-5xl mx-auto px-6 md:px-12">
+        <div class="text-center hero-content opacity-0">
+          <!-- Breadcrumb Navigation (optional - only for category pages) -->
+          {breadcrumbs && breadcrumbs.length > 0 && (
+            <nav aria-label="Breadcrumb" class="mb-8">
+              <ol class="flex items-center justify-center gap-2 text-sm">
+                {breadcrumbs.map((crumb, index) => (
+                  <>
+                    <li>
+                      <a
+                        href={crumb.href}
+                        class="text-slate-light hover:text-bronze transition-colors duration-300 tracking-wide"
+                      >
+                        {crumb.label}
+                      </a>
+                    </li>
+                    {index < breadcrumbs.length - 1 && (
+                      <li class="text-slate-light/40">›</li>
+                    )}
+                  </>
+                ))}
+              </ol>
+            </nav>
+          )}
+
+          <!-- Main Heading - Bebas Neue Luxury -->
+          <h1
+            class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light"
+            style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%);"
+          >
+            {heroTitle}
+          </h1>
+
+          <!-- Bronze accent line -->
+          <div class="w-20 h-0.5 bg-bronze mx-auto mb-8"></div>
+
+          <!-- Subheading -->
+          <p
+            class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed"
+          >
+            {heroDescription}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bronze gradient line - Marks start of main content -->
+    <div class="bronze-gradient-divider"></div>
+
+    <!-- PAGE-SPECIFIC CONTENT GOES HERE -->
+    <slot />
+
+    <!-- Bronze gradient line - Marks end of main content -->
+    <div class="bronze-gradient-divider"></div>
+
+    <!-- CTA Section - Luxury Industrial (consistent across all gallery pages) -->
+    <section class="bg-black-pure section-padding border-t border-bronze/10">
+      <div class="container max-w-4xl mx-auto px-6 md:px-8 text-center">
+        <h2
+          class="font-['Bebas_Neue'] text-4xl md:text-5xl tracking-wider text-white mb-6"
+        >
+          Ready to Start Your Project?
+        </h2>
+        <div class="bronze-divider mx-auto mb-8"></div>
+        <p
+          class="text-lg md:text-xl text-slate-light font-light leading-relaxed mb-10 max-w-2xl mx-auto"
+        >
+          Let us transform your outdoor space with quality craftsmanship and
+          exceptional service.
+        </p>
+        <a
+          href="/#cta"
+          class="btn-primary"
+        >
+          Get Your Free Estimate
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // Hero page-load animation - trigger immediately
+  const heroContent = document.querySelector(".hero-content");
+  if (heroContent) {
+    setTimeout(() => {
+      heroContent.classList.remove("opacity-0");
+      heroContent.classList.add("animate-fade-in-up");
+    }, 100);
+  }
+</script>
+
+<style>
+  /* Import reusable animations */
+  @import '../styles/animations.css';
+</style>

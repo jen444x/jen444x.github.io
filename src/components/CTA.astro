@@ -1,7 +1,7 @@
 ---
 ---
 
-<section class="section-cta bg-black-pure section-padding border-t border-bronze/10" id="contact">
+<section class="section-cta bg-black-pure section-padding border-t border-bronze/10" id="cta">
   <div class="container max-w-7xl mx-auto px-6 md:px-8">
     <!-- Heading Section -->
     <div class="text-center mb-8 md:mb-12 cta-reveal opacity-0" style="animation-delay: 0.1s">
@@ -172,45 +172,16 @@
   </div>
 </section>
 
-<!-- SCROLL ANIMATION STYLES -->
-<style>
-  @keyframes ctaFadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .cta-reveal.animate-in {
-    animation: ctaFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .cta-reveal {
-    will-change: transform, opacity;
-  }
-</style>
-
 <!-- SCROLL ANIMATION SCRIPT -->
 <script>
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  import { initScrollAnimations, HOMEPAGE_SCROLL_CONFIG } from '../utils/animations.js';
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.section-cta .cta-reveal').forEach((el) => {
-    observer.observe(el);
-  });
+  // Initialize scroll animations for CTA section
+  // Using HOMEPAGE_SCROLL_CONFIG: 100px buffer for smooth early reveals
+  initScrollAnimations('.section-cta .cta-reveal', HOMEPAGE_SCROLL_CONFIG);
 </script>
+
+<style>
+  /* Import reusable animations */
+  @import '../styles/animations.css';
+</style>

@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from "../../layouts/Layout.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import GalleryLayout from "../../layouts/GalleryLayout.astro";
+import CategoryNav from "../../components/CategoryNav.astro";
 
 export async function getStaticPaths() {
   const categories = [
@@ -54,512 +53,191 @@ const categorySubcategories: Record<string, { slug: string; name: string }[]> = 
 
 // Get subcategories for current category (if any)
 const subcategories = categorySubcategories[category as string] || [];
+
+// Breadcrumbs for this page
+const breadcrumbs = [
+  { label: 'Gallery', href: '/gallery' },
+  { label: categoryInfo.name, href: `/gallery/${category}` }
+];
 ---
 
-<Layout
+<GalleryLayout
   title={`${categoryInfo.name} — Rocky Concrete Portfolio`}
   description={`${categoryInfo.description} by Rocky Concrete in Bakersfield, CA.`}
+  heroTitle={categoryInfo.name}
+  heroDescription={categoryInfo.description}
+  breadcrumbs={breadcrumbs}
 >
-  <Header />
+  <!-- Category Navigation Bar -->
+  <CategoryNav currentCategory={category} />
 
-  <main class="min-h-screen">
-    <!-- Hero Section - Luxury Industrial (EXACT MATCH) -->
-    <section
-      class="relative min-h-[60vh] flex items-center justify-center bg-black-pure overflow-hidden section-padding border-t border-bronze/10"
-    >
-      <!-- Subtle texture overlay -->
-      <div
-        class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"
-      >
-      </div>
+  <!-- Gallery Section - Full Width -->
+  <section class="section-padding bg-white border-t border-bronze/10">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-8">
+      <!-- Categories WITH subcategories - show subsections with bronze headers -->
+      {subcategories.length > 0 ? (
+        <div>
+          {subcategories.map((subcat) => {
+            const subcatItems = galleryItems.filter(item => item.subcategory === subcat.slug);
+            if (subcatItems.length === 0) return null;
 
-      <div class="container relative z-20 max-w-5xl mx-auto px-6 md:px-12">
-        <div class="text-center hero-content opacity-0">
-          <!-- Breadcrumb Navigation - Minimal & Luxury -->
-          <nav aria-label="Breadcrumb" class="mb-8">
-            <ol class="flex items-center justify-center gap-2 text-sm">
-              <li>
-                <a
-                  href="/gallery"
-                  class="text-slate-light hover:text-bronze transition-colors duration-300 tracking-wide"
-                >
-                  Gallery
-                </a>
-              </li>
-              <li class="text-slate-light/40">›</li>
-              <li>
-                <span class="text-slate-light/60 tracking-wide" aria-current="page">
-                  {categoryInfo.name}
-                </span>
-              </li>
-            </ol>
-          </nav>
-
-          <!-- Main Heading - Bebas Neue Luxury -->
-          <h1
-            class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light"
-            style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%);"
-          >
-            {categoryInfo.name}
-          </h1>
-
-          <!-- Bronze accent line -->
-          <div class="w-20 h-0.5 bg-bronze mx-auto mb-8"></div>
-
-          <!-- Subheading -->
-          <p
-            class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed"
-          >
-            {categoryInfo.description}
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Category Navigation Bar - Static (Not Sticky) -->
-    <div class="bg-charcoal shadow-2xl">
-      <!-- Bronze top accent line -->
-      <div class="h-1 bg-linear-to-r from-transparent via-bronze to-transparent"></div>
-
-      <div class="category-nav-container">
-        <!-- Desktop: Horizontal Category Buttons -->
-        <div class="hidden md:flex items-center justify-center gap-2">
-          <!-- CONCRETE WORK - Has subcategories, always show dropdown -->
-          <div class="relative group">
-            <a
-              href="/gallery/concrete"
-              class={`nav-category-btn flex items-center gap-2 ${
-                category === 'concrete'
-                  ? 'nav-category-btn-active'
-                  : 'nav-category-btn-inactive'
-              }`}
-            >
-              CONCRETE WORK
-              <!-- Dropdown indicator -->
-              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-              <span
-                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-                  category === 'concrete' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                }`}
-              ></span>
-            </a>
-            <!-- Dropdown Menu - Professional spacing & sizing -->
-            <div class="absolute top-full left-0 mt-1 bg-charcoal border border-bronze/20 shadow-[0_8px_30px_rgb(0,0,0,0.6)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-full z-50">
-              <a href="/gallery/concrete#concrete-walkways" class="dropdown-item">
-                Walkways
-              </a>
-              <a href="/gallery/concrete#concrete-stairs" class="dropdown-item">
-                Steps & Stairs
-              </a>
-              <a href="/gallery/concrete#concrete-flatwork" class="dropdown-item">
-                Flatwork & Patios
-              </a>
-            </div>
-          </div>
-
-          <a
-            href="/gallery/outdoor-kitchens"
-            class={`nav-category-btn ${
-              category === 'outdoor-kitchens'
-                ? 'nav-category-btn-active'
-                : 'nav-category-btn-inactive'
-            }`}
-          >
-            OUTDOOR KITCHENS
-            <span
-              class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-                category === 'outdoor-kitchens' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-              }`}
-            ></span>
-          </a>
-
-          <a
-            href="/gallery/covered-patios"
-            class={`nav-category-btn ${
-              category === 'covered-patios'
-                ? 'nav-category-btn-active'
-                : 'nav-category-btn-inactive'
-            }`}
-          >
-            COVERED PATIOS
-            <span
-              class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-                category === 'covered-patios' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-              }`}
-            ></span>
-          </a>
-
-          <a
-            href="/gallery/pools-spas"
-            class={`nav-category-btn ${
-              category === 'pools-spas'
-                ? 'nav-category-btn-active'
-                : 'nav-category-btn-inactive'
-            }`}
-          >
-            POOLS & SPAS
-            <span
-              class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-                category === 'pools-spas' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-              }`}
-            ></span>
-          </a>
-
-          <a
-            href="/gallery/fire-features"
-            class={`nav-category-btn ${
-              category === 'fire-features'
-                ? 'nav-category-btn-active'
-                : 'nav-category-btn-inactive'
-            }`}
-          >
-            FIRE FEATURES
-            <span
-              class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-                category === 'fire-features' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-              }`}
-            ></span>
-          </a>
-
-          <!-- LANDSCAPING - Has subcategories, always show dropdown -->
-          <div class="relative group">
-            <a
-              href="/gallery/landscaping"
-              class={`filter-btn cursor-pointer px-6 py-3 font-['Bebas_Neue'] tracking-[0.1em] text-lg transition-all duration-300 relative border-2 flex items-center gap-2 ${
-                category === 'landscaping'
-                  ? 'text-white border-bronze/30'
-                  : 'text-slate-light hover:text-white border-transparent hover:border-bronze/30'
-              }`}
-            >
-              LANDSCAPING
-              <!-- Dropdown indicator -->
-              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-              <span
-                class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-                  category === 'landscaping' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                }`}
-              ></span>
-            </a>
-            <!-- Dropdown Menu - Professional spacing & sizing -->
-            <div class="absolute top-full left-0 mt-1 bg-charcoal border border-bronze/20 shadow-[0_8px_30px_rgb(0,0,0,0.6)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-full z-50">
-              <a
-                href="/gallery/landscaping#landscaping-turf"
-                class="block px-5 py-3 text-sm font-['Bebas_Neue'] tracking-[0.08em] text-slate-light hover:text-white hover:bg-charcoal-light transition-all duration-150 border-l-3 border-transparent hover:border-bronze"
-              >
-                Artificial Turf
-              </a>
-              <a
-                href="/gallery/landscaping#landscaping-gardens"
-                class="block px-5 py-3 text-sm font-['Bebas_Neue'] tracking-[0.08em] text-slate-light hover:text-white hover:bg-charcoal-light transition-all duration-150 border-l-3 border-transparent hover:border-bronze"
-              >
-                Gardens
-              </a>
-              <a
-                href="/gallery/landscaping#landscaping-water-features"
-                class="block px-5 py-3 text-sm font-['Bebas_Neue'] tracking-[0.08em] text-slate-light hover:text-white hover:bg-charcoal-light transition-all duration-150 border-l-3 border-transparent hover:border-bronze"
-              >
-                Water Features
-              </a>
-            </div>
-          </div>
-
-          <a
-            href="/gallery/ironwork"
-            class={`nav-category-btn ${
-              category === 'ironwork'
-                ? 'nav-category-btn-active'
-                : 'nav-category-btn-inactive'
-            }`}
-          >
-            IRON WORK
-            <span
-              class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-                category === 'ironwork' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-              }`}
-            ></span>
-          </a>
-        </div>
-
-        <!-- Mobile: Grid Layout -->
-        <div class="grid grid-cols-2 gap-1 md:hidden">
-          <a
-            href="/gallery/concrete"
-            class={`nav-mobile-btn ${
-              category === 'concrete'
-                ? 'text-white border-bronze bg-bronze/10'
-                : 'text-slate-light border-transparent'
-            }`}
-          >
-            CONCRETE
-          </a>
-
-          <a
-            href="/gallery/outdoor-kitchens"
-            class={`nav-mobile-btn ${
-              category === 'outdoor-kitchens'
-                ? 'text-white border-bronze bg-bronze/10'
-                : 'text-slate-light border-transparent'
-            }`}
-          >
-            OUTDOOR
-          </a>
-
-          <a
-            href="/gallery/covered-patios"
-            class={`nav-mobile-btn ${
-              category === 'covered-patios'
-                ? 'text-white border-bronze bg-bronze/10'
-                : 'text-slate-light border-transparent'
-            }`}
-          >
-            PATIOS
-          </a>
-
-          <a
-            href="/gallery/pools-spas"
-            class={`nav-mobile-btn ${
-              category === 'pools-spas'
-                ? 'text-white border-bronze bg-bronze/10'
-                : 'text-slate-light border-transparent'
-            }`}
-          >
-            POOLS
-          </a>
-
-          <a
-            href="/gallery/fire-features"
-            class={`nav-mobile-btn ${
-              category === 'fire-features'
-                ? 'text-white border-bronze bg-bronze/10'
-                : 'text-slate-light border-transparent'
-            }`}
-          >
-            FIRE
-          </a>
-
-          <a
-            href="/gallery/landscaping"
-            class={`nav-mobile-btn ${
-              category === 'landscaping'
-                ? 'text-white border-bronze bg-bronze/10'
-                : 'text-slate-light border-transparent'
-            }`}
-          >
-            LANDSCAPE
-          </a>
-
-          <a
-            href="/gallery/ironwork"
-            class={`nav-mobile-btn ${
-              category === 'ironwork'
-                ? 'text-white border-bronze bg-bronze/10'
-                : 'text-slate-light border-transparent'
-            }`}
-          >
-            IRON WORK
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Gallery Section - Full Width -->
-    <section class="section-padding bg-white border-t border-bronze/10">
-      <div class="max-w-[1400px] mx-auto px-6 md:px-8">
-        <!-- Categories WITH subcategories - show subsections with bronze headers -->
-        {subcategories.length > 0 ? (
-          <div>
-            {subcategories.map((subcat) => {
-              const subcatItems = galleryItems.filter(item => item.subcategory === subcat.slug);
-              if (subcatItems.length === 0) return null;
-
-              return (
-                <div id={`${category}-${subcat.slug}`} class="mb-12 scroll-mt-24">
-                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
-                    <span class="w-1 h-6 bg-bronze mr-3" />
-                    {subcat.name}
-                  </h3>
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    {subcatItems.map((item, index) => (
-                      <article
-                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
-                        data-index={galleryItems.indexOf(item)}
-                      >
-                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
-                          <img
-                            src={item.src}
-                            alt={item.alt}
-                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
-                            loading={index < 3 ? "eager" : "lazy"}
-                            width="800"
-                            height="600"
-                          />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div class="absolute bottom-6 left-6 right-6">
-                              <p class="text-white font-light text-sm md:text-base tracking-wide">
-                                {item.alt}
-                              </p>
-                            </div>
+            return (
+              <div id={`${category}-${subcat.slug}`} class="mb-12 scroll-mt-24">
+                <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                  <span class="w-1 h-6 bg-bronze mr-3" />
+                  {subcat.name}
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {subcatItems.map((item, index) => (
+                    <article
+                      class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                      data-index={galleryItems.indexOf(item)}
+                    >
+                      <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                        <img
+                          src={item.src}
+                          alt={item.alt}
+                          class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                          loading={index < 3 ? "eager" : "lazy"}
+                          width="800"
+                          height="600"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div class="absolute bottom-6 left-6 right-6">
+                            <p class="text-white font-light text-sm md:text-base tracking-wide">
+                              {item.alt}
+                            </p>
                           </div>
                         </div>
-                      </article>
-                    ))}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        // Categories WITHOUT subcategories - simple grid like original
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {galleryItems.map((item, index) => (
+            <article
+              class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+              data-index={index}
+            >
+              <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                  loading={index < 6 ? "eager" : "lazy"}
+                  width="800"
+                  height="600"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="absolute bottom-6 left-6 right-6">
+                    <p class="text-white font-light text-sm md:text-base tracking-wide">
+                      {item.alt}
+                    </p>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        ) : (
-          // Categories WITHOUT subcategories - simple grid like original
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {galleryItems.map((item, index) => (
-              <article
-                class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
-                data-index={index}
-              >
-                <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
-                    loading={index < 6 ? "eager" : "lazy"}
-                    width="800"
-                    height="600"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div class="absolute bottom-6 left-6 right-6">
-                      <p class="text-white font-light text-sm md:text-base tracking-wide">
-                        {item.alt}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
-      </div>
-    </section>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
 
-    <!-- CTA Section - Luxury Industrial -->
-    <section class="bg-black-pure section-padding border-t border-bronze/10">
-      <div class="container max-w-4xl mx-auto px-6 md:px-8 text-center">
-        <h2
-          class="font-['Bebas_Neue'] text-4xl md:text-5xl tracking-wider text-white mb-6"
-        >
-          Ready to Start Your Project?
-        </h2>
-        <div class="bronze-divider mx-auto mb-8"></div>
-        <p
-          class="text-lg md:text-xl text-slate-light font-light leading-relaxed mb-10 max-w-2xl mx-auto"
-        >
-          Let us transform your outdoor space with quality craftsmanship and
-          exceptional service.
-        </p>
-        <a
-          href="/#cta"
-          class="btn-primary"
-        >
-          Get Your Free Estimate
-        </a>
-      </div>
-    </section>
-  </main>
-</Layout>
-
-<!-- Lightbox Modal -->
-<div
-  id="lightbox"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Image gallery lightbox"
-  class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300"
->
-  <button
-    id="lightbox-close"
-    class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
-    aria-label="Close lightbox"
+  <!-- Lightbox Modal -->
+  <div
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Image gallery lightbox"
+    class="fixed inset-0 bg-black/95 z-[9999] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300"
   >
-    <svg
-      class="w-10 h-10"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
+    <button
+      id="lightbox-close"
+      class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+      aria-label="Close lightbox"
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M6 18L18 6M6 6l12 12"></path>
-    </svg>
-  </button>
+      <svg
+        class="w-10 h-10"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
 
-  <button
-    id="lightbox-prev"
-    class="absolute left-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
-    aria-label="Previous image"
-  >
-    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M15 19l-7-7 7-7"></path>
-    </svg>
-  </button>
+    <button
+      id="lightbox-prev"
+      class="absolute left-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
+      aria-label="Previous image"
+    >
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
 
-  <button
-    id="lightbox-next"
-    class="absolute right-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
-    aria-label="Next image"
-  >
-    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M9 5l7 7-7 7"></path>
-    </svg>
-  </button>
+    <button
+      id="lightbox-next"
+      class="absolute right-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
+      aria-label="Next image"
+    >
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
 
-  <div
-    class="max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
-  >
-    <img
-      id="lightbox-image"
-      src=""
-      alt=""
-      class="max-w-full max-h-full object-contain opacity-0 scale-95 transition-all duration-300"
-    />
+    <div
+      class="max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+    >
+      <img
+        id="lightbox-image"
+        src=""
+        alt=""
+        class="max-w-full max-h-full object-contain opacity-0 scale-95 transition-all duration-300"
+      />
+    </div>
+
+    <div
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-center"
+    >
+      <p id="lightbox-caption" class="text-lg font-light mb-2 text-slate-light"></p>
+      <p id="lightbox-counter" class="text-sm text-slate-light"></p>
+    </div>
   </div>
 
-  <div
-    class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-center"
+  <!-- Back to Top Button -->
+  <button
+    id="back-to-top"
+    class="fixed bottom-8 right-8 bg-bronze text-white p-4 rounded-full shadow-2xl hover:bg-bronze-dark transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110 cursor-pointer"
+    aria-label="Back to top"
   >
-    <p id="lightbox-caption" class="text-lg font-light mb-2 text-slate-light"></p>
-    <p id="lightbox-counter" class="text-sm text-slate-light"></p>
-  </div>
-</div>
-
-<!-- Back to Top Button (EXACT MATCH) -->
-<button
-  id="back-to-top"
-  class="fixed bottom-8 right-8 bg-bronze text-white p-4 rounded-full shadow-2xl hover:bg-bronze-dark transition-all duration-300 opacity-0 pointer-events-none z-50 hover:scale-110 cursor-pointer"
-  aria-label="Back to top"
->
-  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-  </svg>
-</button>
-
-<Footer />
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+</GalleryLayout>
 
 <script>
   // Constants
@@ -709,15 +387,6 @@ const subcategories = categorySubcategories[category as string] || [];
     }
   });
 
-  // Hero page-load animation
-  const heroContent = document.querySelector(".hero-content");
-  if (heroContent) {
-    setTimeout(() => {
-      heroContent.classList.remove("opacity-0");
-      heroContent.classList.add("animate-fade-in-up");
-    }, 100);
-  }
-
   // Subcategory dropdown scroll functionality
   const HEADER_OFFSET = 120;
   const subcatScrollBtns = document.querySelectorAll(".subcat-scroll-btn");
@@ -737,22 +406,6 @@ const subcategories = categorySubcategories[category as string] || [];
 </script>
 
 <style>
-  /* Hero animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
   /* Hide scrollbar for category nav */
   .scrollbar-hide {
     -ms-overflow-style: none;
