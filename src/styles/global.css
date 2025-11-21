@@ -199,3 +199,20 @@ h1, h2, h3, h4, h5, h6 {
 .bronze-gradient-divider {
   @apply h-1 bg-gradient-to-r from-transparent via-bronze to-transparent;
 }
+
+/* ========================================
+   SMOOTH SCROLL + FIXED HEADER OFFSET
+   Modern solution for anchor links with fixed header
+   ======================================== */
+
+@layer base {
+  /* Smooth scrolling behavior for all anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Offset sections to account for fixed header (96px on desktop) */
+  section[id] {
+    scroll-margin-top: 6rem; /* 96px = exact header height, no extra space */
+  }
+}
