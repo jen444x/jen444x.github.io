@@ -155,46 +155,14 @@ import ironWorkImg from '../../public/img/show-case/iron-work/IMG_8394.jpeg';
 
 <!-- SCROLL ANIMATION SCRIPT -->
 <script>
-  // Intersection Observer for scroll-triggered animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  import { initScrollAnimations, HOMEPAGE_SCROLL_CONFIG } from '../utils/animations.js';
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-fade-in-up');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  // Observe all scroll-reveal elements
-  document.querySelectorAll('.scroll-reveal').forEach((el) => {
-    observer.observe(el);
-  });
+  // Initialize scroll animations for Services section
+  // Using HOMEPAGE_SCROLL_CONFIG: 100px buffer for smooth early reveals
+  initScrollAnimations('.scroll-reveal', HOMEPAGE_SCROLL_CONFIG);
 </script>
 
 <style>
-  /* Scroll-triggered fade-in animation */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  /* Smooth transitions */
-  .scroll-reveal {
-    will-change: transform, opacity;
-  }
+  /* Import reusable animations */
+  @import '../styles/animations.css';
 </style>

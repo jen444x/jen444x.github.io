@@ -125,7 +125,7 @@ const categories = [
     <section class="section-padding bg-white">
       <div class="max-w-7xl mx-auto px-6 md:px-8">
         <!-- Section Intro -->
-        <div class="text-center mb-12 md:mb-16 scroll-reveal opacity-0">
+        <div class="section-intro scroll-reveal opacity-0">
           <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-wider text-charcoal mb-4">
             Browse by Category
           </h2>
@@ -222,7 +222,7 @@ const categories = [
         </p>
         <a
           href="/#cta"
-          class="inline-block font-['Bebas_Neue'] text-lg tracking-wider bg-transparent border-2 border-white text-white py-4 px-10 transition-all duration-300 hover:bg-bronze hover:border-bronze hover:text-white shadow-[0_4px_15px_rgb(0_0_0/30%)] hover:shadow-[0_4px_20px_rgb(184_134_11/40%)]"
+          class="btn-primary"
         >
           Get Your Free Estimate
         </a>
@@ -234,6 +234,8 @@ const categories = [
 </Layout>
 
 <script>
+  import { initScrollAnimations, GALLERY_SCROLL_CONFIG } from '../utils/animations.js';
+
   // Hero page-load animation - trigger immediately
   const heroContent = document.querySelector(".hero-content");
   if (heroContent) {
@@ -244,39 +246,11 @@ const categories = [
   }
 
   // Scroll reveal animations for category cards
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animate-fade-in-up");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll(".scroll-reveal").forEach((el) => {
-    observer.observe(el);
-  });
+  // Using GALLERY_SCROLL_CONFIG: 150px buffer so cards appear sooner (page was looking empty)
+  initScrollAnimations('.scroll-reveal', GALLERY_SCROLL_CONFIG);
 </script>
 
 <style>
-  /* Hero animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
+  /* Import reusable animations */
+  @import '../styles/animations.css';
 </style>
