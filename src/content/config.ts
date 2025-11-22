@@ -6,7 +6,7 @@ const galleryCollection = defineCollection({
     title: z.string(),
     image: z.string(),
     alt: z.string(),
-    categories: z.record(z.string().nullable()),
+    categories: z.array(z.string()), // Array of category slugs (e.g., ["concrete-walkways", "fire-features"])
     featured: z.boolean().optional().default(false),
     date: z.date().optional(),
   }),

@@ -14,12 +14,9 @@
           "type": "string"
         },
         "categories": {
-          "type": "object",
-          "additionalProperties": {
-            "type": [
-              "string",
-              "null"
-            ]
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "featured": {

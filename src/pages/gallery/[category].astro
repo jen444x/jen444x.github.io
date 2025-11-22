@@ -26,16 +26,29 @@ const { categoryInfo } = Astro.props;
 // Get all gallery items and filter by category
 const allGalleryItems = await getCollection('gallery');
 const galleryItems = allGalleryItems
-  .filter(item => category in item.data.categories)
-  .map((item, index) => ({
-    src: item.data.image,
-    alt: item.data.alt,
-    title: item.data.title,
-    categories: item.data.categories,
-    subcategory: item.data.categories[category as keyof typeof item.data.categories],
-    featured: item.data.featured,
-    originalIndex: index,
-  }));
+  .filter(item => {
+    // Check if any category starts with the current category slug
+    // e.g., "concrete" matches "concrete-walkways", "concrete-stairs", etc.
+    return item.data.categories.some(cat => cat.startsWith(category + '-') || cat === category);
+  })
+  .map((item, index) => {
+    // Extract subcategory from category slug
+    // e.g., "concrete-walkways" → subcategory = "walkways"
+    const matchingCategory = item.data.categories.find(cat => cat.startsWith(category + '-') || cat === category);
+    const subcategory = matchingCategory && matchingCategory.includes('-')
+      ? matchingCategory.split('-')[1]
+      : null;
+
+    return {
+      src: item.data.image,
+      alt: item.data.alt,
+      title: item.data.title,
+      categories: item.data.categories,
+      subcategory,
+      featured: item.data.featured,
+      originalIndex: index,
+    };
+  });
 
 // Define subcategories for each category (matches original gallery.astro structure)
 const categorySubcategories: Record<string, { slug: string; name: string }[]> = {
