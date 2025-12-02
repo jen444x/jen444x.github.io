@@ -5,6 +5,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
+import sanity from '@sanity/astro';
+import react from '@astrojs/react';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://rockyconcreteinc.com',
@@ -13,5 +16,14 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap()]
+  integrations: [
+    sitemap(),
+    sanity({
+      projectId: '7pjigdmm',
+      dataset: 'production',
+      useCdn: false,
+      studioBasePath: '/admin',
+    }),
+    react()
+  ]
 });
