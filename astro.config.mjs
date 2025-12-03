@@ -7,13 +7,19 @@ import sitemap from '@astrojs/sitemap';
 
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
+import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://rockyconcreteinc.com',
+  output: 'server',
+  adapter: netlify(),
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ['sanity']
+    }
   },
 
   integrations: [

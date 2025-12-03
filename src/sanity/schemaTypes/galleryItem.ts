@@ -1,0 +1,112 @@
+import { defineField, defineType } from 'sanity'
+
+export default defineType({
+  name: 'galleryItem',
+  title: 'Gallery Item',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true, // Enables image cropping and focal point selection
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      description: 'Brief description of the project (e.g., "Modern geometric walkway with clean lines")',
+      validation: (Rule) => Rule.required().max(100),
+    }),
+    defineField({
+      name: 'alt',
+      title: 'Alt Text',
+      type: 'string',
+      description: 'Describe the image for accessibility (usually same as title)',
+      validation: (Rule) => Rule.required().max(125),
+      initialValue: (context) => context.parent?.title || '',
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      description: 'Select the primary category for this project',
+      options: {
+        list: [
+          { title: 'Concrete Work', value: 'concrete' },
+          { title: 'Outdoor Kitchens', value: 'outdoor-kitchens' },
+          { title: 'Covered Patios', value: 'covered-patios' },
+          { title: 'Pools & Spas', value: 'pools-spas' },
+          { title: 'Fire Features', value: 'fire-features' },
+          { title: 'Landscaping', value: 'landscaping' },
+          { title: 'Iron Work', value: 'iron-work' },
+        ],
+        layout: 'dropdown',
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'subcategory',
+      title: 'Subcategory',
+      type: 'string',
+      description: 'Select a specific type (only for Concrete and Landscaping)',
+      options: {
+        list: [
+          // Concrete subcategories
+          { title: 'Walkways', value: 'walkways' },
+          { title: 'Steps & Stairs', value: 'steps-stairs' },
+          { title: 'Flatwork & Patios', value: 'flatwork-patios' },
+          // Landscaping subcategories
+          { title: 'Artificial Turf', value: 'turf' },
+          { title: 'Gardens', value: 'gardens' },
+          { title: 'Water Features', value: 'water-features' },
+        ],
+        layout: 'dropdown',
+      },
+      hidden: ({ parent }) =>
+        parent?.category !== 'concrete' && parent?.category !== 'landscaping',
+    }),
+    defineField({
+      name: 'notes',
+      title: 'Notes',
+      type: 'text',
+      description: 'Notes from dad about this project (for Jennifer to review)',
+      rows: 3,
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Add custom tags (optional - for future search/filtering)',
+      options: {
+        layout: 'tags', // Nice tag input UI
+      },
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      description: 'Check this to feature on homepage',
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'category',
+      media: 'image',
+    },
+    prepare(selection) {
+      const { title, subtitle, media } = selection
+      return {
+        title: title,
+        subtitle: subtitle ? `Category: ${subtitle}` : 'No category',
+        media: media,
+      }
+    },
+  },
+})

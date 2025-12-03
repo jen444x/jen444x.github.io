@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro'
+import UploadForm from '../components/UploadForm'
+---
+
+<Layout
+  title="Upload Photo | Rocky Concrete"
+  description="Upload photos to the Rocky Concrete gallery"
+>
+  <main class="min-h-screen bg-black-pure">
+    <!-- Simple header -->
+    <header class="bg-charcoal border-b border-charcoal-light">
+      <div class="max-w-lg mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="font-['Bebas_Neue'] text-2xl text-white tracking-wider">
+          Rocky Concrete
+        </a>
+        <a href="/admin" class="text-slate-light hover:text-bronze text-sm transition-colors">
+          Studio →
+        </a>
+      </div>
+    </header>
+
+    <!-- Auth gate - shows login or upload form -->
+    <div id="auth-container" class="max-w-lg mx-auto px-4 py-8">
+      <!-- Login form (shown by default, hidden after auth) -->
+      <div id="login-section">
+        <div class="text-center mb-8">
+          <h1 class="font-['Bebas_Neue'] text-4xl text-white tracking-wide mb-2">
+            Subir Foto
+          </h1>
+          <p class="text-slate-light">Escribe la contraseña</p>
+        </div>
+
+        <form id="login-form" class="space-y-4">
+          <input
+            type="password"
+            id="password-input"
+            placeholder="Contraseña"
+            autocomplete="current-password"
+            class="w-full px-4 py-4 bg-charcoal border-2 border-slate rounded-lg text-white placeholder-slate-light focus:border-bronze focus:outline-none transition-colors text-base text-center tracking-widest"
+          />
+          <div id="login-error" class="text-red-400 text-center text-sm hidden">
+            Contraseña incorrecta
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-bronze hover:bg-bronze-dark text-white font-['Bebas_Neue'] text-xl tracking-wider py-4 rounded-lg transition-colors"
+          >
+            Continuar
+          </button>
+        </form>
+      </div>
+
+      <!-- Upload form (hidden by default, shown after auth) -->
+      <div id="upload-section" class="hidden">
+        <div class="text-center mb-8">
+          <h1 class="font-['Bebas_Neue'] text-4xl text-white tracking-wide mb-2">
+            Subir Foto
+          </h1>
+          <p class="text-slate-light">Agrega una foto nueva a la galería</p>
+        </div>
+
+        <UploadForm client:load />
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Simple password auth with localStorage persistence
+    const STORAGE_KEY = 'rocky_upload_auth'
+
+    const loginSection = document.getElementById('login-section')
+    const uploadSection = document.getElementById('upload-section')
+    const loginForm = document.getElementById('login-form')
+    const passwordInput = document.getElementById('password-input') as HTMLInputElement
+    const loginError = document.getElementById('login-error')
+
+    // Check if already authenticated
+    function checkAuth() {
+      const authToken = localStorage.getItem(STORAGE_KEY)
+      if (authToken === 'authenticated') {
+        showUploadForm()
+      }
+    }
+
+    function showUploadForm() {
+      loginSection?.classList.add('hidden')
+      uploadSection?.classList.remove('hidden')
+    }
+
+    // Verify password against server
+    loginForm?.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const password = passwordInput?.value
+
+      try {
+        const response = await fetch('/api/verify-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password }),
+        })
+
+        if (response.ok) {
+          localStorage.setItem(STORAGE_KEY, 'authenticated')
+          showUploadForm()
+        } else {
+          loginError?.classList.remove('hidden')
+          passwordInput?.focus()
+        }
+      } catch {
+        loginError?.classList.remove('hidden')
+      }
+    })
+
+    // Hide error when typing
+    passwordInput?.addEventListener('input', () => {
+      loginError?.classList.add('hidden')
+    })
+
+    // Run auth check on load
+    checkAuth()
+  </script>
+</Layout>
