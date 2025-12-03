@@ -124,9 +124,7 @@ export default function UploadForm() {
         <h2 className="font-['Bebas_Neue'] text-3xl text-white mb-2">
           ¡Listo!
         </h2>
-        <p className="text-slate-light mb-8">
-          La foto se agregó a la galería.
-        </p>
+        <p className="text-slate-light mb-8">La foto se agregó a la galería.</p>
         <button
           onClick={resetForm}
           className="bg-bronze hover:bg-bronze-dark text-white font-['Bebas_Neue'] text-lg tracking-wider py-4 px-8 transition-colors"
@@ -210,7 +208,7 @@ export default function UploadForm() {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="ej. Patio de concreto estampado"
+          placeholder="ej. Patio de concreto estampado, patrón de piedra"
           maxLength={100}
           className="w-full px-4 py-4 bg-charcoal border-2 border-slate rounded-lg text-white placeholder-slate-light focus:border-bronze focus:outline-none transition-colors text-base"
         />
@@ -289,7 +287,8 @@ export default function UploadForm() {
           id="notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="ej. Concreto estampado, patrón de piedra, cliente en Chester Ave"
+          placeholder="ej. Concreto estampado, patrón de piedra
+          "
           rows={3}
           maxLength={500}
           className="w-full px-4 py-4 bg-charcoal border-2 border-slate rounded-lg text-white placeholder-slate-light focus:border-bronze focus:outline-none transition-colors text-base resize-none"
