@@ -1,5 +1,11 @@
 node_modules/
 dist/
 .env
+.env.local
+.env*.local
 # Local Netlify folder
 .netlify
+# Backup/duplicate files
+*.backup
+*\ 2.ts
+*\ 2
