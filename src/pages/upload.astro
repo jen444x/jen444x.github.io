@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro'
 import UploadForm from '../components/UploadForm'
 ---
 
+<!-- HEIC to JPEG conversion - load before React component -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/heic-to@1.3.0/dist/iife/heic-to.js"></script>
+
 <Layout
   title="Upload Photo | Rocky Concrete"
   description="Upload photos to the Rocky Concrete gallery"

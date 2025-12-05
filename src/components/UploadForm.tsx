@@ -25,7 +25,7 @@ const SUBCATEGORIES: Record<string, { value: string; label: string }[]> = {
   ],
 };
 
-type UploadStatus = "idle" | "uploading" | "success" | "error";
+type UploadStatus = "idle" | "converting" | "uploading" | "success" | "error";
 
 export default function UploadForm() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -41,9 +41,56 @@ export default function UploadForm() {
   const hasSubcategories =
     category === "concrete" || category === "landscaping";
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
+    if (!file) return;
+
+    // Check if it's a HEIC file (iPhone photos)
+    const isHeic =
+      file.type === "image/heic" ||
+      file.type === "image/heif" ||
+      file.name.toLowerCase().endsWith(".heic") ||
+      file.name.toLowerCase().endsWith(".heif");
+
+    if (isHeic) {
+      setStatus("converting");
+      try {
+        // HeicTo is loaded from CDN in upload.astro
+        // Wait for it to be available (max 5 seconds)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let HeicTo = (window as any).HeicTo;
+        if (!HeicTo) {
+          for (let i = 0; i < 50 && !HeicTo; i++) {
+            await new Promise((r) => setTimeout(r, 100));
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            HeicTo = (window as any).HeicTo;
+          }
+        }
+        if (!HeicTo) {
+          throw new Error("HEIC converter not loaded");
+        }
+        const blob = await HeicTo({
+          blob: file,
+          type: "image/jpeg",
+          quality: 0.9,
+        });
+
+        // Create a new File from the blob
+        const convertedFile = new File(
+          [blob],
+          file.name.replace(/\.heic$/i, ".jpg").replace(/\.heif$/i, ".jpg"),
+          { type: "image/jpeg" }
+        );
+
+        setImageFile(convertedFile);
+        setImagePreview(URL.createObjectURL(blob));
+        setStatus("idle");
+      } catch (err) {
+        console.error("HEIC conversion error:", err);
+        setStatus("error");
+        setErrorMessage("No se pudo convertir la foto. Intenta con otra.");
+      }
+    } else {
       setImageFile(file);
       // Create preview URL
       const reader = new FileReader();
@@ -208,7 +255,7 @@ export default function UploadForm() {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="ej. Patio de concreto estampado, patrón de piedra"
+          placeholder="ej. Broom finish"
           maxLength={100}
           className="w-full px-4 py-4 bg-charcoal border-2 border-slate rounded-lg text-white placeholder-slate-light focus:border-bronze focus:outline-none transition-colors text-base"
         />
@@ -287,8 +334,7 @@ export default function UploadForm() {
           id="notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="ej. Concreto estampado, patrón de piedra
-          "
+          placeholder="ej. Tipo de trabajo, detalles"
           rows={3}
           maxLength={500}
           className="w-full px-4 py-4 bg-charcoal border-2 border-slate rounded-lg text-white placeholder-slate-light focus:border-bronze focus:outline-none transition-colors text-base resize-none"
@@ -308,10 +354,10 @@ export default function UploadForm() {
       {/* Submit button */}
       <button
         type="submit"
-        disabled={status === "uploading"}
+        disabled={status === "uploading" || status === "converting"}
         className="w-full bg-bronze hover:bg-bronze-dark disabled:bg-slate disabled:cursor-not-allowed text-white font-['Bebas_Neue'] text-xl tracking-wider py-5 rounded-lg transition-colors"
       >
-        {status === "uploading" ? (
+        {status === "uploading" || status === "converting" ? (
           <span className="flex items-center justify-center gap-2">
             <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
               <circle
@@ -329,7 +375,7 @@ export default function UploadForm() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               />
             </svg>
-            Subiendo...
+            {status === "converting" ? "Convirtiendo..." : "Subiendo..."}
           </span>
         ) : (
           "Subir Foto"
