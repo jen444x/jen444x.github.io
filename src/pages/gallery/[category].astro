@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { sanityClient } from "../../sanity/client";
 import GalleryLayout from "../../layouts/GalleryLayout.astro";
 import CategoryNav from "../../components/CategoryNav.astro";
 
@@ -25,43 +25,52 @@ export async function getStaticPaths() {
 const { category } = Astro.params;
 const { categoryInfo } = Astro.props;
 
-// Get all gallery items and filter by category
-const allGalleryItems = await getCollection('gallery');
-const galleryItems = allGalleryItems
-  .filter(item => {
-    // Check if any category starts with the current category slug
-    // e.g., "concrete" matches "concrete-walkways", "concrete-stairs", etc.
-    return item.data.categories.some(cat => cat.startsWith(category + '-') || cat === category);
-  })
-  .map((item, index) => {
-    // Extract subcategory from category slug
-    // e.g., "concrete-walkways" → subcategory = "walkways"
-    const matchingCategory = item.data.categories.find(cat => cat.startsWith(category + '-') || cat === category);
-    const subcategory = matchingCategory && matchingCategory.includes('-')
-      ? matchingCategory.split('-')[1]
-      : null;
+// Map URL slugs to Sanity category values (ironwork vs iron-work)
+const categorySlugMap: Record<string, string> = {
+  'ironwork': 'iron-work',
+};
+const sanityCategory = categorySlugMap[category as string] || category;
 
-    return {
-      src: item.data.image,
-      alt: item.data.alt,
-      title: item.data.title,
-      categories: item.data.categories,
-      subcategory,
-      featured: item.data.featured,
-      originalIndex: index,
-    };
-  });
+// Fetch gallery items from Sanity, sorted by featured first
+const allGalleryItems = await sanityClient.fetch(`
+  *[_type == "galleryItem" && category == $category] | order(featured desc) {
+    _id,
+    title,
+    alt,
+    category,
+    subcategory,
+    featured,
+    "imageUrl": image.asset->url
+  }
+`, { category: sanityCategory });
 
-// Define subcategories for each category (matches original gallery.astro structure)
+// Map Sanity data to the format the template expects
+const galleryItems = allGalleryItems.map((item: any, index: number) => ({
+  src: item.imageUrl,
+  alt: item.alt,
+  title: item.title,
+  category: item.category,
+  subcategory: item.subcategory || null,
+  featured: item.featured || false,
+  originalIndex: index,
+}));
+
+// Define subcategories for each category (matches Sanity schema values)
 const categorySubcategories: Record<string, { slug: string; name: string }[]> = {
   'concrete': [
     { slug: 'walkways', name: 'Walkways' },
-    { slug: 'stairs', name: 'Steps & Stairs' },
-    { slug: 'flatwork', name: 'Flatwork & Patios' }
+    { slug: 'steps-stairs', name: 'Steps & Stairs' },
+    { slug: 'flatwork-patios', name: 'Flatwork & Patios' },
+    { slug: 'driveways', name: 'Driveways' },
+    { slug: 'stone-work', name: 'Stone Work' }
+  ],
+  'fire-features': [
+    { slug: 'fire-pits', name: 'Fire Pits' },
+    { slug: 'fire-pit-tables', name: 'Fire Pit Tables' },
+    { slug: 'fireplaces', name: 'Fireplaces' }
   ],
   'landscaping': [
     { slug: 'turf', name: 'Artificial Turf' },
-    { slug: 'gardens', name: 'Gardens' },
     { slug: 'water-features', name: 'Water Features' }
   ]
 };

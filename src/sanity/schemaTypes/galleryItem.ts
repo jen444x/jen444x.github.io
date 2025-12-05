@@ -52,22 +52,27 @@ export default defineType({
       name: 'subcategory',
       title: 'Subcategory',
       type: 'string',
-      description: 'Select a specific type (only for Concrete and Landscaping)',
+      description: 'Select a specific type (for Concrete, Fire Features, and Landscaping)',
       options: {
         list: [
           // Concrete subcategories
           { title: 'Walkways', value: 'walkways' },
           { title: 'Steps & Stairs', value: 'steps-stairs' },
           { title: 'Flatwork & Patios', value: 'flatwork-patios' },
+          { title: 'Driveways', value: 'driveways' },
+          { title: 'Stone Work', value: 'stone-work' },
+          // Fire Features subcategories
+          { title: 'Fire Pits', value: 'fire-pits' },
+          { title: 'Fire Pit Tables', value: 'fire-pit-tables' },
+          { title: 'Fireplaces', value: 'fireplaces' },
           // Landscaping subcategories
           { title: 'Artificial Turf', value: 'turf' },
-          { title: 'Gardens', value: 'gardens' },
           { title: 'Water Features', value: 'water-features' },
         ],
         layout: 'dropdown',
       },
       hidden: ({ parent }) =>
-        parent?.category !== 'concrete' && parent?.category !== 'landscaping',
+        parent?.category !== 'concrete' && parent?.category !== 'landscaping' && parent?.category !== 'fire-features',
     }),
     defineField({
       name: 'notes',
