@@ -17,106 +17,140 @@ const client = createClient({
 // Photos analyzed by AI with metadata
 const photos = [
   {
-    filename: '03559C57-B458-40ED-8C06-1F525FBF10C1_1_105_c.jpeg',
-    title: 'Covered patio with stone bar and outdoor kitchen',
-    category: 'outdoor-kitchens',
-    subcategory: null,
-  },
-  {
-    filename: '15820BBF-5871-4A5A-B335-06CB7CE971B0_1_105_c.jpeg',
-    title: 'Covered patio with stone veneer bar and seating',
-    category: 'outdoor-kitchens',
-    subcategory: null,
-  },
-  {
-    filename: '16373F7B-3167-49D4-82C9-E5055DF526D3_1_105_c.jpeg',
-    title: 'Expansive covered patio with dual ceiling fans',
-    category: 'covered-patios',
-    subcategory: null,
-  },
-  {
-    filename: '2A8FC3DC-5929-4668-8961-9BD398474893_1_102_o.jpeg',
-    title: 'Covered outdoor kitchen with stone bar and grill',
-    category: 'outdoor-kitchens',
-    subcategory: null,
-  },
-  {
-    filename: '5E946A03-379C-4BA4-872C-BBE634C80BC8_1_105_c.jpeg',
-    title: 'Aluminum louvered patio cover with pool view',
-    category: 'covered-patios',
-    subcategory: null,
-  },
-  {
-    filename: '803182A4-DC8E-4F79-ADE3-9CC9884A22B8_1_105_c.jpeg',
-    title: 'Concrete fire pit table with modern seating',
+    filename: '1F62D8E2-5C01-4497-82A2-3EE09E1BC505_1_105_c.jpeg',
+    title: 'Custom fire pit with stamped concrete patio',
+    alt: 'Round gas fire pit with bronze rim and black fire glass on stamped concrete patio featuring smooth broom finish',
     category: 'fire-features',
-    subcategory: 'fire-pit-tables',
+    subcategory: 'fire-pits',
+    finishType: null,
   },
   {
-    filename: '93B7689C-6121-4EB1-88BA-8F65396FCD6E_1_105_c.jpeg',
-    title: 'Aluminum patio cover with ceiling fan and pool',
-    category: 'covered-patios',
-    subcategory: null,
-  },
-  {
-    filename: '9A796DEF-F41A-4237-9AAF-96146E1D07A4_1_105_c.jpeg',
-    title: 'Covered outdoor kitchen with stone bar and TV',
-    category: 'outdoor-kitchens',
-    subcategory: null,
-  },
-  {
-    filename: 'AE760FE9-C6DE-429E-970C-1ED7D58DB9A5_1_105_c.jpeg',
-    title: 'Stamped ashlar slate patio in progress',
+    filename: '2395D144-CDD5-4D4E-8267-A7EE7958A70C_1_105_c.jpeg',
+    title: 'Modern pool deck with large format concrete pavers',
+    alt: 'Aerial view of contemporary pool deck installation with large smooth concrete pavers in gray tones',
     category: 'concrete',
     subcategory: 'flatwork-patios',
+    finishType: 'smooth',
   },
   {
-    filename: 'CA5CE75E-173C-4F8D-87E6-0318A212D57E_1_105_c.jpeg',
-    title: 'Concrete fire pit table with glass guard lit',
+    filename: '30BAA46A-FF7F-47CA-B33C-71A362A9815D_1_105_c.jpeg',
+    title: 'Covered entry with flagstone stamped concrete',
+    alt: 'Covered porch flooring featuring flagstone pattern stamped concrete in warm earth tones with natural stone appearance',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stamped',
+  },
+  {
+    filename: '35497401-35A9-4765-B936-2E29DFF465D1_1_105_c.jpeg',
+    title: 'Ashlar slate stamped concrete patio',
+    alt: 'Stamped concrete patio with ashlar slate pattern in gray tones featuring textured finish and expansion joints',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stamped',
+  },
+  {
+    filename: '391CD3CF-2879-4D92-B6B0-1D0CDBFEE13E_1_105_c.jpeg',
+    title: 'Fresh concrete walkway and steps installation',
+    alt: 'Newly poured concrete walkway and steps with smooth broom finish leading from driveway to front entry',
+    category: 'concrete',
+    subcategory: 'walkways-steps',
+    finishType: 'broom-finish',
+  },
+  {
+    filename: '3CA334DB-A11E-4747-BE2F-7CD91432E6BD_1_105_c.jpeg',
+    title: 'European cobblestone stamped concrete patio',
+    alt: 'Decorative stamped concrete patio with European fan cobblestone pattern in warm brown and tan tones',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stamped',
+  },
+  {
+    filename: '5ACCBCE2-5D80-4356-8B04-CFA4B3BF83BD_1_105_c.jpeg',
+    title: 'Closeup of acid-stained concrete with variegated finish',
+    alt: 'Detailed view of acid-stained concrete floor with mottled brown and tan variegated finish and natural color variations',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stained',
+  },
+  {
+    filename: '66065793-D0D4-4946-A7F2-95077EB3BC99_1_105_c.jpeg',
+    title: 'Round fire pit with bronze rim and glass',
+    alt: 'Custom gas fire pit with bronze metal rim and black fire glass on gray stamped concrete patio',
     category: 'fire-features',
-    subcategory: 'fire-pit-tables',
+    subcategory: 'fire-pits',
+    finishType: null,
   },
   {
-    filename: 'CCDE8D80-3375-4C4A-AE6F-F25242D2C3D4_1_105_c.jpeg',
-    title: 'Large covered patio with fire pit table',
-    category: 'covered-patios',
-    subcategory: null,
+    filename: '6A8800DF-4C41-4019-A801-B4A3880B0C71_1_105_c.jpeg',
+    title: 'European fan cobblestone pattern detail',
+    alt: 'Stamped concrete featuring European fan cobblestone pattern with warm tan and brown color blend',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stamped',
   },
   {
-    filename: 'D6414AE1-FC2F-4747-AD7C-0DEAB1DC5D42_4_5005_c.jpeg',
-    title: 'Concrete fire pit table closeup with pool view',
+    filename: '75326C01-A866-46FE-87A8-4E38CA39C342_1_105_c.jpeg',
+    title: 'Diamond-scored stained concrete patio',
+    alt: 'Stained concrete patio with diagonal diamond scoring pattern in gray and brown variegated tones',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stained',
+  },
+  {
+    filename: '7EDE38C3-8C2A-4166-976B-3C5368EFBCA2_1_105_c.jpeg',
+    title: 'Wood plank stamped concrete patio',
+    alt: 'Stamped concrete patio with realistic wood plank pattern in gray and tan weathered wood appearance',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stamped',
+  },
+  {
+    filename: '93123D03-38E7-45C1-8F5F-D2B75B5092BE_1_105_c.jpeg',
+    title: 'Wood grain stamped concrete walkway',
+    alt: 'Stamped concrete walkway featuring detailed wood grain pattern with natural weathered wood coloring and texture',
+    category: 'concrete',
+    subcategory: 'walkways-steps',
+    finishType: 'stamped',
+  },
+  {
+    filename: 'A99C5D66-E640-4FA9-A4F4-B51D75B558B6_1_105_c.jpeg',
+    title: 'Exposed aggregate concrete entryway',
+    alt: 'Exposed aggregate concrete patio with natural stone and pebble finish at front entrance',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'exposed-aggregate',
+  },
+  {
+    filename: 'ADBA9B88-B11D-400A-8D76-EB18C04BAF33_1_105_c.jpeg',
+    title: 'Exposed aggregate concrete detail',
+    alt: 'Closeup of exposed aggregate concrete with multicolored stones and pebbles in brown, tan, and gray tones',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'exposed-aggregate',
+  },
+  {
+    filename: 'E125A667-04F0-4C8C-9A6C-361BFA914F0C_1_105_c.jpeg',
+    title: 'Custom fire pit with stacked stone veneer',
+    alt: 'Round gas fire pit with white concrete cap, stacked stone veneer sides, and blue fire glass on smooth concrete patio',
     category: 'fire-features',
-    subcategory: 'fire-pit-tables',
+    subcategory: 'fire-pits',
+    finishType: null,
   },
   {
-    filename: 'D70A6938-DF35-489C-935A-C450AA908871_4_5005_c.jpeg',
-    title: 'Pool with turf and concrete paver patio',
-    category: 'pools-spas',
-    subcategory: null,
+    filename: 'E31FA842-62A2-4E7C-BF58-B5BD8FD7613A_1_105_c.jpeg',
+    title: 'Flagstone stamped patio with custom fire pit',
+    alt: 'Backyard stamped concrete patio with flagstone pattern in earth tones featuring custom stone fire pit and smooth concrete steps',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stamped',
   },
   {
-    filename: 'DB226A2D-FB57-484F-B04A-4BC40E020DE3_4_5005_c.jpeg',
-    title: 'Covered patio with stone bar seating',
-    category: 'outdoor-kitchens',
-    subcategory: null,
-  },
-  {
-    filename: 'E2E4EC8F-2E90-498E-84A6-735DAD018543_1_102_a.jpeg',
-    title: 'Covered patio with stone bar full view',
-    category: 'outdoor-kitchens',
-    subcategory: null,
-  },
-  {
-    filename: 'F75027C1-7E7D-4B66-8EB3-765D02964F09_4_5005_c.jpeg',
-    title: 'Covered patio with wood planter and stone bar',
-    category: 'outdoor-kitchens',
-    subcategory: null,
-  },
-  {
-    filename: 'FABAE435-8112-4938-A229-F866B8F3B31B_4_5005_c.jpeg',
-    title: 'Outdoor kitchen with stone veneer and grill',
-    category: 'outdoor-kitchens',
-    subcategory: null,
+    filename: 'F6CB1341-E07C-4480-A124-D61F7962D25A_1_105_c.jpeg',
+    title: 'Stained concrete floor with decorative scoring',
+    alt: 'Interior stained concrete floor with diamond-pattern decorative scoring and metallic stain finish in tan tones',
+    category: 'concrete',
+    subcategory: 'flatwork-patios',
+    finishType: 'stained',
   },
 ]
 
@@ -148,7 +182,7 @@ async function uploadPhotos() {
       const doc = {
         _type: 'galleryItem',
         title: photo.title,
-        alt: photo.title,
+        alt: photo.alt,
         category: photo.category,
         featured: false,
         image: {
@@ -165,9 +199,17 @@ async function uploadPhotos() {
         doc.subcategory = photo.subcategory
       }
 
+      // Add finish type only if it exists (concrete photos)
+      if (photo.finishType) {
+        doc.finishType = photo.finishType
+      }
+
       const created = await client.create(doc)
       console.log(`✅ ${photo.title}`)
       console.log(`   Category: ${photo.category}${photo.subcategory ? ` → ${photo.subcategory}` : ''}`)
+      if (photo.finishType) {
+        console.log(`   Finish: ${photo.finishType}`)
+      }
       console.log(`   ID: ${created._id}\n`)
 
       successCount++

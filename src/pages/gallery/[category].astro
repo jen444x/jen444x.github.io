@@ -37,9 +37,9 @@ const categorySlugMap: Record<string, string> = {
 };
 const sanityCategory = categorySlugMap[category as string] || category;
 
-// Fetch gallery items from Sanity, sorted by featured first, then by order, then the rest
+// Fetch gallery items from Sanity, sorted by order only (featured only affects homepage)
 const allGalleryItems = await sanityClient.fetch(`
-  *[_type == "galleryItem" && category == $category] | order(featured desc, order asc) {
+  *[_type == "galleryItem" && category == $category] | order(order asc) {
     _id,
     title,
     alt,
