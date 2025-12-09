@@ -39,7 +39,6 @@ export default defineType({
           { title: 'Concrete Work', value: 'concrete' },
           { title: 'Outdoor Kitchens', value: 'outdoor-kitchens' },
           { title: 'Covered Patios', value: 'covered-patios' },
-          { title: 'Pools & Spas', value: 'pools-spas' },
           { title: 'Fire Features', value: 'fire-features' },
           { title: 'Landscaping', value: 'landscaping' },
           { title: 'Iron Work', value: 'iron-work' },
@@ -56,8 +55,7 @@ export default defineType({
       options: {
         list: [
           // Concrete subcategories
-          { title: 'Walkways', value: 'walkways' },
-          { title: 'Steps & Stairs', value: 'steps-stairs' },
+          { title: 'Walkways & Steps', value: 'walkways-steps' },
           { title: 'Flatwork & Patios', value: 'flatwork-patios' },
           { title: 'Driveways', value: 'driveways' },
           { title: 'Stone Work', value: 'stone-work' },
@@ -75,6 +73,37 @@ export default defineType({
         parent?.category !== 'concrete' && parent?.category !== 'landscaping' && parent?.category !== 'fire-features',
     }),
     defineField({
+      name: 'finishType',
+      title: 'Finish Type',
+      type: 'string',
+      description: 'Type of concrete finish (only for Concrete photos)',
+      options: {
+        list: [
+          { title: 'Stamped', value: 'stamped' },
+          { title: 'Stained', value: 'stained' },
+          { title: 'Exposed Aggregate', value: 'exposed-aggregate' },
+          { title: 'Broom Finish', value: 'broom-finish' },
+          { title: 'Smooth/Troweled', value: 'smooth' },
+          { title: 'Colored', value: 'colored' },
+        ],
+        layout: 'dropdown',
+      },
+      hidden: ({ parent }) => parent?.category !== 'concrete',
+    }),
+    defineField({
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
+      description: 'Lower numbers appear first (e.g., 1 = first, 10 = near top, leave blank = no preference)',
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      description: 'Check this to feature on homepage',
+      initialValue: false,
+    }),
+    defineField({
       name: 'notes',
       title: 'Notes',
       type: 'text',
@@ -88,15 +117,8 @@ export default defineType({
       of: [{ type: 'string' }],
       description: 'Add custom tags (optional - for future search/filtering)',
       options: {
-        layout: 'tags', // Nice tag input UI
+        layout: 'tags',
       },
-    }),
-    defineField({
-      name: 'featured',
-      title: 'Featured',
-      type: 'boolean',
-      description: 'Check this to feature on homepage',
-      initialValue: false,
     }),
   ],
   preview: {

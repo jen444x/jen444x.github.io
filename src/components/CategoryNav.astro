@@ -44,14 +44,17 @@ const { currentCategory } = Astro.props;
         </a>
         <!-- Dropdown Menu - Professional spacing & sizing -->
         <div class="absolute top-full left-0 mt-1 bg-charcoal border border-bronze/20 shadow-[0_8px_30px_rgb(0,0,0,0.6)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-full z-50">
-          <a href="/gallery/concrete#concrete-walkways" class="dropdown-item">
-            Walkways
+          <a href="/gallery/concrete#concrete-walkways-steps" class="dropdown-item">
+            Walkways & Steps
           </a>
-          <a href="/gallery/concrete#concrete-stairs" class="dropdown-item">
-            Steps & Stairs
-          </a>
-          <a href="/gallery/concrete#concrete-flatwork" class="dropdown-item">
+          <a href="/gallery/concrete#concrete-flatwork-patios" class="dropdown-item">
             Flatwork & Patios
+          </a>
+          <a href="/gallery/concrete#concrete-driveways" class="dropdown-item">
+            Driveways
+          </a>
+          <a href="/gallery/concrete#concrete-stone-work" class="dropdown-item">
+            Stone Work
           </a>
         </div>
       </div>
@@ -88,37 +91,40 @@ const { currentCategory } = Astro.props;
         ></span>
       </a>
 
-      <a
-        href="/gallery/pools-spas"
-        class={`nav-category-btn ${
-          currentCategory === 'pools-spas'
-            ? 'nav-category-btn-active'
-            : 'nav-category-btn-inactive'
-        }`}
-      >
-        POOLS & SPAS
-        <span
-          class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-            currentCategory === 'pools-spas' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+      <!-- FIRE FEATURES - Has subcategories, always show dropdown -->
+      <div class="relative group">
+        <a
+          href="/gallery/fire-features"
+          class={`nav-category-btn flex items-center gap-2 ${
+            currentCategory === 'fire-features'
+              ? 'nav-category-btn-active'
+              : 'nav-category-btn-inactive'
           }`}
-        ></span>
-      </a>
-
-      <a
-        href="/gallery/fire-features"
-        class={`nav-category-btn ${
-          currentCategory === 'fire-features'
-            ? 'nav-category-btn-active'
-            : 'nav-category-btn-inactive'
-        }`}
-      >
-        FIRE FEATURES
-        <span
-          class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
-            currentCategory === 'fire-features' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-          }`}
-        ></span>
-      </a>
+        >
+          FIRE FEATURES
+          <!-- Dropdown indicator -->
+          <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <span
+            class={`absolute bottom-0 left-0 w-full h-1 bg-bronze transition-transform duration-300 ${
+              currentCategory === 'fire-features' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+            }`}
+          ></span>
+        </a>
+        <!-- Dropdown Menu -->
+        <div class="absolute top-full left-0 mt-1 bg-charcoal border border-bronze/20 shadow-[0_8px_30px_rgb(0,0,0,0.6)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-full z-50">
+          <a href="/gallery/fire-features#fire-features-fire-pits" class="dropdown-item">
+            Fire Pits
+          </a>
+          <a href="/gallery/fire-features#fire-features-fire-pit-tables" class="dropdown-item">
+            Fire Pit Tables
+          </a>
+          <a href="/gallery/fire-features#fire-features-fireplaces" class="dropdown-item">
+            Fireplaces
+          </a>
+        </div>
+      </div>
 
       <!-- LANDSCAPING - Has subcategories, always show dropdown -->
       <div class="relative group">
@@ -143,22 +149,10 @@ const { currentCategory } = Astro.props;
         </a>
         <!-- Dropdown Menu - Professional spacing & sizing -->
         <div class="absolute top-full left-0 mt-1 bg-charcoal border border-bronze/20 shadow-[0_8px_30px_rgb(0,0,0,0.6)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-full z-50">
-          <a
-            href="/gallery/landscaping#landscaping-turf"
-            class="dropdown-item"
-          >
+          <a href="/gallery/landscaping#landscaping-turf" class="dropdown-item">
             Artificial Turf
           </a>
-          <a
-            href="/gallery/landscaping#landscaping-gardens"
-            class="dropdown-item"
-          >
-            Gardens
-          </a>
-          <a
-            href="/gallery/landscaping#landscaping-water-features"
-            class="dropdown-item"
-          >
+          <a href="/gallery/landscaping#landscaping-water-features" class="dropdown-item">
             Water Features
           </a>
         </div>
@@ -214,17 +208,6 @@ const { currentCategory } = Astro.props;
         }`}
       >
         PATIOS
-      </a>
-
-      <a
-        href="/gallery/pools-spas"
-        class={`nav-mobile-btn ${
-          currentCategory === 'pools-spas'
-            ? 'text-white border-bronze bg-bronze/10'
-            : 'text-slate-light border-transparent'
-        }`}
-      >
-        POOLS
       </a>
 
       <a

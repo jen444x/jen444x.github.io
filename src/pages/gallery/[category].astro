@@ -1,7 +1,14 @@
 ---
 import { sanityClient } from "../../sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
 import GalleryLayout from "../../layouts/GalleryLayout.astro";
 import CategoryNav from "../../components/CategoryNav.astro";
+
+// Set up image URL builder for hotspot support
+const builder = imageUrlBuilder(sanityClient);
+function urlFor(source: any) {
+  return builder.image(source);
+}
 
 export const prerender = true;
 
@@ -10,7 +17,6 @@ export async function getStaticPaths() {
     { slug: 'concrete', name: 'Concrete Work', description: 'Driveways, walkways, patios, stairs, and professional flatwork' },
     { slug: 'outdoor-kitchens', name: 'Outdoor Kitchens', description: 'Luxury outdoor kitchen designs with professional countertops and entertainment setups' },
     { slug: 'covered-patios', name: 'Covered Patios', description: 'Elegant covered patio designs with stone columns and premium finishes' },
-    { slug: 'pools-spas', name: 'Pools & Spas', description: 'Pool remodels, spa installations, and backyard transformations' },
     { slug: 'fire-features', name: 'Fire Features', description: 'Custom fire pits, outdoor fireplaces, and fire feature installations' },
     { slug: 'landscaping', name: 'Landscaping', description: 'Artificial turf, gardens, water features, and complete landscape design' },
     { slug: 'ironwork', name: 'Iron Work', description: 'Decorative gates, railings, archways, and custom metalwork' },
@@ -31,22 +37,26 @@ const categorySlugMap: Record<string, string> = {
 };
 const sanityCategory = categorySlugMap[category as string] || category;
 
-// Fetch gallery items from Sanity, sorted by featured first
+// Fetch gallery items from Sanity, sorted by featured first, then by order, then the rest
 const allGalleryItems = await sanityClient.fetch(`
-  *[_type == "galleryItem" && category == $category] | order(featured desc) {
+  *[_type == "galleryItem" && category == $category] | order(featured desc, order asc) {
     _id,
     title,
     alt,
     category,
     subcategory,
     featured,
-    "imageUrl": image.asset->url
+    image,
+    "fullImageUrl": image.asset->url
   }
 `, { category: sanityCategory });
 
 // Map Sanity data to the format the template expects
+// Thumbnails: 800x600 cropped with hotspot
+// Lightbox: Full size but respects crop rectangle (no forced dimensions)
 const galleryItems = allGalleryItems.map((item: any, index: number) => ({
-  src: item.imageUrl,
+  src: urlFor(item.image).width(800).height(600).fit("crop").url(),
+  fullSrc: urlFor(item.image).url(),
   alt: item.alt,
   title: item.title,
   category: item.category,
@@ -58,8 +68,7 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => ({
 // Define subcategories for each category (matches Sanity schema values)
 const categorySubcategories: Record<string, { slug: string; name: string }[]> = {
   'concrete': [
-    { slug: 'walkways', name: 'Walkways' },
-    { slug: 'steps-stairs', name: 'Steps & Stairs' },
+    { slug: 'walkways-steps', name: 'Walkways & Steps' },
     { slug: 'flatwork-patios', name: 'Flatwork & Patios' },
     { slug: 'driveways', name: 'Driveways' },
     { slug: 'stone-work', name: 'Stone Work' }
@@ -116,6 +125,7 @@ const breadcrumbs = [
                     <article
                       class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                       data-index={galleryItems.indexOf(item)}
+                      data-full-src={item.fullSrc}
                     >
                       <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                         <img
@@ -148,6 +158,7 @@ const breadcrumbs = [
             <article
               class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
               data-index={index}
+              data-full-src={item.fullSrc}
             >
               <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                 <img
@@ -316,6 +327,7 @@ const breadcrumbs = [
     if (!item) return;
 
     const img = item.querySelector("img");
+    const fullSrc = item.getAttribute("data-full-src");
     if (
       !img ||
       !lightbox ||
@@ -325,7 +337,8 @@ const breadcrumbs = [
     )
       return;
 
-    lightboxImage.src = img.src;
+    // Use full resolution image for lightbox, fall back to thumbnail if not available
+    lightboxImage.src = fullSrc || img.src;
     lightboxImage.alt = img.alt;
     lightboxCaption.textContent = img.alt;
     lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${galleryItems.length}`;
