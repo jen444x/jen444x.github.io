@@ -184,6 +184,18 @@ const structure = (S: any) =>
             .filter('_type == "galleryItem" && featured == true')
             .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
         ),
+
+      S.divider(),
+
+      // Category Covers (for homepage Services section)
+      S.listItem()
+        .title('Category Covers')
+        .child(
+          S.document()
+            .schemaType('categoryCovers')
+            .documentId('categoryCovers')
+            .title('Category Covers')
+        ),
     ])
 
 export default defineConfig({
