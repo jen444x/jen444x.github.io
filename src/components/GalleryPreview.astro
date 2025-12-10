@@ -1,12 +1,5 @@
 ---
-import { sanityClient } from "../sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-
-// Set up image URL builder
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source: any) {
-  return builder.image(source).width(1400).quality(90).auto('format');
-}
+import { sanityClient, urlFor } from "../sanity/client";
 
 // Fetch the homepage hero image (the ONE photo marked as homepageHero)
 // Falls back to most recent featured photo if none set

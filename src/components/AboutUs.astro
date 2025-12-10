@@ -1,12 +1,5 @@
 ---
-import { sanityClient } from "../sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-
-// Set up image URL builder
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source: any) {
-  return builder.image(source);
-}
+import { sanityClient, urlFor } from "../sanity/client";
 
 // Fetch one featured photo for the hero image
 const featuredPhoto = await sanityClient.fetch(`
@@ -97,7 +90,7 @@ const heroPhoto = featuredPhoto || await sanityClient.fetch(`
 
         <!-- CTA Button -->
         <a
-          href="tel:+16613308481"
+          href="#cta"
           class="about-cta-btn scroll-reveal opacity-0"
           style="animation-delay: 0.8s"
         >

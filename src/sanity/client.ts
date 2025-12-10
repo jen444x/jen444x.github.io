@@ -1,4 +1,6 @@
 import { createClient } from '@sanity/client'
+import imageUrlBuilder from '@sanity/image-url'
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 // Read-only client for fetching data (used on frontend)
 export const sanityClient = createClient({
@@ -17,3 +19,10 @@ export const sanityWriteClient = createClient({
   useCdn: false,
   token: import.meta.env.SANITY_WRITE_TOKEN,
 })
+
+// Shared image URL builder - use this instead of duplicating in each component
+const builder = imageUrlBuilder(sanityClient)
+
+export function urlFor(source: SanityImageSource) {
+  return builder.image(source)
+}

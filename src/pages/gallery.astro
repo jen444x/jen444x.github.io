@@ -1,8 +1,19 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { sanityClient, urlFor } from "../sanity/client";
+
+// Fetch featured photos from Sanity
+const featuredPhotos = await sanityClient.fetch(`
+  *[_type == "galleryItem" && featured == true] | order(_createdAt desc) {
+    _id,
+    title,
+    alt,
+    image,
+    category
+  }[0...12]
+`);
 
 // Category data with preview images (3 per category for bento grid)
 const categories = [
@@ -199,6 +210,74 @@ const categories = [
       </div>
     </section>
 
+    <!-- Featured Projects - Tight Horizontal Strip -->
+    {featuredPhotos.length > 0 && (
+      <section class="py-10 md:py-12 bg-charcoal border-t border-bronze/10 overflow-hidden group/section">
+        <!-- Minimal header - left aligned -->
+        <div class="pl-6 md:pl-8 mb-4 md:mb-6 scroll-reveal opacity-0">
+          <span class="text-bronze text-[10px] md:text-xs font-medium tracking-widest uppercase">Featured</span>
+        </div>
+
+        <!-- Flush-left horizontal strip -->
+        <div class="relative">
+          <!-- Right edge fade -->
+          <div class="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-charcoal to-transparent z-10 pointer-events-none"></div>
+
+          <!-- Navigation arrows - visible on hover -->
+          <button
+            id="featured-prev"
+            class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/60 hover:bg-bronze text-white flex items-center justify-center opacity-0 group-hover/section:opacity-100 transition-all duration-300 disabled:opacity-0"
+            aria-label="Scroll left"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button
+            id="featured-next"
+            class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/60 hover:bg-bronze text-white flex items-center justify-center opacity-0 group-hover/section:opacity-100 transition-all duration-300"
+            aria-label="Scroll right"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+
+          <!-- Scrollable container - flush left, drag enabled -->
+          <div id="featured-strip" class="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing">
+            <div class="flex gap-1">
+              {featuredPhotos.map((photo: any, index: number) => (
+                <a
+                  href={`/gallery/${photo.category}`}
+                  class="shrink-0 group relative overflow-hidden scroll-reveal opacity-0 select-none"
+                  style={`animation-delay: ${index * 0.05}s`}
+                  draggable="false"
+                >
+                  <div class="w-64 md:w-72 lg:w-80 aspect-4/3 overflow-hidden">
+                    <img
+                      src={urlFor(photo.image).url()}
+                      alt={photo.alt || photo.title}
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+                      loading={index < 4 ? "eager" : "lazy"}
+                      draggable="false"
+                    />
+                  </div>
+                  <!-- Gradient overlay -->
+                  <div class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent group-hover:from-black/80 transition-all duration-300"></div>
+                  <!-- Title -->
+                  <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 class="font-['Bebas_Neue'] text-base md:text-lg text-white tracking-wide">
+                      {photo.title}
+                    </h3>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
     <!-- Bronze gradient line - Marks end of main content -->
     <div class="bronze-gradient-divider"></div>
 
@@ -243,11 +322,87 @@ const categories = [
   }
 
   // Scroll reveal animations for category cards
-  // Using GALLERY_SCROLL_CONFIG: 150px buffer so cards appear sooner (page was looking empty)
   initScrollAnimations('.scroll-reveal', GALLERY_SCROLL_CONFIG);
+
+  // Featured strip - drag to scroll + arrow navigation
+  const strip = document.getElementById('featured-strip');
+  const prevBtn = document.getElementById('featured-prev');
+  const nextBtn = document.getElementById('featured-next');
+
+  if (strip) {
+    // Drag to scroll
+    let isDown = false;
+    let startX: number;
+    let scrollLeft: number;
+    let hasDragged = false;
+
+    strip.addEventListener('mousedown', (e) => {
+      isDown = true;
+      hasDragged = false;
+      strip.style.cursor = 'grabbing';
+      startX = e.pageX - strip.offsetLeft;
+      scrollLeft = strip.scrollLeft;
+    });
+
+    strip.addEventListener('mouseleave', () => {
+      isDown = false;
+      strip.style.cursor = 'grab';
+    });
+
+    strip.addEventListener('mouseup', () => {
+      isDown = false;
+      strip.style.cursor = 'grab';
+    });
+
+    strip.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - strip.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 5) hasDragged = true;
+      strip.scrollLeft = scrollLeft - walk;
+    });
+
+    // Prevent click navigation if user was dragging
+    strip.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    // Arrow button navigation
+    const scrollAmount = 320; // Roughly one card width
+
+    prevBtn?.addEventListener('click', () => {
+      strip.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      strip.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    // Update prev button visibility based on scroll position
+    const updatePrevVisibility = () => {
+      if (prevBtn) {
+        prevBtn.style.display = strip.scrollLeft <= 10 ? 'none' : 'flex';
+      }
+    };
+    strip.addEventListener('scroll', updatePrevVisibility);
+    updatePrevVisibility();
+  }
 </script>
 
 <style>
   /* Import reusable animations */
   @import '../styles/animations.css';
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 </style>

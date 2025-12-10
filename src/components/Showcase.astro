@@ -1,12 +1,5 @@
 ---
-import { sanityClient } from "../sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-
-// Set up image URL builder
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source: any) {
-  return builder.image(source).width(1200).quality(85).auto('format');
-}
+import { sanityClient, urlFor } from "../sanity/client";
 
 // Fetch featured gallery items from Sanity
 const featuredItems = await sanityClient.fetch(`

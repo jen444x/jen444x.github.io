@@ -1,14 +1,7 @@
 ---
-import { sanityClient } from "../../sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
+import { sanityClient, urlFor } from "../../sanity/client";
 import GalleryLayout from "../../layouts/GalleryLayout.astro";
 import CategoryNav from "../../components/CategoryNav.astro";
-
-// Set up image URL builder for hotspot support
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source: any) {
-  return builder.image(source);
-}
 
 export const prerender = true;
 
