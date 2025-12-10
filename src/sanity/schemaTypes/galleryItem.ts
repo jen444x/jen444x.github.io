@@ -100,7 +100,14 @@ export default defineType({
       name: 'featured',
       title: 'Featured',
       type: 'boolean',
-      description: 'Check this to feature on homepage',
+      description: 'Check this to feature on homepage slider/gallery',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'homepageHero',
+      title: 'Homepage Hero Image',
+      type: 'boolean',
+      description: '⭐ THE photo that shows in the "View Our Work" section. Only pick ONE!',
       initialValue: false,
     }),
     defineField({

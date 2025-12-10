@@ -1,0 +1,96 @@
+---
+import { sanityClient } from "../sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+
+// Set up image URL builder
+const builder = imageUrlBuilder(sanityClient);
+function urlFor(source: any) {
+  return builder.image(source).width(1400).quality(90).auto('format');
+}
+
+// Fetch the homepage hero image (the ONE photo marked as homepageHero)
+// Falls back to most recent featured photo if none set
+const homepageHero = await sanityClient.fetch(`
+  *[_type == "galleryItem" && homepageHero == true][0] {
+    _id,
+    title,
+    alt,
+    image
+  }
+`);
+
+// Fallback to most recent featured if no homepage hero is set
+const fallbackImage = !homepageHero ? await sanityClient.fetch(`
+  *[_type == "galleryItem" && featured == true] | order(_createdAt desc)[0] {
+    _id,
+    title,
+    alt,
+    image
+  }
+`) : null;
+
+const featuredImage = homepageHero || fallbackImage;
+---
+
+<!-- LIGHT Section - Featured Project Teaser -->
+<section class="project-teaser py-16 md:py-20 bg-white border-t border-bronze/10">
+  <div class="max-w-6xl mx-auto px-6 md:px-8">
+    {featuredImage ? (
+      <!-- Featured Image with Overlay -->
+      <a href="/gallery" class="block relative group overflow-hidden scroll-reveal opacity-0">
+        <div class="aspect-[21/9] md:aspect-[3/1] overflow-hidden">
+          <img
+            src={urlFor(featuredImage.image).url()}
+            alt={featuredImage.alt || featuredImage.title || "Rocky Concrete featured project"}
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <!-- Dark gradient overlay - fades from left -->
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent group-hover:from-black/70 transition-all duration-500"></div>
+        </div>
+
+        <!-- Text overlay - left aligned -->
+        <div class="absolute inset-0 flex items-center">
+          <div class="px-8 md:px-12">
+            <span class="font-['Bebas_Neue'] text-3xl md:text-5xl lg:text-6xl tracking-wider text-white drop-shadow-lg">
+              VIEW OUR WORK
+            </span>
+            <div class="flex items-center gap-3 mt-3">
+              <span class="font-['Inter'] text-sm md:text-base text-white/80 font-light">
+                Explore our complete portfolio
+              </span>
+              <svg
+                class="w-5 h-5 text-bronze group-hover:translate-x-2 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </a>
+    ) : (
+      <!-- Fallback if no featured images -->
+      <a href="/gallery" class="block relative group overflow-hidden scroll-reveal opacity-0 bg-charcoal aspect-[21/9] md:aspect-[3/1] flex items-center justify-center">
+        <div class="text-center">
+          <span class="font-['Bebas_Neue'] text-3xl md:text-5xl tracking-wider text-white">
+            VIEW OUR WORK
+          </span>
+          <p class="font-['Inter'] text-sm text-slate-light mt-2">Explore our complete portfolio</p>
+        </div>
+      </a>
+    )}
+  </div>
+</section>
+
+<!-- SCROLL ANIMATION SCRIPT -->
+<script>
+  import { initScrollAnimations, HOMEPAGE_SCROLL_CONFIG } from '../utils/animations.js';
+  initScrollAnimations('.project-teaser .scroll-reveal', HOMEPAGE_SCROLL_CONFIG);
+</script>
+
+<style>
+  @import '../styles/animations.css';
+</style>
