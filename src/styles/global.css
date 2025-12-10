@@ -21,10 +21,6 @@
   --color-bronze-dark: #9B7509;
   --color-bronze-light: #D4A574;
 
-  /* Legacy orange (keeping for backwards compatibility - will phase out) */
-  --color-primary: #e67e22;
-  --color-primary-dark: #cf711f;
-
   /* TYPOGRAPHY SYSTEM */
   --font-heading: 'Bebas Neue', sans-serif;
   --font-body: 'Inter', sans-serif;

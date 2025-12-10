@@ -191,4 +191,14 @@
       }
     });
   });
+
+  // Close mobile nav on Escape key (accessibility)
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && header?.classList.contains("nav-open")) {
+      header.classList.remove("nav-open");
+      bodyEl.classList.remove("nav-open");
+      // Return focus to the menu button
+      btnNav?.focus();
+    }
+  });
 </script>

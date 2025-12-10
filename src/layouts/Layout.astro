@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, 'https://rockyconcreteinc.com');
 ---
 
 <!DOCTYPE html>
@@ -17,11 +18,11 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://rockyconcreteinc.com/" />
+    <link rel="canonical" href={canonicalURL.href} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rockyconcreteinc.com/" />
+    <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="https://rockyconcreteinc.com/img/hero/hero-img.jpg" />
@@ -30,7 +31,7 @@ const { title, description } = Astro.props;
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://rockyconcreteinc.com/" />
+    <meta name="twitter:url" content={canonicalURL.href} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://rockyconcreteinc.com/img/hero/hero-img.jpg" />
@@ -42,17 +43,6 @@ const { title, description } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <style>
-      /* Ensure text remains visible during font load */
-      @font-face {
-        font-family: 'Rubik';
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'Quicksand';
-        font-display: swap;
-      }
-    </style>
 
     <link rel="icon" href="/img/favicon-64px.png" />
     <link
@@ -184,7 +174,14 @@ const { title, description } = Astro.props;
       }
     </script>
   </head>
-  <body class="font-rubik leading-normal">
+  <body class="leading-normal">
+    <!-- Skip to main content link for accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-bronze focus:text-white focus:rounded focus:outline-none"
+    >
+      Skip to main content
+    </a>
     <slot />
   </body>
 </html>
