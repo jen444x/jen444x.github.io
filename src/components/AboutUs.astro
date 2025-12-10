@@ -1,9 +1,9 @@
 ---
 import { sanityClient, urlFor } from "../sanity/client";
 
-// Fetch one featured photo for the hero image
-const featuredPhoto = await sanityClient.fetch(`
-  *[_type == "galleryItem" && defined(image) && featured == true] | order(_createdAt desc) [0] {
+// Fetch the About Us photo (the ONE photo marked as aboutUsPhoto)
+const aboutUsPhoto = await sanityClient.fetch(`
+  *[_type == "galleryItem" && aboutUsPhoto == true][0] {
     _id,
     title,
     alt,
@@ -11,15 +11,17 @@ const featuredPhoto = await sanityClient.fetch(`
   }
 `);
 
-// Fallback to most recent if no featured
-const heroPhoto = featuredPhoto || await sanityClient.fetch(`
-  *[_type == "galleryItem" && defined(image)] | order(_createdAt desc) [0] {
+// Fallback to most recent featured photo if none set
+const fallbackPhoto = !aboutUsPhoto ? await sanityClient.fetch(`
+  *[_type == "galleryItem" && featured == true] | order(_createdAt desc)[0] {
     _id,
     title,
     alt,
     image
   }
-`);
+`) : null;
+
+const heroPhoto = aboutUsPhoto || fallbackPhoto;
 ---
 
 <!-- LIGHT Section - Breathing Room After Dark Hero -->

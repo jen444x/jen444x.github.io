@@ -111,6 +111,13 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'aboutUsPhoto',
+      title: 'About Us Photo',
+      type: 'boolean',
+      description: '⭐ THE photo that shows in the About Us section. Only pick ONE!',
+      initialValue: false,
+    }),
+    defineField({
       name: 'notes',
       title: 'Notes',
       type: 'text',
