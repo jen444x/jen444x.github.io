@@ -244,7 +244,7 @@ const categories = [
           </button>
 
           <!-- Scrollable container - flush left, drag enabled -->
-          <div id="featured-strip" class="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing">
+          <div id="featured-strip" class="overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing">
             <div class="flex gap-1">
               {featuredPhotos.map((photo: any, index: number) => (
                 <a
