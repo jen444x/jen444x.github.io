@@ -39,14 +39,16 @@ const allGalleryItems = await sanityClient.fetch(`
     category,
     subcategory,
     featured,
+    isVideo,
+    thumbnailTime,
     image,
-    "fullImageUrl": image.asset->url
+    "fullImageUrl": image.asset->url,
+    "playbackId": video.asset->playbackId
   }
 `, { category: sanityCategory });
 
 // Map Sanity data to the format the template expects
-// Thumbnails: 800x600 cropped with hotspot
-// Lightbox: Full size but respects crop rectangle (no forced dimensions)
+// TODO: Add video support here
 const galleryItems = allGalleryItems.map((item: any, index: number) => ({
   src: urlFor(item.image).width(800).height(600).fit("crop").url(),
   fullSrc: urlFor(item.image).url(),

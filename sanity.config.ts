@@ -1,5 +1,6 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
+import { muxInput } from 'sanity-plugin-mux-input'
 import { schemaTypes } from './src/sanity/schemaTypes'
 
 // Custom structure for organizing gallery items by category
@@ -207,6 +208,7 @@ export default defineConfig({
 
   plugins: [
     structureTool({ structure }),
+    muxInput(),
   ],
 
   schema: {

@@ -6,13 +6,51 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'isVideo',
+      title: 'This is a video',
+      type: 'boolean',
+      description: 'Check this box if uploading a video instead of a photo',
+      initialValue: false,
+    }),
+    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
       options: {
-        hotspot: true, // Enables image cropping and focal point selection
+        hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
+      hidden: ({ parent }) => parent?.isVideo === true,
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as { isVideo?: boolean }
+          if (!parent?.isVideo && !value) {
+            return 'Image is required'
+          }
+          return true
+        }),
+    }),
+    defineField({
+      name: 'video',
+      title: 'Video',
+      type: 'mux.video',
+      description: 'Upload a video (MP4, MOV, etc.)',
+      hidden: ({ parent }) => parent?.isVideo !== true,
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as { isVideo?: boolean }
+          if (parent?.isVideo === true && !value) {
+            return 'Video is required'
+          }
+          return true
+        }),
+    }),
+    defineField({
+      name: 'thumbnailTime',
+      title: 'Thumbnail Time (seconds)',
+      type: 'number',
+      description: 'Optional: Which second of the video to use as thumbnail. Leave empty to use the middle frame.',
+      hidden: ({ parent }) => parent?.isVideo !== true,
+      validation: (Rule) => Rule.min(0),
     }),
     defineField({
       name: 'title',
@@ -65,6 +103,7 @@ export default defineType({
           { title: 'Fireplaces', value: 'fireplaces' },
           // Landscaping subcategories
           { title: 'Artificial Turf', value: 'turf' },
+          { title: 'Gardens & Lawns', value: 'gardens' },
           { title: 'Water Features', value: 'water-features' },
         ],
         layout: 'dropdown',
@@ -138,15 +177,16 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'category',
-      media: 'image',
+      category: 'category',
+      image: 'image',
+      isVideo: 'isVideo',
     },
     prepare(selection) {
-      const { title, subtitle, media } = selection
+      const { title, category, image, isVideo } = selection
       return {
-        title: title,
-        subtitle: subtitle ? `Category: ${subtitle}` : 'No category',
-        media: media,
+        title: isVideo ? `🎬 ${title || 'Untitled Video'}` : (title || 'Untitled'),
+        subtitle: category ? `Category: ${category}` : 'No category',
+        media: isVideo ? undefined : image,
       }
     },
   },
