@@ -45,14 +45,6 @@ export default defineType({
         }),
     }),
     defineField({
-      name: 'thumbnailTime',
-      title: 'Thumbnail Time (seconds)',
-      type: 'number',
-      description: 'Optional: Which second of the video to use as thumbnail. Leave empty to use the middle frame.',
-      hidden: ({ parent }) => parent?.isVideo !== true,
-      validation: (Rule) => Rule.min(0),
-    }),
-    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',

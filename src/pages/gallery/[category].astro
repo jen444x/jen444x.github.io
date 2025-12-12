@@ -40,25 +40,52 @@ const allGalleryItems = await sanityClient.fetch(`
     subcategory,
     featured,
     isVideo,
-    thumbnailTime,
     image,
     "fullImageUrl": image.asset->url,
-    "playbackId": video.asset->playbackId
+    "playbackId": video.asset->playbackId,
+    "thumbTime": video.asset->thumbTime
   }
 `, { category: sanityCategory });
 
 // Map Sanity data to the format the template expects
-// TODO: Add video support here
-const galleryItems = allGalleryItems.map((item: any, index: number) => ({
-  src: urlFor(item.image).width(800).height(600).fit("crop").url(),
-  fullSrc: urlFor(item.image).url(),
-  alt: item.alt,
-  title: item.title,
-  category: item.category,
-  subcategory: item.subcategory || null,
-  featured: item.featured || false,
-  originalIndex: index,
-}));
+const galleryItems = allGalleryItems.map((item: any, index: number) => {
+  // Step 1: Is this a video or photo?
+  const isVideo = item.isVideo === true;
+  const playbackId = item.playbackId;
+  // thumbTime comes from Mux plugin's visual picker (stored on video asset)
+  const thumbTime = item.thumbTime;
+
+  // Step 2: Get the thumbnail URL (different source for each type)
+  let src = '';
+  let fullSrc = '';
+
+  if (isVideo && playbackId) {
+    // VIDEO → Mux thumbnail
+    // Format: https://image.mux.com/{playbackId}/thumbnail.jpg?time={seconds}
+    const timeParam = typeof thumbTime === 'number' ? `?time=${thumbTime}` : '';
+    src = `https://image.mux.com/${playbackId}/thumbnail.jpg${timeParam}`;
+    fullSrc = src;
+  } else if (item.image) {
+    // PHOTO → Sanity image (same as before)
+    src = urlFor(item.image).width(800).height(600).fit("crop").url();
+    fullSrc = urlFor(item.image).url();
+  }
+
+  // Step 3: Return the clean object
+  return {
+    src,
+    fullSrc,
+    alt: item.alt,
+    title: item.title,
+    category: item.category,
+    subcategory: item.subcategory || null,
+    featured: item.featured || false,
+    originalIndex: index,
+    isVideo,
+    playbackId: playbackId || null,
+    thumbTime: thumbTime || null,
+  };
+});
 
 // Define subcategories for each category (matches Sanity schema values)
 const categorySubcategories: Record<string, { slug: string; name: string }[]> = {
@@ -74,8 +101,9 @@ const categorySubcategories: Record<string, { slug: string; name: string }[]> = 
     { slug: 'fireplaces', name: 'Fireplaces' }
   ],
   'landscaping': [
-    { slug: 'turf', name: 'Artificial Turf' },
-    { slug: 'water-features', name: 'Water Features' }
+    { slug: 'gardens', name: 'Gardens & Lawns' },
+    { slug: 'water-features', name: 'Water Features' },
+    { slug: 'turf', name: 'Artificial Turf' }
   ]
 };
 

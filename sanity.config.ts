@@ -146,11 +146,11 @@ const structure = (S: any) =>
                             .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
                         ),
                       S.listItem()
-                        .title('Turf')
+                        .title('Gardens & Lawns')
                         .child(
                           S.documentList()
-                            .title('Turf')
-                            .filter('_type == "galleryItem" && category == "landscaping" && subcategory == "turf"')
+                            .title('Gardens & Lawns')
+                            .filter('_type == "galleryItem" && category == "landscaping" && subcategory == "gardens"')
                             .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
                         ),
                       S.listItem()
@@ -159,6 +159,14 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Water Features')
                             .filter('_type == "galleryItem" && category == "landscaping" && subcategory == "water-features"')
+                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                        ),
+                      S.listItem()
+                        .title('Artificial Turf')
+                        .child(
+                          S.documentList()
+                            .title('Artificial Turf')
+                            .filter('_type == "galleryItem" && category == "landscaping" && subcategory == "turf"')
                             .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
                         ),
                     ])
