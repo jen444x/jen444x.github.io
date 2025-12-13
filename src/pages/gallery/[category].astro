@@ -7,15 +7,44 @@ export const prerender = true;
 
 export async function getStaticPaths() {
   const categories = [
-    { slug: 'concrete', name: 'Concrete Work', description: 'Driveways, walkways, patios, stairs, and professional flatwork' },
-    { slug: 'outdoor-kitchens', name: 'Outdoor Kitchens', description: 'Luxury outdoor kitchen designs with professional countertops and entertainment setups' },
-    { slug: 'covered-patios', name: 'Covered Patios', description: 'Elegant covered patio designs with stone columns and premium finishes' },
-    { slug: 'fire-features', name: 'Fire Features', description: 'Custom fire pits, outdoor fireplaces, and fire feature installations' },
-    { slug: 'landscaping', name: 'Landscaping', description: 'Artificial turf, gardens, water features, and complete landscape design' },
-    { slug: 'ironwork', name: 'Iron Work', description: 'Decorative gates, railings, archways, and custom metalwork' },
+    {
+      slug: "concrete",
+      name: "Concrete Work",
+      description:
+        "Driveways, walkways, patios, stairs, and professional flatwork",
+    },
+    {
+      slug: "outdoor-kitchens",
+      name: "Outdoor Kitchens",
+      description:
+        "Luxury outdoor kitchen designs with professional countertops and entertainment setups",
+    },
+    {
+      slug: "covered-patios",
+      name: "Covered Patios",
+      description:
+        "Elegant covered patio designs with stone columns and premium finishes",
+    },
+    {
+      slug: "fire-features",
+      name: "Fire Features",
+      description:
+        "Custom fire pits, outdoor fireplaces, and fire feature installations",
+    },
+    {
+      slug: "landscaping",
+      name: "Landscaping",
+      description:
+        "Artificial turf, gardens, water features, and complete landscape design",
+    },
+    {
+      slug: "ironwork",
+      name: "Iron Work",
+      description: "Decorative gates, railings, archways, and custom metalwork",
+    },
   ];
 
-  return categories.map(category => ({
+  return categories.map((category) => ({
     params: { category: category.slug },
     props: { categoryInfo: category },
   }));
@@ -26,12 +55,13 @@ const { categoryInfo } = Astro.props;
 
 // Map URL slugs to Sanity category values (ironwork vs iron-work)
 const categorySlugMap: Record<string, string> = {
-  'ironwork': 'iron-work',
+  ironwork: "iron-work",
 };
 const sanityCategory = categorySlugMap[category as string] || category;
 
 // Fetch gallery items from Sanity, sorted by order only (featured only affects homepage)
-const allGalleryItems = await sanityClient.fetch(`
+const allGalleryItems = await sanityClient.fetch(
+  `
   *[_type == "galleryItem" && category == $category] | order(order asc) {
     _id,
     title,
@@ -45,7 +75,9 @@ const allGalleryItems = await sanityClient.fetch(`
     "playbackId": video.asset->playbackId,
     "thumbTime": video.asset->thumbTime
   }
-`, { category: sanityCategory });
+`,
+  { category: sanityCategory }
+);
 
 // Map Sanity data to the format the template expects
 const galleryItems = allGalleryItems.map((item: any, index: number) => {
@@ -56,15 +88,15 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
   const thumbTime = item.thumbTime;
 
   // Step 2: Get the thumbnail URL (different source for each type)
-  let src = '';
-  let fullSrc = '';
+  let src = "";
+  let fullSrc = "";
 
   if (isVideo && playbackId) {
     // VIDEO → Mux thumbnail
-    // Format: https://image.mux.com/{playbackId}/thumbnail.jpg?time={seconds}
-    const timeParam = typeof thumbTime === 'number' ? `?time=${thumbTime}` : '';
-    src = `https://image.mux.com/${playbackId}/thumbnail.jpg${timeParam}`;
-    fullSrc = src;
+    // Format: https://image.mux.com/{playbackId}/thumbnail.jpg?width=800&height=600&fit_mode=crop&time={seconds}
+    const timeParam = typeof thumbTime === "number" ? `&time=${thumbTime}` : "";
+    src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1200&height=900&fit_mode=smartcrop${timeParam}`;
+    fullSrc = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
   } else if (item.image) {
     // PHOTO → Sanity image (same as before)
     src = urlFor(item.image).width(800).height(600).fit("crop").url();
@@ -88,32 +120,33 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
 });
 
 // Define subcategories for each category (matches Sanity schema values)
-const categorySubcategories: Record<string, { slug: string; name: string }[]> = {
-  'concrete': [
-    { slug: 'walkways-steps', name: 'Walkways & Steps' },
-    { slug: 'flatwork-patios', name: 'Flatwork & Patios' },
-    { slug: 'driveways', name: 'Driveways' },
-    { slug: 'stone-work', name: 'Stone Work' }
-  ],
-  'fire-features': [
-    { slug: 'fire-pits', name: 'Fire Pits' },
-    { slug: 'fire-pit-tables', name: 'Fire Pit Tables' },
-    { slug: 'fireplaces', name: 'Fireplaces' }
-  ],
-  'landscaping': [
-    { slug: 'gardens', name: 'Gardens & Lawns' },
-    { slug: 'water-features', name: 'Water Features' },
-    { slug: 'turf', name: 'Artificial Turf' }
-  ]
-};
+const categorySubcategories: Record<string, { slug: string; name: string }[]> =
+  {
+    concrete: [
+      { slug: "walkways-steps", name: "Walkways & Steps" },
+      { slug: "flatwork-patios", name: "Flatwork & Patios" },
+      { slug: "driveways", name: "Driveways" },
+      { slug: "stone-work", name: "Stone Work" },
+    ],
+    "fire-features": [
+      { slug: "fire-pits", name: "Fire Pits" },
+      { slug: "fire-pit-tables", name: "Fire Pit Tables" },
+      { slug: "fireplaces", name: "Fireplaces" },
+    ],
+    landscaping: [
+      { slug: "gardens", name: "Gardens & Lawns" },
+      { slug: "water-features", name: "Water Features" },
+      { slug: "turf", name: "Artificial Turf" },
+    ],
+  };
 
 // Get subcategories for current category (if any)
 const subcategories = categorySubcategories[category as string] || [];
 
 // Breadcrumbs for this page
 const breadcrumbs = [
-  { label: 'Gallery', href: '/gallery' },
-  { label: categoryInfo.name, href: `/gallery/${category}` }
+  { label: "Gallery", href: "/gallery" },
+  { label: categoryInfo.name, href: `/gallery/${category}` },
 ];
 ---
 
@@ -131,79 +164,86 @@ const breadcrumbs = [
   <section class="section-padding bg-white border-t border-bronze/10">
     <div class="max-w-[1400px] mx-auto px-6 md:px-8">
       <!-- Categories WITH subcategories - show subsections with bronze headers -->
-      {subcategories.length > 0 ? (
-        <div>
-          {subcategories.map((subcat) => {
-            const subcatItems = galleryItems.filter(item => item.subcategory === subcat.slug);
-            if (subcatItems.length === 0) return null;
+      {
+        subcategories.length > 0 ? (
+          <div>
+            {subcategories.map((subcat) => {
+              const subcatItems = galleryItems.filter(
+                (item) => item.subcategory === subcat.slug
+              );
+              if (subcatItems.length === 0) return null;
 
-            return (
-              <div id={`${category}-${subcat.slug}`} class="mb-12 scroll-mt-24">
-                <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
-                  <span class="w-1 h-6 bg-bronze mr-3" />
-                  {subcat.name}
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {subcatItems.map((item, index) => (
-                    <article
-                      class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
-                      data-index={galleryItems.indexOf(item)}
-                      data-full-src={item.fullSrc}
-                    >
-                      <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
-                        <img
-                          src={item.src}
-                          alt={item.alt}
-                          class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
-                          loading={index < 3 ? "eager" : "lazy"}
-                          width="800"
-                          height="600"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <div class="absolute bottom-6 left-6 right-6">
-                            <p class="text-white font-light text-sm md:text-base tracking-wide">
-                              {item.alt}
-                            </p>
+              return (
+                <div
+                  id={`${category}-${subcat.slug}`}
+                  class="mb-12 scroll-mt-24"
+                >
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3" />
+                    {subcat.name}
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {subcatItems.map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                        data-index={galleryItems.indexOf(item)}
+                        data-full-src={item.fullSrc}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                            loading={index < 3 ? "eager" : "lazy"}
+                            width="800"
+                            height="600"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
+                                {item.alt}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        // Categories WITHOUT subcategories - simple grid like original
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {galleryItems.map((item, index) => (
-            <article
-              class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
-              data-index={index}
-              data-full-src={item.fullSrc}
-            >
-              <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
-                  loading={index < 6 ? "eager" : "lazy"}
-                  width="800"
-                  height="600"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div class="absolute bottom-6 left-6 right-6">
-                    <p class="text-white font-light text-sm md:text-base tracking-wide">
-                      {item.alt}
-                    </p>
+                      </article>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        ) : (
+          // Categories WITHOUT subcategories - simple grid like original
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {galleryItems.map((item, index) => (
+              <article
+                class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                data-index={index}
+                data-full-src={item.fullSrc}
+              >
+                <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                    loading={index < 6 ? "eager" : "lazy"}
+                    width="800"
+                    height="600"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="absolute bottom-6 left-6 right-6">
+                      <p class="text-white font-light text-sm md:text-base tracking-wide">
+                        {item.alt}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -239,7 +279,12 @@ const breadcrumbs = [
       class="absolute left-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
       aria-label="Previous image"
     >
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -253,7 +298,12 @@ const breadcrumbs = [
       class="absolute right-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
       aria-label="Next image"
     >
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -276,7 +326,8 @@ const breadcrumbs = [
     <div
       class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-center"
     >
-      <p id="lightbox-caption" class="text-lg font-light mb-2 text-slate-light"></p>
+      <p id="lightbox-caption" class="text-lg font-light mb-2 text-slate-light">
+      </p>
       <p id="lightbox-counter" class="text-sm text-slate-light"></p>
     </div>
   </div>
@@ -457,7 +508,10 @@ const breadcrumbs = [
       if (targetId) {
         const target = document.getElementById(targetId);
         if (target) {
-          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+          const targetPosition =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            HEADER_OFFSET;
           window.scrollTo({ top: targetPosition, behavior: "smooth" });
         }
       }
