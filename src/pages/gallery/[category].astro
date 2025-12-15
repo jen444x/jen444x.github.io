@@ -7,15 +7,44 @@ export const prerender = true;
 
 export async function getStaticPaths() {
   const categories = [
-    { slug: 'concrete', name: 'Concrete Work', description: 'Driveways, walkways, patios, stairs, and professional flatwork' },
-    { slug: 'outdoor-kitchens', name: 'Outdoor Kitchens', description: 'Luxury outdoor kitchen designs with professional countertops and entertainment setups' },
-    { slug: 'covered-patios', name: 'Covered Patios', description: 'Elegant covered patio designs with stone columns and premium finishes' },
-    { slug: 'fire-features', name: 'Fire Features', description: 'Custom fire pits, outdoor fireplaces, and fire feature installations' },
-    { slug: 'landscaping', name: 'Landscaping', description: 'Artificial turf, gardens, water features, and complete landscape design' },
-    { slug: 'ironwork', name: 'Iron Work', description: 'Decorative gates, railings, archways, and custom metalwork' },
+    {
+      slug: "concrete",
+      name: "Concrete Work",
+      description:
+        "Driveways, walkways, patios, stairs, and professional flatwork",
+    },
+    {
+      slug: "outdoor-kitchens",
+      name: "Outdoor Kitchens",
+      description:
+        "Luxury outdoor kitchen designs with professional countertops and entertainment setups",
+    },
+    {
+      slug: "covered-patios",
+      name: "Covered Patios",
+      description:
+        "Elegant covered patio designs with stone columns and premium finishes",
+    },
+    {
+      slug: "fire-features",
+      name: "Fire Features",
+      description:
+        "Custom fire pits, outdoor fireplaces, and fire feature installations",
+    },
+    {
+      slug: "landscaping",
+      name: "Landscaping",
+      description:
+        "Artificial turf, gardens, water features, and complete landscape design",
+    },
+    {
+      slug: "ironwork",
+      name: "Iron Work",
+      description: "Decorative gates, railings, archways, and custom metalwork",
+    },
   ];
 
-  return categories.map(category => ({
+  return categories.map((category) => ({
     params: { category: category.slug },
     props: { categoryInfo: category },
   }));
@@ -26,12 +55,13 @@ const { categoryInfo } = Astro.props;
 
 // Map URL slugs to Sanity category values (ironwork vs iron-work)
 const categorySlugMap: Record<string, string> = {
-  'ironwork': 'iron-work',
+  ironwork: "iron-work",
 };
 const sanityCategory = categorySlugMap[category as string] || category;
 
 // Fetch gallery items from Sanity, sorted by order only (featured only affects homepage)
-const allGalleryItems = await sanityClient.fetch(`
+const allGalleryItems = await sanityClient.fetch(
+  `
   *[_type == "galleryItem" && category == $category] | order(order asc) {
     _id,
     title,
@@ -39,51 +69,86 @@ const allGalleryItems = await sanityClient.fetch(`
     category,
     subcategory,
     featured,
+    isVideo,
     image,
-    "fullImageUrl": image.asset->url
+    "fullImageUrl": image.asset->url,
+    "playbackId": video.asset->playbackId,
+    "thumbTime": video.asset->thumbTime,
+    "aspectRatio": video.asset->data.aspect_ratio
   }
-`, { category: sanityCategory });
+`,
+  { category: sanityCategory }
+);
 
 // Map Sanity data to the format the template expects
-// Thumbnails: 800x600 cropped with hotspot
-// Lightbox: Full size but respects crop rectangle (no forced dimensions)
-const galleryItems = allGalleryItems.map((item: any, index: number) => ({
-  src: urlFor(item.image).width(800).height(600).fit("crop").url(),
-  fullSrc: urlFor(item.image).url(),
-  alt: item.alt,
-  title: item.title,
-  category: item.category,
-  subcategory: item.subcategory || null,
-  featured: item.featured || false,
-  originalIndex: index,
-}));
+const galleryItems = allGalleryItems.map((item: any, index: number) => {
+  // Step 1: Is this a video or photo?
+  const isVideo = item.isVideo === true;
+  const playbackId = item.playbackId;
+  // thumbTime comes from Mux plugin's visual picker (stored on video asset)
+  const thumbTime = item.thumbTime;
+
+  // Step 2: Get the thumbnail URL (different source for each type)
+  let src = "";
+  let fullSrc = "";
+
+  if (isVideo && playbackId) {
+    // VIDEO → Mux thumbnail
+    // Format: https://image.mux.com/{playbackId}/thumbnail.jpg?width=800&height=600&fit_mode=crop&time={seconds}
+    const timeParam = typeof thumbTime === "number" ? `&time=${thumbTime}` : "";
+    src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1200&height=900&fit_mode=smartcrop${timeParam}`;
+    fullSrc = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
+  } else if (item.image) {
+    // PHOTO → Sanity image (same as before)
+    src = urlFor(item.image).width(800).height(600).fit("crop").url();
+    fullSrc = urlFor(item.image).url();
+  }
+
+  // Step 3: Return the clean object
+  return {
+    src,
+    fullSrc,
+    alt: item.alt,
+    title: item.title,
+    category: item.category,
+    subcategory: item.subcategory || null,
+    featured: item.featured || false,
+    originalIndex: index,
+    isVideo,
+    playbackId: playbackId || null,
+    thumbTime: thumbTime || null,
+    aspectRatio: item.aspectRatio || null,
+  };
+});
 
 // Define subcategories for each category (matches Sanity schema values)
-const categorySubcategories: Record<string, { slug: string; name: string }[]> = {
-  'concrete': [
-    { slug: 'walkways-steps', name: 'Walkways & Steps' },
-    { slug: 'flatwork-patios', name: 'Flatwork & Patios' },
-    { slug: 'driveways', name: 'Driveways' },
-    { slug: 'stone-work', name: 'Stone Work' }
-  ],
-  'fire-features': [
-    { slug: 'fire-pits', name: 'Fire Pits' },
-    { slug: 'fire-pit-tables', name: 'Fire Pit Tables' },
-    { slug: 'fireplaces', name: 'Fireplaces' }
-  ],
-  'landscaping': [
-    { slug: 'turf', name: 'Artificial Turf' },
-    { slug: 'water-features', name: 'Water Features' }
-  ]
-};
+const categorySubcategories: Record<string, { slug: string; name: string }[]> =
+  {
+    concrete: [
+      { slug: "walkways-steps", name: "Walkways & Steps" },
+      { slug: "flatwork-patios", name: "Flatwork & Patios" },
+      { slug: "driveways", name: "Driveways" },
+      { slug: "stone-work", name: "Stone Work" },
+    ],
+    "fire-features": [
+      { slug: "fire-pits", name: "Fire Pits" },
+      { slug: "fire-pit-tables", name: "Fire Pit Tables" },
+      { slug: "fireplaces", name: "Fireplaces" },
+    ],
+    landscaping: [
+      { slug: "gardens", name: "Gardens & Lawns" },
+      { slug: "water-features", name: "Water Features" },
+      { slug: "turf", name: "Artificial Turf" },
+    ],
+  };
 
 // Get subcategories for current category (if any)
 const subcategories = categorySubcategories[category as string] || [];
 
 // Breadcrumbs for this page
 const breadcrumbs = [
-  { label: 'Gallery', href: '/gallery' },
-  { label: categoryInfo.name, href: `/gallery/${category}` }
+  { label: "Gallery", href: "/gallery" },
+  { label: categoryInfo.name, href: `/gallery/${category}` },
 ];
 ---
 
@@ -101,79 +166,118 @@ const breadcrumbs = [
   <section class="section-padding bg-white border-t border-bronze/10">
     <div class="max-w-[1400px] mx-auto px-6 md:px-8">
       <!-- Categories WITH subcategories - show subsections with bronze headers -->
-      {subcategories.length > 0 ? (
-        <div>
-          {subcategories.map((subcat) => {
-            const subcatItems = galleryItems.filter(item => item.subcategory === subcat.slug);
-            if (subcatItems.length === 0) return null;
+      {
+        subcategories.length > 0 ? (
+          <div>
+            {subcategories.map((subcat) => {
+              const subcatItems = galleryItems.filter(
+                (item) => item.subcategory === subcat.slug
+              );
+              if (subcatItems.length === 0) return null;
 
-            return (
-              <div id={`${category}-${subcat.slug}`} class="mb-12 scroll-mt-24">
-                <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
-                  <span class="w-1 h-6 bg-bronze mr-3" />
-                  {subcat.name}
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {subcatItems.map((item, index) => (
-                    <article
-                      class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
-                      data-index={galleryItems.indexOf(item)}
-                      data-full-src={item.fullSrc}
-                    >
-                      <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
-                        <img
-                          src={item.src}
-                          alt={item.alt}
-                          class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
-                          loading={index < 3 ? "eager" : "lazy"}
-                          width="800"
-                          height="600"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <div class="absolute bottom-6 left-6 right-6">
-                            <p class="text-white font-light text-sm md:text-base tracking-wide">
-                              {item.alt}
-                            </p>
+              return (
+                <div
+                  id={`${category}-${subcat.slug}`}
+                  class="mb-12 scroll-mt-24"
+                >
+                  <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
+                    <span class="w-1 h-6 bg-bronze mr-3" />
+                    {subcat.name}
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    {subcatItems.map((item, index) => (
+                      <article
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                        data-index={galleryItems.indexOf(item)}
+                        data-full-src={item.fullSrc}
+                        data-is-video={item.isVideo}
+                        data-playback-id={item.playbackId || ""}
+                        data-aspect-ratio={item.aspectRatio || ""}
+                      >
+                        <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                            loading={index < 3 ? "eager" : "lazy"}
+                            width="800"
+                            height="600"
+                          />
+                          {/* Video play indicator - luxury minimal design */}
+                          {item.isVideo && (
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                              {/* Subtle backdrop pulse */}
+                              <div class="absolute w-20 h-20 md:w-24 md:h-24 rounded-full bg-bronze/20 animate-pulse-slow"></div>
+                              {/* Main play button */}
+                              <div class="video-play-indicator relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-bronze group-hover:border-bronze group-hover:scale-105 transition-all duration-500 shadow-2xl">
+                                <svg class="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M8 5v14l11-7z"/>
+                                </svg>
+                              </div>
+                            </div>
+                          )}
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute bottom-6 left-6 right-6">
+                              <p class="text-white font-light text-sm md:text-base tracking-wide">
+                                {item.alt}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        // Categories WITHOUT subcategories - simple grid like original
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {galleryItems.map((item, index) => (
-            <article
-              class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
-              data-index={index}
-              data-full-src={item.fullSrc}
-            >
-              <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
-                  loading={index < 6 ? "eager" : "lazy"}
-                  width="800"
-                  height="600"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div class="absolute bottom-6 left-6 right-6">
-                    <p class="text-white font-light text-sm md:text-base tracking-wide">
-                      {item.alt}
-                    </p>
+                      </article>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        ) : (
+          // Categories WITHOUT subcategories - simple grid like original
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {galleryItems.map((item, index) => (
+              <article
+                class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                data-index={index}
+                data-full-src={item.fullSrc}
+                data-is-video={item.isVideo}
+                data-playback-id={item.playbackId || ""}
+                data-aspect-ratio={item.aspectRatio || ""}
+              >
+                <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                    loading={index < 6 ? "eager" : "lazy"}
+                    width="800"
+                    height="600"
+                  />
+                  {/* Video play indicator - luxury minimal design */}
+                  {item.isVideo && (
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      {/* Subtle backdrop pulse */}
+                      <div class="absolute w-20 h-20 md:w-24 md:h-24 rounded-full bg-bronze/20 animate-pulse-slow"></div>
+                      {/* Main play button */}
+                      <div class="video-play-indicator relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-bronze group-hover:border-bronze group-hover:scale-105 transition-all duration-500 shadow-2xl">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="absolute bottom-6 left-6 right-6">
+                      <p class="text-white font-light text-sm md:text-base tracking-wide">
+                        {item.alt}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -209,7 +313,12 @@ const breadcrumbs = [
       class="absolute left-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
       aria-label="Previous image"
     >
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -223,7 +332,12 @@ const breadcrumbs = [
       class="absolute right-4 text-white hover:text-gray-300 transition-colors z-10 bg-white/10 hover:bg-white/20 rounded-full p-3"
       aria-label="Next image"
     >
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -233,7 +347,7 @@ const breadcrumbs = [
     </button>
 
     <div
-      class="max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+      class="max-w-7xl max-h-[85vh] w-full h-full flex items-center justify-center px-4"
     >
       <img
         id="lightbox-image"
@@ -246,7 +360,8 @@ const breadcrumbs = [
     <div
       class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-center"
     >
-      <p id="lightbox-caption" class="text-lg font-light mb-2 text-slate-light"></p>
+      <p id="lightbox-caption" class="text-lg font-light mb-2 text-slate-light">
+      </p>
       <p id="lightbox-counter" class="text-sm text-slate-light"></p>
     </div>
   </div>
@@ -268,6 +383,9 @@ const breadcrumbs = [
 </GalleryLayout>
 
 <script>
+  // Load Mux Player - handles HLS streaming in ALL browsers
+  import("@mux/mux-player");
+
   // Constants
   const SCROLL_THRESHOLD_BACK_TO_TOP = 300;
   const LIGHTBOX_TRANSITION_DELAY = 10;
@@ -312,6 +430,16 @@ const breadcrumbs = [
   const galleryItems = document.querySelectorAll(".gallery-item");
 
   let currentLightboxIndex = 0;
+  let currentMuxPlayer: HTMLElement | null = null;
+
+  // Clean up any existing mux-player
+  function cleanupVideoPlayer() {
+    if (currentMuxPlayer) {
+      (currentMuxPlayer as any).pause?.();
+      currentMuxPlayer.remove();
+      currentMuxPlayer = null;
+    }
+  }
 
   function openLightbox(index: number) {
     currentLightboxIndex = index;
@@ -321,6 +449,11 @@ const breadcrumbs = [
 
     const img = item.querySelector("img");
     const fullSrc = item.getAttribute("data-full-src");
+
+    const isVideo = item.getAttribute("data-is-video") === "true";
+    const playbackId = item.getAttribute("data-playback-id");
+    const aspectRatio = item.getAttribute("data-aspect-ratio");
+
     if (
       !img ||
       !lightbox ||
@@ -330,9 +463,65 @@ const breadcrumbs = [
     )
       return;
 
-    // Use full resolution image for lightbox, fall back to thumbnail if not available
-    lightboxImage.src = fullSrc || img.src;
-    lightboxImage.alt = img.alt;
+    // Clean up any previous video
+    cleanupVideoPlayer();
+
+    if (isVideo && playbackId) {
+      // VIDEO: Hide image, create mux-player as sibling with SAME styling
+      lightboxImage.classList.add("hidden");
+
+      const muxPlayer = document.createElement("mux-player");
+      muxPlayer.setAttribute("playback-id", playbackId);
+      muxPlayer.setAttribute("stream-type", "on-demand");
+
+      // Luxury industrial theme - sophisticated dark controls
+      muxPlayer.setAttribute("accent-color", "#B8860B"); // Bronze accent for progress/hover
+      muxPlayer.setAttribute("primary-color", "#FFFFFF"); // White text and icons
+      muxPlayer.setAttribute("secondary-color", "rgba(10, 10, 10, 0.92)"); // Dark charcoal controls background
+      muxPlayer.setAttribute("default-hidden-captions", ""); // Hide captions by default
+
+      // Enhanced theming with CSS variables
+      muxPlayer.style.setProperty("--controls-background", "rgba(10, 10, 10, 0.92)");
+      muxPlayer.style.setProperty("--controls-hover-background", "rgba(26, 26, 26, 0.95)");
+
+      // Set aspect ratio from Mux (format "16:9" -> "16 / 9")
+      if (aspectRatio) {
+        const cssAspectRatio = aspectRatio.replace(":", " / ");
+        muxPlayer.style.aspectRatio = cssAspectRatio;
+      }
+
+      // CRITICAL: Set ALL sizing styles BEFORE inserting to prevent flash/resize
+      // Constrain to container while maintaining aspect ratio
+      muxPlayer.style.maxWidth = "100%";
+      muxPlayer.style.maxHeight = "100%";
+      muxPlayer.style.width = "auto";
+      muxPlayer.style.height = "auto";
+      muxPlayer.style.setProperty("--media-object-fit", "contain");
+
+      // Keep hidden until fully loaded to prevent resize flash
+      muxPlayer.style.visibility = "hidden";
+      muxPlayer.style.opacity = "0";
+
+      // Insert as sibling right after the image (same parent, same level)
+      lightboxImage.insertAdjacentElement("afterend", muxPlayer);
+      currentMuxPlayer = muxPlayer;
+
+      // Wait for player to be ready (metadata loaded) before showing
+      muxPlayer.addEventListener("loadedmetadata", () => {
+        // Player is ready with correct dimensions - now fade it in
+        muxPlayer.style.visibility = "visible";
+        muxPlayer.style.transition = "opacity 0.4s ease-out";
+        requestAnimationFrame(() => {
+          muxPlayer.style.opacity = "1";
+        });
+      }, { once: true });
+    } else {
+      // IMAGE: Show image
+      lightboxImage.classList.remove("hidden");
+      lightboxImage.src = fullSrc || img.src;
+      lightboxImage.alt = img.alt;
+    }
+
     lightboxCaption.textContent = img.alt;
     lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${galleryItems.length}`;
 
@@ -340,7 +529,7 @@ const breadcrumbs = [
     lightbox.classList.add("flex");
     document.body.style.overflow = "hidden";
 
-    // Trigger fade-in animation and focus close button for keyboard accessibility
+    // Trigger fade-in animation
     setTimeout(() => {
       lightbox.classList.remove("opacity-0");
       lightbox.classList.add("opacity-100");
@@ -352,6 +541,9 @@ const breadcrumbs = [
 
   function closeLightbox() {
     if (!lightbox || !lightboxImage) return;
+
+    // Clean up video player
+    cleanupVideoPlayer();
 
     lightbox.classList.remove("opacity-100");
     lightbox.classList.add("opacity-0");
@@ -427,7 +619,10 @@ const breadcrumbs = [
       if (targetId) {
         const target = document.getElementById(targetId);
         if (target) {
-          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+          const targetPosition =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            HEADER_OFFSET;
           window.scrollTo({ top: targetPosition, behavior: "smooth" });
         }
       }
@@ -444,5 +639,42 @@ const breadcrumbs = [
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Video play indicator - luxury refinement */
+  .video-play-indicator {
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  }
+
+  /* Subtle pulse animation for play button backdrop */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.15;
+      transform: scale(1.15);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  /* Mux player - luxury industrial styling */
+  mux-player {
+    border-radius: 0; /* Sharp edges = industrial */
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(184, 134, 11, 0.15); /* Subtle bronze border */
+    /* Fade-in handled by JavaScript on loadedmetadata event for smooth loading */
+  }
+
+  /* Mux player controls - ensure bronze theming */
+  mux-player::part(bottom) {
+    background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
   }
 </style>
