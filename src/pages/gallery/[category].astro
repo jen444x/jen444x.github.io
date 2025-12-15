@@ -73,7 +73,8 @@ const allGalleryItems = await sanityClient.fetch(
     image,
     "fullImageUrl": image.asset->url,
     "playbackId": video.asset->playbackId,
-    "thumbTime": video.asset->thumbTime
+    "thumbTime": video.asset->thumbTime,
+    "aspectRatio": video.asset->data.aspect_ratio
   }
 `,
   { category: sanityCategory }
@@ -116,6 +117,7 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
     isVideo,
     playbackId: playbackId || null,
     thumbTime: thumbTime || null,
+    aspectRatio: item.aspectRatio || null,
   };
 });
 
@@ -188,6 +190,9 @@ const breadcrumbs = [
                         class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                         data-index={galleryItems.indexOf(item)}
                         data-full-src={item.fullSrc}
+                        data-is-video={item.isVideo}
+                        data-playback-id={item.playbackId || ""}
+                        data-aspect-ratio={item.aspectRatio || ""}
                       >
                         <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
@@ -198,6 +203,16 @@ const breadcrumbs = [
                             width="800"
                             height="600"
                           />
+                          {/* Video play indicator - elegant centered play button */}
+                          {item.isVideo && (
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                              <div class="video-play-indicator w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-bronze/80 group-hover:border-bronze group-hover:scale-110 transition-all duration-300">
+                                <svg class="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M8 5v14l11-7z"/>
+                                </svg>
+                              </div>
+                            </div>
+                          )}
                           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="absolute bottom-6 left-6 right-6">
                               <p class="text-white font-light text-sm md:text-base tracking-wide">
@@ -221,6 +236,9 @@ const breadcrumbs = [
                 class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
                 data-index={index}
                 data-full-src={item.fullSrc}
+                data-is-video={item.isVideo}
+                data-playback-id={item.playbackId || ""}
+                data-aspect-ratio={item.aspectRatio || ""}
               >
                 <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                   <img
@@ -231,6 +249,16 @@ const breadcrumbs = [
                     width="800"
                     height="600"
                   />
+                  {/* Video play indicator - elegant centered play button */}
+                  {item.isVideo && (
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div class="video-play-indicator w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-bronze/80 group-hover:border-bronze group-hover:scale-110 transition-all duration-300">
+                        <svg class="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
                   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div class="absolute bottom-6 left-6 right-6">
                       <p class="text-white font-light text-sm md:text-base tracking-wide">
@@ -313,7 +341,7 @@ const breadcrumbs = [
     </button>
 
     <div
-      class="max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+      class="max-w-7xl max-h-[85vh] w-full h-full flex items-center justify-center px-4"
     >
       <img
         id="lightbox-image"
@@ -349,6 +377,9 @@ const breadcrumbs = [
 </GalleryLayout>
 
 <script>
+  // Load Mux Player - handles HLS streaming in ALL browsers
+  import("@mux/mux-player");
+
   // Constants
   const SCROLL_THRESHOLD_BACK_TO_TOP = 300;
   const LIGHTBOX_TRANSITION_DELAY = 10;
@@ -393,6 +424,16 @@ const breadcrumbs = [
   const galleryItems = document.querySelectorAll(".gallery-item");
 
   let currentLightboxIndex = 0;
+  let currentMuxPlayer: HTMLElement | null = null;
+
+  // Clean up any existing mux-player
+  function cleanupVideoPlayer() {
+    if (currentMuxPlayer) {
+      (currentMuxPlayer as any).pause?.();
+      currentMuxPlayer.remove();
+      currentMuxPlayer = null;
+    }
+  }
 
   function openLightbox(index: number) {
     currentLightboxIndex = index;
@@ -402,6 +443,11 @@ const breadcrumbs = [
 
     const img = item.querySelector("img");
     const fullSrc = item.getAttribute("data-full-src");
+
+    const isVideo = item.getAttribute("data-is-video") === "true";
+    const playbackId = item.getAttribute("data-playback-id");
+    const aspectRatio = item.getAttribute("data-aspect-ratio");
+
     if (
       !img ||
       !lightbox ||
@@ -411,9 +457,45 @@ const breadcrumbs = [
     )
       return;
 
-    // Use full resolution image for lightbox, fall back to thumbnail if not available
-    lightboxImage.src = fullSrc || img.src;
-    lightboxImage.alt = img.alt;
+    // Clean up any previous video
+    cleanupVideoPlayer();
+
+    if (isVideo && playbackId) {
+      // VIDEO: Hide image, create mux-player as sibling with SAME styling
+      lightboxImage.classList.add("hidden");
+
+      const muxPlayer = document.createElement("mux-player");
+      muxPlayer.setAttribute("playback-id", playbackId);
+      muxPlayer.setAttribute("stream-type", "on-demand");
+
+      // Luxury dark theme colors
+      muxPlayer.setAttribute("accent-color", "#B8860B"); // Bronze accent
+      muxPlayer.setAttribute("primary-color", "#FFFFFF"); // White icons
+      muxPlayer.setAttribute("secondary-color", "rgba(10, 10, 10, 0.85)"); // Dark controls bg
+      muxPlayer.setAttribute("default-hidden-captions", ""); // Hide captions by default
+
+      // Set aspect ratio from Mux (format "16:9" -> "16 / 9")
+      if (aspectRatio) {
+        const cssAspectRatio = aspectRatio.replace(":", " / ");
+        muxPlayer.style.aspectRatio = cssAspectRatio;
+      }
+      // Constrain to container while maintaining aspect ratio
+      muxPlayer.style.maxWidth = "100%";
+      muxPlayer.style.maxHeight = "100%";
+      muxPlayer.style.width = "auto";
+      muxPlayer.style.height = "auto";
+      muxPlayer.style.setProperty("--media-object-fit", "contain");
+
+      // Insert as sibling right after the image (same parent, same level)
+      lightboxImage.insertAdjacentElement("afterend", muxPlayer);
+      currentMuxPlayer = muxPlayer;
+    } else {
+      // IMAGE: Show image
+      lightboxImage.classList.remove("hidden");
+      lightboxImage.src = fullSrc || img.src;
+      lightboxImage.alt = img.alt;
+    }
+
     lightboxCaption.textContent = img.alt;
     lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${galleryItems.length}`;
 
@@ -421,7 +503,7 @@ const breadcrumbs = [
     lightbox.classList.add("flex");
     document.body.style.overflow = "hidden";
 
-    // Trigger fade-in animation and focus close button for keyboard accessibility
+    // Trigger fade-in animation
     setTimeout(() => {
       lightbox.classList.remove("opacity-0");
       lightbox.classList.add("opacity-100");
@@ -433,6 +515,9 @@ const breadcrumbs = [
 
   function closeLightbox() {
     if (!lightbox || !lightboxImage) return;
+
+    // Clean up video player
+    cleanupVideoPlayer();
 
     lightbox.classList.remove("opacity-100");
     lightbox.classList.add("opacity-0");
@@ -528,5 +613,15 @@ const breadcrumbs = [
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Video play indicator animation */
+  .video-play-indicator {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Mux player styling - subtle shadow */
+  mux-player {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
   }
 </style>
