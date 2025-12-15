@@ -203,11 +203,14 @@ const breadcrumbs = [
                             width="800"
                             height="600"
                           />
-                          {/* Video play indicator - elegant centered play button */}
+                          {/* Video play indicator - luxury minimal design */}
                           {item.isVideo && (
                             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                              <div class="video-play-indicator w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-bronze/80 group-hover:border-bronze group-hover:scale-110 transition-all duration-300">
-                                <svg class="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                              {/* Subtle backdrop pulse */}
+                              <div class="absolute w-20 h-20 md:w-24 md:h-24 rounded-full bg-bronze/20 animate-pulse-slow"></div>
+                              {/* Main play button */}
+                              <div class="video-play-indicator relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-bronze group-hover:border-bronze group-hover:scale-105 transition-all duration-500 shadow-2xl">
+                                <svg class="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                                   <path d="M8 5v14l11-7z"/>
                                 </svg>
                               </div>
@@ -249,11 +252,14 @@ const breadcrumbs = [
                     width="800"
                     height="600"
                   />
-                  {/* Video play indicator - elegant centered play button */}
+                  {/* Video play indicator - luxury minimal design */}
                   {item.isVideo && (
                     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div class="video-play-indicator w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:bg-bronze/80 group-hover:border-bronze group-hover:scale-110 transition-all duration-300">
-                        <svg class="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      {/* Subtle backdrop pulse */}
+                      <div class="absolute w-20 h-20 md:w-24 md:h-24 rounded-full bg-bronze/20 animate-pulse-slow"></div>
+                      {/* Main play button */}
+                      <div class="video-play-indicator relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-bronze group-hover:border-bronze group-hover:scale-105 transition-all duration-500 shadow-2xl">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
                         </svg>
                       </div>
@@ -468,17 +474,23 @@ const breadcrumbs = [
       muxPlayer.setAttribute("playback-id", playbackId);
       muxPlayer.setAttribute("stream-type", "on-demand");
 
-      // Luxury dark theme colors
-      muxPlayer.setAttribute("accent-color", "#B8860B"); // Bronze accent
-      muxPlayer.setAttribute("primary-color", "#FFFFFF"); // White icons
-      muxPlayer.setAttribute("secondary-color", "rgba(10, 10, 10, 0.85)"); // Dark controls bg
+      // Luxury industrial theme - sophisticated dark controls
+      muxPlayer.setAttribute("accent-color", "#B8860B"); // Bronze accent for progress/hover
+      muxPlayer.setAttribute("primary-color", "#FFFFFF"); // White text and icons
+      muxPlayer.setAttribute("secondary-color", "rgba(10, 10, 10, 0.92)"); // Dark charcoal controls background
       muxPlayer.setAttribute("default-hidden-captions", ""); // Hide captions by default
+
+      // Enhanced theming with CSS variables
+      muxPlayer.style.setProperty("--controls-background", "rgba(10, 10, 10, 0.92)");
+      muxPlayer.style.setProperty("--controls-hover-background", "rgba(26, 26, 26, 0.95)");
 
       // Set aspect ratio from Mux (format "16:9" -> "16 / 9")
       if (aspectRatio) {
         const cssAspectRatio = aspectRatio.replace(":", " / ");
         muxPlayer.style.aspectRatio = cssAspectRatio;
       }
+
+      // CRITICAL: Set ALL sizing styles BEFORE inserting to prevent flash/resize
       // Constrain to container while maintaining aspect ratio
       muxPlayer.style.maxWidth = "100%";
       muxPlayer.style.maxHeight = "100%";
@@ -486,9 +498,23 @@ const breadcrumbs = [
       muxPlayer.style.height = "auto";
       muxPlayer.style.setProperty("--media-object-fit", "contain");
 
+      // Keep hidden until fully loaded to prevent resize flash
+      muxPlayer.style.visibility = "hidden";
+      muxPlayer.style.opacity = "0";
+
       // Insert as sibling right after the image (same parent, same level)
       lightboxImage.insertAdjacentElement("afterend", muxPlayer);
       currentMuxPlayer = muxPlayer;
+
+      // Wait for player to be ready (metadata loaded) before showing
+      muxPlayer.addEventListener("loadedmetadata", () => {
+        // Player is ready with correct dimensions - now fade it in
+        muxPlayer.style.visibility = "visible";
+        muxPlayer.style.transition = "opacity 0.4s ease-out";
+        requestAnimationFrame(() => {
+          muxPlayer.style.opacity = "1";
+        });
+      }, { once: true });
     } else {
       // IMAGE: Show image
       lightboxImage.classList.remove("hidden");
@@ -615,13 +641,40 @@ const breadcrumbs = [
     display: none;
   }
 
-  /* Video play indicator animation */
+  /* Video play indicator - luxury refinement */
   .video-play-indicator {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   }
 
-  /* Mux player styling - subtle shadow */
+  /* Subtle pulse animation for play button backdrop */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.15;
+      transform: scale(1.15);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  /* Mux player - luxury industrial styling */
   mux-player {
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 0; /* Sharp edges = industrial */
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(184, 134, 11, 0.15); /* Subtle bronze border */
+    /* Fade-in handled by JavaScript on loadedmetadata event for smooth loading */
+  }
+
+  /* Mux player controls - ensure bronze theming */
+  mux-player::part(bottom) {
+    background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
   }
 </style>
