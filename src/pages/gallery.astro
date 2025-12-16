@@ -282,7 +282,7 @@ const categories = [
     <div class="bronze-gradient-divider"></div>
 
     <!-- Social Proof Strip - Luxury Minimal -->
-    <div class="bg-black-pure py-16 md:py-24 border-t border-bronze/10 relative overflow-hidden">
+    <section class="social-proof-section bg-black-pure py-16 md:py-24 border-t border-bronze/10 relative overflow-hidden">
       <!-- Subtle radial glow -->
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(184,134,11,0.06)_0%,transparent_70%)] pointer-events-none"></div>
 
@@ -290,7 +290,7 @@ const categories = [
         <div class="flex flex-col items-center gap-10 md:gap-12">
 
           <!-- Heading with gradient divider -->
-          <div class="text-center space-y-4">
+          <div class="text-center space-y-4 scroll-reveal opacity-0" style="animation-delay: 0.1s">
             <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-bronze to-transparent mx-auto"></div>
             <h2 class="font-['Bebas_Neue'] text-3xl md:text-4xl text-white tracking-[0.15em]">
               EXPLORE MORE OF OUR WORK
@@ -301,7 +301,7 @@ const categories = [
           </div>
 
           <!-- Social Icons -->
-          <div class="flex gap-8">
+          <div class="flex gap-8 scroll-reveal opacity-0" style="animation-delay: 0.2s">
             <a
               href="https://www.tiktok.com/@rockyconcreteinc"
               target="_blank"
@@ -333,7 +333,12 @@ const categories = [
 
         </div>
       </div>
-    </div>
+    </section>
+
+    <script>
+      import { initScrollAnimations, GALLERY_SCROLL_CONFIG } from '../utils/animations.js';
+      initScrollAnimations('.social-proof-section .scroll-reveal', GALLERY_SCROLL_CONFIG);
+    </script>
 
     <!-- CTA Section - Luxury Industrial -->
     <section class="bg-black-pure section-padding border-t border-bronze/10">
