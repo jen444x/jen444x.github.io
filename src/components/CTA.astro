@@ -1,95 +1,105 @@
 ---
+
 ---
 
-<!-- CTA Section - Clean & Minimal -->
-<section class="section-cta bg-black-pure section-padding border-t border-bronze/10" id="cta">
+<!-- CTA Section -->
+<section
+  class="section-cta bg-black-pure section-padding border-t border-bronze/10"
+  id="cta"
+>
   <div class="container max-w-7xl mx-auto px-6 md:px-8">
-
-    <!-- Heading Section -->
-    <div class="text-center mb-12 md:mb-14 cta-reveal opacity-0" style="animation-delay: 0.1s">
-      <h2 class="section-heading text-white mb-4">
-        Get Your Free Estimate
-      </h2>
+    <!-- Heading -->
+    <div
+      class="text-center mb-12 md:mb-14 cta-reveal opacity-0"
+      style="animation-delay: 0.1s"
+    >
+      <h2 class="section-heading text-white mb-4">Get Your Free Estimate</h2>
       <div class="bronze-divider mx-auto mb-6"></div>
       <p class="section-subheading text-slate-light max-w-2xl mx-auto">
         Tell us about your project and we'll get back to you within 24 hours.
       </p>
     </div>
 
-    <!-- Split Layout: Contact Info + Form -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
-
-      <!-- Left: Contact Information (2 cols) -->
-      <div class="lg:col-span-2 space-y-6 cta-reveal opacity-0" style="animation-delay: 0.25s">
+    <!-- Two Column Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <!-- Left: Contact Info -->
+      <div class="space-y-8 cta-reveal opacity-0" style="animation-delay: 0.2s">
         <!-- Phone -->
-        <div class="group">
-          <h3 class="font-['Bebas_Neue'] text-xl md:text-2xl tracking-wide text-white mb-4">
+        <div>
+          <h3
+            class="font-['Bebas_Neue'] text-2xl tracking-wide text-white mb-3"
+          >
             Call Us
           </h3>
           <a
             href="tel:661-378-4017"
-            class="inline-flex items-center gap-3 text-white-soft hover:text-bronze transition-all duration-300 text-lg md:text-xl"
+            class="inline-flex items-center gap-3 text-white hover:text-bronze transition-colors text-xl"
           >
-            <ion-icon class="text-2xl" name="call-outline"></ion-icon>
-            <span class="font-['Inter'] font-light tracking-wide">661-378-4017</span>
+            <ion-icon name="call-outline" class="text-2xl text-bronze"
+            ></ion-icon>
+            661-378-4017
           </a>
         </div>
 
         <!-- Email -->
-        <div class="group">
-          <h3 class="font-['Bebas_Neue'] text-xl md:text-2xl tracking-wide text-white mb-4">
+        <div>
+          <h3
+            class="font-['Bebas_Neue'] text-2xl tracking-wide text-white mb-3"
+          >
             Email Us
           </h3>
           <a
             href="mailto:rockyconcreteinc22@gmail.com"
-            class="inline-flex items-start gap-3 text-white-soft hover:text-bronze transition-all duration-300 text-base md:text-lg break-all"
+            class="inline-flex items-center gap-3 text-white hover:text-bronze transition-colors text-base md:text-lg break-all"
           >
-            <ion-icon class="text-2xl shrink-0 mt-1" name="mail-outline"></ion-icon>
-            <span class="font-['Inter'] font-light tracking-wide">rockyconcreteinc22@gmail.com</span>
+            <ion-icon name="mail-outline" class="text-2xl text-bronze shrink-0"
+            ></ion-icon>
+            rockyconcreteinc22@gmail.com
           </a>
         </div>
 
-        <!-- Social Links -->
-        <div class="group pt-6">
-          <h3 class="font-['Bebas_Neue'] text-xl md:text-2xl tracking-wide text-white mb-6">
+        <!-- Socials -->
+        <div>
+          <h3
+            class="font-['Bebas_Neue'] text-2xl tracking-wide text-white mb-4"
+          >
             Follow Us
           </h3>
-          <div class="flex gap-6">
+          <div class="flex gap-4">
             <a
               href="https://www.tiktok.com/@rockyconcreteinc"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="TikTok"
-              class="text-white-soft hover:text-bronze transition-all duration-300 transform hover:scale-110"
+              class="text-white hover:text-bronze transition-colors"
             >
-              <ion-icon class="text-3xl" name="logo-tiktok"></ion-icon>
+              <ion-icon name="logo-tiktok" class="text-3xl"></ion-icon>
             </a>
             <a
               href="https://www.instagram.com/rockyconcreteinc/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              class="text-white-soft hover:text-bronze transition-all duration-300 transform hover:scale-110"
+              class="text-white hover:text-bronze transition-colors"
             >
-              <ion-icon class="text-3xl" name="logo-instagram"></ion-icon>
+              <ion-icon name="logo-instagram" class="text-3xl"></ion-icon>
             </a>
             <a
               href="https://m.facebook.com/RockyConcreteInc/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              class="text-white-soft hover:text-bronze transition-all duration-300 transform hover:scale-110"
+              class="text-white hover:text-bronze transition-colors"
             >
-              <ion-icon class="text-3xl" name="logo-facebook"></ion-icon>
+              <ion-icon name="logo-facebook" class="text-3xl"></ion-icon>
             </a>
           </div>
         </div>
-
       </div>
 
-      <!-- Right: Form (3 cols) -->
-      <div class="lg:col-span-3 cta-reveal opacity-0" style="animation-delay: 0.3s">
-        <div class="bg-charcoal border border-charcoal-light p-6 md:p-8 shadow-2xl">
+      <!-- Right: Form -->
+      <div class="cta-reveal opacity-0" style="animation-delay: 0.3s">
+        <div class="bg-charcoal border border-charcoal-light p-6 md:p-8">
           <form
             name="contact"
             method="POST"
@@ -97,107 +107,90 @@
             netlify-honeypot="bot-field"
             class="space-y-5"
           >
-            <!-- Netlify Forms bot field (hidden) -->
             <input type="hidden" name="form-name" value="contact" />
             <div style="display: none;">
-              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-            </div>
-            <!-- Full Name -->
-            <div>
               <label
-                for="full-name"
-                class="block font-['Inter'] text-sm font-medium text-white-soft mb-2 tracking-wide"
+                >Don't fill this out if you're human: <input
+                  name="bot-field"
+                /></label
               >
-                Full Name
-              </label>
+            </div>
+
+            <div>
+              <label for="full-name" class="block text-sm text-white mb-2"
+                >Full Name</label
+              >
               <input
                 id="full-name"
                 type="text"
                 name="full-name"
                 required
-                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-all duration-300 font-['Inter'] text-base"
+                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-colors"
                 placeholder="John Doe"
               />
             </div>
 
-            <!-- Email -->
             <div>
-              <label
-                for="email"
-                class="block font-['Inter'] text-sm font-medium text-white-soft mb-2 tracking-wide"
+              <label for="email" class="block text-sm text-white mb-2"
+                >Email Address</label
               >
-                Email Address
-              </label>
               <input
                 id="email"
                 type="email"
                 name="email"
                 required
-                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-all duration-300 font-['Inter'] text-base"
+                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-colors"
                 placeholder="john@example.com"
               />
             </div>
 
-            <!-- Phone -->
             <div>
-              <label
-                for="phone"
-                class="block font-['Inter'] text-sm font-medium text-white-soft mb-2 tracking-wide"
+              <label for="phone" class="block text-sm text-white mb-2"
+                >Phone Number</label
               >
-                Phone Number
-              </label>
               <input
                 id="phone"
                 type="tel"
                 name="phone"
-                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-all duration-300 font-['Inter'] text-base"
+                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate focus:outline-none focus:border-bronze transition-colors"
                 placeholder="(555) 123-4567"
               />
             </div>
 
-            <!-- Message -->
             <div>
-              <label
-                for="message"
-                class="block font-['Inter'] text-sm font-medium text-white-soft mb-2 tracking-wide"
+              <label for="message" class="block text-sm text-white mb-2"
+                >Project Details</label
               >
-                Project Details
-              </label>
               <textarea
                 id="message"
                 name="message"
                 rows="4"
                 required
-                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate resize-none focus:outline-none focus:border-bronze transition-all duration-300 font-['Inter'] text-base"
-                placeholder="Tell us about your project..."
-              ></textarea>
+                class="w-full px-4 py-3 bg-black-pure border border-charcoal-light text-white placeholder-slate resize-none focus:outline-none focus:border-bronze transition-colors"
+                placeholder="Tell us about your project..."></textarea>
             </div>
 
-            <!-- Submit Button -->
             <button
               type="submit"
-              class="w-full bg-transparent border-2 border-white text-white font-['Inter'] font-medium text-base md:text-lg py-4 px-8 tracking-wide transition-all duration-300 hover:bg-white hover:text-black-pure hover:border-bronze focus:outline-none focus:ring-2 focus:ring-bronze focus:ring-offset-2 focus:ring-offset-charcoal"
+              class="w-full bg-bronze hover:bg-bronze-light text-black-pure font-medium py-4 px-8 transition-colors"
             >
               Get Free Estimate
             </button>
           </form>
         </div>
       </div>
-
     </div>
-
-
   </div>
 </section>
 
-<!-- SCROLL ANIMATION SCRIPT -->
 <script>
-  import { initScrollAnimations, HOMEPAGE_SCROLL_CONFIG } from '../utils/animations.js';
-
-  // Initialize scroll animations for CTA section
-  initScrollAnimations('.section-cta .cta-reveal', HOMEPAGE_SCROLL_CONFIG);
+  import {
+    initScrollAnimations,
+    HOMEPAGE_SCROLL_CONFIG,
+  } from "../utils/animations.js";
+  initScrollAnimations(".section-cta .cta-reveal", HOMEPAGE_SCROLL_CONFIG);
 </script>
 
 <style>
-  @import '../styles/animations.css';
+  @import "../styles/animations.css";
 </style>
