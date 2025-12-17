@@ -1,26 +1,15 @@
 import type { APIRoute } from 'astro'
-import { createClient } from '@sanity/client'
+import { sanityWriteClient } from '../../sanity/client'
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // Get the Sanity write token from environment
-    const sanityToken = import.meta.env.SANITY_WRITE_TOKEN
-
-    if (!sanityToken) {
+    // Check if write client has token configured
+    if (!import.meta.env.SANITY_WRITE_TOKEN) {
       return new Response(
         JSON.stringify({ error: 'Server configuration error: Missing Sanity token' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       )
     }
-
-    // Create write client
-    const client = createClient({
-      projectId: '7pjigdmm',
-      dataset: 'production',
-      apiVersion: '2024-01-01',
-      useCdn: false,
-      token: sanityToken,
-    })
 
     // Parse form data
     const formData = await request.formData()
@@ -43,7 +32,7 @@ export const POST: APIRoute = async ({ request }) => {
     const buffer = Buffer.from(arrayBuffer)
 
     // Upload image to Sanity
-    const imageAsset = await client.assets.upload('image', buffer, {
+    const imageAsset = await sanityWriteClient.assets.upload('image', buffer, {
       filename: imageFile.name,
       contentType: imageFile.type,
     })
@@ -66,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
       featured: false,
     }
 
-    const createdDoc = await client.create(galleryItem)
+    const createdDoc = await sanityWriteClient.create(galleryItem)
 
     return new Response(
       JSON.stringify({
