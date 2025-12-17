@@ -74,7 +74,8 @@ const allGalleryItems = await sanityClient.fetch(
     "fullImageUrl": image.asset->url,
     "playbackId": video.asset->playbackId,
     "thumbTime": video.asset->thumbTime,
-    "aspectRatio": video.asset->data.aspect_ratio
+    "aspectRatio": video.asset->data.aspect_ratio,
+    thumbFocus
   }
 `,
   { category: sanityCategory }
@@ -87,6 +88,8 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
   const playbackId = item.playbackId;
   // thumbTime comes from Mux plugin's visual picker (stored on video asset)
   const thumbTime = item.thumbTime;
+  // thumbFocus controls where to crop the thumbnail (auto = smartcrop, or top/center/bottom)
+  const thumbFocus = item.thumbFocus || "auto";
 
   // Step 2: Get the thumbnail URL (different source for each type)
   let src = "";
@@ -94,9 +97,15 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
 
   if (isVideo && playbackId) {
     // VIDEO → Mux thumbnail
-    // Format: https://image.mux.com/{playbackId}/thumbnail.jpg?width=800&height=600&fit_mode=crop&time={seconds}
-    const timeParam = typeof thumbTime === "number" ? `&time=${thumbTime}` : "";
-    src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1200&height=900&fit_mode=smartcrop${timeParam}`;
+    const timeParam = typeof thumbTime === "number" ? `time=${thumbTime}` : "";
+
+    if (thumbFocus === "auto") {
+      // Use Mux smartcrop (default behavior)
+      src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1200&height=900&fit_mode=smartcrop${timeParam ? `&${timeParam}` : ""}`;
+    } else {
+      // Manual focus: get full thumbnail, CSS will handle the crop position
+      src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1200${timeParam ? `&${timeParam}` : ""}`;
+    }
     fullSrc = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
   } else if (item.image) {
     // PHOTO → Sanity image (same as before)
@@ -118,6 +127,7 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
     playbackId: playbackId || null,
     thumbTime: thumbTime || null,
     aspectRatio: item.aspectRatio || null,
+    thumbFocus,
   };
 });
 
@@ -199,6 +209,7 @@ const breadcrumbs = [
                             src={item.src}
                             alt={item.alt}
                             class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                            style={item.thumbFocus !== "auto" ? `object-position: ${item.thumbFocus}` : undefined}
                             loading={index < 3 ? "eager" : "lazy"}
                             width="800"
                             height="600"
@@ -248,6 +259,7 @@ const breadcrumbs = [
                     src={item.src}
                     alt={item.alt}
                     class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-75"
+                    style={item.thumbFocus !== "auto" ? `object-position: ${item.thumbFocus}` : undefined}
                     loading={index < 6 ? "eager" : "lazy"}
                     width="800"
                     height="600"

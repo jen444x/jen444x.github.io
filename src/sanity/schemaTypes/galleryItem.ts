@@ -45,6 +45,26 @@ export default defineType({
         }),
     }),
     defineField({
+      name: 'thumbFocus',
+      title: 'Thumbnail Focus',
+      type: 'string',
+      description: 'Where to focus the preview thumbnail crop. Leave on Auto unless it looks wrong.',
+      options: {
+        list: [
+          { title: 'Auto', value: 'auto' },
+          { title: 'Top', value: 'center top' },
+          { title: 'Upper', value: 'center 25%' },
+          { title: 'Center', value: 'center center' },
+          { title: 'Lower', value: 'center 75%' },
+          { title: 'Bottom', value: 'center bottom' },
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'auto',
+      hidden: ({ parent }) => parent?.isVideo !== true,
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
