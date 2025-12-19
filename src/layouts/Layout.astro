@@ -69,9 +69,6 @@ const isHomePage = Astro.url.pathname === '/';
 
     <title>{title}</title>
 
-    {isHomePage && (
-      <link rel="preload" href="/img/hero/hero-img.avif" as="image" type="image/avif" />
-    )}
 
     <!-- Schema.org Structured Data for Local Business -->
     <script type="application/ld+json">
