@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
 import { sanityClient, urlFor } from "../sanity/client";
 
 // Fetch featured photos from Sanity (ordered by drag-and-drop rank)
@@ -309,7 +310,7 @@ const categories = [
               class="group w-16 h-16 flex items-center justify-center border-2 border-bronze/40 text-bronze hover:border-bronze hover:bg-bronze/10 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_32px_rgba(184,134,11,0.4)]"
               aria-label="TikTok"
             >
-              <ion-icon class="text-3xl" name="logo-tiktok"></ion-icon>
+              <Icon name="logo-tiktok" class="text-3xl" />
             </a>
             <a
               href="https://www.instagram.com/rockyconcreteinc/"
@@ -318,7 +319,7 @@ const categories = [
               class="group w-16 h-16 flex items-center justify-center border-2 border-bronze/40 text-bronze hover:border-bronze hover:bg-bronze/10 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_32px_rgba(184,134,11,0.4)]"
               aria-label="Instagram"
             >
-              <ion-icon class="text-3xl" name="logo-instagram"></ion-icon>
+              <Icon name="logo-instagram" class="text-3xl" />
             </a>
             <a
               href="https://m.facebook.com/RockyConcreteInc/"
@@ -327,7 +328,7 @@ const categories = [
               class="group w-16 h-16 flex items-center justify-center border-2 border-bronze/40 text-bronze hover:border-bronze hover:bg-bronze/10 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_32px_rgba(184,134,11,0.4)]"
               aria-label="Facebook"
             >
-              <ion-icon class="text-3xl" name="logo-facebook"></ion-icon>
+              <Icon name="logo-facebook" class="text-3xl" />
             </a>
           </div>
 
