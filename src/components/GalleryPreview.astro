@@ -33,7 +33,7 @@ const featuredImage = homepageHero || fallbackImage;
       <a href="/gallery" class="block relative group overflow-hidden scroll-reveal opacity-0">
         <div class="aspect-[21/9] md:aspect-[3/1] overflow-hidden">
           <img
-            src={urlFor(featuredImage.image).url()}
+            src={urlFor(featuredImage.image).width(1600).auto('format').url()}
             alt={featuredImage.alt || featuredImage.title || "Rocky Concrete featured project"}
             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"

@@ -82,7 +82,7 @@ const services = [
           <div class="absolute inset-0">
             {service.image ? (
               <img
-                src={urlFor(service.image).url()}
+                src={urlFor(service.image).width(800).height(600).auto('format').url()}
                 alt={service.alt}
                 class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                 loading="lazy"
