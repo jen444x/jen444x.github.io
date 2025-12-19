@@ -99,21 +99,25 @@ const categories = [
       </div>
 
       <div class="container relative z-20 max-w-5xl mx-auto px-6 md:px-12">
-        <div class="text-center hero-content opacity-0">
+        <div class="text-center">
           <!-- Main Heading - Bebas Neue Luxury -->
           <h1
-            class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light"
-            style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%);"
+            class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light hero-animate opacity-0"
+            style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%); animation-delay: 0.2s;"
           >
             OUR WORK
           </h1>
 
           <!-- Bronze accent line -->
-          <div class="w-20 h-0.5 bg-bronze mx-auto mb-8"></div>
+          <div
+            class="w-20 h-0.5 bg-bronze mx-auto mb-8 hero-animate opacity-0"
+            style="animation-delay: 0.4s;"
+          ></div>
 
           <!-- Subheading -->
           <p
-            class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed"
+            class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed hero-animate opacity-0"
+            style="animation-delay: 0.6s;"
           >
             Explore our portfolio of concrete and landscaping projects across Bakersfield
           </p>
@@ -256,9 +260,11 @@ const categories = [
                 >
                   <div class="w-64 md:w-72 lg:w-80 aspect-4/3 overflow-hidden">
                     <img
-                      src={urlFor(photo.image).url()}
+                      src={urlFor(photo.image).width(640).height(480).auto('format').url()}
                       alt={photo.alt || photo.title}
                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+                      width="640"
+                      height="480"
                       loading={index < 4 ? "eager" : "lazy"}
                       draggable="false"
                     />
@@ -372,14 +378,13 @@ const categories = [
 <script>
   import { initScrollAnimations, GALLERY_SCROLL_CONFIG } from '../utils/animations.js';
 
-  // Hero page-load animation - trigger immediately
-  const heroContent = document.querySelector(".hero-content");
-  if (heroContent) {
-    setTimeout(() => {
-      heroContent.classList.remove("opacity-0");
-      heroContent.classList.add("animate-fade-in-up");
-    }, 100);
-  }
+  // Hero page-load animation - staggered like Hero.astro
+  document.addEventListener("DOMContentLoaded", () => {
+    const heroElements = document.querySelectorAll(".hero-animate");
+    heroElements.forEach((el) => {
+      el.classList.add("animate-fade-in-up");
+    });
+  });
 
   // Scroll reveal animations for category cards
   initScrollAnimations('.scroll-reveal', GALLERY_SCROLL_CONFIG);
@@ -456,6 +461,11 @@ const categories = [
 <style>
   /* Import reusable animations */
   @import '../styles/animations.css';
+
+  /* Hero animation optimization */
+  .hero-animate {
+    will-change: transform, opacity;
+  }
 
   /* Hide scrollbar but keep functionality */
   .scrollbar-hide {

@@ -46,10 +46,10 @@ const { title, description, heroTitle, heroDescription, breadcrumbs } = Astro.pr
       </div>
 
       <div class="container relative z-20 max-w-5xl mx-auto px-6 md:px-12">
-        <div class="text-center hero-content opacity-0">
+        <div class="text-center">
           <!-- Breadcrumb Navigation (optional - only for category pages) -->
           {breadcrumbs && breadcrumbs.length > 0 && (
-            <nav aria-label="Breadcrumb" class="mb-8">
+            <nav aria-label="Breadcrumb" class="mb-8 hero-animate opacity-0" style="animation-delay: 0.1s;">
               <ol class="flex items-center justify-center gap-2 text-sm">
                 {breadcrumbs.map((crumb, index) => (
                   <>
@@ -72,18 +72,22 @@ const { title, description, heroTitle, heroDescription, breadcrumbs } = Astro.pr
 
           <!-- Main Heading - Bebas Neue Luxury -->
           <h1
-            class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light"
-            style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%);"
+            class="font-['Bebas_Neue'] text-6xl md:text-7xl lg:text-8xl text-white mb-6 tracking-wider font-light hero-animate opacity-0"
+            style="text-shadow: 0 4px 24px rgb(0 0 0 / 70%); animation-delay: 0.2s;"
           >
             {heroTitle}
           </h1>
 
           <!-- Bronze accent line -->
-          <div class="w-20 h-0.5 bg-bronze mx-auto mb-8"></div>
+          <div
+            class="w-20 h-0.5 bg-bronze mx-auto mb-8 hero-animate opacity-0"
+            style="animation-delay: 0.4s;"
+          ></div>
 
           <!-- Subheading -->
           <p
-            class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed"
+            class="text-base md:text-lg text-slate-light max-w-2xl mx-auto font-light leading-relaxed hero-animate opacity-0"
+            style="animation-delay: 0.6s;"
           >
             {heroDescription}
           </p>
@@ -129,17 +133,21 @@ const { title, description, heroTitle, heroDescription, breadcrumbs } = Astro.pr
 </Layout>
 
 <script>
-  // Hero page-load animation - matches Hero.astro pattern
+  // Hero page-load animation - staggered like Hero.astro
   document.addEventListener("DOMContentLoaded", () => {
-    const heroContent = document.querySelector(".hero-content");
-    if (heroContent) {
-      heroContent.classList.remove("opacity-0");
-      heroContent.classList.add("animate-fade-in-up");
-    }
+    const heroElements = document.querySelectorAll(".hero-animate");
+    heroElements.forEach((el) => {
+      el.classList.add("animate-fade-in-up");
+    });
   });
 </script>
 
 <style>
   /* Import reusable animations */
   @import '../styles/animations.css';
+
+  /* Hero animation optimization */
+  .hero-animate {
+    will-change: transform, opacity;
+  }
 </style>
