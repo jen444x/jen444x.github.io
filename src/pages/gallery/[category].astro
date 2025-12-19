@@ -102,15 +102,15 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
 
     if (thumbFocus === "auto") {
       // Use Mux smartcrop (default behavior)
-      src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1200&height=900&fit_mode=smartcrop${timeParam ? `&${timeParam}` : ""}`;
+      src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=800&height=600&fit_mode=smartcrop${timeParam ? `&${timeParam}` : ""}`;
     } else {
       // Manual focus: get full thumbnail, CSS will handle the crop position
-      src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1200${timeParam ? `&${timeParam}` : ""}`;
+      src = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=800&height=600${timeParam ? `&${timeParam}` : ""}`;
     }
     fullSrc = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
   } else if (item.image) {
     // PHOTO → Sanity image (same as before)
-    src = urlFor(item.image).width(800).height(600).fit("crop").url();
+    src = urlFor(item.image).width(800).height(600).fit("crop").auto('format').url();
     fullSrc = urlFor(item.image).url();
   }
 
