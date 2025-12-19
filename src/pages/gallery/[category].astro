@@ -113,10 +113,18 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
     fullSrc = urlFor(item.image).url();
   }
 
-  // Step 3: Return the clean object
+  // Step 3: Generate animated preview URL for videos (Netflix-style hover effect)
+  let animatedSrc = "";
+  if (isVideo && playbackId) {
+    // Mux animated WebP: smooth 4-second loop, 15fps for silky preview
+    animatedSrc = `https://image.mux.com/${playbackId}/animated.webp?width=640&fps=15&start=0&end=4`;
+  }
+
+  // Step 4: Return the clean object
   return {
     src,
     fullSrc,
+    animatedSrc,
     alt: item.alt,
     title: item.title,
     category: item.category,
@@ -203,6 +211,7 @@ const breadcrumbs = [
                         data-is-video={item.isVideo}
                         data-playback-id={item.playbackId || ""}
                         data-aspect-ratio={item.aspectRatio || ""}
+                        data-animated-src={item.animatedSrc || ""}
                       >
                         <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                           <img
@@ -253,6 +262,7 @@ const breadcrumbs = [
                 data-is-video={item.isVideo}
                 data-playback-id={item.playbackId || ""}
                 data-aspect-ratio={item.aspectRatio || ""}
+                data-animated-src={item.animatedSrc || ""}
               >
                 <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
                   <img
@@ -598,6 +608,35 @@ const breadcrumbs = [
         openLightbox(index);
       }
     });
+
+    // Video hover preview - Netflix-style animated thumbnail
+    const isVideo = item.getAttribute("data-is-video") === "true";
+    const animatedSrc = item.getAttribute("data-animated-src");
+
+    if (isVideo && animatedSrc) {
+      const img = item.querySelector("img") as HTMLImageElement;
+      if (!img) return;
+
+      const staticSrc = img.src;
+      let preloadedAnimated: HTMLImageElement | null = null;
+
+      // Preload animated WebP on first hover for instant swap
+      item.addEventListener("mouseenter", () => {
+        if (!preloadedAnimated) {
+          preloadedAnimated = new Image();
+          preloadedAnimated.src = animatedSrc;
+        }
+        // Swap to animated preview
+        img.src = animatedSrc;
+        img.classList.add("video-preview-active");
+      });
+
+      item.addEventListener("mouseleave", () => {
+        // Swap back to static thumbnail
+        img.src = staticSrc;
+        img.classList.remove("video-preview-active");
+      });
+    }
   });
 
   // Lightbox controls
@@ -688,5 +727,15 @@ const breadcrumbs = [
   /* Mux player controls - ensure bronze theming */
   mux-player::part(bottom) {
     background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
+  }
+
+  /* Video preview hover effect - smooth crossfade */
+  .gallery-item img {
+    transition: all 0.5s ease-out;
+  }
+
+  .gallery-item img.video-preview-active {
+    /* Subtle brightness boost when preview is playing */
+    filter: brightness(1.05);
   }
 </style>
