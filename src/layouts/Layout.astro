@@ -8,6 +8,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, 'https://rockyconcreteinc.com');
+const isAdminPage = Astro.url.pathname.startsWith('/admin');
 ---
 
 <!DOCTYPE html>
@@ -60,8 +61,10 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://rockyconcreteinc.com')
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <!-- Netlify Identity Widget for CMS authentication -->
-    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Netlify Identity Widget - only load on admin pages -->
+    {isAdminPage && (
+      <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    )}
 
     <title>{title}</title>
 
