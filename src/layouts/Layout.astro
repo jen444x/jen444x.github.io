@@ -9,6 +9,7 @@ interface Props {
 const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, 'https://rockyconcreteinc.com');
 const isAdminPage = Astro.url.pathname.startsWith('/admin');
+const isHomePage = Astro.url.pathname === '/';
 ---
 
 <!DOCTYPE html>
@@ -68,8 +69,9 @@ const isAdminPage = Astro.url.pathname.startsWith('/admin');
 
     <title>{title}</title>
 
-    <link rel="preload" href="/img/hero/hero-img.avif" as="image" type="image/avif" />
-    <link rel="preload" href="/img/hero/hero-img.jpg" as="image" type="image/jpeg" />
+    {isHomePage && (
+      <link rel="preload" href="/img/hero/hero-img.avif" as="image" type="image/avif" />
+    )}
 
     <!-- Schema.org Structured Data for Local Business -->
     <script type="application/ld+json">

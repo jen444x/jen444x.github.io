@@ -129,14 +129,13 @@ const { title, description, heroTitle, heroDescription, breadcrumbs } = Astro.pr
 </Layout>
 
 <script>
-  // Hero page-load animation - trigger immediately
-  const heroContent = document.querySelector(".hero-content");
-  if (heroContent) {
-    setTimeout(() => {
-      heroContent.classList.remove("opacity-0");
+  // Hero page-load animation - matches Hero.astro pattern
+  document.addEventListener("DOMContentLoaded", () => {
+    const heroContent = document.querySelector(".hero-content");
+    if (heroContent) {
       heroContent.classList.add("animate-fade-in-up");
-    }, 100);
-  }
+    }
+  });
 </script>
 
 <style>
