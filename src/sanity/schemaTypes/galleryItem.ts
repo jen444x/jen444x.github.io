@@ -68,6 +68,13 @@ export default defineType({
       hidden: ({ parent }) => parent?.isVideo !== true,
     }),
     defineField({
+      name: 'previewStart',
+      title: 'Hover Preview Start (seconds)',
+      type: 'number',
+      description: 'When someone hovers, the preview starts from this time. Leave empty to start from beginning.',
+      hidden: ({ parent }) => parent?.isVideo !== true,
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
