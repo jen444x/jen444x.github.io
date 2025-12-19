@@ -1,10 +1,13 @@
 import { defineField, defineType } from 'sanity'
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list'
 
 export default defineType({
   name: 'galleryItem',
   title: 'Gallery Item',
   type: 'document',
+  orderings: [orderRankOrdering],
   fields: [
+    orderRankField({ type: 'galleryItem' }),
     defineField({
       name: 'isVideo',
       title: 'This is a video',
@@ -140,12 +143,6 @@ export default defineType({
         layout: 'dropdown',
       },
       hidden: ({ parent }) => parent?.category !== 'concrete',
-    }),
-    defineField({
-      name: 'order',
-      title: 'Display Order',
-      type: 'number',
-      description: 'Lower numbers appear first (e.g., 1 = first, 10 = near top, leave blank = no preference)',
     }),
     defineField({
       name: 'featured',

@@ -1,13 +1,160 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { muxInput } from 'sanity-plugin-mux-input'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import { schemaTypes } from './src/sanity/schemaTypes'
 
 // Custom structure for organizing gallery items by category
-const structure = (S: any) =>
+const structure = (S: any, context: any) =>
   S.list()
     .title('Content')
     .items([
+      // Drag-and-drop reordering BY CATEGORY
+      S.listItem()
+        .title('↕️ Reorder Gallery')
+        .child(
+          S.list()
+            .title('Reorder by Category')
+            .items([
+              // CONCRETE - has subcategories
+              S.listItem()
+                .title('Concrete')
+                .child(
+                  S.list()
+                    .title('Concrete Subcategories')
+                    .items([
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-walkways-steps',
+                        title: 'Walkways & Steps',
+                        filter: 'category == "concrete" && subcategory == "walkways-steps"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-flatwork-patios',
+                        title: 'Flatwork & Patios',
+                        filter: 'category == "concrete" && subcategory == "flatwork-patios"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-driveways',
+                        title: 'Driveways',
+                        filter: 'category == "concrete" && subcategory == "driveways"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-stone-work',
+                        title: 'Stone Work',
+                        filter: 'category == "concrete" && subcategory == "stone-work"',
+                        S,
+                        context,
+                      }),
+                    ])
+                ),
+              // OUTDOOR KITCHENS - no subcategories
+              orderableDocumentListDeskItem({
+                type: 'galleryItem',
+                id: 'orderable-outdoor-kitchens',
+                title: 'Outdoor Kitchens',
+                filter: 'category == "outdoor-kitchens"',
+                S,
+                context,
+              }),
+              // COVERED PATIOS - no subcategories
+              orderableDocumentListDeskItem({
+                type: 'galleryItem',
+                id: 'orderable-covered-patios',
+                title: 'Covered Patios',
+                filter: 'category == "covered-patios"',
+                S,
+                context,
+              }),
+              // FIRE FEATURES - has subcategories
+              S.listItem()
+                .title('Fire Features')
+                .child(
+                  S.list()
+                    .title('Fire Features Subcategories')
+                    .items([
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-fire-pits',
+                        title: 'Fire Pits',
+                        filter: 'category == "fire-features" && subcategory == "fire-pits"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-fire-pit-tables',
+                        title: 'Fire Pit Tables',
+                        filter: 'category == "fire-features" && subcategory == "fire-pit-tables"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-fireplaces',
+                        title: 'Fireplaces',
+                        filter: 'category == "fire-features" && subcategory == "fireplaces"',
+                        S,
+                        context,
+                      }),
+                    ])
+                ),
+              // LANDSCAPING - has subcategories
+              S.listItem()
+                .title('Landscaping')
+                .child(
+                  S.list()
+                    .title('Landscaping Subcategories')
+                    .items([
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-gardens',
+                        title: 'Gardens & Lawns',
+                        filter: 'category == "landscaping" && subcategory == "gardens"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-water-features',
+                        title: 'Water Features',
+                        filter: 'category == "landscaping" && subcategory == "water-features"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'galleryItem',
+                        id: 'orderable-turf',
+                        title: 'Artificial Turf',
+                        filter: 'category == "landscaping" && subcategory == "turf"',
+                        S,
+                        context,
+                      }),
+                    ])
+                ),
+              // IRON WORK - no subcategories
+              orderableDocumentListDeskItem({
+                type: 'galleryItem',
+                id: 'orderable-iron-work',
+                title: 'Iron Work',
+                filter: 'category == "iron-work"',
+                S,
+                context,
+              }),
+            ])
+        ),
+
+      S.divider(),
+
       // All Gallery Items (with sorting)
       S.listItem()
         .title('All Gallery Items')
@@ -15,7 +162,7 @@ const structure = (S: any) =>
           S.documentList()
             .title('All Gallery Items')
             .filter('_type == "galleryItem"')
-            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
         ),
 
       S.divider(),
@@ -39,7 +186,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('All Concrete')
                             .filter('_type == "galleryItem" && category == "concrete"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Walkways & Steps')
@@ -47,7 +194,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Walkways & Steps')
                             .filter('_type == "galleryItem" && category == "concrete" && subcategory == "walkways-steps"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Flatwork & Patios')
@@ -55,7 +202,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Flatwork & Patios')
                             .filter('_type == "galleryItem" && category == "concrete" && subcategory == "flatwork-patios"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Stone Work')
@@ -63,7 +210,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Stone Work')
                             .filter('_type == "galleryItem" && category == "concrete" && subcategory == "stone-work"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Driveways')
@@ -71,7 +218,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Driveways')
                             .filter('_type == "galleryItem" && category == "concrete" && subcategory == "driveways"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                     ])
                 ),
@@ -81,7 +228,7 @@ const structure = (S: any) =>
                   S.documentList()
                     .title('Outdoor Kitchens')
                     .filter('_type == "galleryItem" && category == "outdoor-kitchens"')
-                    .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                    .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                 ),
               S.listItem()
                 .title('Covered Patios')
@@ -89,7 +236,7 @@ const structure = (S: any) =>
                   S.documentList()
                     .title('Covered Patios')
                     .filter('_type == "galleryItem" && category == "covered-patios"')
-                    .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                    .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                 ),
               S.listItem()
                 .title('Fire Features')
@@ -103,7 +250,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('All Fire Features')
                             .filter('_type == "galleryItem" && category == "fire-features"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Fire Pits')
@@ -111,7 +258,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Fire Pits')
                             .filter('_type == "galleryItem" && category == "fire-features" && subcategory == "fire-pits"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Fire Pit Tables')
@@ -119,7 +266,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Fire Pit Tables')
                             .filter('_type == "galleryItem" && category == "fire-features" && subcategory == "fire-pit-tables"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Fireplaces')
@@ -127,7 +274,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Fireplaces')
                             .filter('_type == "galleryItem" && category == "fire-features" && subcategory == "fireplaces"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                     ])
                 ),
@@ -143,7 +290,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('All Landscaping')
                             .filter('_type == "galleryItem" && category == "landscaping"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Gardens & Lawns')
@@ -151,7 +298,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Gardens & Lawns')
                             .filter('_type == "galleryItem" && category == "landscaping" && subcategory == "gardens"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Water Features')
@@ -159,7 +306,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Water Features')
                             .filter('_type == "galleryItem" && category == "landscaping" && subcategory == "water-features"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                       S.listItem()
                         .title('Artificial Turf')
@@ -167,7 +314,7 @@ const structure = (S: any) =>
                           S.documentList()
                             .title('Artificial Turf')
                             .filter('_type == "galleryItem" && category == "landscaping" && subcategory == "turf"')
-                            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                         ),
                     ])
                 ),
@@ -177,7 +324,7 @@ const structure = (S: any) =>
                   S.documentList()
                     .title('Iron Work')
                     .filter('_type == "galleryItem" && category == "iron-work"')
-                    .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+                    .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
                 ),
             ])
         ),
@@ -191,7 +338,7 @@ const structure = (S: any) =>
           S.documentList()
             .title('Featured Items')
             .filter('_type == "galleryItem" && featured == true')
-            .defaultOrdering([{ field: '_createdAt', direction: 'desc' }])
+            .defaultOrdering([{ field: 'orderRank', direction: 'asc' }])
         ),
 
       S.divider(),

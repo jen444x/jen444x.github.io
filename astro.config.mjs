@@ -18,7 +18,10 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: ['sanity']
+      noExternal: ['sanity', '@sanity/orderable-document-list']
+    },
+    optimizeDeps: {
+      include: ['@sanity/orderable-document-list > lodash/**', '@sanity/orderable-document-list']
     }
   },
 
