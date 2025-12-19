@@ -59,10 +59,10 @@ const categorySlugMap: Record<string, string> = {
 };
 const sanityCategory = categorySlugMap[category as string] || category;
 
-// Fetch gallery items from Sanity, sorted by order only (featured only affects homepage)
+// Fetch gallery items from Sanity, sorted by orderRank (drag-and-drop order)
 const allGalleryItems = await sanityClient.fetch(
   `
-  *[_type == "galleryItem" && category == $category] | order(order asc) {
+  *[_type == "galleryItem" && category == $category] | order(orderRank asc) {
     _id,
     title,
     alt,
@@ -146,9 +146,9 @@ const categorySubcategories: Record<string, { slug: string; name: string }[]> =
       { slug: "fireplaces", name: "Fireplaces" },
     ],
     landscaping: [
-      { slug: "gardens", name: "Gardens & Lawns" },
       { slug: "water-features", name: "Water Features" },
       { slug: "turf", name: "Artificial Turf" },
+      { slug: "gardens", name: "Gardens & Lawns" },
     ],
   };
 

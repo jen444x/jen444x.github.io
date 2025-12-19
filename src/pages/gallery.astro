@@ -4,9 +4,9 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { sanityClient, urlFor } from "../sanity/client";
 
-// Fetch featured photos from Sanity
+// Fetch featured photos from Sanity (ordered by drag-and-drop rank)
 const featuredPhotos = await sanityClient.fetch(`
-  *[_type == "galleryItem" && featured == true] | order(_createdAt desc) {
+  *[_type == "galleryItem" && featured == true] | order(orderRank asc) {
     _id,
     title,
     alt,

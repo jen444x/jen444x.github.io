@@ -3,7 +3,7 @@ import { sanityClient, urlFor } from "../sanity/client";
 
 // Fetch featured gallery items from Sanity
 const featuredItems = await sanityClient.fetch(`
-  *[_type == "galleryItem" && featured == true] | order(order asc) {
+  *[_type == "galleryItem" && featured == true] | order(orderRank asc) {
     _id,
     title,
     alt,

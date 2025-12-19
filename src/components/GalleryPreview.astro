@@ -14,7 +14,7 @@ const homepageHero = await sanityClient.fetch(`
 
 // Fallback to most recent featured if no homepage hero is set
 const fallbackImage = !homepageHero ? await sanityClient.fetch(`
-  *[_type == "galleryItem" && featured == true] | order(_createdAt desc)[0] {
+  *[_type == "galleryItem" && featured == true] | order(orderRank asc)[0] {
     _id,
     title,
     alt,
