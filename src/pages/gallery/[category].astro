@@ -75,7 +75,8 @@ const allGalleryItems = await sanityClient.fetch(
     "playbackId": video.asset->playbackId,
     "thumbTime": video.asset->thumbTime,
     "aspectRatio": video.asset->data.aspect_ratio,
-    thumbFocus
+    thumbFocus,
+    previewStart
   }
 `,
   { category: sanityCategory }
@@ -113,11 +114,13 @@ const galleryItems = allGalleryItems.map((item: any, index: number) => {
     fullSrc = urlFor(item.image).url();
   }
 
-  // Step 3: Generate animated preview URL for videos (Netflix-style hover effect)
+  // Step 3: Generate animated preview URL for videos (hover effect)
   let animatedSrc = "";
   if (isVideo && playbackId) {
-    // Mux animated WebP: smooth 4-second loop, 15fps for silky preview
-    animatedSrc = `https://image.mux.com/${playbackId}/animated.webp?width=640&fps=15&start=0&end=4`;
+    // Use previewStart from Sanity if set, otherwise default to 0 (beginning)
+    const previewStartTime = typeof item.previewStart === "number" ? item.previewStart : 0;
+    const previewEndTime = previewStartTime + 10; // 10 seconds is Mux's max
+    animatedSrc = `https://image.mux.com/${playbackId}/animated.webp?width=640&fps=15&start=${previewStartTime}&end=${previewEndTime}`;
   }
 
   // Step 4: Return the clean object
@@ -524,13 +527,23 @@ const breadcrumbs = [
       muxPlayer.style.height = "auto";
       muxPlayer.style.setProperty("--media-object-fit", "contain");
 
-      // Start visible on mobile - don't wait for events that may not fire
-      muxPlayer.style.visibility = "visible";
-      muxPlayer.style.opacity = "1";
+      // Keep hidden until fully loaded to prevent resize flash
+      muxPlayer.style.visibility = "hidden";
+      muxPlayer.style.opacity = "0";
 
       // Insert as sibling right after the image (same parent, same level)
       lightboxImage.insertAdjacentElement("afterend", muxPlayer);
       currentMuxPlayer = muxPlayer;
+
+      // Wait for player to be ready (metadata loaded) before showing
+      muxPlayer.addEventListener("loadedmetadata", () => {
+        // Player is ready with correct dimensions - now fade it in
+        muxPlayer.style.visibility = "visible";
+        muxPlayer.style.transition = "opacity 0.4s ease-out";
+        requestAnimationFrame(() => {
+          muxPlayer.style.opacity = "1";
+        });
+      }, { once: true });
     } else {
       // IMAGE: Show image
       lightboxImage.classList.remove("hidden");
@@ -603,7 +616,7 @@ const breadcrumbs = [
       }
     });
 
-    // Video hover preview - Netflix-style animated thumbnail
+    // Video hover preview - smart preloading with Intersection Observer
     const isVideo = item.getAttribute("data-is-video") === "true";
     const animatedSrc = item.getAttribute("data-animated-src");
 
@@ -612,23 +625,30 @@ const breadcrumbs = [
       if (!img) return;
 
       const staticSrc = img.src;
-      let preloadedAnimated: HTMLImageElement | null = null;
+      let preloaded = false;
 
-      // Preload animated WebP on first hover for instant swap
+      // Only preload when video is about to enter viewport (saves bandwidth)
+      const preloadObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !preloaded) {
+              const preloadImg = new Image();
+              preloadImg.src = animatedSrc;
+              preloaded = true;
+              preloadObserver.unobserve(item);
+            }
+          });
+        },
+        { rootMargin: "200px" } // Start preloading 200px before visible
+      );
+      preloadObserver.observe(item);
+
       item.addEventListener("mouseenter", () => {
-        if (!preloadedAnimated) {
-          preloadedAnimated = new Image();
-          preloadedAnimated.src = animatedSrc;
-        }
-        // Swap to animated preview
         img.src = animatedSrc;
-        img.classList.add("video-preview-active");
       });
 
       item.addEventListener("mouseleave", () => {
-        // Swap back to static thumbnail
         img.src = staticSrc;
-        img.classList.remove("video-preview-active");
       });
     }
   });
