@@ -208,7 +208,8 @@ const breadcrumbs = [
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {subcatItems.map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze scroll-reveal opacity-0"
+                        style={`animation-delay: ${index * 0.1}s`}
                         data-index={galleryItems.indexOf(item)}
                         data-full-src={item.fullSrc}
                         data-is-video={item.isVideo}
@@ -259,7 +260,8 @@ const breadcrumbs = [
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {galleryItems.map((item, index) => (
               <article
-                class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze"
+                class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze scroll-reveal opacity-0"
+                style={`animation-delay: ${index * 0.1}s`}
                 data-index={index}
                 data-full-src={item.fullSrc}
                 data-is-video={item.isVideo}
@@ -410,6 +412,10 @@ const breadcrumbs = [
 <script>
   // Load Mux Player - handles HLS streaming in ALL browsers
   import("@mux/mux-player");
+
+  // Scroll reveal animations for gallery grid items
+  import { initScrollAnimations, DETAIL_SCROLL_CONFIG } from '../../utils/animations.js';
+  initScrollAnimations('.gallery-item.scroll-reveal', DETAIL_SCROLL_CONFIG);
 
   // Constants
   const SCROLL_THRESHOLD_BACK_TO_TOP = 300;
@@ -695,6 +701,9 @@ const breadcrumbs = [
 </script>
 
 <style>
+  /* Import scroll reveal animations */
+  @import '../../styles/animations.css';
+
   /* Hide scrollbar for category nav */
   .scrollbar-hide {
     -ms-overflow-style: none;

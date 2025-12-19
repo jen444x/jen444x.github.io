@@ -133,6 +133,7 @@ const { title, description, heroTitle, heroDescription, breadcrumbs } = Astro.pr
   document.addEventListener("DOMContentLoaded", () => {
     const heroContent = document.querySelector(".hero-content");
     if (heroContent) {
+      heroContent.classList.remove("opacity-0");
       heroContent.classList.add("animate-fade-in-up");
     }
   });
