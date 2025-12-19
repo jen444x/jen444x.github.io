@@ -1,82 +1,138 @@
 # Rocky Concrete Inc.
 
-Welcome to the repository for Rocky Concrete Inc.'s website. This project showcases the services and expertise of Rocky Concrete Inc., specializing in high-quality concrete and landscaping services.
+A modern, high-performance website for Rocky Concrete Inc., showcasing premium concrete and landscaping services in Bakersfield, CA.
 
-## Table of Contents
+**Live Site:** [rockyconcreteinc.com](https://rockyconcreteinc.com)
 
-- [Demo](#demo)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
+---
 
-## Demo
+## Tech Stack
 
-You can view the live website here: [Rocky Concrete Inc.](https://rockyconcreteinc.com)
+| Layer | Technology |
+|-------|------------|
+| Framework | [Astro 5](https://astro.build) (SSR) |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com) |
+| CMS | [Sanity](https://sanity.io) (embedded studio) |
+| Video | [Mux](https://mux.com) |
+| UI Components | React 18 |
+| Hosting | [Netlify](https://netlify.com) |
+
+---
 
 ## Features
 
-- Responsive design for all devices
-- Modern and professional layout
-- Services overview
-- Gallery showcasing completed projects
-- Contact form for inquiries
-- SEO-friendly structure
+- **Dynamic Gallery System** — Browse projects by category with drag-and-drop ordering in the CMS
+- **Video Support** — Upload and stream project videos via Mux integration
+- **Embedded CMS** — Sanity Studio accessible at `/admin` for content management
+- **Server-Side Rendering** — Fast, SEO-optimized pages with Astro SSR
+- **Responsive Design** — Luxury dark theme with bronze accents, optimized for all devices
+- **Scroll Animations** — Smooth reveal animations throughout the site
+- **Contact Forms** — Netlify Forms integration for lead capture
+- **Auto Sitemap** — SEO-friendly sitemap generation
 
-## Installation
+---
 
-To run this project locally, follow these steps:
+## Services Showcased
 
-1. **Clone the repository**:
-    ```sh
-    git clone https://github.com/jen444x/jen444x.github.io.git
-    ```
-2. **Navigate to the project directory**:
-    ```sh
-    cd jen444x.github.io
-    ```
+- Concrete Work (driveways, patios, walkways, flatwork)
+- Outdoor Kitchens
+- Covered Patios
+- Fire Features (pits, tables, fireplaces)
+- Landscaping (turf, gardens, water features)
+- Iron Work (gates, railings, metalwork)
 
-## Usage
+---
 
-Open the `index.html` file in your preferred web browser to view the website locally.
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or pnpm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/jen444x/upgrade-rocky-concrete.git
+cd upgrade-rocky-concrete
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+The site runs at `http://localhost:4321` and Sanity Studio at `http://localhost:4321/admin`.
+
+### Environment Variables
+
+Create a `.env.local` file:
+
+```env
+SANITY_PROJECT_ID=your_project_id
+SANITY_DATASET=production
+SANITY_WRITE_TOKEN=your_write_token  # For uploads/mutations
+```
+
+---
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/       # Astro & React components
+├── layouts/          # Page layouts
+├── pages/
+│   ├── index.astro   # Homepage
+│   ├── gallery.astro # Gallery overview
+│   └── gallery/[category].astro  # Dynamic category pages
+├── sanity/
+│   ├── client.ts     # Sanity client config
+│   └── schemaTypes/  # CMS content schemas
+├── styles/           # Global styles & animations
+└── utils/            # Helper functions
+```
+
+---
+
+## CMS Content Types
+
+**Gallery Item** — Photos and videos with:
+- Category & subcategory classification
+- Featured/hero image flags
+- Drag-and-drop ordering
+- Video support via Mux
+- Finish type tags (for concrete)
+
+**Category Covers** — Cover images for each service category on the homepage
+
+---
 
 ## Deployment
 
-This project is deployed using GitHub Pages and is accessible via the custom domain [rockyconcreteinc.com](https://rockyconcreteinc.com).
+The site deploys automatically to Netlify on push to `main`.
 
-### Steps to Deploy
+Manual deployment:
 
-1. **Commit and push your changes**:
-    ```sh
-    git add .
-    git commit -m "Your commit message"
-    git push origin main
-    ```
-2. **GitHub Pages Configuration**:
-    - Ensure the repository settings are configured to use the `main` branch for GitHub Pages.
-    - Verify that the custom domain (rockyconcreteinc.com) is set up correctly in the repository settings under the "Pages" section.
+```bash
+npm run build
+# Deploy the `dist/` folder
+```
 
-## Contributing
-
-Contributions are welcome! If you have suggestions for improvements, please fork the repository and create a pull request.
-
-1. **Fork the repository**
-2. **Create a new branch**:
-    ```sh
-    git checkout -b feature-branch
-    ```
-3. **Make your changes and commit them**:
-    ```sh
-    git commit -m "Description of your changes"
-    ```
-4. **Push to the branch**:
-    ```sh
-    git push origin feature-branch
-    ```
-5. **Open a pull request on GitHub**
+---
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+MIT License
