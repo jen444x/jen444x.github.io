@@ -372,7 +372,7 @@ const breadcrumbs = [
     </button>
 
     <div
-      class="max-w-7xl max-h-[85vh] w-full h-full flex items-center justify-center px-4"
+      class="max-w-7xl max-h-[85dvh] w-full h-full flex items-center justify-center px-4"
     >
       <img
         id="lightbox-image"
@@ -514,36 +514,35 @@ const breadcrumbs = [
       muxPlayer.style.setProperty("--controls-hover-background", "rgba(26, 26, 26, 0.95)");
 
       // Set aspect ratio from Mux (format "16:9" -> "16 / 9")
+      // Also calculate max-width from viewport height for height-constrained layout
+      let aspectRatioValue = 16 / 9; // default
       if (aspectRatio) {
         const cssAspectRatio = aspectRatio.replace(":", " / ");
         muxPlayer.style.aspectRatio = cssAspectRatio;
+
+        // Parse aspect ratio for calc (e.g., "16:9" -> 16/9 = 1.777)
+        const [w, h] = aspectRatio.split(":").map(Number);
+        if (w && h) aspectRatioValue = w / h;
       }
 
-      // CRITICAL: Set ALL sizing styles BEFORE inserting to prevent flash/resize
-      // Constrain to container while maintaining aspect ratio
-      muxPlayer.style.maxWidth = "100%";
-      muxPlayer.style.maxHeight = "100%";
-      muxPlayer.style.width = "auto";
+      // CRITICAL: iOS Safari needs concrete width values (not "auto")
+      // Solution: Use width:100% + max-width derived from viewport height
+      // This creates a height-constrained layout with concrete values iOS understands
+      muxPlayer.style.width = "100%";
       muxPlayer.style.height = "auto";
+      muxPlayer.style.maxHeight = "85dvh";
+      // Derive max-width from height: if max-height is 85dvh, max-width = 85dvh * aspectRatio
+      muxPlayer.style.maxWidth = `calc(85dvh * ${aspectRatioValue})`;
       muxPlayer.style.setProperty("--media-object-fit", "contain");
-
-      // Keep hidden until fully loaded to prevent resize flash
-      muxPlayer.style.visibility = "hidden";
-      muxPlayer.style.opacity = "0";
 
       // Insert as sibling right after the image (same parent, same level)
       lightboxImage.insertAdjacentElement("afterend", muxPlayer);
       currentMuxPlayer = muxPlayer;
 
-      // Wait for player to be ready (metadata loaded) before showing
-      muxPlayer.addEventListener("loadedmetadata", () => {
-        // Player is ready with correct dimensions - now fade it in
-        muxPlayer.style.visibility = "visible";
-        muxPlayer.style.transition = "opacity 0.4s ease-out";
-        requestAnimationFrame(() => {
-          muxPlayer.style.opacity = "1";
-        });
-      }, { once: true });
+      // Show player immediately - sizing is now concrete (no resize flash)
+      // Previous approach waited for loadedmetadata which doesn't fire reliably on iOS
+      muxPlayer.style.transition = "opacity 0.4s ease-out";
+      muxPlayer.style.opacity = "1";
     } else {
       // IMAGE: Show image
       lightboxImage.classList.remove("hidden");
@@ -735,7 +734,6 @@ const breadcrumbs = [
     box-shadow:
       0 8px 40px rgba(0, 0, 0, 0.6),
       0 0 0 1px rgba(184, 134, 11, 0.15); /* Subtle bronze border */
-    /* Fade-in handled by JavaScript on loadedmetadata event for smooth loading */
   }
 
   /* Mux player controls - ensure bronze theming */
