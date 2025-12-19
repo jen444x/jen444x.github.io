@@ -496,6 +496,10 @@ const breadcrumbs = [
       muxPlayer.setAttribute("playback-id", playbackId);
       muxPlayer.setAttribute("stream-type", "on-demand");
 
+      // Mobile-critical attributes
+      muxPlayer.setAttribute("playsinline", ""); // Required for iOS inline playback
+      muxPlayer.setAttribute("preload", "metadata"); // Help mobile load faster
+
       // Luxury industrial theme - sophisticated dark controls
       muxPlayer.setAttribute("accent-color", "#B8860B"); // Bronze accent for progress/hover
       muxPlayer.setAttribute("primary-color", "#FFFFFF"); // White text and icons
@@ -520,23 +524,13 @@ const breadcrumbs = [
       muxPlayer.style.height = "auto";
       muxPlayer.style.setProperty("--media-object-fit", "contain");
 
-      // Keep hidden until fully loaded to prevent resize flash
-      muxPlayer.style.visibility = "hidden";
-      muxPlayer.style.opacity = "0";
+      // Start visible on mobile - don't wait for events that may not fire
+      muxPlayer.style.visibility = "visible";
+      muxPlayer.style.opacity = "1";
 
       // Insert as sibling right after the image (same parent, same level)
       lightboxImage.insertAdjacentElement("afterend", muxPlayer);
       currentMuxPlayer = muxPlayer;
-
-      // Wait for player to be ready (metadata loaded) before showing
-      muxPlayer.addEventListener("loadedmetadata", () => {
-        // Player is ready with correct dimensions - now fade it in
-        muxPlayer.style.visibility = "visible";
-        muxPlayer.style.transition = "opacity 0.4s ease-out";
-        requestAnimationFrame(() => {
-          muxPlayer.style.opacity = "1";
-        });
-      }, { once: true });
     } else {
       // IMAGE: Show image
       lightboxImage.classList.remove("hidden");
