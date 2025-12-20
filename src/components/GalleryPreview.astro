@@ -80,8 +80,10 @@ const featuredImage = homepageHero || fallbackImage;
 
 <!-- SCROLL ANIMATION SCRIPT -->
 <script>
-  import { initScrollAnimations, HOMEPAGE_SCROLL_CONFIG } from '../utils/animations.js';
-  initScrollAnimations('.project-teaser .scroll-reveal', HOMEPAGE_SCROLL_CONFIG);
+  import { initScrollAnimations, CTA_CONFIG } from '../utils/animations.js';
+
+  // Gallery teaser - prominent single element, use slower "moment" animation
+  initScrollAnimations('.project-teaser .scroll-reveal', CTA_CONFIG);
 </script>
 
 <style>

@@ -29,7 +29,7 @@ const heroPhoto = aboutUsPhoto || fallbackPhoto;
   <div class="container max-w-7xl mx-auto px-6 md:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <!-- Single Hero Image with Overlapping Card -->
-      <div class="about-image-container scroll-reveal opacity-0" style="animation-delay: 0.1s">
+      <div class="about-image-container scroll-reveal opacity-0">
         {heroPhoto ? (
           <div class="image-wrapper">
             <img
@@ -70,21 +70,21 @@ const heroPhoto = aboutUsPhoto || fallbackPhoto;
       <!-- Text Content - Clean & Professional -->
       <div class="about-us-text-box text-center md:text-left">
         <!-- Heading - Bebas Neue for consistency -->
-        <h2 class="section-heading text-charcoal mb-6 scroll-reveal opacity-0" style="animation-delay: 0.2s">
+        <h2 class="section-heading text-charcoal mb-6 scroll-reveal opacity-0" style="animation-delay: 0.1s">
           TRUSTED EXPERTS IN CONCRETE & LANDSCAPING
         </h2>
 
         <!-- Thin divider line -->
-        <div class="bronze-divider mb-6 mx-auto md:mx-0 scroll-reveal opacity-0" style="animation-delay: 0.35s"></div>
+        <div class="bronze-divider mb-6 mx-auto md:mx-0 scroll-reveal opacity-0" style="animation-delay: 0.2s"></div>
 
         <!-- Body Copy - Generous line height for readability -->
-        <p class="section-subheading text-slate mb-6 scroll-reveal opacity-0" style="animation-delay: 0.5s">
+        <p class="section-subheading text-slate mb-6 scroll-reveal opacity-0" style="animation-delay: 0.3s">
           With over 15 years of experience, Rocky Concrete is Bakersfield's trusted
           concrete contractor and landscaping company. We proudly serve Kern County
           including Bakersfield, Oildale, Shafter, Delano, and surrounding communities.
         </p>
 
-        <p class="section-subheading text-slate mb-8 scroll-reveal opacity-0" style="animation-delay: 0.65s">
+        <p class="section-subheading text-slate mb-8 scroll-reveal opacity-0" style="animation-delay: 0.4s">
           As a family-operated business, we prioritize customer satisfaction,
           delivering exceptional results in every project. From concrete driveways and
           stamped patios to custom outdoor kitchens, fire pits, and complete
@@ -96,7 +96,7 @@ const heroPhoto = aboutUsPhoto || fallbackPhoto;
         <a
           href="#cta"
           class="about-cta-btn scroll-reveal opacity-0"
-          style="animation-delay: 0.8s"
+          style="animation-delay: 0.5s"
         >
           Get a Free Quote
         </a>
@@ -107,11 +107,10 @@ const heroPhoto = aboutUsPhoto || fallbackPhoto;
 
 <!-- SCROLL ANIMATION SCRIPT -->
 <script>
-  import { initScrollAnimations, HOMEPAGE_SCROLL_CONFIG } from '../utils/animations.js';
+  import { initScrollAnimations, CONTENT_CONFIG } from '../utils/animations.js';
 
-  // Initialize scroll animations for About Us section
-  // Using HOMEPAGE_SCROLL_CONFIG: 100px buffer for smooth early reveals
-  initScrollAnimations('.about-us .scroll-reveal', HOMEPAGE_SCROLL_CONFIG);
+  // About section is text-heavy, use CONTENT_CONFIG (600ms, 80px buffer)
+  initScrollAnimations('.about-us .scroll-reveal', CONTENT_CONFIG);
 </script>
 
 <style>

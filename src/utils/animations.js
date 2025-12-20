@@ -2,10 +2,21 @@
  * SCROLL REVEAL ANIMATION UTILITIES
  * Centralized animation logic for consistent behavior across all pages
  *
- * Best Practices (2025):
- * - Use POSITIVE rootMargin to trigger animations BEFORE element enters viewport
- * - Negative rootMargin makes content feel "late" and pages look empty
- * - Different contexts need different timing
+ * Philosophy: "Motion is choreography, not a dance party."
+ * Animations should feel like "velvet curtains opening" - slow, smooth, purposeful.
+ *
+ * Timing Guidelines (Nielsen Norman Group research):
+ * - 300-400ms: Grid items (snappy, multiple items)
+ * - 400-600ms: Content sections (standard reveals)
+ * - 500-700ms: CTAs (feels like a "moment")
+ * - 600-900ms: Hero elements (dramatic, builds anticipation)
+ *
+ * Threshold Guidelines:
+ * - 0.1 (10%): Standard content - triggers early enough
+ * - 0.15-0.2 (15-20%): Grid items - user should SEE the animation happen
+ *
+ * RootMargin: POSITIVE values trigger BEFORE element enters viewport
+ * This prevents pages from looking empty on scroll.
  */
 
 /**
@@ -46,11 +57,24 @@ export function createScrollObserver(options = {}) {
  */
 export function initScrollAnimations(selector = '.scroll-reveal', options = {}) {
   const observer = createScrollObserver(options);
+  const animationClass = options.animationClass || 'animate-fade-in-up';
+
+  // Account for fixed header (h-20 = 80px mobile, h-24 = 96px desktop)
+  const navHeight = window.innerWidth >= 768 ? 96 : 80;
 
   document.querySelectorAll(selector).forEach((el) => {
-    // Store observer reference for cleanup
-    el.observer = observer;
-    observer.observe(el);
+    const rect = el.getBoundingClientRect();
+    // Element must be in the actual visible area (below nav, above bottom)
+    const isVisible = rect.top < window.innerHeight && rect.top > navHeight;
+
+    if (isVisible) {
+      // Already on screen - animate immediately
+      el.classList.add(animationClass);
+    } else {
+      // Below the fold or behind nav - use scroll trigger
+      el.observer = observer;
+      observer.observe(el);
+    }
   });
 
   return observer;
@@ -58,33 +82,61 @@ export function initScrollAnimations(selector = '.scroll-reveal', options = {}) 
 
 /**
  * PRESET CONFIGURATIONS
- * Use these for different contexts across the site
+ * Based on AOS/GSAP approach: trigger when element is ON SCREEN
+ *
+ * Negative rootMargin = element must be X pixels INTO viewport before triggering
+ * This ensures user SEES the animation happen (like AOS offset: 120)
  */
 
-// Homepage sections (Services, About, etc.)
-export const HOMEPAGE_SCROLL_CONFIG = {
+// Content sections (AboutUs, WhyChooseUs, section headings)
+// Triggers when element is 50px into viewport
+export const CONTENT_SCROLL_CONFIG = {
   threshold: 0.1,
-  rootMargin: '0px 0px 100px 0px', // Animations start 100px early
-  animationClass: 'animate-fade-in-up'
+  rootMargin: '0px 0px -50px 0px',    // Must be 50px on screen
+  animationClass: 'animate-fade-in-up' // 500ms
 };
 
-// Gallery landing page - needs more buffer so cards appear sooner
-export const GALLERY_SCROLL_CONFIG = {
+// Grid items (Services cards, category cards)
+// Triggers when element is 80px into viewport (like AOS offset)
+export const GRID_SCROLL_CONFIG = {
   threshold: 0.1,
-  rootMargin: '0px 0px 150px 0px', // Animations start 150px early (page looked empty before)
-  animationClass: 'animate-fade-in-up'
+  rootMargin: '0px 0px -80px 0px',    // Must be 80px on screen
+  animationClass: 'animate-fade-in-up-quick' // 400ms
 };
 
-// Category detail pages - can be tighter since content already visible
-export const DETAIL_SCROLL_CONFIG = {
-  threshold: 0.15,
-  rootMargin: '0px 0px 80px 0px',
-  animationClass: 'animate-fade-in-up'
+// CTA sections - same trigger as content, longer animation for "moment" feel
+export const CTA_SCROLL_CONFIG = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px',    // Same as content
+  animationClass: 'animate-fade-in-up-gentle' // 650ms
 };
 
-// Staggered animations (like grid items)
-export const STAGGERED_SCROLL_CONFIG = {
-  threshold: 0.05, // Lower threshold for grid items
-  rootMargin: '0px 0px 120px 0px',
-  animationClass: 'animate-fade-in-up'
+// Gallery/image items - same as grid
+export const IMAGE_SCROLL_CONFIG = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -80px 0px',    // Must be 80px on screen
+  animationClass: 'animate-fade-in-up-quick' // 400ms
 };
+
+// Featured strips and sections
+export const SECTION_SCROLL_CONFIG = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px',    // Must be 50px on screen
+  animationClass: 'animate-fade-in-up' // 500ms
+};
+
+/**
+ * COMPONENT-SPECIFIC ALIASES
+ * Semantic names that map to the configs above
+ */
+export const CONTENT_CONFIG = CONTENT_SCROLL_CONFIG;   // Text sections
+export const CARD_CONFIG = GRID_SCROLL_CONFIG;         // Grid items (cards)
+export const CTA_CONFIG = CTA_SCROLL_CONFIG;           // Call-to-action sections
+export const IMAGE_CONFIG = IMAGE_SCROLL_CONFIG;       // Gallery images
+export const STRIP_CONFIG = SECTION_SCROLL_CONFIG;     // Featured strips/sections
+
+// Legacy aliases (for backwards compatibility)
+export const HOMEPAGE_SCROLL_CONFIG = CONTENT_SCROLL_CONFIG;
+export const GALLERY_SCROLL_CONFIG = IMAGE_SCROLL_CONFIG;
+export const DETAIL_SCROLL_CONFIG = CONTENT_SCROLL_CONFIG;
+export const STAGGERED_SCROLL_CONFIG = GRID_SCROLL_CONFIG;

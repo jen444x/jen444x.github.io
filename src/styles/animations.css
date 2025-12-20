@@ -1,50 +1,36 @@
 /**
- * REUSABLE ANIMATION STYLES
- * Import these animations in any component that needs scroll reveals
- * Usage: @import '../styles/animations.css';
+ * LUXURY ANIMATION SYSTEM
+ * Based on UX research: slower, smoother animations = premium feel
+ *
+ * Timing guidelines (Nielsen Norman Group):
+ * - 100-200ms: Instant (hover, micro-interactions)
+ * - 300-500ms: Standard transitions
+ * - 500-700ms: Content reveals (luxury feel)
+ * - 700-900ms: Hero/dramatic moments
+ * - >1000ms: Too slow, feels like delay
+ *
+ * Import in any component: @import '../styles/animations.css';
  */
 
-/* Fade In Up - Primary scroll animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ==========================================================================
+   BASE SCROLL REVEAL
+   Elements start hidden, animate when triggered by Intersection Observer
+   ========================================================================== */
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Scroll reveal base class - elements start hidden */
 .scroll-reveal {
   opacity: 0;
   will-change: transform, opacity;
 }
 
-/* Fade In - Simpler version without movement */
-@keyframes fadeIn {
+/* ==========================================================================
+   PRIMARY ANIMATIONS - Luxury Fade Up
+   The signature animation: subtle rise with fade
+   ========================================================================== */
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-/* Fade In Down - Opposite direction */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
+    transform: translateY(24px); /* Subtle rise - "velvet curtains opening" */
   }
   to {
     opacity: 1;
@@ -52,15 +38,48 @@
   }
 }
 
-.animate-fade-in-down {
-  animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Standard - 500ms, content sections (research: 400-600ms range) */
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Scale In - For images or cards */
+/* Gentle - 650ms, CTAs and important moments (research: 500-700ms) */
+.animate-fade-in-up-gentle {
+  animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Quick - 400ms, grid items - snappy but user sees full animation (research: 300-400ms) */
+.animate-fade-in-up-quick {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   FADE IN - No movement, just opacity
+   Best for overlays, backgrounds, subtle reveals
+   ========================================================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in-slow {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* ==========================================================================
+   SCALE IN - Subtle zoom effect
+   Best for images, cards, featured content
+   ========================================================================== */
+
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95); /* Very subtle - 0.95 instead of 0.9 */
   }
   to {
     opacity: 1;
@@ -69,17 +88,118 @@
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/**
- * ANIMATION DELAYS
- * Use for staggered animations in grids
- */
+/* ==========================================================================
+   FADE IN DOWN - Top to bottom reveal
+   Best for headers, dropdowns, notifications
+   ========================================================================== */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* Smaller distance for subtlety */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   SLIDE IN - Horizontal reveals
+   Best for sidebars, panels, horizontal strips
+   ========================================================================== */
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   STAGGER DELAYS
+   Use for grid items to create wave effect
+   Research: 50-100ms between items feels natural
+   ========================================================================== */
+
+.delay-75  { animation-delay: 0.075s; }
 .delay-100 { animation-delay: 0.1s; }
+.delay-150 { animation-delay: 0.15s; }
 .delay-200 { animation-delay: 0.2s; }
+.delay-250 { animation-delay: 0.25s; }
 .delay-300 { animation-delay: 0.3s; }
+.delay-350 { animation-delay: 0.35s; }
 .delay-400 { animation-delay: 0.4s; }
+.delay-450 { animation-delay: 0.45s; }
 .delay-500 { animation-delay: 0.5s; }
 .delay-600 { animation-delay: 0.6s; }
 .delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* ==========================================================================
+   HERO PAGE-LOAD ANIMATIONS
+   These trigger on DOMContentLoaded, not scroll
+   Slightly slower for dramatic effect
+   ========================================================================== */
+
+.hero-animate {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Hero uses 900ms - the slowest, most luxurious timing */
+@keyframes heroFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate.animate-fade-in-up {
+  animation: heroFadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   Respect user preferences for reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .hero-animate {
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-fade-in-up,
+  .animate-fade-in-up-gentle,
+  .animate-fade-in-up-quick,
+  .animate-fade-in,
+  .animate-fade-in-slow,
+  .animate-scale-in,
+  .animate-fade-in-down,
+  .animate-slide-in-right {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
