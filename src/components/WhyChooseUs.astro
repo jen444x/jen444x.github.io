@@ -87,11 +87,10 @@ import Icon from './Icon.astro';
 </section>
 
 <script>
-  import {
-    initScrollAnimations,
-    HOMEPAGE_SCROLL_CONFIG,
-  } from "../utils/animations.js";
-  initScrollAnimations(".why-choose-us .scroll-reveal", HOMEPAGE_SCROLL_CONFIG);
+  import { initScrollAnimations, CONTENT_CONFIG } from "../utils/animations.js";
+
+  // Why Choose Us - text content, use standard content animation
+  initScrollAnimations(".why-choose-us .scroll-reveal", CONTENT_CONFIG);
 </script>
 
 <style>

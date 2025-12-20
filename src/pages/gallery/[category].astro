@@ -196,20 +196,29 @@ const breadcrumbs = [
               );
               if (subcatItems.length === 0) return null;
 
+              const INITIAL_SHOW = 6;
+              const hasMore = subcatItems.length > INITIAL_SHOW;
+
               return (
                 <div
                   id={`${category}-${subcat.slug}`}
-                  class="mb-12 scroll-mt-24"
+                  class="mb-12 scroll-mt-24 gallery-section"
+                  data-section-id={`${category}-${subcat.slug}`}
+                  data-total-items={subcatItems.length}
                 >
                   <h3 class="font-['Bebas_Neue'] text-2xl tracking-wider text-charcoal mb-4 flex items-center">
                     <span class="w-1 h-6 bg-bronze mr-3" />
                     {subcat.name}
+                    <span class="ml-2 text-slate-light text-lg font-normal">({subcatItems.length})</span>
                   </h3>
+                  <p class="gallery-counter text-slate text-sm mb-4 font-light">
+                    Showing <span class="showing-count">{Math.min(INITIAL_SHOW, subcatItems.length)}</span> of {subcatItems.length}
+                  </p>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {subcatItems.map((item, index) => (
                       <article
-                        class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze scroll-reveal opacity-0"
-                        style={`animation-delay: ${index * 0.1}s`}
+                        class={`gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze scroll-reveal opacity-0 ${index >= INITIAL_SHOW ? 'hidden gallery-hidden' : ''}`}
+                        style={`animation-delay: ${(index % INITIAL_SHOW) * 0.1}s`}
                         data-index={galleryItems.indexOf(item)}
                         data-full-src={item.fullSrc}
                         data-is-video={item.isVideo}
@@ -251,58 +260,89 @@ const breadcrumbs = [
                       </article>
                     ))}
                   </div>
+                  {hasMore && (
+                    <div class="text-center mt-8">
+                      <button
+                        class="load-more-btn font-['Bebas_Neue'] text-lg tracking-wider px-8 py-3 border-2 border-bronze text-bronze hover:bg-bronze hover:text-white transition-all duration-300"
+                        data-section={`${category}-${subcat.slug}`}
+                      >
+                        Load More
+                      </button>
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
         ) : (
-          // Categories WITHOUT subcategories - simple grid like original
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {galleryItems.map((item, index) => (
-              <article
-                class="gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze scroll-reveal opacity-0"
-                style={`animation-delay: ${index * 0.1}s`}
-                data-index={index}
-                data-full-src={item.fullSrc}
-                data-is-video={item.isVideo}
-                data-playback-id={item.playbackId || ""}
-                data-aspect-ratio={item.aspectRatio || ""}
-                data-animated-src={item.animatedSrc || ""}
-              >
-                <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-95"
-                    style={item.thumbFocus !== "auto" ? `object-position: ${item.thumbFocus}` : undefined}
-                    loading={index < 6 ? "eager" : "lazy"}
-                    width="800"
-                    height="600"
-                  />
-                  {/* Video play indicator - luxury minimal design */}
-                  {item.isVideo && (
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      {/* Subtle backdrop pulse */}
-                      <div class="absolute w-20 h-20 md:w-24 md:h-24 rounded-full bg-bronze/20 animate-pulse-slow"></div>
-                      {/* Main play button */}
-                      <div class="video-play-indicator relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-bronze group-hover:border-bronze group-hover:scale-105 transition-all duration-500 shadow-2xl">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z"/>
-                        </svg>
+          // Categories WITHOUT subcategories - simple grid with Load More
+          (() => {
+            const INITIAL_SHOW_MAIN = 12;
+            const hasMoreMain = galleryItems.length > INITIAL_SHOW_MAIN;
+            return (
+              <div class="gallery-section" data-section-id={`${category}-main`} data-total-items={galleryItems.length}>
+                <p class="gallery-counter text-slate text-sm mb-6 font-light">
+                  Showing <span class="showing-count">{Math.min(INITIAL_SHOW_MAIN, galleryItems.length)}</span> of {galleryItems.length}
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {galleryItems.map((item, index) => (
+                    <article
+                      class={`gallery-item group cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-bronze scroll-reveal opacity-0 ${index >= INITIAL_SHOW_MAIN ? 'hidden gallery-hidden' : ''}`}
+                      style={`animation-delay: ${(index % INITIAL_SHOW_MAIN) * 0.1}s`}
+                      data-index={index}
+                      data-full-src={item.fullSrc}
+                      data-is-video={item.isVideo}
+                      data-playback-id={item.playbackId || ""}
+                      data-aspect-ratio={item.aspectRatio || ""}
+                      data-animated-src={item.animatedSrc || ""}
+                    >
+                      <div class="relative overflow-hidden aspect-[4/3] bg-charcoal-light">
+                        <img
+                          src={item.src}
+                          alt={item.alt}
+                          class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-95"
+                          style={item.thumbFocus !== "auto" ? `object-position: ${item.thumbFocus}` : undefined}
+                          loading={index < 6 ? "eager" : "lazy"}
+                          width="800"
+                          height="600"
+                        />
+                        {/* Video play indicator - luxury minimal design */}
+                        {item.isVideo && (
+                          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            {/* Subtle backdrop pulse */}
+                            <div class="absolute w-20 h-20 md:w-24 md:h-24 rounded-full bg-bronze/20 animate-pulse-slow"></div>
+                            {/* Main play button */}
+                            <div class="video-play-indicator relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:bg-bronze group-hover:border-bronze group-hover:scale-105 transition-all duration-500 shadow-2xl">
+                              <svg class="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                              </svg>
+                            </div>
+                          </div>
+                        )}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div class="absolute bottom-6 left-6 right-6">
+                            <p class="text-white font-light text-sm md:text-base tracking-wide">
+                              {item.alt}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div class="absolute bottom-6 left-6 right-6">
-                      <p class="text-white font-light text-sm md:text-base tracking-wide">
-                        {item.alt}
-                      </p>
-                    </div>
-                  </div>
+                    </article>
+                  ))}
                 </div>
-              </article>
-            ))}
-          </div>
+                {hasMoreMain && (
+                  <div class="text-center mt-8">
+                    <button
+                      class="load-more-btn font-['Bebas_Neue'] text-lg tracking-wider px-8 py-3 border-2 border-bronze text-bronze hover:bg-bronze hover:text-white transition-all duration-300"
+                      data-section={`${category}-main`}
+                    >
+                      Load More
+                    </button>
+                  </div>
+                )}
+              </div>
+            );
+          })()
         )
       }
     </div>
@@ -414,8 +454,9 @@ const breadcrumbs = [
   import("@mux/mux-player");
 
   // Scroll reveal animations for gallery grid items
-  import { initScrollAnimations, DETAIL_SCROLL_CONFIG } from '../../utils/animations.js';
-  initScrollAnimations('.gallery-item.scroll-reveal', DETAIL_SCROLL_CONFIG);
+  // Uses IMAGE_CONFIG with scale-in animation for visual interest
+  import { initScrollAnimations, IMAGE_CONFIG } from '../../utils/animations.js';
+  initScrollAnimations('.gallery-item.scroll-reveal', IMAGE_CONFIG);
 
   // Constants
   const SCROLL_THRESHOLD_BACK_TO_TOP = 300;
@@ -698,6 +739,62 @@ const breadcrumbs = [
       }
     });
   });
+
+  // Load More button functionality - IKEA-style UX with "Showing X of Y" counter
+  const ITEMS_PER_LOAD = 6;
+  const loadMoreBtns = document.querySelectorAll(".load-more-btn");
+
+  loadMoreBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const sectionId = btn.getAttribute("data-section");
+      if (!sectionId) return;
+
+      // Find the parent section and counter
+      const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+      if (!section) return;
+
+      const counterSpan = section.querySelector(".showing-count");
+      const totalItems = parseInt(section.getAttribute("data-total-items") || "0");
+
+      // Button loading state
+      btn.textContent = "Loading...";
+      btn.classList.add("pointer-events-none", "opacity-70");
+
+      // Small delay for perceived loading (luxury feel)
+      setTimeout(() => {
+        const hiddenItems = section.querySelectorAll(".gallery-hidden");
+        const itemsToReveal = Array.from(hiddenItems).slice(0, ITEMS_PER_LOAD);
+        const remainingAfter = hiddenItems.length - itemsToReveal.length;
+
+        // Staggered reveal animation
+        itemsToReveal.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.remove("hidden", "gallery-hidden", "opacity-0");
+            item.classList.add("animate-gallery-reveal");
+          }, index * 100);
+        });
+
+        // After animation completes, update counter and button
+        const totalRevealTime = itemsToReveal.length * 100 + 100;
+        setTimeout(() => {
+          // Update counter: total - remaining = currently showing
+          if (counterSpan) {
+            counterSpan.textContent = String(totalItems - remainingAfter);
+          }
+
+          if (remainingAfter > 0) {
+            btn.textContent = "Load More";
+            btn.classList.remove("pointer-events-none", "opacity-70");
+          } else {
+            // All items shown - fade out button
+            btn.classList.add("animate-fade-out");
+            setTimeout(() => btn.remove(), 300);
+          }
+        }, totalRevealTime);
+
+      }, 150);
+    });
+  });
 </script>
 
 <style>
@@ -735,6 +832,47 @@ const breadcrumbs = [
 
   .animate-pulse-slow {
     animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  /* Luxury Load More animations */
+  @keyframes galleryReveal {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-gallery-reveal {
+    animation: galleryReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  .animate-fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+  }
+
+  /* Load More button - luxury styling */
+  .load-more-btn {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .load-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(184, 134, 11, 0.25);
   }
 
   /* Mux player - luxury industrial styling */

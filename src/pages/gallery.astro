@@ -129,7 +129,7 @@ const categories = [
     <div class="bronze-gradient-divider"></div>
 
     <!-- Category Grid Section -->
-    <section class="section-padding bg-white">
+    <section class="category-section section-padding bg-white">
       <div class="max-w-7xl mx-auto px-6 md:px-8">
         <!-- Section Intro -->
         <div class="section-intro scroll-reveal opacity-0">
@@ -147,8 +147,8 @@ const categories = [
           {categories.map((category, index) => (
             <a
               href={`/gallery/${category.slug}`}
-              class="scroll-reveal opacity-0 group relative overflow-hidden bg-charcoal border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block"
-              style={`animation-delay: ${(index + 1) * 0.1}s`}
+              class="category-card scroll-reveal opacity-0 group relative overflow-hidden bg-charcoal border-2 border-charcoal-light hover:border-bronze transition-all duration-500 cursor-pointer block"
+              style={`animation-delay: ${(index + 1) * 0.075}s`}
             >
               {/* BENTO GRID: 1 Large Image + 2 Small Images */}
               <div class="grid grid-cols-2 gap-1 aspect-[4/3]">
@@ -217,9 +217,9 @@ const categories = [
 
     <!-- Featured Projects - Tight Horizontal Strip -->
     {featuredPhotos.length > 0 && (
-      <section class="py-10 md:py-12 bg-charcoal border-t border-bronze/10 overflow-hidden group/section">
+      <section class="featured-section py-10 md:py-12 bg-charcoal border-t border-bronze/10 overflow-hidden group/section scroll-reveal opacity-0">
         <!-- Minimal header - left aligned -->
-        <div class="pl-6 md:pl-8 mb-4 md:mb-6 scroll-reveal opacity-0">
+        <div class="pl-6 md:pl-8 mb-4 md:mb-6">
           <span class="text-bronze text-[10px] md:text-xs font-medium tracking-widest uppercase">Featured</span>
         </div>
 
@@ -254,8 +254,7 @@ const categories = [
               {featuredPhotos.map((photo: any, index: number) => (
                 <a
                   href={`/gallery/${photo.category}`}
-                  class="shrink-0 group relative overflow-hidden scroll-reveal opacity-0 select-none"
-                  style={`animation-delay: ${index * 0.05}s`}
+                  class="featured-item shrink-0 group relative overflow-hidden select-none"
                   draggable="false"
                 >
                   <div class="w-64 md:w-72 lg:w-80 aspect-4/3 overflow-hidden">
@@ -342,14 +341,9 @@ const categories = [
       </div>
     </section>
 
-    <script>
-      import { initScrollAnimations, GALLERY_SCROLL_CONFIG } from '../utils/animations.js';
-      initScrollAnimations('.social-proof-section .scroll-reveal', GALLERY_SCROLL_CONFIG);
-    </script>
-
     <!-- CTA Section - Luxury Industrial -->
-    <section class="bg-black-pure section-padding border-t border-bronze/10">
-      <div class="container max-w-4xl mx-auto px-6 md:px-8 text-center">
+    <section class="cta-section bg-black-pure section-padding border-t border-bronze/10">
+      <div class="container max-w-4xl mx-auto px-6 md:px-8 text-center scroll-reveal opacity-0">
         <h2
           class="font-['Bebas_Neue'] text-4xl md:text-5xl tracking-wider text-white mb-6"
         >
@@ -376,9 +370,16 @@ const categories = [
 </Layout>
 
 <script>
-  import { initScrollAnimations, GALLERY_SCROLL_CONFIG } from '../utils/animations.js';
+  import {
+    initScrollAnimations,
+    CONTENT_CONFIG,
+    CARD_CONFIG,
+    CTA_CONFIG,
+    STRIP_CONFIG
+  } from '../utils/animations.js';
 
   // Hero page-load animation - staggered like Hero.astro
+  // Uses 900ms timing for luxury feel (defined in animations.css)
   document.addEventListener("DOMContentLoaded", () => {
     const heroElements = document.querySelectorAll(".hero-animate");
     heroElements.forEach((el) => {
@@ -386,8 +387,21 @@ const categories = [
     });
   });
 
-  // Scroll reveal animations for category cards
-  initScrollAnimations('.scroll-reveal', GALLERY_SCROLL_CONFIG);
+  // Section intro text - standard content reveal
+  initScrollAnimations('.section-intro.scroll-reveal', CONTENT_CONFIG);
+
+  // Category cards - higher threshold so user sees animation happen
+  // Uses quick 400ms animation for snappy grid feel
+  initScrollAnimations('.category-card.scroll-reveal', CARD_CONFIG);
+
+  // Featured section - animate whole section (horizontal scrollers don't work well with individual item observers)
+  initScrollAnimations('.featured-section.scroll-reveal', STRIP_CONFIG);
+
+  // Social proof section - gentle/slower animation for emphasis
+  initScrollAnimations('.social-proof-section .scroll-reveal', CTA_CONFIG);
+
+  // CTA section - gentle/slower animation, triggers early
+  initScrollAnimations('.cta-section .scroll-reveal', CTA_CONFIG);
 
   // Featured strip - drag to scroll + arrow navigation
   const strip = document.getElementById('featured-strip');

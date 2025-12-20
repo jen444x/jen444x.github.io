@@ -110,11 +110,13 @@ const services = [
 
 <!-- SCROLL ANIMATION SCRIPT -->
 <script>
-  import { initScrollAnimations, HOMEPAGE_SCROLL_CONFIG } from '../utils/animations.js';
+  import { initScrollAnimations, CONTENT_CONFIG, CARD_CONFIG } from '../utils/animations.js';
 
-  // Initialize scroll animations for Services section
-  // Using HOMEPAGE_SCROLL_CONFIG: 100px buffer for smooth early reveals
-  initScrollAnimations('.scroll-reveal', HOMEPAGE_SCROLL_CONFIG);
+  // Section heading - standard content animation
+  initScrollAnimations('.services .text-center.scroll-reveal', CONTENT_CONFIG);
+
+  // Service cards - snappier animation with higher threshold
+  initScrollAnimations('.services a.scroll-reveal', CARD_CONFIG);
 </script>
 
 <style>
