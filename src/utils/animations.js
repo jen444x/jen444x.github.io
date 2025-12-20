@@ -97,10 +97,10 @@ export const CONTENT_SCROLL_CONFIG = {
 };
 
 // Grid items (Services cards, category cards)
-// Triggers when element is 80px into viewport (like AOS offset)
+// Trigger earlier so cards are ready when user scrolls
 export const GRID_SCROLL_CONFIG = {
   threshold: 0.1,
-  rootMargin: '0px 0px -80px 0px',    // Must be 80px on screen
+  rootMargin: '0px 0px -35px 0px',    // Trigger sooner (35px on screen)
   animationClass: 'animate-fade-in-up-quick' // 400ms
 };
 
@@ -111,10 +111,10 @@ export const CTA_SCROLL_CONFIG = {
   animationClass: 'animate-fade-in-up-gentle' // 650ms
 };
 
-// Gallery/image items - same as grid
+// Gallery/image items - trigger earlier so images are ready
 export const IMAGE_SCROLL_CONFIG = {
   threshold: 0.1,
-  rootMargin: '0px 0px -80px 0px',    // Must be 80px on screen
+  rootMargin: '0px 0px -35px 0px',    // Trigger sooner (35px on screen)
   animationClass: 'animate-fade-in-up-quick' // 400ms
 };
 
