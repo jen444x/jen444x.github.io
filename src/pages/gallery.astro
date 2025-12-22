@@ -16,69 +16,46 @@ const featuredPhotos = await sanityClient.fetch(`
   }[0...12]
 `);
 
-// Category data with preview images (3 per category for bento grid)
-const categories = [
-  {
-    slug: "concrete",
-    name: "Concrete Work",
-    description: "Driveways, walkways, patios, stairs & professional flatwork",
-    images: [
-      { src: "/img/show-case/concrete/showcase9.jpeg", alt: "Stamped concrete patio" },
-      { src: "/img/show-case/concrete/IMG_9634.jpeg", alt: "Geometric walkway" },
-      { src: "/img/show-case/concrete/showcase5.jpeg", alt: "Custom concrete stairs" },
-    ],
-  },
-  {
-    slug: "outdoor-kitchens",
-    name: "Outdoor Kitchens",
-    description: "Luxury outdoor kitchen designs with premium countertops",
-    images: [
-      { src: "/img/show-case/backyard-remodels/IMG_1803.jpeg", alt: "Outdoor kitchen with stone bar" },
-      { src: "/img/show-case/backyard-remodels/IMG_1809.jpeg", alt: "Kitchen with fire pit table" },
-      { src: "/img/show-case/backyard-remodels/IMG_1805.jpeg", alt: "Kitchen with bar seating" },
-    ],
-  },
-  {
-    slug: "covered-patios",
-    name: "Covered Patios",
-    description: "Elegant covered patio designs with stone columns",
-    images: [
-      { src: "/img/show-case/patio/IMG_0600.jpeg", alt: "Evening patio with stone columns" },
-      { src: "/img/show-case/patio/IMG_0592.jpeg", alt: "Covered patio with pool" },
-      { src: "/img/show-case/patio/IMG_0593.jpeg", alt: "Elegant patio ceiling" },
-    ],
-  },
-  {
-    slug: "fire-features",
-    name: "Fire Features",
-    description: "Custom fire pits, outdoor fireplaces & fire feature installations",
-    images: [
-      { src: "/img/show-case/backyard-remodels/showcase8.jpeg", alt: "Fire pit with seating" },
-      { src: "/img/show-case/backyard-remodels/20241102093329.jpg", alt: "Modern patio fire feature" },
-      { src: "/img/show-case/backyard-remodels/showcase2.jpeg", alt: "Custom fire pit" },
-    ],
-  },
-  {
-    slug: "landscaping",
-    name: "Landscaping",
-    description: "Artificial turf, gardens, water features & landscape design",
-    images: [
-      { src: "/img/show-case/concrete/showcase10.JPEG", alt: "Turf and raised garden" },
-      { src: "/img/show-case/landscape/IMG_0805.jpeg", alt: "Clean backyard turf" },
-      { src: "/img/show-case/landscape/IMG_1990.jpeg", alt: "Rock waterfall feature" },
-    ],
-  },
-  {
-    slug: "ironwork",
-    name: "Iron Work",
-    description: "Decorative gates, railings, archways & custom metalwork",
-    images: [
-      { src: "/img/show-case/iron-work/IMG_8394.jpeg", alt: "Decorative iron archway" },
-      { src: "/img/show-case/iron-work/IMG_9054.jpeg", alt: "Custom wrought iron gate" },
-      { src: "/img/show-case/iron-work/IMG_1193.jpeg", alt: "Iron trellis with plants" },
-    ],
-  },
+// Fetch category cover images from Sanity (optimized via CDN)
+const categoryCovers = await sanityClient.fetch(`
+  *[_type == "categoryCovers"][0] {
+    "concrete": concrete[]->{ image, alt },
+    "outdoor-kitchens": outdoorKitchens[]->{ image, alt },
+    "covered-patios": coveredPatios[]->{ image, alt },
+    "fire-features": fireFeatures[]->{ image, alt },
+    "landscaping": landscaping[]->{ image, alt },
+    "iron-work": ironWork[]->{ image, alt }
+  }
+`);
+
+// Category metadata
+const categoryMeta = [
+  { slug: "concrete", name: "Concrete Work", description: "Driveways, walkways, patios, stairs & professional flatwork" },
+  { slug: "outdoor-kitchens", name: "Outdoor Kitchens", description: "Luxury outdoor kitchen designs with premium countertops" },
+  { slug: "covered-patios", name: "Covered Patios", description: "Elegant covered patio designs with stone columns" },
+  { slug: "fire-features", name: "Fire Features", description: "Custom fire pits, outdoor fireplaces & fire feature installations" },
+  { slug: "landscaping", name: "Landscaping", description: "Artificial turf, gardens, water features & landscape design" },
+  { slug: "ironwork", name: "Iron Work", description: "Decorative gates, railings, archways & custom metalwork" },
 ];
+
+// Map slug to Sanity field name (ironwork → iron-work)
+const slugToSanityKey: Record<string, string> = {
+  "ironwork": "iron-work",
+};
+
+// Build categories array with Sanity images
+const categories = categoryMeta.map((cat) => {
+  const sanityKey = slugToSanityKey[cat.slug] || cat.slug;
+  const covers = categoryCovers?.[sanityKey] || [];
+
+  return {
+    ...cat,
+    images: covers.map((item: any) => ({
+      src: item?.image ? urlFor(item.image).width(600).height(450).auto('format').url() : '',
+      alt: item?.alt || cat.name,
+    })),
+  };
+});
 ---
 
 <Layout
@@ -153,47 +130,59 @@ const categories = [
               {/* BENTO GRID: 1 Large Image + 2 Small Images */}
               <div class="grid grid-cols-2 gap-1 aspect-[4/3]">
                 {/* Large Image - Takes full left column */}
-                <div class="col-span-1 row-span-2 relative overflow-hidden">
-                  <img
-                    src={category.images[0].src}
-                    alt={category.images[0].alt}
-                    class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-                    width="400"
-                    height="600"
-                    loading={index < 2 ? "eager" : "lazy"}
-                  />
+                <div class="col-span-1 row-span-2 relative overflow-hidden bg-charcoal">
+                  {category.images[0]?.src ? (
+                    <img
+                      src={category.images[0].src}
+                      alt={category.images[0].alt}
+                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                      width="600"
+                      height="450"
+                      loading={index < 2 ? "eager" : "lazy"}
+                    />
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center text-slate-light text-sm">No image</div>
+                  )}
                   <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-500"></div>
                 </div>
 
                 {/* Small Image Top Right */}
-                <div class="relative overflow-hidden">
-                  <img
-                    src={category.images[1].src}
-                    alt={category.images[1].alt}
-                    class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-                    width="400"
-                    height="300"
-                    loading={index < 2 ? "eager" : "lazy"}
-                  />
+                <div class="relative overflow-hidden bg-charcoal">
+                  {category.images[1]?.src ? (
+                    <img
+                      src={category.images[1].src}
+                      alt={category.images[1].alt}
+                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                      width="600"
+                      height="450"
+                      loading={index < 2 ? "eager" : "lazy"}
+                    />
+                  ) : (
+                    <div class="w-full h-full"></div>
+                  )}
                   <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-500"></div>
                 </div>
 
                 {/* Small Image Bottom Right */}
-                <div class="relative overflow-hidden">
-                  <img
-                    src={category.images[2].src}
-                    alt={category.images[2].alt}
-                    class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-                    width="400"
-                    height="300"
-                    loading={index < 2 ? "eager" : "lazy"}
-                  />
+                <div class="relative overflow-hidden bg-charcoal">
+                  {category.images[2]?.src ? (
+                    <img
+                      src={category.images[2].src}
+                      alt={category.images[2].alt}
+                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                      width="600"
+                      height="450"
+                      loading={index < 2 ? "eager" : "lazy"}
+                    />
+                  ) : (
+                    <div class="w-full h-full"></div>
+                  )}
                   <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-500"></div>
                 </div>
               </div>
 
               {/* Card Content Overlay */}
-              <div class="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent group-hover:from-black/90 group-hover:via-black/70 transition-all duration-500 p-6 flex flex-col justify-end">
+              <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/50 to-transparent group-hover:from-black/85 group-hover:via-black/50 transition-all duration-500 p-6 flex flex-col justify-end">
                 <h3 class="text-white text-2xl md:text-3xl font-bold mb-2 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300 font-['Bebas_Neue']">
                   {category.name}
                 </h3>
