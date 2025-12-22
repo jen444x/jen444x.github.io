@@ -91,8 +91,8 @@ export function initScrollAnimations(selector = '.scroll-reveal', options = {}) 
 // Content sections (AboutUs, WhyChooseUs, section headings)
 // Triggers when element is 50px into viewport
 export const CONTENT_SCROLL_CONFIG = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px',    // Must be 50px on screen
+  threshold: 0.15,
+  rootMargin: '0px 0px -100px 0px',   // Must be 100px on screen
   animationClass: 'animate-fade-in-up' // 500ms
 };
 
@@ -106,8 +106,8 @@ export const GRID_SCROLL_CONFIG = {
 
 // CTA sections - same trigger as content, longer animation for "moment" feel
 export const CTA_SCROLL_CONFIG = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px',    // Same as content
+  threshold: 0.15,
+  rootMargin: '0px 0px -120px 0px',   // More on screen for "moment" feel
   animationClass: 'animate-fade-in-up-gentle' // 650ms
 };
 
@@ -120,8 +120,8 @@ export const IMAGE_SCROLL_CONFIG = {
 
 // Featured strips and sections
 export const SECTION_SCROLL_CONFIG = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px',    // Must be 50px on screen
+  threshold: 0.15,
+  rootMargin: '0px 0px -100px 0px',   // Must be 100px on screen
   animationClass: 'animate-fade-in-up' // 500ms
 };
 

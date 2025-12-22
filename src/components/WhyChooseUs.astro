@@ -19,7 +19,7 @@ import Icon from './Icon.astro';
       <!-- Heading with gradient divider -->
       <div
         class="text-center space-y-4 scroll-reveal opacity-0"
-        style="animation-delay: 0.1s"
+        style="animation-delay: 0.15s"
       >
         <div
           class="w-16 h-0.5 bg-gradient-to-r from-transparent via-bronze to-transparent mx-auto"
@@ -38,7 +38,7 @@ import Icon from './Icon.astro';
       <!-- Trust Pillars - single row on all screens -->
       <div
         class="flex justify-center gap-4 md:gap-8 scroll-reveal opacity-0"
-        style="animation-delay: 0.2s"
+        style="animation-delay: 0.4s"
       >
         <div class="flex flex-col items-center gap-2 text-center">
           <div
@@ -87,10 +87,10 @@ import Icon from './Icon.astro';
 </section>
 
 <script>
-  import { initScrollAnimations, CONTENT_CONFIG } from "../utils/animations.js";
+  import { initScrollAnimations, CTA_CONFIG } from "../utils/animations.js";
 
-  // Why Choose Us - text content, use standard content animation
-  initScrollAnimations(".why-choose-us .scroll-reveal", CONTENT_CONFIG);
+  // Why Choose Us - trust section, use slower gentle animation (650ms)
+  initScrollAnimations(".why-choose-us .scroll-reveal", CTA_CONFIG);
 </script>
 
 <style>
