@@ -1,15 +1,15 @@
 ---
 import { sanityClient, urlFor } from "../sanity/client";
 
-// Fetch category covers from Sanity
+// Fetch category covers from Sanity (get first item from each array)
 const covers = await sanityClient.fetch(`
   *[_type == "categoryCovers"][0] {
-    "concrete": concrete->{ image, title },
-    "outdoorKitchens": outdoorKitchens->{ image, title },
-    "coveredPatios": coveredPatios->{ image, title },
-    "fireFeatures": fireFeatures->{ image, title },
-    "landscaping": landscaping->{ image, title },
-    "ironWork": ironWork->{ image, title }
+    "concrete": concrete[0]->{ image, title },
+    "outdoorKitchens": outdoorKitchens[0]->{ image, title },
+    "coveredPatios": coveredPatios[0]->{ image, title },
+    "fireFeatures": fireFeatures[0]->{ image, title },
+    "landscaping": landscaping[0]->{ image, title },
+    "ironWork": ironWork[0]->{ image, title }
   }
 `);
 
