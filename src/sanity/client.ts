@@ -10,9 +10,10 @@ const config = {
 }
 
 // Read-only client for fetching data (used on frontend)
+// useCdn: true in production (fast edge cache), false in dev (instant updates)
 export const sanityClient = createClient({
   ...config,
-  useCdn: false,
+  useCdn: import.meta.env.PROD,
 })
 
 // Write client for uploading (used on server/API routes only)
