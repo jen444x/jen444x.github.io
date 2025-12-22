@@ -1,4 +1,5 @@
 import galleryItem from './galleryItem'
-import categoryCovers from './categoryCovers'
+import homepageCovers from './homepageCovers'
+import galleryCovers from './galleryCovers'
 
-export const schemaTypes = [galleryItem, categoryCovers]
+export const schemaTypes = [galleryItem, homepageCovers, galleryCovers]

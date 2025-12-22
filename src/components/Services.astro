@@ -1,15 +1,15 @@
 ---
 import { sanityClient, urlFor } from "../sanity/client";
 
-// Fetch category covers from Sanity (get first item from each array)
+// Fetch homepage service card covers from Sanity
 const covers = await sanityClient.fetch(`
-  *[_type == "categoryCovers"][0] {
-    "concrete": concrete[0]->{ image, title },
-    "outdoorKitchens": outdoorKitchens[0]->{ image, title },
-    "coveredPatios": coveredPatios[0]->{ image, title },
-    "fireFeatures": fireFeatures[0]->{ image, title },
-    "landscaping": landscaping[0]->{ image, title },
-    "ironWork": ironWork[0]->{ image, title }
+  *[_type == "homepageCovers"][0] {
+    "concrete": concrete->{ image, title },
+    "outdoorKitchens": outdoorKitchens->{ image, title },
+    "coveredPatios": coveredPatios->{ image, title },
+    "fireFeatures": fireFeatures->{ image, title },
+    "landscaping": landscaping->{ image, title },
+    "ironWork": ironWork->{ image, title }
   }
 `);
 
@@ -94,7 +94,7 @@ const services = [
                 <span class="text-slate text-sm">No cover image set</span>
               </div>
             )}
-            <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all duration-500"></div>
+            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-black/30 to-black/10 group-hover:from-black/75 group-hover:via-black/45 group-hover:to-black/20 transition-all duration-500"></div>
           </div>
           <div class="relative z-10 p-8 h-full flex flex-col justify-end">
             <h3 class="text-white text-2xl md:text-3xl font-bold mb-3 tracking-wide uppercase transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300">

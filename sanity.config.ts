@@ -343,14 +343,30 @@ const structure = (S: any, context: any) =>
 
       S.divider(),
 
-      // Category Covers (for homepage Services section)
+      // Category Covers (separate docs for homepage vs gallery)
       S.listItem()
         .title('Category Covers')
         .child(
-          S.document()
-            .schemaType('categoryCovers')
-            .documentId('categoryCovers')
+          S.list()
             .title('Category Covers')
+            .items([
+              S.listItem()
+                .title('Homepage')
+                .child(
+                  S.document()
+                    .schemaType('homepageCovers')
+                    .documentId('homepageCovers')
+                    .title('Homepage Service Cards')
+                ),
+              S.listItem()
+                .title('Gallery')
+                .child(
+                  S.document()
+                    .schemaType('galleryCovers')
+                    .documentId('galleryCovers')
+                    .title('Gallery Page Cards')
+                ),
+            ])
         ),
     ])
 

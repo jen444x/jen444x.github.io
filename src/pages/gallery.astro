@@ -16,9 +16,9 @@ const featuredPhotos = await sanityClient.fetch(`
   }[0...12]
 `);
 
-// Fetch category cover images from Sanity (optimized via CDN)
+// Fetch gallery cover images from Sanity (optimized via CDN)
 const categoryCovers = await sanityClient.fetch(`
-  *[_type == "categoryCovers"][0] {
+  *[_type == "galleryCovers"][0] {
     "concrete": concrete[]->{ image, alt },
     "outdoor-kitchens": outdoorKitchens[]->{ image, alt },
     "covered-patios": coveredPatios[]->{ image, alt },

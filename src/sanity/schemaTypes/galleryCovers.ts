@@ -1,10 +1,10 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'categoryCovers',
-  title: 'Category Covers',
+  name: 'galleryCovers',
+  title: 'Gallery Page Cards',
   type: 'document',
-  description: 'Select cover images for each service category (used on Gallery and Services pages)',
+  description: 'Pick up to 3 photos for each category bento grid on the gallery page',
   fields: [
     defineField({
       name: 'concrete',
@@ -14,13 +14,10 @@ export default defineType({
         {
           type: 'reference',
           to: [{ type: 'galleryItem' }],
-          options: {
-            filter: 'category == "concrete" && isVideo != true',
-          },
+          options: { filter: 'category == "concrete" && isVideo != true' },
         },
       ],
       validation: (Rule) => Rule.max(3),
-      description: 'Pick up to 3 photos. First one is the main image, others fill the bento grid.',
     }),
     defineField({
       name: 'outdoorKitchens',
@@ -30,13 +27,10 @@ export default defineType({
         {
           type: 'reference',
           to: [{ type: 'galleryItem' }],
-          options: {
-            filter: 'category == "outdoor-kitchens" && isVideo != true',
-          },
+          options: { filter: 'category == "outdoor-kitchens" && isVideo != true' },
         },
       ],
       validation: (Rule) => Rule.max(3),
-      description: 'Pick up to 3 photos. First one is the main image, others fill the bento grid.',
     }),
     defineField({
       name: 'coveredPatios',
@@ -46,13 +40,10 @@ export default defineType({
         {
           type: 'reference',
           to: [{ type: 'galleryItem' }],
-          options: {
-            filter: 'category == "covered-patios" && isVideo != true',
-          },
+          options: { filter: 'category == "covered-patios" && isVideo != true' },
         },
       ],
       validation: (Rule) => Rule.max(3),
-      description: 'Pick up to 3 photos. First one is the main image, others fill the bento grid.',
     }),
     defineField({
       name: 'fireFeatures',
@@ -62,13 +53,10 @@ export default defineType({
         {
           type: 'reference',
           to: [{ type: 'galleryItem' }],
-          options: {
-            filter: 'category == "fire-features" && isVideo != true',
-          },
+          options: { filter: 'category == "fire-features" && isVideo != true' },
         },
       ],
       validation: (Rule) => Rule.max(3),
-      description: 'Pick up to 3 photos. First one is the main image, others fill the bento grid.',
     }),
     defineField({
       name: 'landscaping',
@@ -78,13 +66,10 @@ export default defineType({
         {
           type: 'reference',
           to: [{ type: 'galleryItem' }],
-          options: {
-            filter: 'category == "landscaping" && isVideo != true',
-          },
+          options: { filter: 'category == "landscaping" && isVideo != true' },
         },
       ],
       validation: (Rule) => Rule.max(3),
-      description: 'Pick up to 3 photos. First one is the main image, others fill the bento grid.',
     }),
     defineField({
       name: 'ironWork',
@@ -94,20 +79,17 @@ export default defineType({
         {
           type: 'reference',
           to: [{ type: 'galleryItem' }],
-          options: {
-            filter: 'category == "iron-work" && isVideo != true',
-          },
+          options: { filter: 'category == "iron-work" && isVideo != true' },
         },
       ],
       validation: (Rule) => Rule.max(3),
-      description: 'Pick up to 3 photos. First one is the main image, others fill the bento grid.',
     }),
   ],
   preview: {
     prepare() {
       return {
-        title: 'Category Covers',
-        subtitle: 'Gallery & Services card images',
+        title: 'Gallery Page Cards',
+        subtitle: 'Bento grid images for gallery',
       }
     },
   },
