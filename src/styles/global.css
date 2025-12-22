@@ -22,8 +22,8 @@
   --color-bronze-light: #D4A574;
 
   /* TYPOGRAPHY SYSTEM */
-  --font-heading: 'Bebas Neue', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Bebas Neue', 'Arial Narrow', 'Helvetica Condensed', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Font Sizes - Luxury Scale (larger = more premium) */
   --text-xs: 0.75rem;    /* 12px */

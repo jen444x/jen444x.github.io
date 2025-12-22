@@ -139,6 +139,7 @@ const categories = categoryMeta.map((cat) => {
                       width="600"
                       height="450"
                       loading={index < 2 ? "eager" : "lazy"}
+                      fetchpriority={index === 0 ? "high" : undefined}
                     />
                   ) : (
                     <div class="w-full h-full flex items-center justify-center text-slate-light text-sm">No image</div>
@@ -156,6 +157,7 @@ const categories = categoryMeta.map((cat) => {
                       width="600"
                       height="450"
                       loading={index < 2 ? "eager" : "lazy"}
+                      fetchpriority={index === 0 ? "high" : undefined}
                     />
                   ) : (
                     <div class="w-full h-full"></div>
@@ -173,6 +175,7 @@ const categories = categoryMeta.map((cat) => {
                       width="600"
                       height="450"
                       loading={index < 2 ? "eager" : "lazy"}
+                      fetchpriority={index === 0 ? "high" : undefined}
                     />
                   ) : (
                     <div class="w-full h-full"></div>
