@@ -3,7 +3,9 @@ import { Image } from "astro:assets";
 import heroImg from "../../public/img/hero/hero-img2.avif";
 ---
 
-<section class="section-hero relative h-screen overflow-hidden bg-black-pure">
+<!-- Hero uses same pattern as gallery heroes: min-height + flexbox centering -->
+<!-- svh = small viewport height (accounts for mobile browser UI) -->
+<section class="section-hero relative min-h-svh flex items-center justify-center overflow-hidden bg-black-pure pt-20 md:pt-24">
   <!-- Background Image with Astro optimization -->
   <Image
     src={heroImg}
@@ -15,52 +17,48 @@ import heroImg from "../../public/img/hero/hero-img2.avif";
   />
 
   <!-- DRAMATIC Dark Overlay - Luxury Industrial -->
-  <div
-    class="absolute inset-0 bg-linear-to-b from-black/70 via-black/60 to-black/80"
-  >
-  </div>
+  <div class="absolute inset-0 bg-linear-to-b from-black/70 via-black/60 to-black/80"></div>
 
   <!-- Subtle Concrete Texture Overlay -->
   <div
     class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]"
-  >
-  </div>
+  ></div>
 
-  <!-- Content - LUXURY: THIN + LARGE -->
-  <div
-    class="hero absolute z-10 max-w-6xl left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 text-center px-6 md:px-12"
-  >
-    <!-- Main Heading - THIN + LARGE = Luxury (optimized spacing) -->
+  <!-- Content - Centered with flexbox -->
+  <div class="hero relative z-10 max-w-6xl text-center px-6 md:px-12">
+    <!-- Main Heading -->
     <h1
       class="heading-primary text-white font-light leading-[1.1] mb-4 md:mb-6 tracking-[0.04em]
-                text-5xl sm:text-6xl md:text-7xl lg:text-8xl
-                [text-shadow:0_4px_24px_rgb(0_0_0/70%)]
-                hero-animate opacity-0"
+             text-5xl sm:text-6xl md:text-7xl lg:text-8xl
+             [text-shadow:0_4px_24px_rgb(0_0_0/70%)]
+             hero-animate opacity-0"
       style="animation-delay: 0.2s"
     >
       TRANSFORMING<br />OUTDOOR SPACES
     </h1>
 
-    <!-- Bronze accent line - Tight with heading (they're one unit) -->
+    <!-- Bronze accent line -->
     <div
       class="bronze-divider mx-auto mb-10 md:mb-12 hero-animate opacity-0"
       style="animation-delay: 0.4s"
-    >
-    </div>
+    ></div>
 
-    <!-- Subheading - Expanded with location context -->
+    <!-- Subheading -->
     <p
-      class="heading-description text-white-soft text-lg md:text-xl lg:text-2xl font-light leading-relaxed mb-10 md:mb-12 max-w-3xl mx-auto tracking-wide hero-animate opacity-0"
+      class="heading-description text-white-soft font-light leading-relaxed max-w-3xl mx-auto tracking-wide
+             text-lg md:text-xl lg:text-2xl
+             mb-10 md:mb-12
+             hero-animate opacity-0"
       style="animation-delay: 0.6s"
     >
-      Expert concrete and landscape construction serving Bakersfield and
-      surrounding areas
+      Expert concrete and landscape construction serving Bakersfield and surrounding areas
     </p>
 
-    <!-- CTA Button - Professional with proper spacing -->
+    <!-- CTA Button -->
     <a
       href="#cta"
-      class="btn inline-block text-sm md:text-base font-bold uppercase tracking-widest
+      class="btn inline-block font-bold uppercase tracking-widest
+             text-sm md:text-base
              bg-white text-black-pure no-underline
              py-4 px-12 md:py-6 md:px-16
              border-2 border-white
@@ -77,7 +75,6 @@ import heroImg from "../../public/img/hero/hero-img2.avif";
   </div>
 </section>
 
-<!-- HERO PAGE-LOAD ANIMATION SCRIPT -->
 <script>
   // Trigger animations on page load
   document.addEventListener("DOMContentLoaded", () => {
@@ -89,7 +86,6 @@ import heroImg from "../../public/img/hero/hero-img2.avif";
 </script>
 
 <style>
-  /* Page-load fade-in animation */
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -107,5 +103,26 @@ import heroImg from "../../public/img/hero/hero-img2.avif";
 
   .hero-animate {
     will-change: transform, opacity;
+  }
+
+  /* Mobile landscape only (short + wide screens) */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .section-hero {
+      padding-top: 4rem;
+    }
+    .section-hero h1 {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .section-hero .bronze-divider {
+      margin-bottom: 1rem;
+    }
+    .section-hero p {
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+    .section-hero .btn {
+      padding: 0.75rem 2rem;
+    }
   }
 </style>
