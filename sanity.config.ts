@@ -368,6 +368,16 @@ const structure = (S: any, context: any) =>
                 ),
             ])
         ),
+
+      // Site Images (hero, about us, etc.)
+      S.listItem()
+        .title('Site Images')
+        .child(
+          S.document()
+            .schemaType('siteImages')
+            .documentId('siteImages')
+            .title('Site Images')
+        ),
     ])
 
 export default defineConfig({

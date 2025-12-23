@@ -1,19 +1,15 @@
 ---
 import { sanityClient, urlFor } from "../sanity/client";
 
-// Fetch the homepage hero image (the ONE photo marked as homepageHero)
-// Falls back to most recent featured photo if none set
-const homepageHero = await sanityClient.fetch(`
-  *[_type == "galleryItem" && homepageHero == true][0] {
-    _id,
-    title,
-    alt,
-    image
+// Fetch the homepage hero image from Site Images document
+const siteImages = await sanityClient.fetch(`
+  *[_type == "siteImages"][0] {
+    "homepageHero": homepageHero->{ _id, title, alt, image }
   }
 `);
 
 // Fallback to most recent featured if no homepage hero is set
-const fallbackImage = !homepageHero ? await sanityClient.fetch(`
+const fallbackImage = !siteImages?.homepageHero ? await sanityClient.fetch(`
   *[_type == "galleryItem" && featured == true] | order(orderRank asc)[0] {
     _id,
     title,
@@ -22,7 +18,7 @@ const fallbackImage = !homepageHero ? await sanityClient.fetch(`
   }
 `) : null;
 
-const featuredImage = homepageHero || fallbackImage;
+const featuredImage = siteImages?.homepageHero || fallbackImage;
 ---
 
 <!-- LIGHT Section - Featured Project Teaser -->
