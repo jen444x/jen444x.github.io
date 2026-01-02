@@ -199,27 +199,18 @@ const breadcrumbs = [
   <!-- Category Navigation Bar -->
   <CategoryNav currentCategory={category} />
 
-  <!-- Concrete Finish Types Filter (only on concrete page) -->
-  {isConcretePage && (
-    <section class="bg-white">
-      <div class="max-w-[1400px] mx-auto px-6 md:px-8 pt-10 md:pt-14 pb-6 md:pb-8">
-        <!-- Section Header -->
-        <div class="mb-8 md:mb-10">
-          <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-bronze mb-3">Explore By Finish</p>
-          <h2 class="font-['Bebas_Neue'] text-2xl md:text-3xl tracking-wide text-charcoal">
-            Concrete Finishes
-          </h2>
-          <p class="text-slate text-sm md:text-base mt-3 max-w-2xl leading-relaxed">
-            From decorative stamped patterns to classic broom finishes, each technique creates a unique look and feel for your outdoor space.
-          </p>
-        </div>
+  <!-- Gallery Section - Full Width -->
+  <section class="section-padding bg-white border-t border-bronze/10">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-8 relative">
 
-        <!-- Filter Tabs - Elegant Underline Style -->
-        <div class="relative" id="finish-filter-tabs">
-          <div class="flex gap-6 md:gap-10 overflow-x-auto scrollbar-hide pb-4">
+      <!-- Finish Type Filter - Floats top right, doesn't affect layout (concrete only) -->
+      {isConcretePage && (
+        <div class="absolute -top-16 right-6 md:right-8 text-right z-10" id="finish-filter-tabs">
+          <p class="text-xs uppercase tracking-[0.2em] text-bronze mb-2">Explore By Finish</p>
+          <div class="flex justify-end gap-4 md:gap-6">
             {finishTypes.map((finish, index) => (
               <button
-                class={`finish-filter-btn group relative whitespace-nowrap text-sm md:text-base tracking-wide transition-colors duration-300 pb-3 ${
+                class={`finish-filter-btn group relative whitespace-nowrap text-sm tracking-wide transition-colors duration-300 pb-2 ${
                   index === 0
                     ? 'text-charcoal font-medium'
                     : 'text-slate hover:text-charcoal'
@@ -233,16 +224,9 @@ const breadcrumbs = [
               </button>
             ))}
           </div>
-          <!-- Subtle divider line -->
-          <div class="absolute bottom-4 left-0 right-0 h-px bg-charcoal/10 -z-10"></div>
         </div>
-      </div>
-    </section>
-  )}
+      )}
 
-  <!-- Gallery Section - Full Width -->
-  <section class="section-padding bg-white border-t border-bronze/10">
-    <div class="max-w-[1400px] mx-auto px-6 md:px-8">
       <!-- Categories WITH subcategories - show subsections with bronze headers -->
       {
         subcategories.length > 0 ? (
@@ -978,10 +962,9 @@ const breadcrumbs = [
     display: none !important;
   }
 
-  /* Elegant underline tab style */
+  /* Elegant underline filter style */
   .finish-filter-btn {
     font-family: 'Inter', sans-serif;
-    letter-spacing: 0.02em;
   }
 
   .finish-filter-btn span {
